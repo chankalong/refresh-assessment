@@ -20,7 +20,7 @@ document.querySelectorAll("input[type=radio]").forEach(
                 document.querySelectorAll("input[type=radio]:checked").length;
             console.log(numberTickedBoxes)
             var numberTickedBoxes_percentage = Math.round(numberTickedBoxes / 12 * 100)
-            document.querySelector('.progress-container').style.cssText = '--tooltip-width: ' + numberTickedBoxes_percentage + '%; width: 80%;'
+            document.querySelector('.progress-container').style.cssText = '--tooltip-width: ' + numberTickedBoxes_percentage + '%; width: 75%;'
             //document.querySelector('progress').value = numberTickedBoxes
             document.getElementById('progress_label').innerText = numberTickedBoxes + " / 12"
         })
