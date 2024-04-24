@@ -26,7 +26,7 @@ document.querySelectorAll("select").forEach(
             var numberTickedBoxes = numberTickedBoxesArray.filter(Boolean).length;
             console.log(numberTickedBoxes)
             var numberTickedBoxes_percentage = Math.round(numberTickedBoxes / 5 * 100)
-            document.querySelector('.progress-container').style.cssText = '--tooltip-width: ' + numberTickedBoxes_percentage + '%; width: 80%;'
+            document.querySelector('.progress-container').style.cssText = '--tooltip-width: ' + numberTickedBoxes_percentage + '%; width: 75%;'
             //document.querySelector('progress').value = numberTickedBoxes
             document.getElementById('progress_label').innerText = numberTickedBoxes + " / 5"
         })
