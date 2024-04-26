@@ -193,8 +193,8 @@ form.addEventListener("submit", function (e) {
     var emotional_blackmail_fear = emotional_blackmail_object['emotional_blackmail_0_score'] + emotional_blackmail_object['emotional_blackmail_1_score'] + emotional_blackmail_object['emotional_blackmail_2_score'] + emotional_blackmail_object['emotional_blackmail_3_score'] + emotional_blackmail_object['emotional_blackmail_4_score'] + emotional_blackmail_object['emotional_blackmail_5_score'];
     var emotional_blackmail_guilt = emotional_blackmail_object['emotional_blackmail_6_score'] + emotional_blackmail_object['emotional_blackmail_7_score'] + emotional_blackmail_object['emotional_blackmail_8_score'] + emotional_blackmail_object['emotional_blackmail_9_score'] + emotional_blackmail_object['emotional_blackmail_10_score'] + emotional_blackmail_object['emotional_blackmail_11_score'];
     var emotional_blackmail_obligate = emotional_blackmail_object['emotional_blackmail_12_score'] + emotional_blackmail_object['emotional_blackmail_13_score'] + emotional_blackmail_object['emotional_blackmail_14_score'] + emotional_blackmail_object['emotional_blackmail_15_score'] + emotional_blackmail_object['emotional_blackmail_16_score'] + emotional_blackmail_object['emotional_blackmail_17_score'];
-    emotional_blackmailCategory.textContent = 'emotional_blackmailCategory';
-    emotional_blackmailDescription.textContent = 'emotional_blackmailDescription';
+    emotional_blackmailCategory.textContent = "afslkfls";
+    emotional_blackmailDescription.textContent = "jdkhgkjfdhgkdf";
     document.getElementById('emotional_blackmailQuestionDiv').style.display = 'none';
     document.getElementById('emotional_blackmailResultDiv').style.display = '';
 
