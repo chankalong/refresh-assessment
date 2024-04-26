@@ -226,7 +226,7 @@ form.addEventListener("submit", function (e) {
             },
             radialaxis: {
                 visible: false,
-                range: [0, 20]
+                range: [0, 24]
             }
         },
         showlegend: false,
