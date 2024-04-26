@@ -233,7 +233,7 @@ form.addEventListener("submit", function (e) {
         },
         showlegend: false,
         hovermode: false,
-        height: 300
+        height: 250
     }
     var config = { responsive: true, displaylogo: false, displayModeBar: false }
     Plotly.newPlot('myDiv', data, layout, config);
