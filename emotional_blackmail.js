@@ -197,6 +197,8 @@ form.addEventListener("submit", function (e) {
     emotional_blackmailDescription.textContent = "jdkhgkjfdhgkdf";
     document.getElementById('emotional_blackmailQuestionDiv').style.display = 'none';
     document.getElementById('emotional_blackmailResultDiv').style.display = '';
+    document.querySelector('h1').style.display = '';
+    h1.textContent = "afslkfls";
 
     //new
     var data = [{
