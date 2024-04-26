@@ -216,7 +216,7 @@ form.addEventListener("submit", function (e) {
     }]
 
     var layout = {
-        margin: { b: 30, t: 30, r: 20, l: 20, pad: 0 }, font: {
+        margin: { b: 0, t: 30, r: 20, l: 20, pad: 0 }, font: {
             family: 'Arial, sans-serif'
         },
         polar: {
@@ -233,7 +233,7 @@ form.addEventListener("submit", function (e) {
         },
         showlegend: false,
         hovermode: false,
-        height: 200
+        height: 300
     }
     var config = { responsive: true, displaylogo: false, displayModeBar: false }
     Plotly.newPlot('myDiv', data, layout, config);
