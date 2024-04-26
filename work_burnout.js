@@ -13,11 +13,7 @@ window.FloatingUIDOM.autoUpdate(assessment_div, progress_div, function () {
         });
     });
 })
-$(document).ready(function () {
-    $("select").change(function () {
-        $(this).blur();
-    });
-});
+
 document.querySelectorAll("select").forEach(
     function (input) {
         input.addEventListener('change', function (event) {
