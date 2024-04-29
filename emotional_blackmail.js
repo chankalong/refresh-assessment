@@ -193,12 +193,16 @@ form.addEventListener("submit", function (e) {
     var emotional_blackmail_fear = emotional_blackmail_object['emotional_blackmail_0_score'] + emotional_blackmail_object['emotional_blackmail_1_score'] + emotional_blackmail_object['emotional_blackmail_2_score'] + emotional_blackmail_object['emotional_blackmail_3_score'] + emotional_blackmail_object['emotional_blackmail_4_score'] + emotional_blackmail_object['emotional_blackmail_5_score'];
     var emotional_blackmail_guilt = emotional_blackmail_object['emotional_blackmail_6_score'] + emotional_blackmail_object['emotional_blackmail_7_score'] + emotional_blackmail_object['emotional_blackmail_8_score'] + emotional_blackmail_object['emotional_blackmail_9_score'] + emotional_blackmail_object['emotional_blackmail_10_score'] + emotional_blackmail_object['emotional_blackmail_11_score'];
     var emotional_blackmail_obligate = emotional_blackmail_object['emotional_blackmail_12_score'] + emotional_blackmail_object['emotional_blackmail_13_score'] + emotional_blackmail_object['emotional_blackmail_14_score'] + emotional_blackmail_object['emotional_blackmail_15_score'] + emotional_blackmail_object['emotional_blackmail_16_score'] + emotional_blackmail_object['emotional_blackmail_17_score'];
-    emotional_blackmailCategory.textContent = "afslkfls";
-    emotional_blackmailDescription.textContent = "jdkhgkjfdhgkdf";
+
+    if (emotional_blackmail_fear > 8 | emotional_blackmail_guilt > 8 | emotional_blackmail_obligate > 8) {
+        emotional_blackmailDescription.textContent = "你可能開始被人情緒勒索，為了自己的情緒健康著想，可參考以下由英國公營醫療服務（NHS）認可的資訊網站BPDFamily.com提出的建議，5個步驟助你走出情緒勒索。";
+    } else {
+        emotional_blackmailDescription.textContent = "你較少被人情緒勒索，如果你察覺到有人被人情緒勒索，你可參考以下由英國公營醫療服務（NHS）認可的資訊網站BPDFamily.com提出的建議，5個步驟助他走出情緒勒索。";
+    }
+    
     document.getElementById('emotional_blackmailQuestionDiv').style.display = 'none';
     document.getElementById('emotional_blackmailResultDiv').style.display = '';
     document.querySelector('h1').style.display = '';
-    document.querySelector('h1').textContent = "afslkfls";
 
     //new
     var data = [{
