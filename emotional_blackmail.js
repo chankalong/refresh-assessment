@@ -190,11 +190,11 @@ form.addEventListener("submit", function (e) {
 
     //score
 
-    var emotional_blackmail_fear = emotional_blackmail_object['emotional_blackmail_0_score'] + emotional_blackmail_object['emotional_blackmail_1_score'] + emotional_blackmail_object['emotional_blackmail_2_score'] + emotional_blackmail_object['emotional_blackmail_3_score'] + emotional_blackmail_object['emotional_blackmail_4_score'] + emotional_blackmail_object['emotional_blackmail_5_score'];
-    var emotional_blackmail_guilt = emotional_blackmail_object['emotional_blackmail_6_score'] + emotional_blackmail_object['emotional_blackmail_7_score'] + emotional_blackmail_object['emotional_blackmail_8_score'] + emotional_blackmail_object['emotional_blackmail_9_score'] + emotional_blackmail_object['emotional_blackmail_10_score'] + emotional_blackmail_object['emotional_blackmail_11_score'];
-    var emotional_blackmail_obligate = emotional_blackmail_object['emotional_blackmail_12_score'] + emotional_blackmail_object['emotional_blackmail_13_score'] + emotional_blackmail_object['emotional_blackmail_14_score'] + emotional_blackmail_object['emotional_blackmail_15_score'] + emotional_blackmail_object['emotional_blackmail_16_score'] + emotional_blackmail_object['emotional_blackmail_17_score'];
+    var emotional_blackmail_fear = emotional_blackmail_object['emotional_blackmail_0_score'] + emotional_blackmail_object['emotional_blackmail_1_score'] + emotional_blackmail_object['emotional_blackmail_2_score'] + emotional_blackmail_object['emotional_blackmail_3_score'] + emotional_blackmail_object['emotional_blackmail_4_score'] + emotional_blackmail_object['emotional_blackmail_5_score'] + 6;
+    var emotional_blackmail_guilt = emotional_blackmail_object['emotional_blackmail_6_score'] + emotional_blackmail_object['emotional_blackmail_7_score'] + emotional_blackmail_object['emotional_blackmail_8_score'] + emotional_blackmail_object['emotional_blackmail_9_score'] + emotional_blackmail_object['emotional_blackmail_10_score'] + emotional_blackmail_object['emotional_blackmail_11_score'] + 6;
+    var emotional_blackmail_obligate = emotional_blackmail_object['emotional_blackmail_12_score'] + emotional_blackmail_object['emotional_blackmail_13_score'] + emotional_blackmail_object['emotional_blackmail_14_score'] + emotional_blackmail_object['emotional_blackmail_15_score'] + emotional_blackmail_object['emotional_blackmail_16_score'] + emotional_blackmail_object['emotional_blackmail_17_score'] + 6;
 
-    if (emotional_blackmail_fear > 8 | emotional_blackmail_guilt > 8 | emotional_blackmail_obligate > 8) {
+    if (emotional_blackmail_fear > 10 | emotional_blackmail_guilt > 10 | emotional_blackmail_obligate > 10) {
         emotional_blackmailDescription.textContent = "你可能開始被人情緒勒索，為了自己的情緒健康著想，可參考以下由英國公營醫療服務（NHS）認可的資訊網站BPDFamily.com提出的建議，5個步驟助你走出情緒勒索。";
     } else {
         emotional_blackmailDescription.textContent = "你較少被人情緒勒索，如果你察覺到有人被人情緒勒索，你可參考以下由英國公營醫療服務（NHS）認可的資訊網站BPDFamily.com提出的建議，5個步驟助他走出情緒勒索。";
@@ -214,7 +214,7 @@ form.addEventListener("submit", function (e) {
     {
         type: 'scatterpolar',
         mode: 'lines',
-        r: [24, 24, 24, 24],
+        r: [30, 30, 30, 30],
         theta: ['恐懼', '內疚', '義務', '恐懼'],
         line: { color: 'grey' }
     }]
@@ -232,7 +232,7 @@ form.addEventListener("submit", function (e) {
             },
             radialaxis: {
                 visible: false,
-                range: [0, 24]
+                range: [0, 30]
             }
         },
         showlegend: false,
