@@ -4,13 +4,13 @@ var form_apply_workshop_member_id = document.getElementById(
   "form_apply_workshop_member_id"
 );
 
-workshop_link_textbox = document.referrer.replace(
-  "https://refresh.bokss.org.hk",
-  ""
-);
-member_id_textbox = drupalSettings.user.member_id;
+
 
 form_apply_workshop_member_id.addEventListener("submit", function (e) {
+  workshop_link_textbox = document.referrer.replace(
+  "https://refresh.bokss.org.hk",
+  "");
+  member_id_textbox = drupalSettings.user.member_id;
   var data = new FormData(form_apply_workshop_member_id);
   var action = e.target.action;
   fetch(action, {
