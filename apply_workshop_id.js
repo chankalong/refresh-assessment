@@ -3,14 +3,12 @@ var member_id_textbox = document.getElementById("member_id");
 var form_apply_workshop_member_id = document.getElementById(
   "form_apply_workshop_member_id"
 );
-
-
-
 form_apply_workshop_member_id.addEventListener("submit", function (e) {
-  workshop_link_textbox = document.referrer.replace(
+  workshop_link_textbox.value = document.referrer.replace(
   "https://refresh.bokss.org.hk",
   "");
-  member_id_textbox = drupalSettings.user.member_id;
+  member_id_textbox.value = drupalSettings.user.member_id;
+  e.preventDefault();
   var data = new FormData(form_apply_workshop_member_id);
   var action = e.target.action;
   fetch(action, {
@@ -19,5 +17,4 @@ form_apply_workshop_member_id.addEventListener("submit", function (e) {
   });
   e.preventDefault();
 });
-
 document.querySelector("input[value=提交工作坊資料]").click();
