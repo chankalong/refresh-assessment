@@ -16,5 +16,5 @@ form_apply_workshop_member_id.addEventListener("submit", function (e) {
     body: data,
   });
   e.preventDefault();
-});
+}, true);
 document.querySelector("input[value=提交工作坊資料]").click();
