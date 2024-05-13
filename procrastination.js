@@ -194,8 +194,8 @@ form.addEventListener("submit", function (e) {
     if (procrastination <= 18) {
         procrastinationDescription.textContent = "你可能較少時候會拖延。";
         procrastinationColor = "#4EC04E";
-    } else if (procrastination > 18 | procrastination < 27) {
-        procrastinationDescription.textContent = "你可能較少時候會拖延。";
+    } else if (procrastination > 18 && procrastination < 27) {
+        procrastinationDescription.textContent = "你可能較多時候都會拖延。";
         procrastinationColor = "#FFC84A";
     } else {
         procrastinationDescription.textContent = "你可能較多時候都會拖延。";
