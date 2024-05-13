@@ -189,7 +189,7 @@ form.addEventListener("submit", function (e) {
     e.preventDefault();
 
     //score
-    var procrastination = procrastination_object['procrastination_0_score'] + procrastination_object['procrastination_1_score'] + (5 - procrastination_object['procrastination_2_score']) + procrastination_object['procrastination_3_score'] + (5 - procrastination_object['procrastination_4_score']) + (5 - procrastination_object['procrastination_5_score']) + procrastination_object['procrastination_6_score'] + procrastination_object['procrastination_7_score'] + procrastination_object['procrastination_8_score']
+    var procrastination = procrastination_object['procrastination_0_score'] + procrastination_object['procrastination_1_score'] + (4 - procrastination_object['procrastination_2_score']) + procrastination_object['procrastination_3_score'] + (4 - procrastination_object['procrastination_4_score']) + (4 - procrastination_object['procrastination_5_score']) + procrastination_object['procrastination_6_score'] + procrastination_object['procrastination_7_score'] + procrastination_object['procrastination_8_score']
 
     if (procrastination <= 18) {
         procrastinationDescription.textContent = "你可能較少時候會拖延。";
