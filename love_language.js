@@ -430,7 +430,7 @@ function clearTooltip(e) {
         document.getElementById("love_languageResultDiv").style.display = "";
       });
     document.querySelector("h1").innerText = "你的「愛的語言」";
-    document.title = "你的「愛的語言」 | Re:Fresh線上精神健康自助平台";
+    //document.title = "你的「愛的語言」 | Re:Fresh線上精神健康自助平台";
     test_result.style.backgroundColor = love_languageColor_bg + ",1)";
     love_languageImage_div.style.backgroundColor = love_languageColor_inbox;
     love_languageSuggestion_div.style.backgroundColor =
