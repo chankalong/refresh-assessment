@@ -222,7 +222,7 @@ form.addEventListener("submit", function (e) {
     ];
 
     var layout = {
-        margin: { b: 0, t: 30, r: 20, l: 20, pad: 0 }, height: 300, autosize: true, font: {
+        margin: { b: 20, t: 60, r: 35, l: 35, pad: 0 }, height: 300, autosize: true, font: {
             family: 'Arial, sans-serif'
         }
     };
