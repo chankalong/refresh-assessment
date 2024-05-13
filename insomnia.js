@@ -223,25 +223,25 @@ function clearTooltip(e) {
   
   var insomnia_7_next_button = document.getElementById("insomnia_7_next_button");
   var insomnia_7_next_function = function () {
-    swal
-      .fire({
-        text: "確定提交嗎？",
-        showCloseButton: true,
-        cancelButtonText: "取消",
-        showCancelButton: true,
-        confirmButtonText: "確定",
-        customClass: {
-          confirmButton: "btnRound-thin btnRound-orange mx-2",
-          cancelButton: "btnRound-thin btnRound-green mx-2",
-        },
-        buttonsStyling: false,
-        focusConfirm: false,
-      })
-      .then(function (result) {
-        if (result.isConfirmed) {
+    //swal
+    //  .fire({
+    //    text: "確定提交嗎？",
+    //    showCloseButton: true,
+    //    cancelButtonText: "取消",
+    //    showCancelButton: true,
+    //    confirmButtonText: "確定",
+    //    customClass: {
+    //      confirmButton: "btnRound-thin btnRound-orange mx-2",
+    //      cancelButton: "btnRound-thin btnRound-green mx-2",
+    //    },
+    //    buttonsStyling: false,
+    //    focusConfirm: false,
+    //  })
+    //  .then(function (result) {
+    //    if (result.isConfirmed) {
           document.querySelector("input[value=查看測試結果]").click();
-        }
-      });
+    //    }
+    //  });
   };
   
   Array.prototype.map.call(
