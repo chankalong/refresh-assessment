@@ -625,7 +625,7 @@
     e.addEventListener("click", function (evt) {
       if (e.getAttribute("data-gt-lang") == default_language) {
         evt.preventDefault();
-        doGTranslate("zh-TW|zh-TW");
+        document.getElementById(":1.restore").click()
       } else if (url_structure == "none") {
         evt.preventDefault();
         doGTranslate("zh-TW|" + e.getAttribute("data-gt-lang"));
