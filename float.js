@@ -412,7 +412,7 @@
     '" alt="' +
     current_lang +
     '"> <span class="gt-lang-code">' +
-    current_lang +
+    current_lang.substr(0, 2) +
     '</span> <span class="gt_float_switcher-arrow"></span></div></div>';
   var gt_options_div = '<div class="gt_options" style="display:none">';
   languages.forEach(function (lang) {
