@@ -623,9 +623,12 @@
   }, 20);
   document.querySelectorAll(u_class + " a[data-gt-lang]").forEach(function (e) {
     e.addEventListener("click", function (evt) {
-      if (url_structure == "none") {
+      if (e.getAttribute("data-gt-lang") == default_language) {
         evt.preventDefault();
-        doGTranslate(default_language + "|" + e.getAttribute("data-gt-lang"));
+        doGTranslate("zh-TW|zh-TW");
+      } else if (url_structure == "none") {
+        evt.preventDefault();
+        doGTranslate("zh-TW|" + e.getAttribute("data-gt-lang"));
       }
       gt_update_float_language(e);
     });
