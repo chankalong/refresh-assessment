@@ -214,7 +214,7 @@
     zu: "Zulu",
   };
   var default_language = "zh-TW";//gt.default_language || "auto";
-  var languages = gt.languages || Object.keys(lang_array_english);
+  var languages = ["zh-TW","en"];
   var alt_flags = gt.alt_flags || {};
   var flag_style = gt.flag_style || "2d";
   var flags_location =
@@ -225,9 +225,9 @@
   var switcher_horizontal_position = gt.switcher_horizontal_position || "left";
   var switcher_vertical_position = gt.switcher_vertical_position || "bottom";
   var float_switcher_open_direction = gt.float_switcher_open_direction || "top";
-  var native_language_names = gt.native_language_names || false;
+  var native_language_names = true;
   var detect_browser_language = gt.detect_browser_language || false;
-  var wrapper_selector = gt.wrapper_selector || ".gtranslate_wrapper";
+  var wrapper_selector = ".gtranslate_wrapper";
   var custom_css = gt.custom_css || "";
   var lang_array =
     (native_language_names && lang_array_native) || lang_array_english;
