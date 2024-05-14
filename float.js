@@ -412,7 +412,7 @@
     '" alt="' +
     current_lang +
     '"> <span class="gt-lang-code">' +
-    current_lang.substr(0, 2) +
+    current_lang + //current_lang.substr(0, 2) +
     '</span> <span class="gt_float_switcher-arrow"></span></div></div>';
   var gt_options_div = '<div class="gt_options" style="display:none">';
   languages.forEach(function (lang) {
@@ -596,7 +596,7 @@
   }
   function gt_update_float_language(el) {
     var lang = el.getAttribute("data-gt-lang");
-    var lang_short = lang.substr(0, 2)
+    //var lang_short = lang.substr(0, 2)
     var img_src = el.parentNode
       .querySelector('a[data-gt-lang="' + lang + '"] img')
       .getAttribute("src");
@@ -611,7 +611,7 @@
       .setAttribute("src", img_src);
     el.parentNode.parentNode.querySelector(
       ".gt-selected span.gt-lang-code"
-    ).innerText = lang_short;
+    ).innerText = lang;//lang_short;
     gt_hide_float_switcher();
   }
   setTimeout(function () {
