@@ -622,7 +622,10 @@
   }, 20);
   document.querySelectorAll(u_class + " a[data-gt-lang]").forEach(function (e) {
     e.addEventListener("click", function (evt) {
-      if (url_structure == "none" && e.getAttribute('data-gt-lang') != default_language) {
+      if (e.getAttribute('data-gt-lang') == default_language) {
+        evt.preventDefault();
+        doGTranslate(default_language + "|" + default_language);
+      } else if (url_structure == "none") {
         evt.preventDefault();
         doGTranslate(default_language + "|" + e.getAttribute("data-gt-lang"));
       }
