@@ -17,7 +17,7 @@
     ceb: "Cebuano",
     ny: "Chichewa",
     "zh-CN": "Chinese (Simplified)",
-    "zh-hk": "Chinese (Traditional)",
+    "zh-TW": "Chinese (Traditional)",
     co: "Corsican",
     hr: "Croatian",
     cs: "Czech",
@@ -123,7 +123,7 @@
     ceb: "Cebuano",
     ny: "Chichewa",
     "zh-CN": "\u7b80\u4f53\u4e2d\u6587",
-    "zh-hk": "\u7e41\u9ad4\u4e2d\u6587",
+    "zh-TW": "\u7e41\u9ad4\u4e2d\u6587",
     co: "Corsu",
     hr: "Hrvatski",
     cs: "\u010ce\u0161tina\u200e",
@@ -407,7 +407,7 @@
       switcher_horizontal_position +
       ':20px;z-index:999999;"><div class="gt_float_switcher notranslate" style="opacity:0">';
   var gt_current_div =
-    '<div class="gt-selected"><div class="gt-current-lang"> <img src="' +
+    '<div class="gt-selected"><div class="gt-current-lang"><img src="' +
     get_flag_src(current_lang) +
     '" alt="' +
     current_lang +
@@ -596,6 +596,7 @@
   }
   function gt_update_float_language(el) {
     var lang = el.getAttribute("data-gt-lang");
+    var lang_short = lang.substr(0, 2)
     var img_src = el.parentNode
       .querySelector('a[data-gt-lang="' + lang + '"] img')
       .getAttribute("src");
@@ -610,7 +611,7 @@
       .setAttribute("src", img_src);
     el.parentNode.parentNode.querySelector(
       ".gt-selected span.gt-lang-code"
-    ).innerText = lang;
+    ).innerText = lang_short;
     gt_hide_float_switcher();
   }
   setTimeout(function () {
@@ -622,10 +623,7 @@
   }, 20);
   document.querySelectorAll(u_class + " a[data-gt-lang]").forEach(function (e) {
     e.addEventListener("click", function (evt) {
-      if (e.getAttribute('data-gt-lang') == default_language) {
-        evt.preventDefault();
-        doGTranslate("zh-TW|zh-TW");
-      } else if (url_structure == "none") {
+      if (url_structure == "none") {
         evt.preventDefault();
         doGTranslate(default_language + "|" + e.getAttribute("data-gt-lang"));
       }
