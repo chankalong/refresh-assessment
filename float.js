@@ -625,7 +625,15 @@
     e.addEventListener("click", function (evt) {
       if (e.getAttribute("data-gt-lang") == default_language) {
         evt.preventDefault();
-        document.getElementById(":1.restore").click()
+        const phoneRecoverIframe = document.getElementById(':1.container') // 移动端
+          const PCRecoverIframe = document.getElementById(':2.container') // PC端
+          if (phoneRecoverIframe) {
+            const recoverDocument = phoneRecoverIframe.contentWindow.document
+            recoverDocument.getElementById(':1.restore').click()
+          } else if (PCRecoverIframe) {
+            const recoverDocument = PCRecoverIframe.contentWindow.document
+            recoverDocument.getElementById(':2.restore').click()
+          }
       } else if (url_structure == "none") {
         evt.preventDefault();
         doGTranslate("zh-TW|" + e.getAttribute("data-gt-lang"));
