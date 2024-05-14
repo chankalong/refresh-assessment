@@ -662,9 +662,9 @@
     ).toLowerCase();
     switch (accept_language) {
       case "zh":
-      case "zh-cn":
-        var preferred_language = "zh-CN";
-        break;
+      //case "zh-cn":
+      //  var preferred_language = "zh-CN";
+      //  break;
       case "zh-tw":
       case "zh-hk":
         var preferred_language = "zh-TW";
