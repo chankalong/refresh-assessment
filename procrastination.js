@@ -192,13 +192,13 @@ form.addEventListener("submit", function (e) {
     var procrastination = procrastination_object['procrastination_0_score'] + procrastination_object['procrastination_1_score'] + (4 - procrastination_object['procrastination_2_score']) + procrastination_object['procrastination_3_score'] + (4 - procrastination_object['procrastination_4_score']) + (4 - procrastination_object['procrastination_5_score']) + procrastination_object['procrastination_6_score'] + procrastination_object['procrastination_7_score'] + procrastination_object['procrastination_8_score']
 
     if (procrastination <= 18) {
-        procrastinationDescription.textContent = "你可能較少時候會拖延。";
+        procrastinationDescription.textContent = "恭喜你，你沒有拖延症的問題。";
         procrastinationColor = "#4EC04E";
     } else if (procrastination > 18 && procrastination < 27) {
-        procrastinationDescription.textContent = "你可能較多時候都會拖延。";
+        procrastinationDescription.textContent = "你在生活中可能少許拖延的行為，我們建議你用不同的方式去調節情緒，然後學會擺脫自我批評，為即將到來的事情做好準備。";
         procrastinationColor = "#FFC84A";
     } else {
-        procrastinationDescription.textContent = "你可能較多時候都會拖延。";
+        procrastinationDescription.textContent = "你可能已經養成拖延的習慣，我們建議你運用方法，訓練自己去意識到逃避和拖延的傾向，然後學會擺脫自我批評，為即將到來的事情做好準備。";
         procrastinationColor = "#F48847";
     }
     
