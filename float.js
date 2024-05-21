@@ -122,7 +122,7 @@
     ca: "Catal\u00e0",
     ceb: "Cebuano",
     ny: "Chichewa",
-    "zh-CN": "\u7b80\u4f53\u4e2d\u6587",
+    "zh-CN": "\u7b80\u4f53\u4e2d\u6587 (\u8c37\u6b4c\u7ffb\u8bd1)",
     "zh-TW": "\u7e41\u9ad4\u4e2d\u6587",
     co: "Corsu",
     hr: "Hrvatski",
