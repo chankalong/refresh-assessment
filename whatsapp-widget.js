@@ -69,7 +69,7 @@ function createElements(params) {
                             </div>
                             <div class="whatsapp-widget-chat-footer" id="whatsapp-widget-chat-footer">
                                 <div id="whatsapp-widget-chat-input-container">
-                                    <input type="text" placeholder="Write a message here" id="whatsapp-widget-chat-input" />                        
+                                    <input type="text" id="whatsapp-widget-chat-input" />                        
                                 </div>
                                 <a href="#" id="whatsapp-widget-open-modal" class="whatsapp-widget-open-modal">   
                                     ${paramsDefault.optionsChat.text}       
