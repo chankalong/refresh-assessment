@@ -412,7 +412,8 @@
     '" alt="' +
     current_lang +
     '"> <span class="gt-lang-code">' +
-    current_lang.slice(-2) +
+    if (current_lang === "zh-TW") {"HK"} else {current_lang.slice(-2)} +
+    //current_lang.slice(-2) +
     '</span> <span class="gt_float_switcher-arrow"></span></div></div>';
   var gt_options_div = '<div class="gt_options" style="display:none">';
   languages.forEach(function (lang) {
@@ -596,7 +597,7 @@
   }
   function gt_update_float_language(el) {
     var lang = el.getAttribute("data-gt-lang");
-    var lang_short = lang.slice(-2)
+    if (lang === "zh-TW") {var lang_short = "HK"} else {var lang_short = lang.slice(-2)}
     var img_src = el.parentNode
       .querySelector('a[data-gt-lang="' + lang + '"] img')
       .getAttribute("src");
