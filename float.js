@@ -213,7 +213,7 @@
     yo: "Yor\u00f9b\u00e1",
     zu: "Zulu",
   };
-  var default_language = "zh-TW";//gt.default_language || "auto";
+  var default_language = "zh-hk";//gt.default_language || "auto";
   var languages = ["zh-TW","en"];
   var alt_flags = gt.alt_flags || {};
   var flag_style = gt.flag_style || "2d";
