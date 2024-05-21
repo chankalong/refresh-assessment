@@ -412,7 +412,7 @@
     '" alt="' +
     current_lang +
     '"> <span class="gt-lang-code">' +
-    if (current_lang === "zh-TW") {"HK"} else {current_lang.slice(-2)} +
+    (current_lang === "zh-TW" ? "HK" : current_lang.slice(-2)) +
     //current_lang.slice(-2) +
     '</span> <span class="gt_float_switcher-arrow"></span></div></div>';
   var gt_options_div = '<div class="gt_options" style="display:none">';
