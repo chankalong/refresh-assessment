@@ -16,7 +16,7 @@
     ca: "Catalan",
     ceb: "Cebuano",
     ny: "Chichewa",
-    //"zh-CN": "Chinese (Simplified)",
+    "zh-CN": "Chinese (Simplified)",
     "zh-TW": "Chinese (Traditional)",
     co: "Corsican",
     hr: "Croatian",
@@ -122,7 +122,7 @@
     ca: "Catal\u00e0",
     ceb: "Cebuano",
     ny: "Chichewa",
-    //"zh-CN": "\u7b80\u4f53\u4e2d\u6587",
+    "zh-CN": "\u7b80\u4f53\u4e2d\u6587",
     "zh-TW": "\u7e41\u9ad4\u4e2d\u6587",
     co: "Corsu",
     hr: "Hrvatski",
@@ -412,7 +412,7 @@
     '" alt="' +
     current_lang +
     '"> <span class="gt-lang-code">' +
-    current_lang.substr(0, 2) +
+    current_lang.slice(-2) +
     '</span> <span class="gt_float_switcher-arrow"></span></div></div>';
   var gt_options_div = '<div class="gt_options" style="display:none">';
   languages.forEach(function (lang) {
@@ -596,7 +596,7 @@
   }
   function gt_update_float_language(el) {
     var lang = el.getAttribute("data-gt-lang");
-    var lang_short = lang.substr(0, 2)
+    var lang_short = lang.slice(-2)
     var img_src = el.parentNode
       .querySelector('a[data-gt-lang="' + lang + '"] img')
       .getAttribute("src");
@@ -670,9 +670,9 @@
     ).toLowerCase();
     switch (accept_language) {
       case "zh":
-      //case "zh-cn":
-      //  var preferred_language = "zh-CN";
-      //  break;
+      case "zh-cn":
+        var preferred_language = "zh-CN";
+        break;
       case "zh-tw":
       case "zh-hk":
         var preferred_language = "zh-TW";
