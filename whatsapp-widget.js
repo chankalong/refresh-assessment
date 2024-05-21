@@ -25,7 +25,7 @@ let timer;
 
 function initWidget(params)  {
 
-    document.addEventListener("DOMContentLoaded", function(e) {
+    //document.addEventListener("DOMContentLoaded", function(e) {
         const wpp = document.createElement('div');
         wpp.setAttribute("id", "whatsapp-widget");
         wpp.classList.add('whatsapp-widget');
@@ -34,7 +34,7 @@ function initWidget(params)  {
         body.appendChild(wpp);
 
         createElements(params);
-    })
+    //})
 }
 
 function createElements(params) {
