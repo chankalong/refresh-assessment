@@ -637,7 +637,7 @@
           }
       } else if (url_structure == "none") {
         evt.preventDefault();
-        doGTranslate(current_lang + "|" + e.getAttribute("data-gt-lang"));
+        doGTranslate("zh-TW |" + e.getAttribute("data-gt-lang"));
       }
       gt_update_float_language(e);
     });
