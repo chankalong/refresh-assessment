@@ -123,7 +123,7 @@ function setEvents() {
                 messageBot.style.display = 'block';
                 userBot.innerHTML = paramsDefault.optionsBot.name;
                 msgBot.innerHTML = paramsDefault.optionsBot.messageDefault;
-                statusBot.innerHTML = `Online`;
+                statusBot.innerHTML = `浸信會愛羣社會服務處`;
                 dateBot.innerHTML = timeNow();
             }, 2000);
         }
