@@ -14,10 +14,10 @@ let paramsDefault = {
         text: 'Send'
     },
     optionsBot: {
-        name: 'Bot',
+        name: 'Re:Fresh',
         image: 'https://refresh.bokss.org.hk/sites/default/files/inpages/whatsapp/bot.png',
         messageDefault: 'Hi, 👋 how can I help you?',
-        messageTyping: 'is typing...'
+        messageTyping: '線上精神健康自助平台'
     }
 };
 
@@ -57,7 +57,7 @@ function createElements(params) {
                                 
                                 <div style="margin-left: 16px; margin-right: 16px">
                                     <div class="whatsapp-widget-chat-header name" id="nameBot">${paramsDefault.optionsBot.name}</div>
-                                    <div class="whatsapp-widget-chat-header status" id="statusBot">浸信會愛羣社會服務處</div>
+                                    <div class="whatsapp-widget-chat-header status" id="statusBot">線上精神健康自助平台</div>
                                 </div>
                             </div>
                         </div>
@@ -121,9 +121,9 @@ function setEvents() {
 
             timer = setTimeout(() => {
                 messageBot.style.display = 'block';
-                userBot.innerHTML = paramsDefault.optionsBot.name;
+                userBot.innerHTML = paramsDefault.optionsBot.name + " " + paramsDefault.optionsBot.messageTyping;
                 msgBot.innerHTML = paramsDefault.optionsBot.messageDefault;
-                statusBot.innerHTML = `浸信會愛羣社會服務處`;
+                statusBot.innerHTML = `線上精神健康自助平台`;
                 dateBot.innerHTML = timeNow();
             }, 2000);
         }
