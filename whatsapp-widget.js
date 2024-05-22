@@ -57,7 +57,7 @@ function createElements(params) {
                                 
                                 <div style="margin-left: 16px; margin-right: 16px">
                                     <div class="whatsapp-widget-chat-header name" id="nameBot">${paramsDefault.optionsBot.name}</div>
-                                    <div class="whatsapp-widget-chat-header status" id="statusBot">ONLINE 🟢</div>
+                                    <div class="whatsapp-widget-chat-header status" id="statusBot">浸信會愛羣社會服務處</div>
                                 </div>
                             </div>
                         </div>
@@ -72,10 +72,7 @@ function createElements(params) {
                                     <input type="text" id="whatsapp-widget-chat-input" />                        
                                 </div>
                                 <a href="#" id="whatsapp-widget-open-modal" class="whatsapp-widget-open-modal">   
-                                    <svg class="joinchat__button__send" width="60" height="60" viewBox="0 0 400 400" stroke-linecap="round" stroke-width="33">
-<path class="joinchat_svg__plain" d="M168.83 200.504H79.218L33.04 44.284a1 1 0 0 1 1.386-1.188L365.083 199.04a1 1 0 0 1 .003 1.808L34.432 357.903a1 1 0 0 1-1.388-1.187l29.42-99.427"></path>
-<path class="joinchat_svg__chat" d="M318.087 318.087c-52.982 52.982-132.708 62.922-195.725 29.82l-80.449 10.18 10.358-80.112C18.956 214.905 28.836 134.99 81.913 81.913c65.218-65.217 170.956-65.217 236.174 0 42.661 42.661 57.416 102.661 44.265 157.316"></path>
-</svg>      
+                                    ${paramsDefault.optionsChat.text}   
                                 </a>
                             </div>
                         </div>
