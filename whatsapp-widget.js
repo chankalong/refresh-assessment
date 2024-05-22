@@ -49,7 +49,7 @@ function createElements(params) {
 
     const strChat = `<div class="whatsapp-widget-chat" id="whatsapp-widget-chat">
                         <div class="whatsapp-widget-chat-header" id="whatsapp-widget-chat-header" style="background: ${paramsDefault.optionsPopup.background}; color: ${paramsDefault.optionsPopup.color}">
-                            <div class="whatsapp-widget-chat-header close" id="close">✖</div>
+                            <div class="whatsapp-widget-chat-header close" id="close"></div>
                             <div class="whatsapp-widget-chat-header bot">
                                 <div class="bot-img" id="bot-img">
                                     <img class="whatsapp-widget-chat-header" src="${paramsDefault.optionsBot.image}" />
