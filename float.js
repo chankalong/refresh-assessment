@@ -513,6 +513,9 @@
       });
   }
   var gt_float_open = false;
+  function remove_white_bar() {
+    if (Array.prototype.filter.call(document.querySelectorAll('svg'), function (e) {return e.getAttribute("viewBox") == '0 0 66 66'})[0]) {Array.prototype.filter.call(document.querySelectorAll('svg'), function (e) {return e.getAttribute("viewBox") == '0 0 66 66'})[0].style.display = 'none';}
+  }
   function gt_hscroll(evt) {
     var tgt = evt.target;
     if (tgt.tagName == "A") tgt = tgt.parentNode;
@@ -563,6 +566,10 @@
           e.addEventListener("touchstart", gt_hscroll);
           e.addEventListener("touchmove", gt_hscroll);
           e.addEventListener("touchend", gt_hscroll);
+          e.addEventListener("mousewheel", remove_white_bar);
+          e.addEventListener("touchstart", remove_white_bar);
+          e.addEventListener("touchmove", remove_white_bar);
+          e.addEventListener("touchend", remove_white_bar);
         }
       }, 200);
     });
@@ -588,6 +595,10 @@
           e.removeEventListener("touchstart", gt_hscroll);
           e.removeEventListener("touchmove", gt_hscroll);
           e.removeEventListener("touchend", gt_hscroll);
+          e.removeEventListener("mousewheel", remove_white_bar);
+          e.removeEventListener("touchstart", remove_white_bar);
+          e.removeEventListener("touchmove", remove_white_bar);
+          e.removeEventListener("touchend", remove_white_bar);
         }
         e.classList.remove("gt-open");
         setTimeout(function () {
