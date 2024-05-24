@@ -242,6 +242,9 @@
   var widget_css = custom_css;
   flags_location += (flag_style == "3d" ? 32 : "svg") + "/";
   var flag_ext = flag_style == "3d" ? ".png" : ".svg";
+  function remove_white_bar() {
+    if (Array.prototype.filter.call(document.querySelectorAll('svg'), function (e) {return e.getAttribute("viewBox") == '0 0 66 66'})[0]) {Array.prototype.filter.call(document.querySelectorAll('svg'), function (e) {return e.getAttribute("viewBox") == '0 0 66 66'})[0].style.display = 'none';}
+  }
   function get_flag_src(lang) {
     if (!alt_flags[lang]) return flags_location + lang + flag_ext;
     else if (alt_flags[lang] == "usa")
@@ -510,12 +513,11 @@
     else
       document.querySelectorAll(u_class).forEach(function (e) {
         e.addEventListener("pointerenter", load_tlib);
+        e.addEventListener("pointerenter", remove_white_bar);
       });
   }
   var gt_float_open = false;
-  function remove_white_bar() {
-    if (Array.prototype.filter.call(document.querySelectorAll('svg'), function (e) {return e.getAttribute("viewBox") == '0 0 66 66'})[0]) {Array.prototype.filter.call(document.querySelectorAll('svg'), function (e) {return e.getAttribute("viewBox") == '0 0 66 66'})[0].style.display = 'none';}
-  }
+  
   function gt_hscroll(evt) {
     var tgt = evt.target;
     if (tgt.tagName == "A") tgt = tgt.parentNode;
