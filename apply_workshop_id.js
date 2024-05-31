@@ -5,7 +5,12 @@ var form_apply_workshop_member_id = document.getElementById(
 );
 url_path = document.referrer.replace("https://refresh.bokss.org.hk", "");
 url_para_position = url_path.search("\\?")
-workshop_link_textbox.value = url_path.slice(0, url_para_position);
+if (url_para_position > 0) {
+  workshop_link_textbox.value = url_path.slice(0, url_para_position);
+} else {
+  workshop_link_textbox.value = url_path
+}
+
 member_id_workshop_textbox.value = drupalSettings.user.member_id;
 
 form_apply_workshop_member_id.addEventListener("submit", function (e) {
