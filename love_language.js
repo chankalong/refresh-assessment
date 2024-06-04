@@ -270,10 +270,13 @@ function clearTooltip(e) {
 
   var system_id_textbox = document.getElementById("system_id");
   var member_id_textbox = document.getElementById("member_id");
+  var uid_textbox = document.getElementById("uid");
   var canvas_element = document.createElement("canvas");
 
   member_id_textbox.value = drupalSettings.user.member_id;
   system_id_textbox.value = drupalSettings.bokss.user_uuid;
+  if (uid_textbox.value) {console.log("input uid value already")} else {uid_textbox.value = Math.random();}
+  
   var form = document.getElementById("form_love_language");
 
   form.addEventListener("submit", function (e) {
