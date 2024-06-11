@@ -333,7 +333,7 @@ function clearTooltip(e) {
         "default": "/sites/default/files/inpages/assessment/big_five/5 身體的接觸_v2.png"
       };
       
-      const resultDiv = document.getElementById("test_result");
+      const resultDiv = document.getElementById("test_result_img");
       const trait = sortedKeys_big_five_factor_object[0];
       resultDiv.src = resultBgSources[trait] || resultBgSources["default"];
 
