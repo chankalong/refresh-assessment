@@ -535,6 +535,7 @@ function clearTooltip(e) {
       font: {
         family: "'Noto Sans HK', Arial, sans-serif",
         size: 11,
+        color: big_TextColor
       },
       polar: {
         angularaxis: {
