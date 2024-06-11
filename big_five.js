@@ -326,11 +326,11 @@ function clearTooltip(e) {
     //var sortedKeys_big_five_factor_object_high_one = sortedKeys_big_five_factor_object[0]
 
       const resultBgSources = {
-        "big_five_extraversion": "/sites/default/files/inpages/assessment/big_five/1 肯定的言語_v3.png",
-        "big_five_agreeableness": "/sites/default/files/inpages/assessment/big_five/4 精心的時刻_v2.png",
-        "big_five_conscientiousness": "/sites/default/files/inpages/assessment/big_five/3 真心的禮物_v2.png",
-        "big_five_neuroticism": "/sites/default/files/inpages/assessment/big_five/2 服務的行動_v2.png",
-        "default": "/sites/default/files/inpages/assessment/big_five/5 身體的接觸_v2.png"
+        "big_five_extraversion": "/sites/default/files/inpages/assessment/big-five/e.jpg",
+        "big_five_agreeableness": "/sites/default/files/inpages/assessment/big-five/a.jpg",
+        "big_five_conscientiousness": "/sites/default/files/inpages/assessment/big-five/c.jpg",
+        "big_five_neuroticism": "/sites/default/files/inpages/assessment/big-five/n.jpg",
+        "default": "/sites/default/files/inpages/assessment/big-five/o.jpg"
       };
       
       const resultDiv = document.getElementById("test_result_img");
