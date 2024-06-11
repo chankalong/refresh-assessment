@@ -338,14 +338,16 @@ function clearTooltip(e) {
       resultDiv.src = resultBgSources[trait] || resultBgSources["default"];
 
       const colorSources = {
-        "big_five_extraversion": "#edddc2",
-        "big_five_agreeableness": "#f8d359",
-        "big_five_conscientiousness": "#73cae6",
-        "big_five_neuroticism": "#34dcb3",
-        "default": "#f98c8a"
+        "big_five_extraversion": "#EFEBDE",
+        "big_five_agreeableness": "#FFEEC7",
+        "big_five_conscientiousness": "#D5ECF4",
+        "big_five_neuroticism": "#C3F6E9",
+        "default": "#FFD7D7"
       };
       
       const big_fiveColor = colorSources[trait] || colorSources["default"];
+      const plotBgDiv = document.getElementById("svg_div_img");
+      plotBgDiv.style.backgroundColor = colorSources[trait] || colorSources["default"];
 
     document.getElementById("big_fiveQuestionDiv").style.display = "none";
     document.getElementById("big_fiveQuestionFinishDiv").style.display =
@@ -505,8 +507,8 @@ function clearTooltip(e) {
           "肯定<br>言語",
         ],
         fill: "toself",
-        fillcolor: big_fiveColor + ",0.8)",
-        line: { color: big_fiveColor + ",0.8)" },
+        fillcolor: big_fiveColor,
+        //line: { color: big_fiveColor + ",0.8)" },
         mode: "none",
       },
     ];
