@@ -526,7 +526,7 @@ function clearTooltip(e) {
         },
         radialaxis: {
           visible: false,
-          range: [0, 8],
+          range: [0, 4],
         },
       },
       showlegend: false,
