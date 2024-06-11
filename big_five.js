@@ -542,7 +542,7 @@ function clearTooltip(e) {
         angularaxis: {
           color: "transparent",
           gridcolor: "black",
-          tickfont: { color: big_TextColor },
+          tickfont: { color: big_TextColor, weight: "bold" },
           rotation: 90,
         },
         radialaxis: {
