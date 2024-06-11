@@ -337,17 +337,34 @@ function clearTooltip(e) {
       const trait = sortedKeys_big_five_factor_object[0];
       resultDiv.src = resultBgSources[trait] || resultBgSources["default"];
 
-      const colorSources = {
+      const divColor = {
         "big_five_extraversion": "#EFEBDE",
         "big_five_agreeableness": "#FFEEC7",
         "big_five_conscientiousness": "#D5ECF4",
         "big_five_neuroticism": "#C3F6E9",
         "default": "#FFD7D7"
       };
+
+      const plotFillColor = {
+        "big_five_extraversion": "rgba(155, 147, 121, 0.8)",
+        "big_five_agreeableness": "rgba(216, 166, 51, 0.8)",
+        "big_five_conscientiousness": "rgba(105, 193, 224, 0.8)",
+        "big_five_neuroticism": "rgba(35, 215, 168, 0.8)",
+        "default": "rgba(247, 122, 121, 0.8)"
+      };
+
+      const plotTextColor = {
+        "big_five_extraversion": "#9B9379",
+        "big_five_agreeableness": "#D8A633",
+        "big_five_conscientiousness": "#69C1E0",
+        "big_five_neuroticism": "#23D7A8",
+        "default": "#F77A79"
+      };
       
-      const big_fiveColor = colorSources[trait] || colorSources["default"];
-      const plotBgDiv = document.getElementById("svg_div_img");
-      plotBgDiv.style.backgroundColor = colorSources[trait] || colorSources["default"];
+      const big_FillColor = plotFillColor[trait] || plotFillColor["default"];
+      const big_TextColor = plotTextColor[trait] || plotTextColor["default"];
+      const plotBgDiv = document.getElementById("svg_div");
+      plotBgDiv.style.backgroundColor = divColor[trait] || divColor["default"];
 
     document.getElementById("big_fiveQuestionDiv").style.display = "none";
     document.getElementById("big_fiveQuestionFinishDiv").style.display =
@@ -507,8 +524,8 @@ function clearTooltip(e) {
           "肯定<br>言語",
         ],
         fill: "toself",
-        fillcolor: big_fiveColor,
-        //line: { color: big_fiveColor + ",0.8)" },
+        fillcolor: big_FillColor,
+        line: { color: big_FillColor },
         mode: "none",
       },
     ];
