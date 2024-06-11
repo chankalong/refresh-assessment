@@ -325,7 +325,7 @@ function clearTooltip(e) {
     //var sortedKeys_big_five_factor_object_high_two = sortedKeys_big_five_factor_object[0] + sortedKeys_big_five_factor_object[1]
     //var sortedKeys_big_five_factor_object_high_one = sortedKeys_big_five_factor_object[0]
 
-      const iconSources = {
+      const resultBgSources = {
         "big_five_extraversion": "/sites/default/files/inpages/assessment/big_five/1 肯定的言語_v3.png",
         "big_five_agreeableness": "/sites/default/files/inpages/assessment/big_five/4 精心的時刻_v2.png",
         "big_five_conscientiousness": "/sites/default/files/inpages/assessment/big_five/3 真心的禮物_v2.png",
@@ -333,19 +333,19 @@ function clearTooltip(e) {
         "default": "/sites/default/files/inpages/assessment/big_five/5 身體的接觸_v2.png"
       };
       
-      const iconDiv = document.getElementById("icon_div");
+      const resultDiv = document.getElementById("test_result");
       const trait = sortedKeys_big_five_factor_object[0];
-      iconDiv.src = iconSources[trait] || iconSources["default"];
+      resultDiv.src = resultBgSources[trait] || resultBgSources["default"];
 
       const colorSources = {
-        "big_five_extraversion": "/sites/default/files/inpages/assessment/big_five/1 肯定的言語_v3.png",
-        "big_five_agreeableness": "/sites/default/files/inpages/assessment/big_five/4 精心的時刻_v2.png",
-        "big_five_conscientiousness": "/sites/default/files/inpages/assessment/big_five/3 真心的禮物_v2.png",
-        "big_five_neuroticism": "/sites/default/files/inpages/assessment/big_five/2 服務的行動_v2.png",
-        "default": "/sites/default/files/inpages/assessment/big_five/5 身體的接觸_v2.png"
+        "big_five_extraversion": "#edddc2",
+        "big_five_agreeableness": "#f8d359",
+        "big_five_conscientiousness": "#73cae6",
+        "big_five_neuroticism": "#34dcb3",
+        "default": "#f98c8a"
       };
       
-      big_fiveColor_bg = colorSources[trait] || colorSources["default"];
+      const big_fiveColor = colorSources[trait] || colorSources["default"];
 
     document.getElementById("big_fiveQuestionDiv").style.display = "none";
     document.getElementById("big_fiveQuestionFinishDiv").style.display =
@@ -505,8 +505,8 @@ function clearTooltip(e) {
           "肯定<br>言語",
         ],
         fill: "toself",
-        fillcolor: big_fiveColor_bg + ",0.8)",
-        line: { color: big_fiveColor_bg + ",0.8)" },
+        fillcolor: big_fiveColor + ",0.8)",
+        line: { color: big_fiveColor + ",0.8)" },
         mode: "none",
       },
     ];
