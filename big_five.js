@@ -286,9 +286,9 @@ function clearTooltip(e) {
 
     for (var i = 0; i <= 49; i++) {
       var inputName = "big_five_" + i;
-      big_five_object[inputName + "_score"] = document.querySelector(
+      big_five_object[inputName + "_score"] = parseInt(document.querySelector(
         'input[name="' + inputName + '"]:checked'
-      ).value;
+      ).value);
     }
 
     function hasNull(element, index, array) {
