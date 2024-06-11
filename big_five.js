@@ -310,11 +310,11 @@ function clearTooltip(e) {
 
     //score
 
-    var big_five_extraversion = 20 + big_five_object['big_five_0_score'] - big_five_object['big_five_5_score'] + big_five_object['big_five_10_score'] - big_five_object['big_five_15_score'] + big_five_object['big_five_20_score'] - big_five_object['big_five_25_score'] + big_five_object['big_five_30_score'] - big_five_object['big_five_35_score'] + big_five_object['big_five_40_score'] - big_five_object['big_five_45_score'];
-    var big_five_agreeableness = 14 - big_five_object['big_five_1_score'] + big_five_object['big_five_6_score'] - big_five_object['big_five_11_score'] + big_five_object['big_five_16_score'] - big_five_object['big_five_21_score'] + big_five_object['big_five_26_score'] - big_five_object['big_five_31_score'] + big_five_object['big_five_36_score'] + big_five_object['big_five_41_score'] + big_five_object['big_five_46_score'];
-    var big_five_conscientiousness = 14 + big_five_object['big_five_2_score'] - big_five_object['big_five_7_score'] + big_five_object['big_five_12_score'] - big_five_object['big_five_17_score'] + big_five_object['big_five_22_score'] - big_five_object['big_five_27_score'] + big_five_object['big_five_32_score'] - big_five_object['big_five_37_score'] + big_five_object['big_five_42_score'] + big_five_object['big_five_47_score'];
-    var big_five_neuroticism = 38 - big_five_object['big_five_3_score'] + big_five_object['big_five_8_score'] - big_five_object['big_five_13_score'] + big_five_object['big_five_18_score'] - big_five_object['big_five_23_score'] - big_five_object['big_five_28_score'] - big_five_object['big_five_33_score'] - big_five_object['big_five_38_score'] - big_five_object['big_five_43_score'] - big_five_object['big_five_48_score'];
-    var big_five_openness = 8 + big_five_object['big_five_4_score'] - big_five_object['big_five_9_score'] + big_five_object['big_five_14_score'] - big_five_object['big_five_19_score'] + big_five_object['big_five_24_score'] - big_five_object['big_five_29_score'] + big_five_object['big_five_34_score'] + big_five_object['big_five_39_score'] + big_five_object['big_five_44_score'] + big_five_object['big_five_49_score'];
+    var big_five_extraversion = (20 + big_five_object['big_five_0_score'] - big_five_object['big_five_5_score'] + big_five_object['big_five_10_score'] - big_five_object['big_five_15_score'] + big_five_object['big_five_20_score'] - big_five_object['big_five_25_score'] + big_five_object['big_five_30_score'] - big_five_object['big_five_35_score'] + big_five_object['big_five_40_score'] - big_five_object['big_five_45_score']) / 10;
+    var big_five_agreeableness = (14 - big_five_object['big_five_1_score'] + big_five_object['big_five_6_score'] - big_five_object['big_five_11_score'] + big_five_object['big_five_16_score'] - big_five_object['big_five_21_score'] + big_five_object['big_five_26_score'] - big_five_object['big_five_31_score'] + big_five_object['big_five_36_score'] + big_five_object['big_five_41_score'] + big_five_object['big_five_46_score']) / 10;
+    var big_five_conscientiousness = (14 + big_five_object['big_five_2_score'] - big_five_object['big_five_7_score'] + big_five_object['big_five_12_score'] - big_five_object['big_five_17_score'] + big_five_object['big_five_22_score'] - big_five_object['big_five_27_score'] + big_five_object['big_five_32_score'] - big_five_object['big_five_37_score'] + big_five_object['big_five_42_score'] + big_five_object['big_five_47_score']) / 10;
+    var big_five_neuroticism = (38 - big_five_object['big_five_3_score'] + big_five_object['big_five_8_score'] - big_five_object['big_five_13_score'] + big_five_object['big_five_18_score'] - big_five_object['big_five_23_score'] - big_five_object['big_five_28_score'] - big_five_object['big_five_33_score'] - big_five_object['big_five_38_score'] - big_five_object['big_five_43_score'] - big_five_object['big_five_48_score']) / 10;
+    var big_five_openness = (8 + big_five_object['big_five_4_score'] - big_five_object['big_five_9_score'] + big_five_object['big_five_14_score'] - big_five_object['big_five_19_score'] + big_five_object['big_five_24_score'] - big_five_object['big_five_29_score'] + big_five_object['big_five_34_score'] + big_five_object['big_five_39_score'] + big_five_object['big_five_44_score'] + big_five_object['big_five_49_score']) / 10;
 
 
 
@@ -552,6 +552,7 @@ function clearTooltip(e) {
       hovermode: false,
       height: 150,
       width: 158,
+      paper_bgcolor: "rgba(0,0,0,0)"
     };
     var config = {
       responsive: true,
