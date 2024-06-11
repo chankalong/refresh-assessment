@@ -363,9 +363,9 @@ function clearTooltip(e) {
       
       const big_FillColor = plotFillColor[trait] || plotFillColor["default"];
       const big_TextColor = plotTextColor[trait] || plotTextColor["default"];
-      const plotBgDiv = document.getElementById("svg_div");
-      const big_divColor = divColor[trait] || divColor["default"];
-      plotBgDiv.style.backgroundColor = big_divColor
+      //const plotBgDiv = document.getElementById("svg_div");
+      //const big_divColor = divColor[trait] || divColor["default"];
+      //plotBgDiv.style.backgroundColor = big_divColor
 
     document.getElementById("big_fiveQuestionDiv").style.display = "none";
     document.getElementById("big_fiveQuestionFinishDiv").style.display =
@@ -411,7 +411,7 @@ function clearTooltip(e) {
           "開放型",
           "外向型",
         ],
-        line: { color: "#D3D3D3", width: 1 },
+        line: { color: "black", width: 1 },
       },
       {
         type: "scatterpolar",
@@ -535,7 +535,7 @@ function clearTooltip(e) {
       margin: { b: 35, t: 45, r: 25, l: 25, pad: 0 },
       font: {
         family: "'Noto Sans HK', Arial, sans-serif",
-        size: 11,
+        size: 9,
         color: big_TextColor
       },
       polar: {
