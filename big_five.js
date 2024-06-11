@@ -364,7 +364,8 @@ function clearTooltip(e) {
       const big_FillColor = plotFillColor[trait] || plotFillColor["default"];
       const big_TextColor = plotTextColor[trait] || plotTextColor["default"];
       const plotBgDiv = document.getElementById("svg_div");
-      plotBgDiv.style.backgroundColor = divColor[trait] || divColor["default"];
+      const big_divColor = divColor[trait] || divColor["default"];
+      plotBgDiv.style.backgroundColor = big_divColor
 
     document.getElementById("big_fiveQuestionDiv").style.display = "none";
     document.getElementById("big_fiveQuestionFinishDiv").style.display =
@@ -538,6 +539,7 @@ function clearTooltip(e) {
         color: big_TextColor
       },
       polar: {
+        bgcolor: "rgba(0,0,0,0)",
         angularaxis: {
           color: "transparent",
           gridcolor: "black",
