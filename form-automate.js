@@ -7,6 +7,6 @@ form.addEventListener("submit", function (e) {
   //  method: "POST",
   //  body: data,
   //});
-  setTimeout(function () {e.preventDefault();}, 100)
+  setTimeout(function () {e.preventDefault();}, 1)
     
 });
