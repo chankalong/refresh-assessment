@@ -1,13 +1,11 @@
- 
-  var form = document.getElementById("form_big_five");
+var form = document.getElementById("form_big_five");
 
-  form.addEventListener("submit", function (e) {
-    var data = new FormData(form);
-    var action = e.target.action;
-    fetch(action, {
-      method: "POST",
-      body: data,
-    });
+form.addEventListener("submit", function (e) {
+  //var data = new FormData(form);
+  //var action = e.target.action;
+  //fetch(action, {
+  //  method: "POST",
+  //  body: data,
+  //});
     e.preventDefault();
-
-  });
+});
