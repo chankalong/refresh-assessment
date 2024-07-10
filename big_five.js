@@ -552,8 +552,8 @@ function clearTooltip(e) {
       },
       showlegend: false,
       hovermode: false,
-      height: 200,
-      width: 200,
+      height: 150,
+      width: 158,
       plot_bgcolor: "rgba(0,0,0,0)",
       paper_bgcolor: "rgba(0,0,0,0)"
     };
