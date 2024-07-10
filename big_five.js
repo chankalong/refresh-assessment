@@ -535,7 +535,7 @@ function clearTooltip(e) {
       margin: { b: 35, t: 45, r: 25, l: 25, pad: 0 },
       font: {
         family: "'Noto Sans HK', Arial, sans-serif",
-        size: 14
+        size: 16
       },
       polar: {
         bgcolor: "rgba(0,0,0,0)",
