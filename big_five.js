@@ -326,11 +326,11 @@ function clearTooltip(e) {
     //var sortedKeys_big_five_factor_object_high_one = sortedKeys_big_five_factor_object[0]
 
       const resultBgSources = {
-        "big_five_extraversion": "/sites/default/files/inpages/assessment/big-five/e.jpg",
-        "big_five_agreeableness": "/sites/default/files/inpages/assessment/big-five/a.jpg",
-        "big_five_conscientiousness": "/sites/default/files/inpages/assessment/big-five/c.jpg",
-        "big_five_neuroticism": "/sites/default/files/inpages/assessment/big-five/n.jpg",
-        "default": "/sites/default/files/inpages/assessment/big-five/o.jpg"
+        "big_five_extraversion": "/sites/default/files/inpages/assessment/big-five/test.jpg",
+        "big_five_agreeableness": "/sites/default/files/inpages/assessment/big-five/test.jpg",
+        "big_five_conscientiousness": "/sites/default/files/inpages/assessment/big-five/test.jpg",
+        "big_five_neuroticism": "/sites/default/files/inpages/assessment/big-five/test.jpg",
+        "default": "/sites/default/files/inpages/assessment/big-five/test.jpg"
       };
       
       const resultDiv = document.getElementById("test_result_img");
