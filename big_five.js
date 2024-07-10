@@ -574,7 +574,7 @@ function clearTooltip(e) {
       .click();
     setTimeout(function () {
       html2canvas(document.querySelector("#test_result"), {
-        scale: 1,
+        scale: 2,
         onclone: function (document) {
           document.querySelector("#test_result").style.display = "";
         },
