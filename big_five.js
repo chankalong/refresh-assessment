@@ -326,16 +326,33 @@ function clearTooltip(e) {
     //var sortedKeys_big_five_factor_object_high_one = sortedKeys_big_five_factor_object[0]
 
       const resultBgSources = {
-        "big_five_extraversion": "/sites/default/files/inpages/assessment/big-five/test.jpg",
-        "big_five_agreeableness": "/sites/default/files/inpages/assessment/big-five/test.jpg",
-        "big_five_conscientiousness": "/sites/default/files/inpages/assessment/big-five/test.jpg",
-        "big_five_neuroticism": "/sites/default/files/inpages/assessment/big-five/test.jpg",
+        "big_five_extraversion_big_five_agreeableness": "/sites/default/files/inpages/assessment/big-five/ea.jpg",
+        "big_five_extraversion_big_five_conscientiousness": "/sites/default/files/inpages/assessment/big-five/ec.jpg",
+        "big_five_extraversion_big_five_neuroticism": "/sites/default/files/inpages/assessment/big-five/en.jpg",
+        "big_five_extraversion_big_five_openness": "/sites/default/files/inpages/assessment/big-five/eo.jpg",
+        "big_five_agreeableness_big_five_extraversion": "/sites/default/files/inpages/assessment/big-five/ae.jpg",
+        "big_five_agreeableness_big_five_conscientiousness": "/sites/default/files/inpages/assessment/big-five/ac.jpg",
+        "big_five_agreeableness_big_five_neuroticism": "/sites/default/files/inpages/assessment/big-five/an.jpg",
+        "big_five_agreeableness_big_five_openness": "/sites/default/files/inpages/assessment/big-five/ao.jpg",
+        "big_five_conscientiousness_big_five_extraversion": "/sites/default/files/inpages/assessment/big-five/ce.jpg",
+        "big_five_conscientiousness_big_five_agreeableness": "/sites/default/files/inpages/assessment/big-five/ca.jpg",
+        "big_five_conscientiousness_big_five_neuroticism": "/sites/default/files/inpages/assessment/big-five/cn.jpg",
+        "big_five_conscientiousness_big_five_openness": "/sites/default/files/inpages/assessment/big-five/co.jpg",
+        "big_five_neuroticism_big_five_extraversion": "/sites/default/files/inpages/assessment/big-five/ne.jpg",
+        "big_five_neuroticism_big_five_agreeableness": "/sites/default/files/inpages/assessment/big-five/na.jpg",
+        "big_five_neuroticism_big_five_conscientiousness": "/sites/default/files/inpages/assessment/big-five/nc.jpg",
+        "big_five_neuroticism_big_five_openness": "/sites/default/files/inpages/assessment/big-five/no.jpg",
+        "big_five_openness_big_five_extraversion": "/sites/default/files/inpages/assessment/big-five/oe.jpg",
+        "big_five_openness_big_five_agreeableness": "/sites/default/files/inpages/assessment/big-five/oa.jpg",
+        "big_five_openness_big_five_conscientiousness": "/sites/default/files/inpages/assessment/big-five/oc.jpg",
+        "big_five_openness_big_five_neuroticism": "/sites/default/files/inpages/assessment/big-five/on.jpg",
         "default": "/sites/default/files/inpages/assessment/big-five/test.jpg"
       };
       
       const resultDiv = document.getElementById("test_result_img");
       const trait = sortedKeys_big_five_factor_object[0];
-      resultDiv.src = resultBgSources[trait] || resultBgSources["default"];
+      const trait_high_low = sortedKeys_big_five_factor_object[0]+ "_"+sortedKeys_big_five_factor_object[4];
+      resultDiv.src = resultBgSources[trait_high_low] || resultBgSources["default"];
 
       const divColor = {
         "big_five_extraversion": "#EFEBDE",
