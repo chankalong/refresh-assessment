@@ -49,12 +49,12 @@ form.addEventListener("submit", function (e) {
     var scs_11_score = parseInt(document.querySelector('input[name="scs_10"]:checked').value);
     var scs_12_score = parseInt(document.querySelector('input[name="scs_11"]:checked').value);
 
-    var scsScore_sk = scs_2_score + scs_6_score;
-    var scsScore_sj = (6 - scs_11_score) + (6 - scs_12_score);
-    var scsScore_ch = scs_5_score + scs_10_score;
-    var scsScore_i = (6 - scs_4_score) + (6 - scs_8_score);
-    var scsScore_m = scs_3_score + scs_7_score;
-    var scsScore_oi = (6 - scs_1_score) + (6 - scs_9_score);
+    var scsScore_sk = (scs_2_score + scs_6_score)/2;
+    var scsScore_sj = ((6 - scs_11_score) + (6 - scs_12_score))/2;
+    var scsScore_ch = (scs_5_score + scs_10_score)/2;
+    var scsScore_i = ((6 - scs_4_score) + (6 - scs_8_score))/2;
+    var scsScore_m = (scs_3_score + scs_7_score)/2;
+    var scsScore_oi = ((6 - scs_1_score) + (6 - scs_9_score))/2;
 
 
     if (isNaN(scsScore_sk) || isNaN(scsScore_sj) || isNaN(scsScore_ch) || isNaN(scsScore_i) || isNaN(scsScore_m) || isNaN(scsScore_oi)) {
@@ -83,7 +83,7 @@ form.addEventListener("submit", function (e) {
     {
         type: 'scatterpolar',
         mode: 'lines',
-        r: [10, 10, 10, 10, 10, 10, 10],
+        r: [5, 5, 5, 5, 5, 5, 5],
         theta: ['善待自己', '自我批評', '共同人性', '自我隔離', '活在當下', '過度沉迷', '善待自己'],
         line: { color: 'grey' }
     }]
