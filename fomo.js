@@ -168,7 +168,7 @@ var form = document.getElementById('form_fomo');
 form.addEventListener("submit", function (e) {
     var fomo_object = {};
 
-    for (var i = 1; i <= 10; i++) {
+    for (var i = 0; i <= 9; i++) {
         var inputName = 'fomo_' + i;
         fomo_object[inputName + '_score'] = parseInt(document.querySelector('input[name="' + inputName + '"]:checked').value);
     }
@@ -189,7 +189,7 @@ form.addEventListener("submit", function (e) {
     e.preventDefault();
 
     //score
-    var fomo = fomo_object['fomo_1_score'] + (fomo_object['fomo_2_score']) + fomo_object['fomo_3_score'] + (fomo_object['fomo_4_score']) + (fomo_object['fomo_5_score']) + fomo_object['fomo_6_score'] + fomo_object['fomo_7_score'] + fomo_object['fomo_8_score'] + fomo_object['fomo_9_score'] + fomo_object['fomo_10_score']
+    var fomo = fomo_object['fomo_0_score'] + fomo_object['fomo_1_score'] + (fomo_object['fomo_2_score']) + fomo_object['fomo_3_score'] + (fomo_object['fomo_4_score']) + (fomo_object['fomo_5_score']) + fomo_object['fomo_6_score'] + fomo_object['fomo_7_score'] + fomo_object['fomo_8_score'] + fomo_object['fomo_9_score']
 
     if (fomo <= 20) {
         fomoDescription.textContent = "恭喜你，你沒有拖延症的問題。";
