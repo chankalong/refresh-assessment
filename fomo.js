@@ -1,109 +1,262 @@
-var assessment_div = document.querySelector('ol');
-var progress_div = document.getElementById('progress_div');
+document.querySelector('#start_div').addEventListener('click', function () {
+    document.querySelector('#fomoIntroDiv').style.display = 'none';
+    document.querySelector('#fomoQuestionDiv').style.display = '';
+    document.querySelector('h1').style.display = 'none';
+    document.querySelector('.fixed.bottom-0.right-4').querySelector('button').click()
+})
+//document.querySelector('.node-container').classList.remove('my-6')
+//document.querySelector('.node-container').classList.remove('pt-4')
+document.querySelector('.page-title').style.marginBottom = '0px';
+for (var i = 2; i <= 10; i++) {
+    var targetId = '#fomo_' + i + '_block';
+    anime({
+        targets: targetId,
+        translateX: 20,
+    });
+}
 
-window.FloatingUIDOM.autoUpdate(assessment_div, progress_div, function () {
-    window.FloatingUIDOM.computePosition(assessment_div, progress_div, {
-        placement: 'bottom', // 'bottom' by default
-        strategy: 'fixed',
-        middleware: [window.FloatingUIDOM.offset(10), window.FloatingUIDOM.shift({ crossAxis: true, })],
-    }).then(function (result) {
-        Object.assign(progress_div.style, {
-            left: result.x + "px",
-            top: result.y + "px",
-        });
+var fomo_1_next_button = document.getElementById('fomo_1_next_button');
+var fomo_1_next_function = function () {
+    anime.timeline({
+        duration: 200,
+        delay: 200
+    })
+        .add({
+            targets: '#fomo_1_block',
+            easing: 'easeOutExpo',
+            translateX: -20,
+            opacity: 0, complete: function () {
+                document.getElementById('fomo_1_block').style.display = 'none';
+                document.getElementById('fomo_2_block').style.display = '';
+            }
+        })
+        .add({
+            targets: '#fomo_2_block',
+            easing: 'easeInExpo',
+            translateX: 0,
+            opacity: 1
+        }, '-=50')
+};
+Array.prototype.map.call(document.querySelectorAll('input[name=fomo_0]'), function (e) {
+    e.addEventListener('click', fomo_1_next_function);
+    e.addEventListener('click', function () {
+        fomo_1_next_button.addEventListener('click', fomo_1_next_function);
+        fomo_1_next_button.style.opacity = 1
     });
 })
-document.querySelectorAll("input[type=radio]").forEach(
-    function (input) {
-        input.addEventListener('click', function (event) {
-            var numberTickedBoxes =
-                document.querySelectorAll("input[type=radio]:checked").length;
-            console.log(numberTickedBoxes)
-            var numberTickedBoxes_percentage = Math.round(numberTickedBoxes / 10 * 100)
-            document.querySelector('.progress-container').style.cssText = '--tooltip-width: ' + numberTickedBoxes_percentage + '%; width: 75%;'
-            //document.querySelector('progress').value = numberTickedBoxes
-            document.getElementById('progress_label').innerText = numberTickedBoxes + " / 10"
-        })
-    }
-);
 
+// Common function for handling previous and next buttons
+function handlePreviousButton(previousblockId, currentBlockId) {
+    anime.timeline({
+        duration: 200,
+        delay: 200
+    })
+        .add({
+            targets: '#' + currentBlockId + '_block',
+            easing: 'easeOutExpo',
+            translateX: 20,
+            opacity: 0,
+            complete: function () {
+                document.querySelector('#' + currentBlockId + '_block').style.display = 'none';
+                document.querySelector('#' + previousblockId + '_block').style.display = '';
+            }
+        })
+        .add({
+            targets: '#' + previousblockId + '_block',
+            easing: 'easeInExpo',
+            translateX: 0,
+            opacity: 1
+        }, '-=50');
+}
+
+function handleNextButton(currentBlockId, nextBlockId) {
+    anime.timeline({
+        duration: 200,
+        delay: 200
+    })
+        .add({
+            targets: '#' + currentBlockId + '_block',
+            easing: 'easeOutExpo',
+            translateX: -20,
+            opacity: 0,
+            complete: function () {
+                document.querySelector('#' + currentBlockId + '_block').style.display = 'none';
+                document.querySelector('#' + nextBlockId + '_block').style.display = '';
+            }
+        })
+        .add({
+            targets: '#' + nextBlockId + '_block',
+            easing: 'easeInExpo',
+            translateX: 0,
+            opacity: 1
+        }, '-=50');
+}
+
+function AddFunctionListener(previousblockId, currentBlockId, nextBlockId) {
+    document.getElementById(currentBlockId + '_previous_button').addEventListener('click', function () { handlePreviousButton(previousblockId, currentBlockId) })
+    Array.prototype.map.call(document.querySelectorAll('input[name=' + previousblockId + ']'), function (e) {
+        e.addEventListener('click', function () { handleNextButton(currentBlockId, nextBlockId) });
+        e.addEventListener('click', function () {
+            document.getElementById(currentBlockId + '_next_button').addEventListener('click', function () { handleNextButton(currentBlockId, nextBlockId) });
+            document.getElementById(currentBlockId + '_next_button').style.opacity = 1
+        });
+    })
+
+}
+
+for (var i = 1; i <= 8; i++) {
+    AddFunctionListener('fomo_' + i, 'fomo_' + (i + 1), 'fomo_' + (i + 2));
+}
+
+//##last
+
+var fomo_10_previous_button = document.getElementById('fomo_10_previous_button');
+fomo_10_previous_button.addEventListener('click', function () {
+    anime.timeline({
+        duration: 200,
+        delay: 200
+    })
+        .add({
+            targets: '#fomo_10_block',
+            easing: 'easeOutExpo',
+            translateX: 20,
+            opacity: 0, complete: function () {
+                document.getElementById('fomo_9_block').style.display = '';
+                document.getElementById('fomo_10_block').style.display = 'none';
+            }
+        })
+        .add({
+            targets: '#fomo_9_block',
+            easing: 'easeInExpo',
+            translateX: 0,
+            opacity: 1
+        }, '-=50')
+})
+
+var fomo_10_next_button = document.getElementById('fomo_10_next_button');
+var fomo_10_next_function = function () {
+    swal.fire({
+        text: '確定提交嗎？',
+        showCloseButton: true,
+        cancelButtonText: '取消',
+        showCancelButton: true,
+        confirmButtonText: '確定',
+        customClass: { confirmButton: 'btnRound-thin btnRound-orange mx-2', cancelButton: 'btnRound-thin btnRound-green mx-2' },
+        buttonsStyling: false,
+        focusConfirm: false
+    }).then(function (result) {
+        if (result.isConfirmed) {
+            document.querySelector('input[value=查看測試結果]').click()
+        }
+    });
+}
+
+Array.prototype.map.call(document.querySelectorAll('input[name=fomo_9]'), function (e) {
+    e.addEventListener('click', fomo_10_next_function);
+    e.addEventListener('click', function () {
+        fomo_10_next_button.addEventListener('click', fomo_10_next_function);
+        fomo_10_next_button.style.opacity = 1
+    });
+})
 var system_id_textbox = document.getElementById("system_id");
 var member_id_textbox = document.getElementById("member_id");
+var canvas_element = document.createElement('canvas');
 member_id_textbox.value = drupalSettings.user.member_id;
 system_id_textbox.value = drupalSettings.bokss.user_uuid;
 var form = document.getElementById('form_fomo');
 
 form.addEventListener("submit", function (e) {
+    var fomo_object = {};
 
+    for (var i = 1; i <= 10; i++) {
+        var inputName = 'fomo_' + i;
+        fomo_object[inputName + '_score'] = parseInt(document.querySelector('input[name="' + inputName + '"]:checked').value);
+    }
 
+    function hasNull(element, index, array) {
+        return element === null;
+    }
 
-
-    var fomo_1_score = parseInt(document.querySelector('input[name="fomo_1"]:checked').value);
-    var fomo_2_score = parseInt(document.querySelector('input[name="fomo_2"]:checked').value);
-    var fomo_3_score = parseInt(document.querySelector('input[name="fomo_3"]:checked').value);
-    var fomo_4_score = parseInt(document.querySelector('input[name="fomo_4"]:checked').value);
-    var fomo_5_score = parseInt(document.querySelector('input[name="fomo_5"]:checked').value);
-    var fomo_6_score = parseInt(document.querySelector('input[name="fomo_6"]:checked').value);
-    var fomo_7_score = parseInt(document.querySelector('input[name="fomo_7"]:checked').value);
-    var fomo_8_score = parseInt(document.querySelector('input[name="fomo_8"]:checked').value);
-    var fomo_9_score = parseInt(document.querySelector('input[name="fomo_9"]:checked').value);
-    var fomo_10_score = parseInt(document.querySelector('input[name="fomo_10"]:checked').value);
-
-    var fomoScore = fomo_1_score + fomo_2_score + fomo_3_score + fomo_4_score + fomo_5_score + fomo_6_score + fomo_7_score + fomo_8_score + fomo_9_score + fomo_10_score;
-
-    if (isNaN(fomoScore)) {
+    if (Object.values(fomo_object).some(hasNull)) {
         return; //stop the execution of function
     }
-    var data_form = new FormData(form);
+    var data = new FormData(form);
     var action = e.target.action;
     fetch(action, {
         method: 'POST',
-        body: data_form,
+        body: data,
     })
     e.preventDefault();
 
-    fomoResult.textContent = "結果 " + fomoScore + " 分";
-    if (fomoScore >= 0 && fomoScore <= 10) {
-        fomoCategory.textContent = "輕微照顧者壓力";
-        fomoDescription.textContent = "你的情緒很健康啊，真好！";
-        //document.getElementById('getHelpDiv').style.display='none';
-        fomoColor = "#4EC04E";
-    } if (fomoScore > 10 && fomoScore <= 20) {
-        fomoCategory.textContent = "中度照顧者壓力";
-        fomoDescription.textContent = "你可能有中度照顧者壓力，不妨散散步讓自己輕鬆一下，向你的朋友及家人分享你的感受，還可以看看我們為你準備的身心健康貼士，我們很樂意為你提供一對一免費線上諮詢服務，讓你進一步了解自己的狀況。";
-        fomoColor = "#FFC84A";
-    } if (fomoScore > 20 && fomoScore <= 30) {
-        fomoCategory.textContent = "嚴重照顧者壓力";
-        fomoDescription.textContent = "你可能有嚴重照顧者壓力，不妨散散步讓自己輕鬆一下，向你的朋友及家人分享你的感受，還可以看看我們為你準備的身心健康貼士，我們很樂意為你提供一對一免費線上諮詢服務，讓你進一步了解自己的狀況。";
-        fomoColor = "#F48847";
-    } if (fomoScore > 30 && fomoScore <= 40) {
-        fomoCategory.textContent = "嚴重照顧者壓力";
-        fomoDescription.textContent = "你可能有嚴重照顧者壓力，不妨散散步讓自己輕鬆一下，向你的朋友及家人分享你的感受，還可以看看我們為你準備的身心健康貼士，我們很樂意為你提供一對一免費線上諮詢服務，讓你進一步了解自己的狀況。";
-        fomoColor = "#EB4841";
-    }
-    document.getElementById('fomoQuestionresultDiv').style.display = 'none';
-    document.getElementById('fomoResultDiv').style.display = '';
+    //score
+    var fomo = fomo_object['fomo_1_score'] + (fomo_object['fomo_2_score']) + fomo_object['fomo_3_score'] + (fomo_object['fomo_4_score']) + (fomo_object['fomo_5_score']) + fomo_object['fomo_6_score'] + fomo_object['fomo_7_score'] + fomo_object['fomo_8_score'] + fomo_object['fomo_9_score'] + fomo_object['fomo_10_score']
 
+    if (fomo <= 20) {
+        fomoDescription.textContent = "恭喜你，你沒有拖延症的問題。";
+        fomoColor = "#4EC04E";
+    } else if (fomo > 20 && fomo < 31) {
+        fomoDescription.textContent = "你在生活中可能少許拖延的行為，我們建議你用不同的方式去調節情緒，然後學會擺脫自我批評，為即將到來的事情做好準備。";
+        fomoColor = "#FFC84A";
+    } else {
+        fomoDescription.textContent = "你可能已經養成拖延的習慣，我們建議你運用方法，訓練自己去意識到逃避和拖延的傾向，然後學會擺脫自我批評，為即將到來的事情做好準備。";
+        fomoColor = "#F48847";
+    }
+    
+    document.getElementById('fomoQuestionDiv').style.display = 'none';
+    document.getElementById('fomoResultDiv').style.display = '';
+    document.querySelector('h1').style.display = '';
+
+    //new
     var data = [
         {
             domain: { x: [0, 1], y: [0, 1] },
-            value: fomoScore,
+            value: fomo,
             title: { text: "分數" },
             type: "indicator",
             mode: "gauge+number",
             gauge: {
-                axis: { range: [0, 40], tickvals: [0, 10, 20, 230, 40] },
+                axis: { range: [0, 40], tickvals: [0, 10, 20, 30, 40] },
                 bar: { color: fomoColor, thickness: 1 }
             }
         }
     ];
 
     var layout = {
-        margin: { l: 35, r: 35, b: 10, t: 80, pad: 0 }, height: 200, autosize: true, font: {
+        margin: { b: 20, t: 60, r: 35, l: 35, pad: 0 }, height: 300, autosize: true, font: {
             family: 'Arial, sans-serif'
         }
     };
+
     var config = { responsive: true, displaylogo: false, displayModeBar: false }
     Plotly.newPlot('myDiv', data, layout, config);
-    document.getElementById('block-bokss-page-title').scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' })
+    //document.getElementById('block-bokss-page-title').scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' })
+
+    document.querySelector('.fixed.bottom-0.right-4').querySelector('button').click()
+
 })
+
+document
+  .querySelector("#share_div")
+  .setAttribute("data-clipboard-text", window.location.href);
+
+document.querySelector("#share_div").addEventListener("click", function () {
+  var shareData = {
+    url: window.location.href,
+  };
+
+  try {
+    window.navigator.canShare(shareData);
+  } catch (err) {}
+
+  if (window.navigator.canShare(shareData)) {
+    try {
+      window.navigator.share(shareData);
+    } catch (err) {
+      if (err.name !== "AbortError") {
+        console.error(err.name, err.message);
+      }
+    }
+  } else {
+    console.warn("Sharing not supported", shareData);
+  }
+});
