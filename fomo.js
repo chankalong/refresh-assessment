@@ -192,13 +192,13 @@ form.addEventListener("submit", function (e) {
     var fomo = fomo_object['fomo_0_score'] + fomo_object['fomo_1_score'] + (fomo_object['fomo_2_score']) + fomo_object['fomo_3_score'] + (fomo_object['fomo_4_score']) + (fomo_object['fomo_5_score']) + fomo_object['fomo_6_score'] + fomo_object['fomo_7_score'] + fomo_object['fomo_8_score'] + fomo_object['fomo_9_score']
 
     if (fomo <= 20) {
-        fomoDescription.textContent = "恭喜你，你沒有拖延症的問題。";
+        fomoDescription.textContent = "恭喜你，你沒有「FOMO」錯失恐懼的問題。";
         fomoColor = "#4EC04E";
     } else if (fomo > 20 && fomo < 31) {
-        fomoDescription.textContent = "你在生活中可能少許拖延的行為，我們建議你用不同的方式去調節情緒，然後學會擺脫自我批評，為即將到來的事情做好準備。";
+        fomoDescription.textContent = "你在生活中可能有少許「FOMO」錯失恐懼的問題，我們建議你用不同的方式去調節情緒，然後學會擺脫「FOMO」的惡性循環，為即將到來的事情做好準備。";
         fomoColor = "#FFC84A";
     } else {
-        fomoDescription.textContent = "你可能已經養成拖延的習慣，我們建議你運用方法，訓練自己去意識到逃避和拖延的傾向，然後學會擺脫自我批評，為即將到來的事情做好準備。";
+        fomoDescription.textContent = "你可能已經養成「FOMO」錯失恐懼的習慣，我們建議你運用方法，訓練自己去意識到「FOMO」的傾向，然後學會擺脫「FOMO」的惡性循環，為即將到來的事情做好準備。";
         fomoColor = "#F48847";
     }
     
