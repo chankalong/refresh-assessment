@@ -189,7 +189,9 @@ form.addEventListener("submit", function (e) {
     e.preventDefault();
 
     //score
-    var scs = ((6 - scs_object['scs_0_score']) + scs_object['scs_1_score'] + (scs_object['scs_2_score']) + (6 - scs_object['scs_3_score']) + (scs_object['scs_4_score']) + (scs_object['scs_5_score']) + scs_object['scs_6_score'] + (6 - scs_object['scs_7_score']) + (6 - scs_object['scs_8_score']) + scs_object['scs_9_score'] + (6 - scs_object['scs_10_score']) + (6 - scs_object['scs_11_score']))/12
+    var scs_sum = ((6 - scs_object['scs_0_score']) + scs_object['scs_1_score'] + (scs_object['scs_2_score']) + (6 - scs_object['scs_3_score']) + (scs_object['scs_4_score']) + (scs_object['scs_5_score']) + scs_object['scs_6_score'] + (6 - scs_object['scs_7_score']) + (6 - scs_object['scs_8_score']) + scs_object['scs_9_score'] + (6 - scs_object['scs_10_score']) + (6 - scs_object['scs_11_score']))/12;
+    var scs = Math.round((scs_sum + Number.EPSILON) * 10) / 10;
+    
 
     if (scs < 2.49) {
         scsDescription.textContent = "你的自我關懷程度較低，這意味著你對自己比較嚴厲或在面對困難時對自己過於苛刻。培養自我關懷對你的身心健康將有很大的幫助，但可能需要更多的耐心和時間來培養。試著在日常生活中對自己多一些理解和包容，這將有助於提升你的幸福感。";
@@ -215,7 +217,7 @@ form.addEventListener("submit", function (e) {
             type: "indicator",
             mode: "gauge+number",
             gauge: {
-                axis: { range: [1, 5], tickvals: [1, 2.5, 5] },
+                axis: { range: [1, 5], tickvals: [1, 3, 5] },
                 bar: { color: scsColor, thickness: 1 }
             }
         }
