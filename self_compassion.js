@@ -1,114 +1,262 @@
-var assessment_div = document.querySelector('ol');
-var progress_div = document.getElementById('progress_div');
+document.querySelector('#start_div').addEventListener('click', function () {
+    document.querySelector('#scsIntroDiv').style.display = 'none';
+    document.querySelector('#scsQuestionDiv').style.display = '';
+    document.querySelector('h1').style.display = 'none';
+    document.querySelector('.fixed.bottom-0.right-4').querySelector('button').click()
+})
+//document.querySelector('.node-container').classList.remove('my-6')
+//document.querySelector('.node-container').classList.remove('pt-4')
+document.querySelector('.page-title').style.marginBottom = '0px';
+for (var i = 2; i <= 10; i++) {
+    var targetId = '#scs_' + i + '_block';
+    anime({
+        targets: targetId,
+        translateX: 20,
+    });
+}
 
-window.FloatingUIDOM.autoUpdate(assessment_div, progress_div, function () {
-    window.FloatingUIDOM.computePosition(assessment_div, progress_div, {
-        placement: 'bottom', // 'bottom' by default
-        strategy: 'fixed',
-        middleware: [window.FloatingUIDOM.offset(10), window.FloatingUIDOM.shift({ crossAxis: true, })],
-    }).then(function (result) {
-        Object.assign(progress_div.style, {
-            left: result.x + "px",
-            top: result.y + "px",
-        });
+var scs_1_next_button = document.getElementById('scs_1_next_button');
+var scs_1_next_function = function () {
+    anime.timeline({
+        duration: 200,
+        delay: 200
+    })
+        .add({
+            targets: '#scs_1_block',
+            easing: 'easeOutExpo',
+            translateX: -20,
+            opacity: 0, complete: function () {
+                document.getElementById('scs_1_block').style.display = 'none';
+                document.getElementById('scs_2_block').style.display = '';
+            }
+        })
+        .add({
+            targets: '#scs_2_block',
+            easing: 'easeInExpo',
+            translateX: 0,
+            opacity: 1
+        }, '-=50')
+};
+Array.prototype.map.call(document.querySelectorAll('input[name=scs_0]'), function (e) {
+    e.addEventListener('click', scs_1_next_function);
+    e.addEventListener('click', function () {
+        scs_1_next_button.addEventListener('click', scs_1_next_function);
+        scs_1_next_button.style.opacity = 1
     });
 })
-document.querySelectorAll("input[type=radio]").forEach(
-    function (input) {
-        input.addEventListener('click', function (event) {
-            var numberTickedBoxes =
-                document.querySelectorAll("input[type=radio]:checked").length;
-            console.log(numberTickedBoxes)
-            var numberTickedBoxes_percentage = Math.round(numberTickedBoxes / 12 * 100)
-            document.querySelector('.progress-container').style.cssText = '--tooltip-width: ' + numberTickedBoxes_percentage + '%; width: 75%;'
-            //document.querySelector('progress').value = numberTickedBoxes
-            document.getElementById('progress_label').innerText = numberTickedBoxes + " / 12"
-        })
-    }
-);
 
+// Common function for handling previous and next buttons
+function handlePreviousButton(previousblockId, currentBlockId) {
+    anime.timeline({
+        duration: 200,
+        delay: 200
+    })
+        .add({
+            targets: '#' + currentBlockId + '_block',
+            easing: 'easeOutExpo',
+            translateX: 20,
+            opacity: 0,
+            complete: function () {
+                document.querySelector('#' + currentBlockId + '_block').style.display = 'none';
+                document.querySelector('#' + previousblockId + '_block').style.display = '';
+            }
+        })
+        .add({
+            targets: '#' + previousblockId + '_block',
+            easing: 'easeInExpo',
+            translateX: 0,
+            opacity: 1
+        }, '-=50');
+}
+
+function handleNextButton(currentBlockId, nextBlockId) {
+    anime.timeline({
+        duration: 200,
+        delay: 200
+    })
+        .add({
+            targets: '#' + currentBlockId + '_block',
+            easing: 'easeOutExpo',
+            translateX: -20,
+            opacity: 0,
+            complete: function () {
+                document.querySelector('#' + currentBlockId + '_block').style.display = 'none';
+                document.querySelector('#' + nextBlockId + '_block').style.display = '';
+            }
+        })
+        .add({
+            targets: '#' + nextBlockId + '_block',
+            easing: 'easeInExpo',
+            translateX: 0,
+            opacity: 1
+        }, '-=50');
+}
+
+function AddFunctionListener(previousblockId, currentBlockId, nextBlockId) {
+    document.getElementById(currentBlockId + '_previous_button').addEventListener('click', function () { handlePreviousButton(previousblockId, currentBlockId) })
+    Array.prototype.map.call(document.querySelectorAll('input[name=' + previousblockId + ']'), function (e) {
+        e.addEventListener('click', function () { handleNextButton(currentBlockId, nextBlockId) });
+        e.addEventListener('click', function () {
+            document.getElementById(currentBlockId + '_next_button').addEventListener('click', function () { handleNextButton(currentBlockId, nextBlockId) });
+            document.getElementById(currentBlockId + '_next_button').style.opacity = 1
+        });
+    })
+
+}
+
+for (var i = 1; i <= 10; i++) {
+    AddFunctionListener('scs_' + i, 'scs_' + (i + 1), 'scs_' + (i + 2));
+}
+
+//##last
+
+var scs_12_previous_button = document.getElementById('scs_12_previous_button');
+scs_12_previous_button.addEventListener('click', function () {
+    anime.timeline({
+        duration: 200,
+        delay: 200
+    })
+        .add({
+            targets: '#scs_12_block',
+            easing: 'easeOutExpo',
+            translateX: 20,
+            opacity: 0, complete: function () {
+                document.getElementById('scs_11_block').style.display = '';
+                document.getElementById('scs_12_block').style.display = 'none';
+            }
+        })
+        .add({
+            targets: '#scs_11_block',
+            easing: 'easeInExpo',
+            translateX: 0,
+            opacity: 1
+        }, '-=50')
+})
+
+var scs_12_next_button = document.getElementById('scs_12_next_button');
+var scs_12_next_function = function () {
+    swal.fire({
+        text: '確定提交嗎？',
+        showCloseButton: true,
+        cancelButtonText: '取消',
+        showCancelButton: true,
+        confirmButtonText: '確定',
+        customClass: { confirmButton: 'btnRound-thin btnRound-orange mx-2', cancelButton: 'btnRound-thin btnRound-green mx-2' },
+        buttonsStyling: false,
+        focusConfirm: false
+    }).then(function (result) {
+        if (result.isConfirmed) {
+            document.querySelector('input[value=查看測試結果]').click()
+        }
+    });
+}
+
+Array.prototype.map.call(document.querySelectorAll('input[name=scs_11]'), function (e) {
+    e.addEventListener('click', scs_12_next_function);
+    e.addEventListener('click', function () {
+        scs_12_next_button.addEventListener('click', scs_12_next_function);
+        scs_12_next_button.style.opacity = 1
+    });
+})
 var system_id_textbox = document.getElementById("system_id");
 var member_id_textbox = document.getElementById("member_id");
+var canvas_element = document.createElement('canvas');
 member_id_textbox.value = drupalSettings.user.member_id;
 system_id_textbox.value = drupalSettings.bokss.user_uuid;
 var form = document.getElementById('form_scs');
 
 form.addEventListener("submit", function (e) {
+    var scs_object = {};
 
-
-    var scs_1_score = parseInt(document.querySelector('input[name="scs_0"]:checked').value);
-    var scs_2_score = parseInt(document.querySelector('input[name="scs_1"]:checked').value);
-    var scs_3_score = parseInt(document.querySelector('input[name="scs_2"]:checked').value);
-    var scs_4_score = parseInt(document.querySelector('input[name="scs_3"]:checked').value);
-    var scs_5_score = parseInt(document.querySelector('input[name="scs_4"]:checked').value);
-    var scs_6_score = parseInt(document.querySelector('input[name="scs_5"]:checked').value);
-    var scs_7_score = parseInt(document.querySelector('input[name="scs_6"]:checked').value);
-    var scs_8_score = parseInt(document.querySelector('input[name="scs_7"]:checked').value);
-    var scs_9_score = parseInt(document.querySelector('input[name="scs_8"]:checked').value);
-    var scs_10_score = parseInt(document.querySelector('input[name="scs_9"]:checked').value);
-    var scs_11_score = parseInt(document.querySelector('input[name="scs_10"]:checked').value);
-    var scs_12_score = parseInt(document.querySelector('input[name="scs_11"]:checked').value);
-
-    var scsScore_sk = (scs_2_score + scs_6_score)/2;
-    var scsScore_sj = ((6 - scs_11_score) + (6 - scs_12_score))/2;
-    var scsScore_ch = (scs_5_score + scs_10_score)/2;
-    var scsScore_i = ((6 - scs_4_score) + (6 - scs_8_score))/2;
-    var scsScore_m = (scs_3_score + scs_7_score)/2;
-    var scsScore_oi = ((6 - scs_1_score) + (6 - scs_9_score))/2;
-
-
-    if (isNaN(scsScore_sk) || isNaN(scsScore_sj) || isNaN(scsScore_ch) || isNaN(scsScore_i) || isNaN(scsScore_m) || isNaN(scsScore_oi)) {
-        return; //stop the execution of function
+    for (var i = 0; i <= 11; i++) {
+        var inputName = 'scs_' + i;
+        scs_object[inputName + '_score'] = parseInt(document.querySelector('input[name="' + inputName + '"]:checked').value);
     }
 
-    var data_form = new FormData(form);
+    function hasNull(element, index, array) {
+        return element === null;
+    }
+
+    if (Object.values(scs_object).some(hasNull)) {
+        return; //stop the execution of function
+    }
+    var data = new FormData(form);
     var action = e.target.action;
     fetch(action, {
         method: 'POST',
-        body: data_form,
+        body: data,
     })
     e.preventDefault();
 
-    scsResult.innerHTML = "善待自己 " + scsScore_sk + " 分" + "<br />" + "自我批評 " + scsScore_sj + " 分" + "<br />" + "共同人性 " + scsScore_ch + " 分" + "<br />" + "自我隔離 " + scsScore_i + " 分" + "<br />" + "活在當下 " + scsScore_m + " 分" + "<br />" + "過度沉迷 " + scsScore_oi + " 分";
+    //score
+    var scs = ((6 - scs_object['scs_0_score']) + scs_object['scs_1_score'] + (scs_object['scs_2_score']) + (6 - scs_object['scs_3_score']) + (scs_object['scs_4_score']) + (scs_object['scs_5_score']) + scs_object['scs_6_score'] + (6 - scs_object['scs_7_score']) + (6 - scs_object['scs_8_score']) + scs_object['scs_9_score'] + (6 - scs_object['scs_10_score']) + (6 - scs_object['scs_11_score']))/12
 
-    document.getElementById('scsQuestionresultDiv').style.display = 'none';
+    if (scs < 2.49) {
+        scsDescription.textContent = "你的自我關懷程度較低，這意味著你對自己比較嚴厲或在面對困難時對自己過於苛刻。培養自我關懷對你的身心健康將有很大的幫助，但可能需要更多的耐心和時間來培養。試著在日常生活中對自己多一些理解和包容，這將有助於提升你的幸福感。";
+        scsColor = "#F48847";
+    } else if (scs < 3.51) {
+        scsDescription.textContent = "你的自我關懷程度適中，這意味著你在某些情況下你能夠善待自己。培養更多的自我關懷將有助於你提升應對壓力的能力，並增強內心的平靜和滿意感。繼續學習在日常生活中多給予自己一些理解和支持吧！";
+        scsColor = "#FFC84A";
+    } else {
+        scsDescription.textContent = "很好！你的自我關懷程度較高，這顯示你有好好關懷自己並在面對困難時能夠給予自己支持。繼續保持這種自我關懷的態度，有助於你保持心理健康，並提升應對壓力的能力。";
+        scsColor = "#4EC04E";
+    }
+    
+    document.getElementById('scsQuestionDiv').style.display = 'none';
     document.getElementById('scsResultDiv').style.display = '';
+    document.querySelector('h1').style.display = '';
 
-    var data = [{
-        type: 'scatterpolar',
-        r: [scsScore_sk, scsScore_sj, scsScore_ch, scsScore_i, scsScore_m, scsScore_oi, scsScore_sk],
-        theta: ['善待自己', '自我批評', '共同人性', '自我隔離', '活在當下', '過度沉迷', '善待自己'],
-        fill: 'toself'
-    },
-    {
-        type: 'scatterpolar',
-        mode: 'lines',
-        r: [5, 5, 5, 5, 5, 5, 5],
-        theta: ['善待自己', '自我批評', '共同人性', '自我隔離', '活在當下', '過度沉迷', '善待自己'],
-        line: { color: 'grey' }
-    }]
+    //new
+    var data = [
+        {
+            domain: { x: [0, 1], y: [0, 1] },
+            value: scs,
+            title: { text: "分數" },
+            type: "indicator",
+            mode: "gauge+number",
+            gauge: {
+                axis: { range: [1, 5], tickvals: [1, 2.5, 5] },
+                bar: { color: scsColor, thickness: 1 }
+            }
+        }
+    ];
 
     var layout = {
-        margin: { b: 30, t: 30, r: 60, l: 60, pad: 0 }, font: {
+        margin: { b: 20, t: 60, r: 35, l: 35, pad: 0 }, height: 300, autosize: true, font: {
             family: 'Arial, sans-serif'
-        },
-        polar: {
-            angularaxis: {
-                color: "transparent",
-                gridcolor: "grey",
-                tickfont: { color: "grey" },
-                rotation: 90
-            },
-            radialaxis: {
-                visible: false,
-                range: [0, 10]
-            }
-        },
-        showlegend: false,
-        hovermode: false,
-        height: 300
-    }
+        }
+    };
+
     var config = { responsive: true, displaylogo: false, displayModeBar: false }
     Plotly.newPlot('myDiv', data, layout, config);
-    document.getElementById('block-bokss-page-title').scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' })
+    //document.getElementById('block-bokss-page-title').scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' })
+
+    document.querySelector('.fixed.bottom-0.right-4').querySelector('button').click()
+
 })
+
+document
+  .querySelector("#share_div")
+  .setAttribute("data-clipboard-text", window.location.href);
+
+document.querySelector("#share_div").addEventListener("click", function () {
+  var shareData = {
+    url: window.location.href,
+  };
+
+  try {
+    window.navigator.canShare(shareData);
+  } catch (err) {}
+
+  if (window.navigator.canShare(shareData)) {
+    try {
+      window.navigator.share(shareData);
+    } catch (err) {
+      if (err.name !== "AbortError") {
+        console.error(err.name, err.message);
+      }
+    }
+  } else {
+    console.warn("Sharing not supported", shareData);
+  }
+});
