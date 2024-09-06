@@ -57,7 +57,7 @@ form.addEventListener("submit", function (e) {
     if (resilienceScore >= 0 && resilienceScore <= 8) {
         resilienceCategory.textContent = "心理彈性程度低";
         resilienceDescription.textContent = "你的心理彈性程度低，不妨散散步讓自己輕鬆一下，向你的朋友及家人分享你的感受。除了放鬆心情之外，我們建議你可以考慮輔導服務，我們很樂意為你提供一對一免費線上諮詢服務，讓你進一步了解自己的狀況。";
-        resilienceColor = "#4EC04E";
+        resilienceColor = "#F48847";
     } if (resilienceScore > 8 && resilienceScore <= 16) {
         resilienceCategory.textContent = "心理彈性程度中";
         resilienceDescription.textContent = "你的心理彈性程度中，不妨散散步讓自己輕鬆一下，向你的朋友及家人分享你的感受，還可以看看我們為你準備的身心健康貼士，或參加我們在線舉辦的工作坊啊！";
@@ -65,7 +65,7 @@ form.addEventListener("submit", function (e) {
     } if (resilienceScore > 16 && resilienceScore <= 24) {
         resilienceCategory.textContent = "心理彈性程度高";
         resilienceDescription.textContent = "你的情緒很健康啊，真好！";
-        resilienceColor = "#F48847";
+        resilienceColor = "#4EC04E";
     }
     document.getElementById('resilienceQuestionresultDiv').style.display = 'none';
     document.getElementById('resilienceResultDiv').style.display = '';
