@@ -41,7 +41,7 @@ form.addEventListener("submit", function (e) {
     var resilience_4_score = parseInt(document.querySelector('input[name="resilience_4"]:checked').value);
     var resilience_5_score = parseInt(document.querySelector('input[name="resilience_5"]:checked').value);
 
-    var resilienceScore = resilience_0_score + resilience_1_score + resilience_2_score + (5 - resilience_3_score) + (5 - resilience_4_score) + (5 - resilience_5_score);
+    var resilienceScore = resilience_0_score + resilience_1_score + resilience_2_score + resilience_3_score + resilience_4_score + resilience_5_score;
     if (isNaN(resilienceScore)) {
         return; //stop the execution of function
     }
@@ -55,16 +55,16 @@ form.addEventListener("submit", function (e) {
 
     resilienceResult.textContent = "結果 " + resilienceScore + " 分";
     if (resilienceScore >= 0 && resilienceScore <= 8) {
-        resilienceCategory.textContent = "心理彈性程度高";
-        resilienceDescription.textContent = "你的情緒很健康啊，真好！";
+        resilienceCategory.textContent = "心理彈性程度低";
+        resilienceDescription.textContent = "你的心理彈性程度低，不妨散散步讓自己輕鬆一下，向你的朋友及家人分享你的感受。除了放鬆心情之外，我們建議你可以考慮輔導服務，我們很樂意為你提供一對一免費線上諮詢服務，讓你進一步了解自己的狀況。";
         resilienceColor = "#4EC04E";
-    } if (resilienceScore > 6 && resilienceScore <= 16) {
+    } if (resilienceScore > 8 && resilienceScore <= 16) {
         resilienceCategory.textContent = "心理彈性程度中";
         resilienceDescription.textContent = "你的心理彈性程度中，不妨散散步讓自己輕鬆一下，向你的朋友及家人分享你的感受，還可以看看我們為你準備的身心健康貼士，或參加我們在線舉辦的工作坊啊！";
         resilienceColor = "#FFC84A";
     } if (resilienceScore > 16 && resilienceScore <= 24) {
-        resilienceCategory.textContent = "心理彈性程度低";
-        resilienceDescription.textContent = "你的心理彈性程度低，不妨散散步讓自己輕鬆一下，向你的朋友及家人分享你的感受。除了放鬆心情之外，我們建議你可以考慮輔導服務，我們很樂意為你提供一對一免費線上諮詢服務，讓你進一步了解自己的狀況。";
+        resilienceCategory.textContent = "心理彈性程度高";
+        resilienceDescription.textContent = "你的情緒很健康啊，真好！";
         resilienceColor = "#F48847";
     }
     document.getElementById('resilienceQuestionresultDiv').style.display = 'none';
@@ -78,7 +78,7 @@ form.addEventListener("submit", function (e) {
             type: "indicator",
             mode: "gauge+number",
             gauge: {
-                axis: { range: [0, 24] },
+                axis: { range: [0, 12, 24] },
                 bar: { color: resilienceColor, thickness: 1 }
             }
         }
