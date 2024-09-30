@@ -151,21 +151,22 @@ var scs_13_next_function = function () {
     });
 }
 
-Array.prototype.map.call(document.querySelectorAll('input[name=scs_12]'), function (e) {
-    e.addEventListener('click', scs_13_next_function);
-    e.addEventListener('click', function () {
-        scs_13_next_button.addEventListener('click', scs_13_next_function);
-        scs_13_next_button.style.opacity = 1
-    });
-})
+scs_13_next_button.style.opacity = 1
+scs_13_next_button.addEventListener('click', scs_13_next_function);
+
+//Array.prototype.map.call(document.querySelectorAll('input[name=scs_12]'), function (e) {
+//    e.addEventListener('click', scs_13_next_function);
+//    e.addEventListener('click', function () {
+//        scs_13_next_button.addEventListener('click', scs_13_next_function);
+//        scs_13_next_button.style.opacity = 1
+//    });
+//})
+
 var system_id_textbox = document.getElementById("system_id");
 var member_id_textbox = document.getElementById("member_id");
-var uid_textbox = document.getElementById("uid");
 var canvas_element = document.createElement('canvas');
 member_id_textbox.value = drupalSettings.user.member_id;
 system_id_textbox.value = drupalSettings.bokss.user_uuid;
-if (uid_textbox.value) {console.log("input uid value already")} else {uid_textbox.value = Math.random();}
-  
 var form = document.getElementById('form_scs');
 
 form.addEventListener("submit", function (e) {
