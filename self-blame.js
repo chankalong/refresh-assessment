@@ -163,6 +163,15 @@ var member_id_textbox = document.getElementById("member_id");
 var canvas_element = document.createElement('canvas');
 member_id_textbox.value = drupalSettings.user.member_id;
 system_id_textbox.value = drupalSettings.bokss.user_uuid;
+
+  var uid_textbox = document.getElementById("uid");
+  var member_level_textbox = document.getElementById("member_level");
+  var eap_company_textbox = document.getElementById("eap_company");
+
+  if (uid_textbox.value) {console.log("input uid value already")} else {uid_textbox.value = Math.random();}
+  if (drupalSettings.user.levels === undefined) {member_level_textbox.value = 0} else {member_level_textbox.value = drupalSettings.user.levels[0]}
+  if (drupalSettings.user.eap === undefined) {eap_company_textbox.value = '0'} else {eap_company_textbox.value = drupalSettings.user.eap.label}
+
 var form = document.getElementById('form_self_blame');
 
 form.addEventListener("submit", function (e) {
