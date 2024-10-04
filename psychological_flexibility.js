@@ -198,7 +198,7 @@ form.addEventListener("submit", function (e) {
     e.preventDefault();
 
     //score
-    var psychological_flexibility = 49 - psychological_flexibility_object['psychological_flexibility_0_score'] + psychological_flexibility_object['psychological_flexibility_1_score'] + (psychological_flexibility_object['psychological_flexibility_2_score']) + psychological_flexibility_object['psychological_flexibility_3_score'] + (psychological_flexibility_object['psychological_flexibility_4_score']) + (psychological_flexibility_object['psychological_flexibility_5_score']) + psychological_flexibility_object['psychological_flexibility_6_score']
+    var psychological_flexibility = 49 - (psychological_flexibility_object['psychological_flexibility_0_score'] + psychological_flexibility_object['psychological_flexibility_1_score'] + (psychological_flexibility_object['psychological_flexibility_2_score']) + psychological_flexibility_object['psychological_flexibility_3_score'] + (psychological_flexibility_object['psychological_flexibility_4_score']) + (psychological_flexibility_object['psychological_flexibility_5_score']) + psychological_flexibility_object['psychological_flexibility_6_score'])
 
     if (psychological_flexibility <= 20) {
         psychological_flexibilityDescription.textContent = "心理彈性偏低，很可能已出現一些情緒健康問題！你是否感到情緒困擾使你難以享受生活？是時候安頓下來，好好親親自己的心靈，回顧自己處理情緒和人生價值的取向吧！讓自己放開心懷，重新選擇活在當下，不纏繞於過去的遺憾和將來的擔憂，選擇可行的事實踐人生價值，你亦可能需要一些專業輔導支持你進行這個過程。";
