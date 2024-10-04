@@ -204,13 +204,13 @@ form.addEventListener("submit", function (e) {
         psychological_flexibilityDescription.textContent = "心理彈性偏低，很可能已出現一些情緒健康問題！你是否感到情緒困擾使你難以享受生活？是時候安頓下來，好好親親自己的心靈，回顧自己處理情緒和人生價值的取向吧！讓自己放開心懷，重新選擇活在當下，不纏繞於過去的遺憾和將來的擔憂，選擇可行的事實踐人生價值，你亦可能需要一些專業輔導支持你進行這個過程。";
         psychological_flexibilityColor = "#f45e47";
     } else if (psychological_flexibility >= 21 && psychological_flexibility <= 25) {
-        psychological_flexibilityDescription.textContent = "稍欠心理彈性，你很可能有一些情緒困擾或感到受壓，需要注意情緒健康的警號！嘗試多留意此時此刻身體給你的訊息•多以觀察角度了解自己的心情和規法•靜心聆聽它們並留意本能的回應是否有幫助，選擇適合的方法去照顧這些感受，聽一首歌，畫一幅畫，提醒自己做喜歡和重要的事..用創意的方式接觸這個心情吧！";
+        psychological_flexibilityDescription.textContent = "稍欠心理彈性，你很可能有一些情緒困擾或感到受壓，需要注意情緒健康的警號！嘗試多留意此時此刻身體給你的訊息，多以觀察角度了解自己的心情和規法，靜心聆聽它們並留意本能的回應是否有幫助，選擇適合的方法去照顧這些感受，聽一首歌，畫一幅畫，提醒自己做喜歡和重要的事，用創意的方式接觸這個心情吧！";
         psychological_flexibilityColor = "#F48847";
     } else if (psychological_flexibility >= 26 && psychological_flexibility <= 33) {
         psychological_flexibilityDescription.textContent = "心理彈性屬一般，你的情緒大致上沒有妨礙你想過的生活。你有時察覺得到自己受情緒困擾並會重新選擇如何面對，使自己回復彈性。繼續抱開放態度看待情緒和想法吧，你會發現更闊的天空！";
         psychological_flexibilityColor = "#FFC84A";
     }else {
-        psychological_flexibilityDescription.textContent = "心理彈性高•你能夠與你的情緒和壓力相處，活得自在。繼續保持這份心理彈性吧！這是難得的內在資源、使你能迎難而上，留意內心所重視的價值並實踐官，將會讓你人生活得精彩！";
+        psychological_flexibilityDescription.textContent = "心理彈性高，你能夠與你的情緒和壓力相處，活得自在。繼續保持這份心理彈性吧！這是難得的內在資源、使你能迎難而上，留意內心所重視的價值並實踐官，將會讓你人生活得精彩！";
         psychological_flexibilityColor = "#4EC04E";
     }
     
