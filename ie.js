@@ -226,7 +226,7 @@ form.addEventListener("submit", function (e) {
             type: "indicator",
             mode: "gauge+number",
             gauge: {
-                axis: { range: [8, 40], tickvals: [8, 40] },
+                axis: { range: [8, 40], tickvals: [8, 24, 40] },
                 bar: { color: ieColor, thickness: 1 }
             }
         }
