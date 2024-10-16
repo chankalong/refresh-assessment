@@ -215,7 +215,7 @@ form.addEventListener("submit", function (e) {
     document.getElementById('ieQuestionDiv').style.display = 'none';
     document.getElementById('ieResultDiv').style.display = '';
     document.querySelector('h1').style.display = '';
-    document.querySelector('ie_result_image').src = ieUrl;
+    document.querySelector('img.ie_result_image').src = ieUrl;
 
     //new
     var data = [
