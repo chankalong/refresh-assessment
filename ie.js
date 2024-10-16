@@ -202,20 +202,20 @@ form.addEventListener("submit", function (e) {
     //var ie = Math.round((ie_sum + Number.EPSILON) * 10) / 10;
     
 
-    if (ie < 20) {
-        ieDescription.innerHTML = "你的自我關懷程度<strong>較低</strong>，這意味著你對自己比較嚴厲或在面對困難時對自己過於苛刻。培養自我關懷對你的身心健康將有很大的幫助，但可能需要更多的耐心和時間來培養。試著在日常生活中對自己多一些理解和包容，這將有助於提升你的幸福感。";
-        ieColor = "#F48847";
-    } else if (ie < 30) {
-        ieDescription.innerHTML = "你的自我關懷程度<strong>適中</strong>，這意味著你在某些情況下你能夠善待自己。培養更多的自我關懷將有助於你提升應對壓力的能力，並增強內心的平靜和滿意感。繼續學習在日常生活中多給予自己一些理解和支持吧！";
-        ieColor = "#FFC84A";
+    if (ie <= 24) {
+        ieDescription.innerHTML = "你傾向屬於<strong>內向型</strong>，偏向安靜低調，大部份時間喜歡獨處，以免被社交活動耗費大量精力。不過，你並非拒絕與人接觸，只是更著重個人空間，享受專注地思考，並以獨處來恢復精神及平靜。";
+        ieColor = "#4E89AE";
+        ieUrl = "/sites/default/files/inpages/post%201.3%20內向vs外向人休息方法大不同_v2_cms_アートボード%201_0.png"
     } else {
-        ieDescription.innerHTML = "很好！你的自我關懷程度<strong>較高</strong>，這顯示你有好好關懷自己並在面對困難時能夠給予自己支持。繼續保持這種自我關懷的態度，有助於你保持心理健康，並提升應對壓力的能力。";
-        ieColor = "#4EC04E";
+        ieDescription.innerHTML = "你傾向屬於<strong>外向型</strong>，熱衷人際交往，喜歡說話及參與社交聚會。比起獨處，你更傾向與他人共處，融入所在的環境，並從身邊的人事物及反應汲取能量，變得精力充沛。當你獨處時，反而會感到無聊及失去動力。";
+        ieColor = "#ED6663";
+        ieUrl = "/sites/default/files/inpages/post%201.2%20內向vs外向人休息方法大不同_v3_cms_アートボード%201.png"
     }
     
     document.getElementById('ieQuestionDiv').style.display = 'none';
     document.getElementById('ieResultDiv').style.display = '';
     document.querySelector('h1').style.display = '';
+    document.querySelector('ie_result_image').src = ieUrl;
 
     //new
     var data = [
