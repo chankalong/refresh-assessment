@@ -204,11 +204,11 @@ form.addEventListener("submit", function (e) {
 
     if (ie <= 24) {
         ieDescription.innerHTML = "你傾向屬於<strong>內向型</strong>，偏向安靜低調，大部份時間喜歡獨處，以免被社交活動耗費大量精力。不過，你並非拒絕與人接觸，只是更著重個人空間，享受專注地思考，並以獨處來恢復精神及平靜。";
-        ieColor = "#4E89AE";
+        ieColor = "#8EACCD";
         ieUrl = "/sites/default/files/inpages/post%201.3%20內向vs外向人休息方法大不同_v2_cms_アートボード%201_0.png"
     } else {
         ieDescription.innerHTML = "你傾向屬於<strong>外向型</strong>，熱衷人際交往，喜歡說話及參與社交聚會。比起獨處，你更傾向與他人共處，融入所在的環境，並從身邊的人事物及反應汲取能量，變得精力充沛。當你獨處時，反而會感到無聊及失去動力。";
-        ieColor = "#ED6663";
+        ieColor = "#FFB0B0";
         ieUrl = "/sites/default/files/inpages/post%201.2%20內向vs外向人休息方法大不同_v3_cms_アートボード%201.png"
     }
     
