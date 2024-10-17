@@ -101,7 +101,7 @@ form.addEventListener("submit", function (e) {
         psychological_flexibilityColor = "#EB4841";
     } else {console.log("no psychological_flexibility score")}
 
-    document.getElementById('goldenageQuestionresultDiv').style.display = 'none';
+    document.getElementById('goldenAgeQuestionresultDiv').style.display = 'none';
     document.getElementById('golden_ageResultDiv').style.display = '';
 
     var gad_data = [
