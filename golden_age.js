@@ -101,8 +101,8 @@ form.addEventListener("submit", function (e) {
         psychological_flexibilityColor = "#EB4841";
     } else {console.log("no psychological_flexibility score")}
 
-    document.getElementById('gadQuestionresultDiv').style.display = 'none';
-    document.getElementById('gadResultDiv').style.display = '';
+    document.getElementById('goledn_ageQuestionresultDiv').style.display = 'none';
+    document.getElementById('goledn_ageResultDiv').style.display = '';
 
     var gad_data = [
         {
@@ -152,8 +152,8 @@ form.addEventListener("submit", function (e) {
         }
     };
     var config = { responsive: true, displaylogo: false, displayModeBar: false }
-    Plotly.newPlot('gad_plotly_div', gad_data, layout, config);
+    //Plotly.newPlot('gad_plotly_div', gad_data, layout, config);
     Plotly.newPlot('phq_plotly_div', phq_data, layout, config);
-    Plotly.newPlot('psychological_flexibility_plotly_div', psychological_flexibility_data, layout, config);
+    //Plotly.newPlot('psychological_flexibility_plotly_div', psychological_flexibility_data, layout, config);
     document.getElementById('block-bokss-page-title').scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' })
 })
