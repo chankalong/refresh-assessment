@@ -33,6 +33,7 @@ form.addEventListener("submit", function (e) {
       }
       catch(err) {
         var gad_0_score = 'missing'
+        console.log('no gad_0_score')
       }
 
       try {
@@ -42,6 +43,7 @@ form.addEventListener("submit", function (e) {
       }
       catch(err) {
         var gad_1_score = 'missing'
+        console.log('no gad_1_score')
       }
 
       try {
@@ -51,6 +53,7 @@ form.addEventListener("submit", function (e) {
       }
       catch(err) {
         var gad_2_score = 'missing'
+        console.log('no gad_2_score')
       }
 
       try {
@@ -60,6 +63,7 @@ form.addEventListener("submit", function (e) {
       }
       catch(err) {
         var gad_3_score = 'missing'
+        console.log('no gad_3_score')
       }
 
       try {
@@ -69,6 +73,7 @@ form.addEventListener("submit", function (e) {
       }
       catch(err) {
         var gad_4_score = 'missing'
+        console.log('no gad_4_score')
       }
 
       try {
@@ -78,6 +83,7 @@ form.addEventListener("submit", function (e) {
       }
       catch(err) {
         var gad_5_score = 'missing'
+        console.log('no gad_5_score')
       }
 
       try {
@@ -87,6 +93,7 @@ form.addEventListener("submit", function (e) {
       }
       catch(err) {
         var gad_6_score = 'missing'
+        console.log('no gad_6_score')
       }
   
 
@@ -147,7 +154,7 @@ form.addEventListener("submit", function (e) {
       .value
   );
 
-  if (gad_6_score = 'missing') {
+  if (gad_6_score =='missing') {
     var gadScore = 'missing'
   } else {
     var gadScore =
@@ -268,7 +275,7 @@ form.addEventListener("submit", function (e) {
   phq_6_answer.textContent = document.querySelector(`label[for="${document.querySelector('input[name="phq_6"]:checked').id}"]`).innerText
   phq_7_answer.textContent = document.querySelector(`label[for="${document.querySelector('input[name="phq_7"]:checked').id}"]`).innerText
   phq_8_answer.textContent = document.querySelector(`label[for="${document.querySelector('input[name="phq_8"]:checked').id}"]`).innerText
-if (gadScore = 'missing') {
+if (gadScore == 'missing') {
     console.log('no gad score')
 } else {
     gad_0_answer.textContent = document.querySelector(`label[for="${document.querySelector('input[name="gad_0"]:checked').id}"]`).innerText
@@ -308,7 +315,7 @@ if (gadScore = 'missing') {
   document.getElementById("goldenAgeQuestionresultDiv").style.display = "none";
   document.getElementById("golden_ageResultDiv").style.display = "";
 
-  if (gadScore = 'missing') {
+  if (gadScore == 'missing') {
     console.log('no gad score')
 } else {
     var gad_data = [
@@ -366,7 +373,7 @@ if (gadScore = 'missing') {
   };
   var config = { responsive: true, displaylogo: false, displayModeBar: false };
 
-  if (gadScore = 'missing') {
+  if (gadScore == 'missing') {
     console.log('no gad score')
     var gad_plotly_div_parent_element = document.getElementById("gad_plotly_div_parent");
     gad_plotly_div_parent_element.parentNode.removeChild(gad_plotly_div_parent_element);
