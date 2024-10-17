@@ -207,7 +207,7 @@ form.addEventListener("submit", function (e) {
     console.log("no psychological_flexibility score");
   }
 
-  manual_member_id_answer = 
+  manual_member_id_answer = document.querySelector('#manual_member_id').value;
   phq_0_answer = document.querySelector(`label[for="${document.querySelector('input[name="phq_0"]:checked').id}"]`).innerText
   phq_1_answer = document.querySelector(`label[for="${document.querySelector('input[name="phq_1"]:checked').id}"]`).innerText
   phq_2_answer = document.querySelector(`label[for="${document.querySelector('input[name="phq_2"]:checked').id}"]`).innerText
