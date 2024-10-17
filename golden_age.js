@@ -82,7 +82,7 @@ form.addEventListener("submit", function (e) {
     } else if (phqScore > 9 && phqScore <= 14) {
         phqCategory.textContent = "中度焦慮";
         phqColor = "#F48847";
-    } else if (phqScore > 14 && phqScore <= 21) {
+    } else if (phqScore > 14 && phqScore <= 27) {
         phqCategory.textContent = "嚴重焦慮";
         phqColor = "#EB4841";
     } else {console.log("no phq score")}
