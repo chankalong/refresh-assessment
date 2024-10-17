@@ -207,24 +207,24 @@ form.addEventListener("submit", function (e) {
     console.log("no psychological_flexibility score");
   }
 
-  manual_member_id_answer = document.querySelector('#manual_member_id').value;
-  phq_0_answer = document.querySelector(`label[for="${document.querySelector('input[name="phq_0"]:checked').id}"]`).innerText
-  phq_1_answer = document.querySelector(`label[for="${document.querySelector('input[name="phq_1"]:checked').id}"]`).innerText
-  phq_2_answer = document.querySelector(`label[for="${document.querySelector('input[name="phq_2"]:checked').id}"]`).innerText
-  phq_3_answer = document.querySelector(`label[for="${document.querySelector('input[name="phq_3"]:checked').id}"]`).innerText
-  phq_4_answer = document.querySelector(`label[for="${document.querySelector('input[name="phq_4"]:checked').id}"]`).innerText
-  phq_5_answer = document.querySelector(`label[for="${document.querySelector('input[name="phq_5"]:checked').id}"]`).innerText
-  phq_6_answer = document.querySelector(`label[for="${document.querySelector('input[name="phq_6"]:checked').id}"]`).innerText
-  phq_7_answer = document.querySelector(`label[for="${document.querySelector('input[name="phq_7"]:checked').id}"]`).innerText
-  phq_8_answer = document.querySelector(`label[for="${document.querySelector('input[name="phq_8"]:checked').id}"]`).innerText
+  manual_member_id_answer.textContent = document.querySelector('#manual_member_id').value;
+  phq_0_answer.textContent = document.querySelector(`label[for="${document.querySelector('input[name="phq_0"]:checked').id}"]`).innerText
+  phq_1_answer.textContent = document.querySelector(`label[for="${document.querySelector('input[name="phq_1"]:checked').id}"]`).innerText
+  phq_2_answer.textContent = document.querySelector(`label[for="${document.querySelector('input[name="phq_2"]:checked').id}"]`).innerText
+  phq_3_answer.textContent = document.querySelector(`label[for="${document.querySelector('input[name="phq_3"]:checked').id}"]`).innerText
+  phq_4_answer.textContent = document.querySelector(`label[for="${document.querySelector('input[name="phq_4"]:checked').id}"]`).innerText
+  phq_5_answer.textContent = document.querySelector(`label[for="${document.querySelector('input[name="phq_5"]:checked').id}"]`).innerText
+  phq_6_answer.textContent = document.querySelector(`label[for="${document.querySelector('input[name="phq_6"]:checked').id}"]`).innerText
+  phq_7_answer.textContent = document.querySelector(`label[for="${document.querySelector('input[name="phq_7"]:checked').id}"]`).innerText
+  phq_8_answer.textContent = document.querySelector(`label[for="${document.querySelector('input[name="phq_8"]:checked').id}"]`).innerText
 
-  gad_0_answer = document.querySelector(`label[for="${document.querySelector('input[name="gad_0"]:checked').id}"]`).innerText
-  gad_1_answer = document.querySelector(`label[for="${document.querySelector('input[name="gad_1"]:checked').id}"]`).innerText
-  gad_2_answer = document.querySelector(`label[for="${document.querySelector('input[name="gad_2"]:checked').id}"]`).innerText
-  gad_3_answer = document.querySelector(`label[for="${document.querySelector('input[name="gad_3"]:checked').id}"]`).innerText
-  gad_4_answer = document.querySelector(`label[for="${document.querySelector('input[name="gad_4"]:checked').id}"]`).innerText
-  gad_5_answer = document.querySelector(`label[for="${document.querySelector('input[name="gad_5"]:checked').id}"]`).innerText
-  gad_6_answer = document.querySelector(`label[for="${document.querySelector('input[name="gad_6"]:checked').id}"]`).innerText
+  gad_0_answer.textContent = document.querySelector(`label[for="${document.querySelector('input[name="gad_0"]:checked').id}"]`).innerText
+  gad_1_answer.textContent = document.querySelector(`label[for="${document.querySelector('input[name="gad_1"]:checked').id}"]`).innerText
+  gad_2_answer.textContent = document.querySelector(`label[for="${document.querySelector('input[name="gad_2"]:checked').id}"]`).innerText
+  gad_3_answer.textContent = document.querySelector(`label[for="${document.querySelector('input[name="gad_3"]:checked').id}"]`).innerText
+  gad_4_answer.textContent = document.querySelector(`label[for="${document.querySelector('input[name="gad_4"]:checked').id}"]`).innerText
+  gad_5_answer.textContent = document.querySelector(`label[for="${document.querySelector('input[name="gad_5"]:checked').id}"]`).innerText
+  gad_6_answer.textContent = document.querySelector(`label[for="${document.querySelector('input[name="gad_6"]:checked').id}"]`).innerText
 
   const flexibilityScoreMapping = {
     0: '從不',
@@ -242,13 +242,13 @@ form.addEventListener("submit", function (e) {
   }
   
   // Example usage:
-  psychological_flexibility_0_answer = getFlexibilityAnswer(psychological_flexibility_0_score);
-  psychological_flexibility_1_answer = getFlexibilityAnswer(psychological_flexibility_1_score);
-  psychological_flexibility_2_answer = getFlexibilityAnswer(psychological_flexibility_2_score);
-  psychological_flexibility_3_answer = getFlexibilityAnswer(psychological_flexibility_3_score);
-  psychological_flexibility_4_answer = getFlexibilityAnswer(psychological_flexibility_4_score);
-  psychological_flexibility_5_answer = getFlexibilityAnswer(psychological_flexibility_5_score);
-  psychological_flexibility_6_answer = getFlexibilityAnswer(psychological_flexibility_6_score);
+  psychological_flexibility_0_answer.textContent = getFlexibilityAnswer(psychological_flexibility_0_score);
+  psychological_flexibility_1_answer.textContent = getFlexibilityAnswer(psychological_flexibility_1_score);
+  psychological_flexibility_2_answer.textContent = getFlexibilityAnswer(psychological_flexibility_2_score);
+  psychological_flexibility_3_answer.textContent = getFlexibilityAnswer(psychological_flexibility_3_score);
+  psychological_flexibility_4_answer.textContent = getFlexibilityAnswer(psychological_flexibility_4_score);
+  psychological_flexibility_5_answer.textContent = getFlexibilityAnswer(psychological_flexibility_5_score);
+  psychological_flexibility_6_answer.textContent = getFlexibilityAnswer(psychological_flexibility_6_score);
 
   document.getElementById("goldenAgeQuestionresultDiv").style.display = "none";
   document.getElementById("golden_ageResultDiv").style.display = "";
