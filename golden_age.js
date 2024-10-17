@@ -41,7 +41,7 @@ form.addEventListener("submit", function (e) {
     var psychological_flexibility_6_score = parseInt(document.querySelector('input[name="psychological_flexibility_6"]:checked').value);
 
     var gadScore = gad_0_score + gad_1_score + gad_2_score + gad_3_score + gad_4_score + gad_5_score + gad_6_score;
-    var phqScore = phq_0_score + phq_1_score + phq_2_score + phq_3_score + phq_4_score + phq_5_score + phq_6_score + phq_7_score + phq_8_score + phq_9_score;
+    var phqScore = phq_0_score + phq_1_score + phq_2_score + phq_3_score + phq_4_score + phq_5_score + phq_6_score + phq_7_score + phq_8_score;
     var psychological_flexibilityScore = psychological_flexibility_0_score + psychological_flexibility_1_score + psychological_flexibility_2_score + psychological_flexibility_3_score + psychological_flexibility_4_score + psychological_flexibility_5_score + psychological_flexibility_6_score;
 
     if (isNaN(phqScore)) {
