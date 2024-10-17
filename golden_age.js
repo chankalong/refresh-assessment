@@ -96,13 +96,13 @@ form.addEventListener("submit", function (e) {
     } else if (psychological_flexibilityScore > 9 && psychological_flexibilityScore <= 14) {
         psychological_flexibilityCategory.textContent = "中度焦慮";
         psychological_flexibilityColor = "#F48847";
-    } else if (psychological_flexibilityScore > 14 && psychological_flexibilityScore <= 21) {
+    } else if (psychological_flexibilityScore > 14 && psychological_flexibilityScore <= 42) {
         psychological_flexibilityCategory.textContent = "嚴重焦慮";
         psychological_flexibilityColor = "#EB4841";
     } else {console.log("no psychological_flexibility score")}
 
-    document.getElementById('goledn_ageQuestionresultDiv').style.display = 'none';
-    document.getElementById('goledn_ageResultDiv').style.display = '';
+    document.getElementById('goldenageQuestionresultDiv').style.display = 'none';
+    document.getElementById('golden_ageResultDiv').style.display = '';
 
     var gad_data = [
         {
@@ -126,7 +126,7 @@ form.addEventListener("submit", function (e) {
             type: "indicator",
             mode: "gauge+number",
             gauge: {
-                axis: { range: [0, 24], tickvals: [0, 13.5, 27] },
+                axis: { range: [0, 27], tickvals: [0, 13.5, 27] },
                 bar: { color: phqColor, thickness: 1 }
             }
         }
