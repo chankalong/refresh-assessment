@@ -152,8 +152,8 @@ form.addEventListener("submit", function (e) {
         }
     };
     var config = { responsive: true, displaylogo: false, displayModeBar: false }
-    //Plotly.newPlot('gad_plotly_div', gad_data, layout, config);
+    Plotly.newPlot('gad_plotly_div', gad_data, layout, config);
     Plotly.newPlot('phq_plotly_div', phq_data, layout, config);
-    //Plotly.newPlot('psychological_flexibility_plotly_div', psychological_flexibility_data, layout, config);
+    Plotly.newPlot('psychological_flexibility_plotly_div', psychological_flexibility_data, layout, config);
     document.getElementById('block-bokss-page-title').scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' })
 })
