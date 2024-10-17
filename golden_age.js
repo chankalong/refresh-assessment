@@ -112,7 +112,7 @@ form.addEventListener("submit", function (e) {
             type: "indicator",
             mode: "gauge+number",
             gauge: {
-                axis: { range: [0, 21], tickvals: [0, 5, 10, 15, 21] },
+                axis: { range: [0, 21], tickvals: [0, 10.5, 21] },
                 bar: { color: gadColor, thickness: 1 }
             }
         }
@@ -126,7 +126,7 @@ form.addEventListener("submit", function (e) {
             type: "indicator",
             mode: "gauge+number",
             gauge: {
-                axis: { range: [0, 21], tickvals: [0, 5, 10, 15, 21] },
+                axis: { range: [0, 24], tickvals: [0, 13.5, 27] },
                 bar: { color: phqColor, thickness: 1 }
             }
         }
@@ -140,7 +140,7 @@ form.addEventListener("submit", function (e) {
             type: "indicator",
             mode: "gauge+number",
             gauge: {
-                axis: { range: [0, 21], tickvals: [0, 5, 10, 15, 21] },
+                axis: { range: [0, 42], tickvals: [0, 21, 42] },
                 bar: { color: psychological_flexibilityColor, thickness: 1 }
             }
         }
