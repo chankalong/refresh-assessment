@@ -368,14 +368,17 @@ if (gadScore = 'missing') {
 
   if (gadScore = 'missing') {
     console.log('no gad score')
-} else {
-    Plotly.newPlot("gad_plotly_div", gad_data, layout, config);
+    var gad_plotly_div_parent_element = document.getElementById("gad_plotly_div_parent");
+    gad_plotly_div_parent_element.parentNode.removeChild(gad_plotly_div_parent_element);
     var gad_answer_hr_element = document.getElementById("gad_answer_hr");
     gad_answer_hr_element.parentNode.removeChild(gad_answer_hr_element);
     var gad_answer_header_element = document.getElementById("gad_answer_header");
     gad_answer_header_element.parentNode.removeChild(gad_answer_header_element);
     var gad_answer_ol_element = document.getElementById("gad_answer_ol");
     gad_answer_ol_element.parentNode.removeChild(gad_answer_ol_element);
+
+} else {
+    Plotly.newPlot("gad_plotly_div", gad_data, layout, config);
 }
 
   
