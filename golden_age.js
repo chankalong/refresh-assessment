@@ -423,9 +423,10 @@ if (gadScore == 'missing') {
             img_div,
             document.getElementById("save_div").parentNode
           );
+        document.querySelector("#golden_ageResultDiv").style.display = "none";
+          document.querySelector("#svg_div").style.display = "";
       });
     }, 1000);
-  document.querySelector("#golden_ageResultDiv").style.display = "none";
-          document.querySelector("#svg_div").style.display = "";
+  
 });
 
