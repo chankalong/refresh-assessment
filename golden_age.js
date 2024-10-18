@@ -359,6 +359,7 @@ if (gadScore == 'missing') {
       gauge: {
         axis: { range: [0, 42], tickvals: [0, 21, 42] },
         bar: { color: psychological_flexibilityColor, thickness: 1 },
+        bgcolor: "white"
       },
     },
   ];
