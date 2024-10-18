@@ -377,6 +377,8 @@ if (gadScore == 'missing') {
   };
   var config = { responsive: true, displaylogo: false, displayModeBar: false };
 
+  var svg_div = document.querySelector("#svg_div");
+
   if (gadScore == 'missing') {
     console.log('no gad score')
     var gad_plotly_div_parent_element = document.getElementById("gad_plotly_div_parent");
@@ -400,7 +402,34 @@ if (gadScore == 'missing') {
     layout,
     config
   );
+  //document
+  //  .getElementById("block-bokss-page-title")
+  //  .scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
   document
-    .getElementById("block-bokss-page-title")
-    .scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
+      .querySelector(".fixed.bottom-0.right-4")
+      .querySelector("button")
+      .click();
+    setTimeout(function () {
+      html2canvas(document.querySelector("#test_result"), {
+        scale: 2,
+        onclone: function (document) {
+          document.querySelector("#test_result").style.display = "";
+        },
+      }).then(function (canvas) {
+        canvas_element = canvas;
+        var img_png = canvas_element.toDataURL("image/png");
+        var img_div = document.createElement("div");
+        var img_div_content = document.createElement("img");
+        img_div.style = "display: flex; justify-content: center;";
+        img_div.appendChild(img_div_content);
+        img_div_content.src = img_png;
+        document
+          .getElementById("save_result")
+          .insertBefore(
+            img_div,
+            document.getElementById("save_div").parentNode
+          );
+      });
+    }, 1000);
 });
+
