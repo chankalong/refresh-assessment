@@ -408,6 +408,8 @@ if (gadScore == 'missing') {
       .querySelector(".fixed.bottom-0.right-4")
       .querySelector("button")
       .click();
+  var html2canvas_count = 0;
+  if (html2canvas_count == 0) {
     setTimeout(function () {
       html2canvas(document.querySelector("#golden_ageResultDiv")).then(function (canvas) {
         canvas_element = canvas;
@@ -424,9 +426,14 @@ if (gadScore == 'missing') {
             document.getElementById("save_div").parentNode
           );
         document.querySelector("#golden_ageResultDiv").style.display = "none";
-          document.querySelector("#svg_div").style.display = "";
+        document.querySelector("#svg_div").style.display = "";
+        html2canvas_count = 1;
       });
     }, 1000);
+  } else {
+    console.log("create html2canvas");
+  }
+    
   
 });
 
