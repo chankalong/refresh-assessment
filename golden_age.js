@@ -370,6 +370,7 @@ if (gadScore == 'missing') {
     font: {
       family: "Arial, sans-serif",
     },
+    paper_bgcolor: "transparent"
   };
   var config = { responsive: true, displaylogo: false, displayModeBar: false };
 
