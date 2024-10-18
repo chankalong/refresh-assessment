@@ -328,6 +328,7 @@ if (gadScore == 'missing') {
           gauge: {
             axis: { range: [0, 21], tickvals: [0, 10.5, 21] },
             bar: { color: gadColor, thickness: 1 },
+            bgcolor: "white"
           },
         },
       ];
@@ -345,6 +346,7 @@ if (gadScore == 'missing') {
       gauge: {
         axis: { range: [0, 27], tickvals: [0, 13.5, 27] },
         bar: { color: phqColor, thickness: 1 },
+        bgcolor: "white"
       },
     },
   ];
