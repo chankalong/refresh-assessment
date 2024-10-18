@@ -377,7 +377,6 @@ if (gadScore == 'missing') {
   };
   var config = { responsive: true, displaylogo: false, displayModeBar: false };
 
-  var svg_div = document.querySelector("#svg_div");
 
   if (gadScore == 'missing') {
     console.log('no gad score')
@@ -410,10 +409,10 @@ if (gadScore == 'missing') {
       .querySelector("button")
       .click();
     setTimeout(function () {
-      html2canvas(document.querySelector("#test_result"), {
-        scale: 2,
+      html2canvas(document.querySelector("#golden_ageResultDiv"), {
+        //scale: 2,
         onclone: function (document) {
-          document.querySelector("#test_result").style.display = "";
+          document.querySelector("#golden_ageResultDiv").style.display = "";
         },
       }).then(function (canvas) {
         canvas_element = canvas;
@@ -424,7 +423,7 @@ if (gadScore == 'missing') {
         img_div.appendChild(img_div_content);
         img_div_content.src = img_png;
         document
-          .getElementById("save_result")
+          .getElementById("svg_div")
           .insertBefore(
             img_div,
             document.getElementById("save_div").parentNode
