@@ -412,7 +412,8 @@ if (gadScore == 'missing') {
       html2canvas(document.querySelector("#golden_ageResultDiv"), {
         //scale: 2,
         onclone: function (document) {
-          document.querySelector("#golden_ageResultDiv").style.display = "";
+          document.querySelector("#golden_ageResultDiv").style.display = "none";
+          document.querySelector("#svg_div").style.display = "";
         },
       }).then(function (canvas) {
         canvas_element = canvas;
