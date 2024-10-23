@@ -1,37 +1,74 @@
-const Shuffle = window.Shuffle;
-const shuffleInstance = new Shuffle(document.getElementById("assessment_div"), {
-  itemSelector: ".assessment-item",
-  sizer: ".js-shuffle-sizer",
-});
+var Shuffle = window.Shuffle;
 
-document.querySelector(".emotion-filter").addEventListener("click", (e) => {
-  shuffleInstance.filter("emotion");
-});
+class Demo {
+  constructor(element) {
+    this.element = element;
+    this.shuffle = new Shuffle(element, {
+      itemSelector: '.assessment-item',
+      sizer: element.querySelector('.js-shuffle-sizer'),
+    });
 
-document
-  .querySelector(".communication-filter")
-  .addEventListener("click", (e) => {
-    shuffleInstance.filter("communication");
-  });
+    // Log events.
+    this.addShuffleEventListeners();
+    this._activeFilters = [];
+    this.addFilterButtons();
+    this.addSorting();
+    this.addSearchFilter();
+  }
 
-document.querySelector(".work-filter").addEventListener("click", (e) => {
-  shuffleInstance.filter("work");
-});
+  /**
+   * Shuffle uses the CustomEvent constructor to dispatch events. You can listen
+   * for them like you normally would (with jQuery for example).
+   */
+  addShuffleEventListeners() {
+    this.shuffle.on(Shuffle.EventType.LAYOUT, (data) => {
+      console.log('layout. data:', data);
+    });
+    this.shuffle.on(Shuffle.EventType.REMOVED, (data) => {
+      console.log('removed. data:', data);
+    });
+  }
 
-document.querySelector(".personality-filter").addEventListener("click", (e) => {
-  shuffleInstance.filter("personality");
-});
+  addFilterButtons() {
+    const options = document.querySelector('.filter-options');
+    if (!options) {
+      return;
+    }
+    
+    const filterButtons = Array.from(options.children);
+    const onClick = this._handleFilterClick.bind(this);
+    filterButtons.forEach((button) => {
+      button.addEventListener('click', onClick, false);
+    });
+  }
 
-document
-  .querySelector(".relationship-filter")
-  .addEventListener("click", (e) => {
-    shuffleInstance.filter("relationship");
-  });
+  _handleFilterClick(evt) {
+    const btn = evt.currentTarget;
+    const isActive = btn.classList.contains('active');
+    const btnGroup = btn.getAttribute('data-group');
+    
+    this._removeActiveClassFromChildren(btn.parentNode);
+    
+    let filterGroup;
+    if (isActive) {
+      btn.classList.remove('active');
+      filterGroup = Shuffle.ALL_ITEMS;
+    } else {
+      btn.classList.add('active');
+      filterGroup = btnGroup;
+    }
+    
+    this.shuffle.filter(filterGroup);
+  }
 
-document.querySelector(".other-filter").addEventListener("click", (e) => {
-  shuffleInstance.filter("other");
-});
+  _removeActiveClassFromChildren(parent) {
+    const { children } = parent;
+    for (let i = children.length - 1; i >= 0; i--) {
+      children[i].classList.remove('active');
+    }
+  }
+}
 
-document.querySelector(".all-filter").addEventListener("click", (e) => {
-  shuffleInstance.filter(Shuffle.ALL_ITEMS);
+document.addEventListener('DOMContentLoaded', () => {
+  window.demo = new Demo(document.getElementById('assessment_div'));
 });
