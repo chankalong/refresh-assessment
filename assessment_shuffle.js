@@ -12,8 +12,8 @@ class Demo {
     this.addShuffleEventListeners();
     this._activeFilters = [];
     this.addFilterButtons();
-    this.addSorting();
-    this.addSearchFilter();
+    //this.addSorting();
+    //this.addSearchFilter();
   }
 
   /**
