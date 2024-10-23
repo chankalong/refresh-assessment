@@ -23,6 +23,27 @@ if (drupalSettings.user.eap === undefined) {
   eap_company_textbox.value = drupalSettings.user.eap.label;
 }
 
+var complete_time_textbox = document.getElementById("complete_time");
+
+Number.prototype.padLeft = function (base, chr) {
+  var len = String(base || 10).length - String(this).length + 1;
+  return len > 0 ? new Array(len).join(chr || "0") + this : this;
+};
+
+var d = new Date();
+var dformat =
+  [d.getFullYear(), (d.getMonth() + 1).padLeft(), d.getDate().padLeft()].join(
+    "/"
+  ) +
+  " " +
+  [
+    d.getHours().padLeft(),
+    d.getMinutes().padLeft(),
+    d.getSeconds().padLeft(),
+  ].join(":");
+
+complete_time_textbox.value = dformat;
+
 var form = document.getElementById("form_golden_age");
 
 form.addEventListener("submit", function (e) {
