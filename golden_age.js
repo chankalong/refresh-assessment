@@ -287,6 +287,7 @@ form.addEventListener("submit", function (e) {
   }
 
   manual_member_id_answer.textContent = document.querySelector('#manual_member_id').value;
+  complete_time_answer.textContent = dformat;
   phq_0_answer.textContent = document.querySelector(`label[for="${document.querySelector('input[name="phq_0"]:checked').id}"]`).innerText
   phq_1_answer.textContent = document.querySelector(`label[for="${document.querySelector('input[name="phq_1"]:checked').id}"]`).innerText
   phq_2_answer.textContent = document.querySelector(`label[for="${document.querySelector('input[name="phq_2"]:checked').id}"]`).innerText
