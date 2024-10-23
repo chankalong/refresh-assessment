@@ -6,6 +6,7 @@ class Demo {
     this.shuffle = new Shuffle(element, {
       itemSelector: '.assessment-item',
       //sizer: element.querySelector('.js-shuffle-sizer'),
+      columnWidth: 200
     });
 
     // Log events.
