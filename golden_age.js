@@ -337,6 +337,7 @@ if (gadScore == 'missing') {
   psychological_flexibility_5_answer.textContent = getFlexibilityAnswer(psychological_flexibility_5_score);
   psychological_flexibility_6_answer.textContent = getFlexibilityAnswer(psychological_flexibility_6_score);
 
+  document.getElementById("description").style.display = "none";
   document.getElementById("goldenAgeQuestionresultDiv").style.display = "none";
   document.getElementById("golden_ageResultDiv").style.display = "";
 
