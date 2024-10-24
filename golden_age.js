@@ -199,7 +199,7 @@ form.addEventListener("submit", function (e) {
     phq_6_score +
     phq_7_score +
     phq_8_score;
-  var psychological_flexibilityScore = 49 -
+  var psychological_flexibilityScore = 42 -
     (psychological_flexibility_0_score +
     psychological_flexibility_1_score +
     psychological_flexibility_2_score +
