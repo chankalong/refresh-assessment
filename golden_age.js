@@ -286,8 +286,14 @@ form.addEventListener("submit", function (e) {
     console.log("no psychological_flexibility score");
   }
 
-  manual_member_id_answer.textContent = document.querySelector('#manual_member_id').value;
+  name_manual_member_id_answer.textContent = document.getElementById("name").value.concat(" （", document.querySelector('#manual_member_id').value, "）");
   complete_time_answer.textContent = dformat;
+  //name_manual_member_id_answer.textContent = dformat;
+  district_answer.textContent = document.querySelector('input[name="district"]:checked').value;
+
+  var name_textbox = ;
+
+  
   phq_0_answer.textContent = document.querySelector(`label[for="${document.querySelector('input[name="phq_0"]:checked').id}"]`).innerText
   phq_1_answer.textContent = document.querySelector(`label[for="${document.querySelector('input[name="phq_1"]:checked').id}"]`).innerText
   phq_2_answer.textContent = document.querySelector(`label[for="${document.querySelector('input[name="phq_2"]:checked').id}"]`).innerText
