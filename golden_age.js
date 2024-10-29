@@ -366,7 +366,7 @@ if (gadScore == 'missing') {
     {
       domain: { x: [0, 1], y: [0, 1] },
       value: phqScore,
-      title: { text: "憂鬱" },
+      title: { text: "抑鬱" },
       type: "indicator",
       mode: "gauge+number",
       gauge: {
