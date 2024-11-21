@@ -219,6 +219,8 @@ function clearTooltip(e) {
         }
       });
   };
+
+  phq_gad_5_next_button.addEventListener("click", phq_gad_5_next_function);
   
   var system_id_textbox = document.getElementById("system_id");
   var member_id_textbox = document.getElementById("member_id");
