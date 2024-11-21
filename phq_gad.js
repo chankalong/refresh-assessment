@@ -332,7 +332,7 @@ form.addEventListener("submit", function (e) {
     console.log("no phq score");
   }
 
-  name_manual_member_id_answer.textContent = document.getElementById("name").value.concat(" （", document.querySelector('#manual_member_id').value, "）");
+  name_manual_member_id_answer.textContent = document.getElementById("name").value;
   complete_time_answer.textContent = dformat;
   //name_manual_member_id_answer.textContent = dformat;
   district_answer.textContent = document.querySelector('input[name="district"]:checked').value;
