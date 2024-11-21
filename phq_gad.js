@@ -23,7 +23,31 @@ function clearTooltip(e) {
     }
     return actionMsg;
   }
+  var clipboardDemos = new ClipboardJS("#share_div");
+  clipboardDemos.on("success", function (e) {
+    e.clearSelection();
+    console.info("Action:", e.action);
+    console.info("Text:", e.text);
+    console.info("Trigger:", e.trigger);
+    showTooltip(e.trigger, "已複製問卷連結!");
+    clearTooltip(e.trigger);
+  });
+  clipboardDemos.on("error", function (e) {
+    console.error("Action:", e.action);
+    console.error("Trigger:", e.trigger);
+    showTooltip(e.trigger, fallbackMessage(e.action));
+  });
+  document.querySelector("#start_div").addEventListener("click", function () {
+    document.querySelector("#phq_gadIntroDiv").style.display = "none";
+    document.querySelector("#phq_gadQuestionDiv").style.display = "";
+    document.querySelector("h1").style.display = "none";
+    document
+      .querySelector(".fixed.bottom-0.right-4")
+      .querySelector("button")
+      .click();
+  });
   
+  document.querySelector(".page-title").style.marginBottom = "0px";
   for (var i = 2; i <= 7; i++) {
     var targetId = "#phq_gad_" + i + "_block";
     anime({
@@ -157,7 +181,7 @@ function clearTooltip(e) {
     );
   }
   
-  for (var i = 1; i <= 2; i++) {
+  for (var i = 1; i <= 3; i++) {
     AddFunctionListener(
       "phq_gad_" + i,
       "phq_gad_" + (i + 1),
@@ -167,28 +191,28 @@ function clearTooltip(e) {
   
   //##last
   
-  var phq_gad_4_previous_button = document.getElementById(
-    "phq_gad_4_previous_button"
+  var phq_gad_5_previous_button = document.getElementById(
+    "phq_gad_5_previous_button"
   );
-  phq_gad_4_previous_button.addEventListener("click", function () {
+  phq_gad_5_previous_button.addEventListener("click", function () {
     anime
       .timeline({
         duration: 200,
         delay: 200,
       })
       .add({
-        targets: "#phq_gad_4_block",
+        targets: "#phq_gad_5_block",
         easing: "easeOutExpo",
         translateX: 20,
         opacity: 0,
         complete: function () {
-          document.getElementById("phq_gad_3_block").style.display = "";
-          document.getElementById("phq_gad_4_block").style.display = "none";
+          document.getElementById("phq_gad_4_block").style.display = "";
+          document.getElementById("phq_gad_5_block").style.display = "none";
         },
       })
       .add(
         {
-          targets: "#phq_gad_3_block",
+          targets: "#phq_gad_4_block",
           easing: "easeInExpo",
           translateX: 0,
           opacity: 1,
@@ -197,8 +221,8 @@ function clearTooltip(e) {
       );
   });
   
-  var phq_gad_4_next_button = document.getElementById("phq_gad_4_next_button");
-  var phq_gad_4_next_function = function () {
+  var phq_gad_5_next_button = document.getElementById("phq_gad_5_next_button");
+  var phq_gad_5_next_function = function () {
     swal
       .fire({
         text: "確定提交嗎？",
@@ -220,19 +244,7 @@ function clearTooltip(e) {
       });
   };
   
-  Array.prototype.map.call(
-    document.querySelectorAll("input[name=phq_gad_3]"),
-    function (e) {
-      e.addEventListener("click", phq_gad_4_next_function);
-      e.addEventListener("click", function () {
-        phq_gad_4_next_button.addEventListener(
-          "click",
-          phq_gad_4_next_function
-        );
-        phq_gad_4_next_button.style.opacity = 1;
-      });
-    }
-  );
+
   var system_id_textbox = document.getElementById("system_id");
   var member_id_textbox = document.getElementById("member_id");
   var canvas_element = document.createElement("canvas");
@@ -247,188 +259,5 @@ function clearTooltip(e) {
   if (uid_textbox.value) {console.log("input uid value already")} else {uid_textbox.value = Math.random();}
   if (drupalSettings.user.levels === undefined) {member_level_textbox.value = 0} else {member_level_textbox.value = drupalSettings.user.levels[0]}
   if (drupalSettings.user.eap === undefined) {eap_company_textbox.value = '0'} else {eap_company_textbox.value = drupalSettings.user.eap.label}
-
-var complete_time_textbox = document.getElementById("complete_time");
-
-Number.prototype.padLeft = function (base, chr) {
-  var len = String(base || 10).length - String(this).length + 1;
-  return len > 0 ? new Array(len).join(chr || "0") + this : this;
-};
-
-var d = new Date();
-var dformat =
-  [d.getFullYear(), (d.getMonth() + 1).padLeft(), d.getDate().padLeft()].join(
-    "/"
-  ) +
-  " " +
-  [
-    d.getHours().padLeft(),
-    d.getMinutes().padLeft(),
-    d.getSeconds().padLeft(),
-  ].join(":");
-
-complete_time_textbox.value = dformat;
-
-var form = document.getElementById("form_phq_gad");
-
-form.addEventListener("submit", function (e) {
-    
+  var form = document.getElementById("form_phq_gad");
   
-
-  var phq_1_score = parseInt(
-    document.querySelector('input[name="phq_gad_0"]:checked').value
-  );
-  var phq_2_score = parseInt(
-    document.querySelector('input[name="phq_gad_1"]:checked').value
-  );
-  var gad_1_score = parseInt(
-    document.querySelector('input[name="phq_gad_2"]:checked').value
-  );
-  var gad_2_score = parseInt(
-    document.querySelector('input[name="phq_gad_3"]:checked').value
-  );
-  
-
-  
-  var phqScore = phq_1_score + phq_2_score;
-  var gadScore = gad_1_score + gad_2_score;
-
-  if (isNaN(phqScore)) {
-    return; //stop the execution of function
-  }
-
-  if (isNaN(gadScore)) {
-    return; //stop the execution of function
-  }
-  var data_form = new FormData(form);
-  var action = e.target.action;
-  fetch(action, {
-    method: "POST",
-    body: data_form,
-  });
-  e.preventDefault();
-
-  if (gadScore >= 0 && gadScore <= 4) {
-    gadCategory.textContent = "良好";
-    gadColor = "#4EC04E";
-  } else if (gadScore > 4 && gadScore <= 9) {
-    gadCategory.textContent = "輕微";
-    gadColor = "#FFC84A";
-  } else if (gadScore > 9 && gadScore <= 14) {
-    gadCategory.textContent = "中度";
-    gadColor = "#F48847";
-  } else if (gadScore > 14 && gadScore <= 21) {
-    gadCategory.textContent = "嚴重";
-    gadColor = "#EB4841";
-  } else {
-    console.log("no gad score");
-  }
-
-  if (phqScore >= 0 && phqScore <= 4) {
-    phqCategory.textContent = "良好";
-    phqColor = "#4EC04E";
-  } else if (phqScore > 4 && phqScore <= 9) {
-    phqCategory.textContent = "輕微";
-    phqColor = "#FFC84A";
-  } else if (phqScore > 9 && phqScore <= 14) {
-    phqCategory.textContent = "中度";
-    phqColor = "#F48847";
-  } else if (phqScore > 14 && phqScore <= 19) {
-    phqCategory.textContent = "嚴重";
-    phqColor = "#f45e47";
-  } else if (phqScore > 19 && phqScore <= 27) {
-    phqCategory.textContent = "非常嚴重";
-    phqColor = "#EB4841";
-  } else {
-    console.log("no phq score");
-  }
-
-  name_manual_member_id_answer.textContent = document.getElementById("name").value.concat(" （", document.querySelector('#manual_member_id').value, "）");
-  complete_time_answer.textContent = dformat;
-  //name_manual_member_id_answer.textContent = dformat;
-  district_answer.textContent = document.querySelector('input[name="district"]:checked').value;
-
-  document.getElementById("description").style.display = "none";
-  document.getElementById("phq_gadQuestionresultDiv").style.display = "none";
-  document.getElementById("phq_gadResultDiv").style.display = "";
-
-
-    var gad_data = [
-        {
-          domain: { x: [0, 1], y: [0, 1] },
-          value: gadScore,
-          title: { text: "焦慮" },
-          type: "indicator",
-          mode: "gauge+number",
-          gauge: {
-            axis: { range: [0, 21], tickvals: [0, 10.5, 21] },
-            bar: { color: gadColor, thickness: 1 },
-            bgcolor: "white"
-          },
-        },
-      ];  
-
-  var phq_data = [
-    {
-      domain: { x: [0, 1], y: [0, 1] },
-      value: phqScore,
-      title: { text: "抑鬱" },
-      type: "indicator",
-      mode: "gauge+number",
-      gauge: {
-        axis: { range: [0, 27], tickvals: [0, 13.5, 27] },
-        bar: { color: phqColor, thickness: 1 },
-        bgcolor: "white"
-      },
-    },
-  ];
-
-  var layout = {
-    margin: { l: 35, r: 35, b: 10, t: 80, pad: 0 },
-    height: 200,
-    autosize: true,
-    font: {
-      family: "Arial, sans-serif",
-    },
-    paper_bgcolor: "transparent"
-  };
-  var config = { responsive: true, displaylogo: false, displayModeBar: false };
-
-  
-  Plotly.newPlot("phq_plotly_div", phq_data, layout, config);
-  
-  //document
-  //  .getElementById("block-bokss-page-title")
-  //  .scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
-  document
-      .querySelector(".fixed.bottom-0.right-4")
-      .querySelector("button")
-      .click();
-  var html2canvas_count = 0;
-  if (html2canvas_count == 0) {
-    setTimeout(function () {
-      html2canvas(document.querySelector("#phq_gadResultDiv")).then(function (canvas) {
-        canvas_element = canvas;
-        var img_png = canvas_element.toDataURL("image/png");
-        var img_div = document.createElement("div");
-        var img_div_content = document.createElement("img");
-        img_div.style = "display: flex; justify-content: center;";
-        img_div.appendChild(img_div_content);
-        img_div_content.src = img_png;
-        document
-          .getElementById("svg_div")
-          .insertBefore(
-            img_div,
-            document.getElementById("save_div").parentNode
-          );
-        document.querySelector("#phq_gadResultDiv").style.display = "none";
-        document.querySelector("#svg_div").style.display = "";
-        html2canvas_count = 1;
-      });
-    }, 1000);
-  } else {
-    console.log("create html2canvas");
-  }
-    
-  
-});
