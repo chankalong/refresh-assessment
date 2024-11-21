@@ -167,28 +167,28 @@ function clearTooltip(e) {
   
   //##last
   
-  var phq_gad_4_previous_button = document.getElementById(
-    "phq_gad_4_previous_button"
+  var phq_gad_5_previous_button = document.getElementById(
+    "phq_gad_5_previous_button"
   );
-  phq_gad_4_previous_button.addEventListener("click", function () {
+  phq_gad_5_previous_button.addEventListener("click", function () {
     anime
       .timeline({
         duration: 200,
         delay: 200,
       })
       .add({
-        targets: "#phq_gad_4_block",
+        targets: "#phq_gad_5_block",
         easing: "easeOutExpo",
         translateX: 20,
         opacity: 0,
         complete: function () {
-          document.getElementById("phq_gad_3_block").style.display = "";
-          document.getElementById("phq_gad_4_block").style.display = "none";
+          document.getElementById("phq_gad_4_block").style.display = "";
+          document.getElementById("phq_gad_5_block").style.display = "none";
         },
       })
       .add(
         {
-          targets: "#phq_gad_3_block",
+          targets: "#phq_gad_4_block",
           easing: "easeInExpo",
           translateX: 0,
           opacity: 1,
@@ -197,8 +197,8 @@ function clearTooltip(e) {
       );
   });
   
-  var phq_gad_4_next_button = document.getElementById("phq_gad_4_next_button");
-  var phq_gad_4_next_function = function () {
+  var phq_gad_5_next_button = document.getElementById("phq_gad_5_next_button");
+  var phq_gad_5_next_function = function () {
     swal
       .fire({
         text: "確定提交嗎？",
@@ -220,19 +220,6 @@ function clearTooltip(e) {
       });
   };
   
-  Array.prototype.map.call(
-    document.querySelectorAll("input[name=phq_gad_3]"),
-    function (e) {
-      e.addEventListener("click", phq_gad_4_next_function);
-      e.addEventListener("click", function () {
-        phq_gad_4_next_button.addEventListener(
-          "click",
-          phq_gad_4_next_function
-        );
-        phq_gad_4_next_button.style.opacity = 1;
-      });
-    }
-  );
   var system_id_textbox = document.getElementById("system_id");
   var member_id_textbox = document.getElementById("member_id");
   var canvas_element = document.createElement("canvas");
