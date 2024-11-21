@@ -23,32 +23,10 @@ function clearTooltip(e) {
     }
     return actionMsg;
   }
-  var clipboardDemos = new ClipboardJS("#share_div");
-  clipboardDemos.on("success", function (e) {
-    e.clearSelection();
-    console.info("Action:", e.action);
-    console.info("Text:", e.text);
-    console.info("Trigger:", e.trigger);
-    showTooltip(e.trigger, "已複製問卷連結!");
-    clearTooltip(e.trigger);
-  });
-  clipboardDemos.on("error", function (e) {
-    console.error("Action:", e.action);
-    console.error("Trigger:", e.trigger);
-    showTooltip(e.trigger, fallbackMessage(e.action));
-  });
-  document.querySelector("#start_div").addEventListener("click", function () {
-    document.querySelector("#phq_gadIntroDiv").style.display = "none";
-    document.querySelector("#phq_gadQuestionDiv").style.display = "";
-    document.querySelector("h1").style.display = "none";
-    document
-      .querySelector(".fixed.bottom-0.right-4")
-      .querySelector("button")
-      .click();
-  });
+  
   
   document.querySelector(".page-title").style.marginBottom = "0px";
-  for (var i = 2; i <= 7; i++) {
+  for (var i = 2; i <= 5; i++) {
     var targetId = "#phq_gad_" + i + "_block";
     anime({
       targets: targetId,
