@@ -157,7 +157,7 @@ function clearTooltip(e) {
     );
   }
   
-  for (var i = 1; i <= 2; i++) {
+  for (var i = 1; i <= 3; i++) {
     AddFunctionListener(
       "phq_gad_" + i,
       "phq_gad_" + (i + 1),
