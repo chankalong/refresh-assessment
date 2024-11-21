@@ -337,8 +337,8 @@ form.addEventListener("submit", function (e) {
   //name_manual_member_id_answer.textContent = dformat;
   district_answer.textContent = document.querySelector('input[name="district"]:checked').value;
 
-  document.getElementById("description").style.display = "none";
-  document.getElementById("phq_gadQuestionresultDiv").style.display = "none";
+  //document.getElementById("description").style.display = "none";
+  document.getElementById("phq_gadQuestionDiv").style.display = "none";
   document.getElementById("phq_gadResultDiv").style.display = "";
 
 
