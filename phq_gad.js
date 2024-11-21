@@ -385,6 +385,7 @@ form.addEventListener("submit", function (e) {
 
   
   Plotly.newPlot("phq_plotly_div", phq_data, layout, config);
+    Plotly.newPlot("gad_plotly_div", gad_data, layout, config);
   
   //document
   //  .getElementById("block-bokss-page-title")
