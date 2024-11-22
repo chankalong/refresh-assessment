@@ -220,7 +220,24 @@ function clearTooltip(e) {
       });
   };
 
-  phq_gad_5_next_button.addEventListener("click", phq_gad_5_next_function);
+    const nameInput = document.getElementById('name');
+    const districtWC = document.getElementById('district_wc');
+    const districtHKE = document.getElementById('district_hke');
+    const districtKT = document.getElementById('district_kt');
+
+    function checkAndHide() {
+        if (textInput.value !== '' && (document.getElementById('district_wc').checked || document.getElementById('district_hke').checked || document.getElementById('district_kt').checked)) {
+            phq_gad_5_next_button.addEventListener("click", phq_gad_5_next_function);
+            phq_gad_5_next_button.style.opacity = 1;
+        } else {
+            console.log('not fill-in')
+        }
+    }
+
+    nameInput.addEventListener('input', checkAndHide);
+    districtWC.addEventListener('change', checkAndHide);
+    districtHKE.addEventListener('change', checkAndHide);
+    districtKT.addEventListener('change', checkAndHide);
   
   var system_id_textbox = document.getElementById("system_id");
   var member_id_textbox = document.getElementById("member_id");
