@@ -226,7 +226,7 @@ function clearTooltip(e) {
     const districtKT = document.getElementById('district_kt');
 
     function checkAndHide() {
-        if (textInput.value !== '' && (document.getElementById('district_wc').checked || document.getElementById('district_hke').checked || document.getElementById('district_kt').checked)) {
+        if (nameInput.value !== '' && (document.getElementById('district_wc').checked || document.getElementById('district_hke').checked || document.getElementById('district_kt').checked)) {
             phq_gad_5_next_button.addEventListener("click", phq_gad_5_next_function);
             phq_gad_5_next_button.style.opacity = 1;
         } else {
