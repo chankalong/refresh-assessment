@@ -314,35 +314,38 @@ form.addEventListener("submit", function (e) {
   });
   e.preventDefault();
 
-  if (gadScore >= 0 && gadScore <= 4) {
+  if (gadScore >= 0 && gadScore <= 2) {
     gadCategory.textContent = "良好";
     gadColor = "#4EC04E";
-  } else if (gadScore > 4 && gadScore <= 9) {
+  } else if (gadScore == 3) {
     gadCategory.textContent = "輕微";
     gadColor = "#FFC84A";
-  } else if (gadScore > 9 && gadScore <= 14) {
+  } else if (gadScore == 4) {
     gadCategory.textContent = "中度";
     gadColor = "#F48847";
-  } else if (gadScore > 14 && gadScore <= 21) {
+  } else if (gadScore == 5) {
     gadCategory.textContent = "嚴重";
+    gadColor = "#f45e47";
+  } else if (gadScore == 6) {
+    gadCategory.textContent = "非常嚴重";
     gadColor = "#EB4841";
   } else {
     console.log("no gad score");
   }
 
-  if (phqScore >= 0 && phqScore <= 4) {
+  if (phqScore >= 0 && phqScore <= 2) {
     phqCategory.textContent = "良好";
     phqColor = "#4EC04E";
-  } else if (phqScore > 4 && phqScore <= 9) {
+  } else if (phqScore == 3) {
     phqCategory.textContent = "輕微";
     phqColor = "#FFC84A";
-  } else if (phqScore > 9 && phqScore <= 14) {
+  } else if (phqScore == 4) {
     phqCategory.textContent = "中度";
     phqColor = "#F48847";
-  } else if (phqScore > 14 && phqScore <= 19) {
+  } else if (phqScore == 5) {
     phqCategory.textContent = "嚴重";
     phqColor = "#f45e47";
-  } else if (phqScore > 19 && phqScore <= 27) {
+  } else if (phqScore == 6) {
     phqCategory.textContent = "非常嚴重";
     phqColor = "#EB4841";
   } else {
@@ -367,7 +370,7 @@ form.addEventListener("submit", function (e) {
           type: "indicator",
           mode: "gauge+number",
           gauge: {
-            axis: { range: [0, 21], tickvals: [0, 10.5, 21] },
+            axis: { range: [0, 6], tickvals: [0, 3, 6] },
             bar: { color: gadColor, thickness: 1 },
             bgcolor: "white"
           },
@@ -382,7 +385,7 @@ form.addEventListener("submit", function (e) {
       type: "indicator",
       mode: "gauge+number",
       gauge: {
-        axis: { range: [0, 27], tickvals: [0, 13.5, 27] },
+        axis: { range: [0, 6], tickvals: [0, 3, 6] },
         bar: { color: phqColor, thickness: 1 },
         bgcolor: "white"
       },
