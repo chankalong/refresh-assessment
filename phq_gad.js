@@ -220,10 +220,10 @@ function clearTooltip(e) {
       });
   };
 
-    const nameInput = document.getElementById('name');
-    const districtWC = document.getElementById('district_wc');
-    const districtHKE = document.getElementById('district_hke');
-    const districtKT = document.getElementById('district_kt');
+    var nameInput = document.getElementById('name');
+    var districtWC = document.getElementById('district_wc');
+    var districtHKE = document.getElementById('district_hke');
+    var districtKT = document.getElementById('district_kt');
 
     function checkAndHide() {
         if (nameInput.value !== '' && (document.getElementById('district_wc').checked || document.getElementById('district_hke').checked || document.getElementById('district_kt').checked)) {
