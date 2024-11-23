@@ -1,13 +1,3 @@
-try {
-  var query_String = window.location.search;
-  var activity_name = new URLSearchParams(query_String).get('activity_name');
-  var activity_name_textbox = document.getElementById("activity_name");
-  activity_name_textbox.value = activity_name;
-} catch (exceptionVar) {
-  catchStatements
-}
-  
-
 function clearTooltip(e) {
     setTimeout(function () {
       e.setAttribute("class", "btnRound btnRound-green mx-2");
@@ -284,6 +274,9 @@ var dformat =
   ].join(":");
 
 complete_time_textbox.value = dformat;
+
+var activity_name_textbox = document.getElementById("activity_name");
+  activity_name_textbox.value = new URLSearchParams(window.location.search).get('activity_name');
 
 var form = document.getElementById("form_phq_gad");
 
