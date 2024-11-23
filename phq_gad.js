@@ -1,3 +1,8 @@
+var queryString = window.location.search;
+  var activity_name = new URLSearchParams(queryString).get('activity_name');
+var activity_name_textbox = document.getElementById("activity_name");
+activity_name_textbox.value = activity_name;  
+
 function clearTooltip(e) {
     setTimeout(function () {
       e.setAttribute("class", "btnRound btnRound-green mx-2");
