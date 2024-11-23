@@ -1,4 +1,4 @@
-var query_String = window.location.search;
+let query_String = window.location.search;
   var activity_name = new URLSearchParams(query_String).get('activity_name');
 var activity_name_textbox = document.getElementById("activity_name");
 activity_name_textbox.value = activity_name;  
