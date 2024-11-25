@@ -349,7 +349,7 @@ for (var key in phq_object) {
       type: "indicator",
       mode: "gauge+number",
       gauge: {
-        axis: { range: [0, 6], tickvals: [0, 13.5, 27] },
+        axis: { range: [0, 27], tickvals: [0, 13.5, 27] },
         bar: { color: phqColor, thickness: 1 },
         bgcolor: "white"
       },
