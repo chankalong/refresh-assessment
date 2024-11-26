@@ -224,9 +224,10 @@ function clearTooltip(e) {
     var districtWC = document.getElementById('district_wc');
     var districtHKE = document.getElementById('district_hke');
     var districtKT = document.getElementById('district_kt');
+    var districtOther = document.getElementById('district_other');
 
     function checkAndHide() {
-        if (nameInput.value !== '' && (document.getElementById('district_wc').checked || document.getElementById('district_hke').checked || document.getElementById('district_kt').checked || document.getElementById('district_other').checked)) {
+        if (nameInput.value !== '' && (districtWC.checked || districtHKE.checked || districtKT.checked || districtOther.checked)) {
             phq_10_next_button.addEventListener("click", phq_10_next_function);
             phq_10_next_button.style.opacity = 1;
         } else {
@@ -238,6 +239,7 @@ function clearTooltip(e) {
     districtWC.addEventListener('change', checkAndHide);
     districtHKE.addEventListener('change', checkAndHide);
     districtKT.addEventListener('change', checkAndHide);
+    districtOther.addEventListener('change', checkAndHide);
   
   var system_id_textbox = document.getElementById("system_id");
   var member_id_textbox = document.getElementById("member_id");
