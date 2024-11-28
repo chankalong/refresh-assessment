@@ -44,6 +44,23 @@ var dformat =
 
 complete_time_textbox.value = dformat;
 
+var radiosDistrict = document.querySelectorAll('input[name="district"]');
+var workerSelect = document.getElementById('worker');
+    
+radiosDistrict.forEach(function(radio) {
+        radio.addEventListener("change", function() {
+            var val = this.value;
+            workerSelect.innerHTML = options[val];
+        });
+    });
+
+var options = {
+    "灣仔": "<option disabled='disabled' selected='selected' value=''>-- 請選擇 --</option><option value='WC-Chan Lai Lai'>WC-Chan Lai Lai</option><option value='WC-Chan Lok Lam'>WC-Chan Lok Lam</option><option value='WC-Chan Mee Ki'>WC-Chan Mee Ki</option><option value='WC-Cheng Chiu Man'>WC-Cheng Chiu Man</option><option value='WC-Cheung Nga Wun'>WC-Cheung Nga Wun</option><option value='WC-Hui Nicky Kei Chung'>WC-Hui Nicky Kei Chung</option><option value='WC-Hui Wai Man'>WC-Hui Wai Man</option><option value='WC-Lai Sim'>WC-Lai Sim</option><option value='WC-Lam Hin Leung'>WC-Lam Hin Leung</option><option value='WC-Lam Wai Cheong'>WC-Lam Wai Cheong</option><option value='WC-Lau Pan Yuen'>WC-Lau Pan Yuen</option><option value='WC-Lee Chi Ching'>WC-Lee Chi Ching</option><option value='WC-Lee Yue Fung'>WC-Lee Yue Fung</option><option value='WC-Leung Wing Yan'>WC-Leung Wing Yan</option><option value='WC-Li Sin Ying Iris'>WC-Li Sin Ying Iris</option><option value='WC-Liu Ying Yiu Claudia'>WC-Liu Ying Yiu Claudia</option><option value='WC-Lo Yin Ling'>WC-Lo Yin Ling</option><option value='WC-Mak On Yi'>WC-Mak On Yi</option><option value='WC-Ngan Fan'>WC-Ngan Fan</option><option value='WC-Shum King Sun'>WC-Shum King Sun</option><option value='WC-Sze Nga Yan'>WC-Sze Nga Yan</option><option value='WC-Tse Wing Shan'>WC-Tse Wing Shan</option><option value='WC-Wong Shuk Fan'>WC-Wong Shuk Fan</option>",
+    "港島東": "<option disabled='disabled' selected='selected' value=''>-- 請選擇 --</option><option value='HKE-Chan Hiu Yan'>HKE-Chan Hiu Yan</option><option value='HKE-Cheung Yin Mui'>HKE-Cheung Yin Mui</option><option value='HKE-Ho Kwok Fung'>HKE-Ho Kwok Fung</option><option value='HKE-Ho Suet Ying'>HKE-Ho Suet Ying</option><option value='HKE-Lai On Po'>HKE-Lai On Po</option><option value='HKE-Lam Lai Hong'>HKE-Lam Lai Hong</option><option value='HKE-Lau Kam Yu'>HKE-Lau Kam Yu</option><option value='HKE-Lau Man Ying'>HKE-Lau Man Ying</option><option value='HKE-Lee Lai Wan'>HKE-Lee Lai Wan</option><option value='HKE-Leung Ka Hei'>HKE-Leung Ka Hei</option><option value='HKE-Lo Chung Man'>HKE-Lo Chung Man</option><option value='HKE-Man Fung Yi Kat'>HKE-Man Fung Yi Kat</option><option value='HKE-Ng Fung Yi Allie'>HKE-Ng Fung Yi Allie</option><option value='HKE-Ng Tsz Chung'>HKE-Ng Tsz Chung</option><option value='HKE-Poon Po Ki'>HKE-Poon Po Ki</option><option value='HKE-Sun Chia Tsen'>HKE-Sun Chia Tsen</option><option value='HKE-Wong Man Kuen'>HKE-Wong Man Kuen</option><option value='HKE-Wong Man Yu'>HKE-Wong Man Yu</option><option value='HKE-Wong Wai Yan'>HKE-Wong Wai Yan</option><option value='HKE-Yau Yung Hon'>HKE-Yau Yung Hon</option><option value='HKE-Yim Sze Wai'>HKE-Yim Sze Wai</option><option value='HKE-Yu Wai Kit'>HKE-Yu Wai Kit</option>",
+    "葵青": "<option disabled='disabled' selected='selected' value=''>-- 請選擇 --</option><option value='KT-Chan Chun Mong'>KT-Chan Chun Mong</option><option value='KT-Chan Kin Chung'>KT-Chan Kin Chung</option><option value='KT-Chan Man Hei'>KT-Chan Man Hei</option><option value='KT-Fong Ah Yung Naner'>KT-Fong Ah Yung Naner</option><option value='KT-Ho Yu Ting'>KT-Ho Yu Ting</option><option value='KT-Lai Yuk'>KT-Lai Yuk</option><option value='KT-Lau Pik Wai'>KT-Lau Pik Wai</option><option value='KT-Lee Tsz Mei'>KT-Lee Tsz Mei</option><option value='KT-Leung Chun Pong'>KT-Leung Chun Pong</option><option value='KT-Leung Lai Wan'>KT-Leung Lai Wan</option><option value='KT-Li Po Na'>KT-Li Po Na</option><option value='KT-Lo Ka Hao'>KT-Lo Ka Hao</option><option value='KT-Siu Sze Man'>KT-Siu Sze Man</option><option value='KT-So Cho Yiu'>KT-So Cho Yiu</option><option value='KT-Sze Hiu Shan'>KT-Sze Hiu Shan</option><option value='KT-To Chi Yam'>KT-To Chi Yam</option><option value='KT-Wong Kam Huen'>KT-Wong Kam Huen</option><option value='KT-Wong Kin Han'>KT-Wong Kin Han</option><option value='KT-Wong Kong Wan'>KT-Wong Kong Wan</option><option value='KT-Yau Lui Chi'>KT-Yau Lui Chi</option>",
+    "其他": "<option disabled='disabled' selected='selected' value=''>-- 請選擇 --</option><option value='IMHS-Chan Ka Long'>IMHS-Chan Ka Long</option>"
+};
+
 var form = document.getElementById("form_golden_age");
 
 form.addEventListener("submit", function (e) {
