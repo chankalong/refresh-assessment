@@ -33,7 +33,7 @@ Number.prototype.padLeft = function (base, chr) {
 var d = new Date();
 var dformat =
   [d.getFullYear(), (d.getMonth() + 1).padLeft(), d.getDate().padLeft()].join(
-    "/"
+    "-"
   ) +
   " " +
   [
