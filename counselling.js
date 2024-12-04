@@ -53,12 +53,6 @@ validator
       errorMessage: "必填",
     },
   ])
-  .addField("#form_carer_type_select", [
-    {
-      rule: "required",
-      errorMessage: "必填",
-    },
-  ])
   .addField("#form_iccmw_select", [
     {
       rule: "required",
@@ -314,6 +308,24 @@ form_time_select.addEventListener("change", function (e) {
   } else {
     document.getElementById("form_time_other_wrapper").style.display = "none";
     validator.removeField("#form_time_other");
+    validator.revalidate();
+  }
+});
+
+var form_carer_select = document.getElementById("form_carer_select");
+form_carer_select.addEventListener("change", function (e) {
+  if (form_carer_select.selectedOptions[0].innerText == "是") {
+    document.getElementById("form_carer_type_wrapper").style.display = "";
+    validator.addField("#form_carer_type_select", [
+      {
+        rule: "required",
+        errorMessage: "必填",
+      },
+    ]);
+    validator.revalidate();
+  } else {
+    document.getElementById("form_carer_type_wrapper").style.display = "none";
+    validator.removeField("#form_carer_type_select");
     validator.revalidate();
   }
 });
