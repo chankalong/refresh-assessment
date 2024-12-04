@@ -37,8 +37,8 @@ validator
     },
     {
       rule: "customRegexp",
-      value: /^[0-9]{8}$/, //need to change the regex for email
-      errorMessage: "8位數字",
+      value: /^[\S]+@([\S]+\.)+[\S]+[^\.]$/, //need to change the regex for email
+      errorMessage: "電郵",
     },
   ])
   .addField("#form_time_select", [
