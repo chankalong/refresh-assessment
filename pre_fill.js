@@ -1,5 +1,5 @@
 var counselling_apply_button = document.getElementById('counselling_apply_button')
-var original_link = counselling_apply_button.href
+var original_link = '/online-counselling-application-form'
 
 if (window.location.pathname.includes('consultation')) {
   var queryString = window.location.search;
