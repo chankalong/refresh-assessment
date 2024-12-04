@@ -1,3 +1,10 @@
+  var queryString = window.location.search;
+  //var lms_course = new URLSearchParams(queryString).get('lms_course');
+  //var utm_campaign = new URLSearchParams(queryString).get('utm_campaign');
+  //if (lms_course == null) {
+  //  var referral_var = utm_campaign} else {
+  //    var referral_var = lms_course}  
+
 var validator = new JustValidate("#counselling_form", {
   tooltip: {
     position: "bottom",
@@ -229,7 +236,7 @@ validator
 
 var system_id_textbox = document.getElementById("system_id");
 var member_id_textbox = document.getElementById("member_id");
-var referral_textbox = document.getElementById("referrer_page");
+var referral_textbox = queryString;
 var uid_textbox = document.getElementById("uid");
 var member_level_textbox = document.getElementById("member_level");
 var eap_company_textbox = document.getElementById("eap_company");
