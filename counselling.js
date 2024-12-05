@@ -326,7 +326,7 @@ form_carer_select.addEventListener("change", function (e) {
   } else {
     document.getElementById("form_carer_type_wrapper").style.display = "none";
     validator.removeField("#form_carer_type_select");
-    validator.revalidate();
+    //validator.revalidate();
   }
 });
 
@@ -344,7 +344,7 @@ form_carer_type_select.addEventListener("change", function (e) {
   } else {
     document.getElementById("form_carer_type_other_wrapper").style.display = "none";
     validator.removeField("#form_carer_type_other");
-    validator.revalidate();
+    //validator.revalidate();
   }
 });
 
@@ -362,11 +362,12 @@ form_source_select.addEventListener("change", function (e) {
   } else {
     document.getElementById("form_source_other_wrapper").style.display = "none";
     validator.removeField("#form_source_other");
-    validator.revalidate();
+    //validator.revalidate();
   }
 });
 
 form.addEventListener("submit", function (e) {
+  validator.revalidate()
   e.preventDefault();
 
   var data = new FormData(form);
