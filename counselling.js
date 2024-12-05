@@ -304,11 +304,11 @@ form_time_select.addEventListener("change", function (e) {
         errorMessage: "必填",
       },
     ]);
-    validator.revalidate();
+    //validator.revalidate();
   } else {
     document.getElementById("form_time_other_wrapper").style.display = "none";
     validator.removeField("#form_time_other");
-    validator.revalidate();
+    //validator.revalidate();
   }
 });
 
@@ -322,7 +322,7 @@ form_carer_select.addEventListener("change", function (e) {
         errorMessage: "必填",
       },
     ]);
-    validator.revalidate();
+    //validator.revalidate();
   } else {
     document.getElementById("form_carer_type_wrapper").style.display = "none";
     validator.removeField("#form_carer_type_select");
@@ -340,7 +340,7 @@ form_carer_type_select.addEventListener("change", function (e) {
         errorMessage: "必填",
       },
     ]);
-    validator.revalidate();
+    //validator.revalidate();
   } else {
     document.getElementById("form_carer_type_other_wrapper").style.display = "none";
     validator.removeField("#form_carer_type_other");
@@ -358,7 +358,7 @@ form_source_select.addEventListener("change", function (e) {
         errorMessage: "必填",
       },
     ]);
-    validator.revalidate();
+    //validator.revalidate();
   } else {
     document.getElementById("form_source_other_wrapper").style.display = "none";
     validator.removeField("#form_source_other");
