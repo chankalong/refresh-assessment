@@ -9,7 +9,7 @@ var validator = new JustValidate("#counselling_form", {
   tooltip: {
     position: "bottom",
   },
-  validateBeforeSubmitting: true,
+  //validateBeforeSubmitting: true,
 });
 
 validator
@@ -36,8 +36,8 @@ validator
       errorMessage: "必填",
     },
     {
-      rule: "customRegexp",
-      value: /^[\S]+@([\S]+\.)+[\S]+[^\.]$/, //need to change the regex for email
+      rule: "email",
+      //value: /^[\S]+@([\S]+\.)+[\S]+[^\.]$/, //need to change the regex for email
       errorMessage: "電郵",
     },
   ])
