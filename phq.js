@@ -280,6 +280,9 @@ complete_time_textbox.value = dformat;
 var activity_name_textbox = document.getElementById("activity_name");
   activity_name_textbox.value = new URLSearchParams(window.location.search).get('activity_name');
 
+var worker_textbox = document.getElementById("worker");
+  worker_textbox.value = new URLSearchParams(window.location.search).get('worker');
+
 var form = document.getElementById("form_phq");
 
 form.addEventListener("submit", function (e) {
