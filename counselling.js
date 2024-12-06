@@ -10,6 +10,7 @@ var validator = new JustValidate("#counselling_form", {
     position: "bottom",
   },
   //validateBeforeSubmitting: true,
+  submitFormAutomatically: true,
 });
 
 validator
@@ -389,18 +390,13 @@ form_source_select.addEventListener("change", function (e) {
 });
 
 form.addEventListener("submit", function (e) {
-  validator.revalidate()
+  
   e.preventDefault();
 
+  validator.revalidate()
+
   var data = new FormData(form);
-  if (
-    !data.has("form_name") |
-    !data.has("form_telephone") |
-    !data.has("form_consent") |
-    !validator.isValid
-  ) {
-    return;
-  }
+
   var action = e.target.action;
   fetch(action, {
     method: "POST",
