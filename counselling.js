@@ -293,6 +293,28 @@ if (drupalSettings.user.uid == 0) {
 }
 
 member_id_textbox.value = drupalSettings.user.member_id;
+
+var complete_time_textbox = document.getElementById("complete_time");
+
+Number.prototype.padLeft = function (base, chr) {
+  var len = String(base || 10).length - String(this).length + 1;
+  return len > 0 ? new Array(len).join(chr || "0") + this : this;
+};
+
+var d = new Date();
+var dformat =
+  [d.getFullYear(), (d.getMonth() + 1).padLeft(), d.getDate().padLeft()].join(
+    "-"
+  ) +
+  " " +
+  [
+    d.getHours().padLeft(),
+    d.getMinutes().padLeft(),
+    d.getSeconds().padLeft(),
+  ].join(":");
+
+complete_time_textbox.value = dformat;
+
 var form = document.getElementById("counselling_form");
 var form_time_select = document.getElementById("form_time_select");
 form_time_select.addEventListener("change", function (e) {
