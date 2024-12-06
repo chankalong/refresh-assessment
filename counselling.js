@@ -10,7 +10,7 @@ var validator = new JustValidate("#counselling_form", {
     position: "bottom",
   },
   //validateBeforeSubmitting: true,
-  submitFormAutomatically: true,
+  //submitFormAutomatically: true,
 });
 
 validator
@@ -390,20 +390,27 @@ form_source_select.addEventListener("change", function (e) {
 });
 
 form.addEventListener("submit", function (e) {
-  
   e.preventDefault();
 
-  validator.revalidate()
+  validator.revalidate().then((isValid) => {
+    if (isValid) {
+      var data = new FormData(form);
+      var action = e.target.action;
+      fetch(action, {
+        method: "POST",
+        body: data,
+      });
+      document.getElementById("counselling_div").style.display = "none";
+      document.getElementById("counselling_submit").style.display = "";
+      console.log("Submit Form.");
+      e.preventDefault();
+      return false;
 
-  var data = new FormData(form);
-
-  var action = e.target.action;
-  fetch(action, {
-    method: "POST",
-    body: data,
+      // Do something with the form data
+    } else {
+      console.log("Form is not valid.");
+    }
   });
-  document.getElementById("counselling_div").style.display = "none";
-  document.getElementById("counselling_submit").style.display = "";
   e.preventDefault();
   return false;
 });
