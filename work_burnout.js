@@ -140,7 +140,7 @@ function AddFunctionListener(previousblockId, currentBlockId, nextBlockId) {
   );
 }
 
-for (var i = 1; i <= 20; i++) {
+for (var i = 1; i <= 21; i++) {
   AddFunctionListener("mbi_" + i, "mbi_" + (i + 1), "mbi_" + (i + 2));
 }
 
