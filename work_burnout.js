@@ -10,7 +10,7 @@ document.querySelector("#start_div").addEventListener("click", function () {
 //document.querySelector('.node-container').classList.remove('my-6')
 //document.querySelector('.node-container').classList.remove('pt-4')
 document.querySelector(".page-title").style.marginBottom = "0px";
-for (var i = 2; i <= 9; i++) {
+for (var i = 2; i <= 22; i++) {
   var targetId = "#mbi_" + i + "_block";
   anime({
     targets: targetId,
