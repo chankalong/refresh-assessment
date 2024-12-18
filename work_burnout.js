@@ -207,6 +207,7 @@ system_id_textbox.value = drupalSettings.bokss.user_uuid;
 var uid_textbox = document.getElementById("uid");
 var member_level_textbox = document.getElementById("member_level");
 var eap_company_textbox = document.getElementById("eap_company");
+var complete_time_textbox = document.getElementById("complete_time");
 
 if (uid_textbox.value) {
   console.log("input uid value already");
