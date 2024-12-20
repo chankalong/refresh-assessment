@@ -381,7 +381,7 @@ var layout = {
   var html2canvas_count = 0;
   if (html2canvas_count == 0) {
     setTimeout(function () {
-      html2canvas(document.querySelector("#mbiResultDiv")).then(function (canvas) {
+      html2canvas(document.querySelector("#save_result")).then(function (canvas) {
         canvas_element = canvas;
         var img_png = canvas_element.toDataURL("image/png");
         var img_div = document.createElement("div");
@@ -395,7 +395,7 @@ var layout = {
             img_div,
             document.getElementById("save_div").parentNode
           );
-        document.querySelector("#mbiResultDiv").style.display = "none";
+        document.querySelector("#save_result").style.display = "none";
         document.querySelector("#svg_div").style.display = "";
         html2canvas_count = 1;
       });
