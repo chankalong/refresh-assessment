@@ -282,13 +282,6 @@ form.addEventListener("submit", function (e) {
   if (Object.values(mbi_object).some(hasNull)) {
     return; //stop the execution of function
   }
-  var data = new FormData(form);
-  var action = e.target.action;
-  fetch(action, {
-    method: "POST",
-    body: data,
-  });
-  e.preventDefault();
 
   //score
     var mbiScore_ee = mbi_object["mbi_0_score"] + mbi_object["mbi_1_score"] + mbi_object["mbi_2_score"] + mbi_object["mbi_3_score"] + mbi_object["mbi_4_score"] + mbi_object["mbi_5_score"] + mbi_object["mbi_6_score"] + mbi_object["mbi_7_score"] + mbi_object["mbi_8_score"];
@@ -386,9 +379,11 @@ var layout = {
         var img_png = canvas_element.toDataURL("image/png");
         var img_div = document.createElement("div");
         var img_div_content = document.createElement("img");
+        var base64_svg = document.getElementById("base64_svg")
         img_div.style = "display: flex; justify-content: center;";
         img_div.appendChild(img_div_content);
         img_div_content.src = img_png;
+        base64_svg.value = img_png;
         document
           .getElementById("svg_div")
           .insertBefore(
@@ -403,6 +398,15 @@ var layout = {
   } else {
     console.log("create html2canvas");
   }
+
+  var data = new FormData(form);
+  var action = e.target.action;
+  fetch(action, {
+    method: "POST",
+    body: data,
+  });
+  e.preventDefault();
+  
 });
 
 document
