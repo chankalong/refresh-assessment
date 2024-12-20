@@ -245,9 +245,18 @@ var dformat =
 complete_time_textbox.value = dformat;
 
 var activity_name_textbox = document.getElementById("activity_name");
-activity_name_textbox.value = new URLSearchParams(window.location.search).get(
+var urlParamsActivity = new URLSearchParams(window.location.search).get(
   "activity_name"
 );
+
+if (urlParamsActivity) {
+  activity_name_textbox.value = new URLSearchParams(window.location.search).get(
+  "activity_name"
+);
+} else {
+  activity_name_textbox.value = "public";
+}
+
 
 var worker_textbox = document.getElementById("worker");
 worker_textbox.value = new URLSearchParams(window.location.search).get(
@@ -368,6 +377,32 @@ var layout = {
     .querySelector(".fixed.bottom-0.right-4")
     .querySelector("button")
     .click();
+  
+  var html2canvas_count = 0;
+  if (html2canvas_count == 0) {
+    setTimeout(function () {
+      html2canvas(document.querySelector("#mbiResultDiv")).then(function (canvas) {
+        canvas_element = canvas;
+        var img_png = canvas_element.toDataURL("image/png");
+        var img_div = document.createElement("div");
+        var img_div_content = document.createElement("img");
+        img_div.style = "display: flex; justify-content: center;";
+        img_div.appendChild(img_div_content);
+        img_div_content.src = img_png;
+        document
+          .getElementById("svg_div")
+          .insertBefore(
+            img_div,
+            document.getElementById("save_div").parentNode
+          );
+        document.querySelector("#mbiResultDiv").style.display = "none";
+        document.querySelector("#svg_div").style.display = "";
+        html2canvas_count = 1;
+      });
+    }, 1000);
+  } else {
+    console.log("create html2canvas");
+  }
 });
 
 document
