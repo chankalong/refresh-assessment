@@ -372,14 +372,19 @@ var layout = {
     .querySelector("button")
     .click();
   
-  var html2canvas_count = 0;
-  if (html2canvas_count == 0) {
+  //var html2canvas_count = 0;
+  if (img_div_content_id) {
+    console.log("do not create html2canvas");
+  } else {
+    
+
     setTimeout(function () {
       html2canvas(document.querySelector("#save_result")).then(function (canvas) {
         canvas_element = canvas;
         var img_png = canvas_element.toDataURL("image/png");
         var img_div = document.createElement("div");
         var img_div_content = document.createElement("img");
+        img_div_content.id = "img_div_content_id";
         var base64_svg = document.getElementById("base64_svg")
         img_div.style = "display: flex; justify-content: center;";
         img_div.appendChild(img_div_content);
@@ -393,7 +398,7 @@ var layout = {
           );
         document.querySelector("#save_result").style.display = "none";
         document.querySelector("#svg_div").style.display = "";
-        html2canvas_count = 1;
+        //html2canvas_count = 1;
                       var data = new FormData(form);
   var action = e.target.action;
   fetch(action, {
@@ -404,9 +409,8 @@ var layout = {
 
       });
     }, 1000);
-  } else {
-    console.log("create html2canvas");
   }
+  console.log("create html2canvas");
 
 
 
