@@ -373,7 +373,7 @@ var layout = {
     .click();
   
   //var html2canvas_count = 0;
-  if (img_div_content_id) {
+  if (document.getElementById("img_div_content_id")) {
     console.log("do not create html2canvas");
   } else {
     
