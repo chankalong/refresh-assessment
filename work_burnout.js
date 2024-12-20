@@ -406,6 +406,8 @@ var layout = {
     console.log("create html2canvas");
   }
 
+  e.preventDefault();
+
   
   
 });
