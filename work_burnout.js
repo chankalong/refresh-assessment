@@ -266,6 +266,7 @@ worker_textbox.value = new URLSearchParams(window.location.search).get(
 var form = document.getElementById("form_mbi");
 
 form.addEventListener("submit", function (e) {
+    e.preventDefault();
   var mbi_object = {};
 
   for (var i = 0; i <= 21; i++) {
