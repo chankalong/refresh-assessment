@@ -393,19 +393,20 @@ var layout = {
         document.querySelector("#save_result").style.display = "none";
         document.querySelector("#svg_div").style.display = "";
         html2canvas_count = 1;
-      });
-    }, 1000);
-  } else {
-    console.log("create html2canvas");
-  }
-
-  var data = new FormData(form);
+        var data = new FormData(form);
   var action = e.target.action;
   fetch(action, {
     method: "POST",
     body: data,
   });
   e.preventDefault();
+      });
+    }, 1000);
+  } else {
+    console.log("create html2canvas");
+  }
+
+  
   
 });
 
