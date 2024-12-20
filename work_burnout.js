@@ -343,7 +343,7 @@ form.addEventListener("submit", function (e) {
 }]
 
 var layout = {
-    margin: { b: 0, t: 30, r: 60, l: 60, pad: 0 }, font: {
+    margin: { b: 0, t: 30, r: 100, l: 100, pad: 0 }, font: {
         family: 'Arial, sans-serif'
     },
     polar: {
