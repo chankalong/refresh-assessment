@@ -254,7 +254,7 @@ if (urlParamsActivity) {
   "activity_name"
 );
 } else {
-  activity_name_textbox.value = "public";
+  activity_name_textbox.value = "NA_public";
 }
 
 
