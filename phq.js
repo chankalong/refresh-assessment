@@ -165,7 +165,7 @@ phq_11_previous_button.addEventListener("click", function () {
     })
     .add(
       {
-        targets: "#phq_109_block",
+        targets: "#phq_10_block",
         easing: "easeInExpo",
         translateX: 0,
         opacity: 1,
