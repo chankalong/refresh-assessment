@@ -269,7 +269,7 @@ form.addEventListener("submit", function (e) {
     e.preventDefault();
   var phq_object = {};
 
-  for (var i = 0; i <= 21; i++) {
+  for (var i = 0; i <= 8; i++) {
     var inputName = "phq_" + i;
     phq_object[inputName + "_score"] = parseInt(
       document.querySelector('input[name="' + inputName + '"]:checked').value
