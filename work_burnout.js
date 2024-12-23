@@ -427,7 +427,7 @@ document
 
 document.querySelector("#share_div").addEventListener("click", function () {
   var shareData = {
-    url: window.location.href,
+    url: document.location.origin + document.location.pathname + '?utm_source=website&utm_medium=utm_source',
   };
 
   try {
