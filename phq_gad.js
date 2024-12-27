@@ -299,7 +299,7 @@ form.addEventListener("submit", function (e) {
 
   if (phqScore >= 0 && phqScore <= 2) {
     phqCategory.textContent = '良好';
-    phqDescription.textContent = "恭喜你，你的情緒很健康啊，真好！";
+    phqDescription.textContent = "恭喜你，你沒有抑鬱的病徵，真好！";
     phqColor = "#4EC04E";
   } else if (phqScore >= 3) {
     phqCategory.textContent = '輕微抑鬱';
@@ -325,7 +325,7 @@ form.addEventListener("submit", function (e) {
 
   if (gadScore >= 0 && gadScore <= 2) {
     gadCategory.textContent = '良好';
-    gadDescription.textContent = "恭喜你，你的情緒很健康啊，真好！";
+    gadDescription.textContent = "恭喜你，你沒有焦慮的病徵，真好！";
     gadColor = "#4EC04E";
   } else if (gadScore >= 3) {
     gadCategory.textContent = '輕微焦慮';
@@ -386,7 +386,8 @@ form.addEventListener("submit", function (e) {
 
   var layout = {
     margin: { l: 35, r: 35, b: 10, t: 80, pad: 0 },
-    height: 120,
+    width: 200,
+    height: 150,
     autosize: true,
     font: {
       family: "Arial, sans-serif",
