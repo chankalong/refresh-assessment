@@ -307,22 +307,23 @@ form.addEventListener("submit", function (e) {
     });
 
 	const resultBgSources = {
-        "enneagram_type_1": "/sites/default/files/inpages/assessment/enneagram/1.png",
-        "enneagram_type_2": "/sites/default/files/inpages/assessment/enneagram/2.png",
-        "enneagram_type_3": "/sites/default/files/inpages/assessment/enneagram/3.png",
-        "enneagram_type_4": "/sites/default/files/inpages/assessment/enneagram/4.png",
-        "enneagram_type_5": "/sites/default/files/inpages/assessment/enneagram/5.png",
-        "enneagram_type_6": "/sites/default/files/inpages/assessment/enneagram/6.png",
-        "enneagram_type_7": "/sites/default/files/inpages/assessment/enneagram/7.png",
-        "enneagram_type_8": "/sites/default/files/inpages/assessment/enneagram/8.png",
-        "enneagram_type_9": "/sites/default/files/inpages/assessment/enneagram/9.png",
+        "enneagram_type_1": "url('/sites/default/files/inpages/assessment/enneagram/1.png')",
+        "enneagram_type_2": "url('/sites/default/files/inpages/assessment/enneagram/2.png')",
+        "enneagram_type_3": "url('/sites/default/files/inpages/assessment/enneagram/3.png')",
+        "enneagram_type_4": "url('/sites/default/files/inpages/assessment/enneagram/4.png')",
+        "enneagram_type_5": "url('/sites/default/files/inpages/assessment/enneagram/5.png')",
+        "enneagram_type_6": "url('/sites/default/files/inpages/assessment/enneagram/6.png')",
+        "enneagram_type_7": "url('/sites/default/files/inpages/assessment/enneagram/7.png')",
+        "enneagram_type_8": "url('/sites/default/files/inpages/assessment/enneagram/8.png')",
+        "enneagram_type_9": "url('/sites/default/files/inpages/assessment/enneagram/9.png')",
         "default": ""
       };
 
 	
 	  const resultDiv = document.getElementById("save_result");
       const trait = sortedKeys_enneagram_factor_object[0];
-      resultDiv.src = resultBgSources[trait] || resultBgSources["default"];
+	  resultDiv.style.backgroundImage = resultBgSources[trait] || resultBgSources["default"];
+      //resultDiv.src = resultBgSources[trait] || resultBgSources["default"];
 
       const plotFillColor = {
         "enneagram_type_1": "rgba(155, 147, 121, 0.8)",
