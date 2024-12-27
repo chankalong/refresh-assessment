@@ -284,6 +284,12 @@ form.addEventListener("submit", function (e) {
     return; //stop the execution of function
   }
 
+  if (document.getElementById("user_name_manual").value == "") {
+    console.log("no name");
+  } else {
+    participantName.textContent = document.getElementById("user_name_manual").value;
+  }
+
   //score
     var phqScore = phq_object["phq_0_score"] + phq_object["phq_1_score"] + phq_object["phq_2_score"] + phq_object["phq_3_score"] + phq_object["phq_4_score"] + phq_object["phq_5_score"] + phq_object["phq_6_score"] + phq_object["phq_7_score"] + phq_object["phq_8_score"];
     if (isNaN(phqScore)) {
