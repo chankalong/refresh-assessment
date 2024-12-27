@@ -1,182 +1,750 @@
-var assessment_div = document.querySelector('ol');
-var progress_div = document.getElementById('progress_div');
+document.querySelector("#start_div").addEventListener("click", function () {
+  document.querySelector("#enneagramIntroDiv").style.display = "none";
+  document.querySelector("#enneagramQuestionDiv").style.display = "";
+  document.querySelector("h1").style.display = "none";
+  document
+    .querySelector(".fixed.bottom-0.right-4")
+    .querySelector("button")
+    .click();
+});
+//document.querySelector('.node-container').classList.remove('my-6')
+//document.querySelector('.node-container').classList.remove('pt-4')
+document.querySelector(".page-title").style.marginBottom = "0px";
+for (var i = 2; i <= 36; i++) {
+  var targetId = "#enneagram_" + i + "_block";
+  anime({
+    targets: targetId,
+    translateX: 20,
+  });
+}
 
-window.FloatingUIDOM.autoUpdate(assessment_div, progress_div, function () {
-    window.FloatingUIDOM.computePosition(assessment_div, progress_div, {
-        placement: 'bottom', // 'bottom' by default
-        strategy: 'fixed',
-        middleware: [window.FloatingUIDOM.offset(10), window.FloatingUIDOM.shift({ crossAxis: true, })],
-    }).then(function (result) {
-        Object.assign(progress_div.style, {
-            left: result.x + "px",
-            top: result.y + "px",
-        });
+var enneagram_1_next_button = document.getElementById("enneagram_1_next_button");
+var enneagram_1_next_function = function () {
+  anime
+    .timeline({
+      duration: 200,
+      delay: 200,
+    })
+    .add({
+      targets: "#enneagram_1_block",
+      easing: "easeOutExpo",
+      translateX: -20,
+      opacity: 0,
+      complete: function () {
+        document.getElementById("enneagram_1_block").style.display = "none";
+        document.getElementById("enneagram_2_block").style.display = "";
+      },
+    })
+    .add(
+      {
+        targets: "#enneagram_2_block",
+        easing: "easeInExpo",
+        translateX: 0,
+        opacity: 1,
+      },
+      "-=50"
+    );
+};
+Array.prototype.map.call(
+  document.querySelectorAll("input[name=enneagram_0]"),
+  function (e) {
+    e.addEventListener("click", enneagram_1_next_function);
+    e.addEventListener("click", function () {
+      enneagram_1_next_button.addEventListener("click", enneagram_1_next_function);
+      enneagram_1_next_button.style.opacity = 1;
     });
-})
-document.querySelectorAll("input[type=radio]").forEach(
-    function (input) {
-        input.addEventListener('click', function (event) {
-            var numberTickedBoxes =
-                document.querySelectorAll("input[type=radio]:checked").length;
-            console.log(numberTickedBoxes)
-            var numberTickedBoxes_percentage = Math.round(numberTickedBoxes / 36 * 100)
-            document.querySelector('.progress-container').style.cssText = '--tooltip-width: ' + numberTickedBoxes_percentage + '%; width: 75%;'
-            //document.querySelector('progress').value = numberTickedBoxes
-            document.getElementById('progress_label').innerText = numberTickedBoxes + " / 36"
-        })
-    }
+  }
 );
+
+// Common function for handling previous and next buttons
+function handlePreviousButton(previousblockId, currentBlockId) {
+  anime
+    .timeline({
+      duration: 200,
+      delay: 200,
+    })
+    .add({
+      targets: "#" + currentBlockId + "_block",
+      easing: "easeOutExpo",
+      translateX: 20,
+      opacity: 0,
+      complete: function () {
+        document.querySelector("#" + currentBlockId + "_block").style.display =
+          "none";
+        document.querySelector("#" + previousblockId + "_block").style.display =
+          "";
+      },
+    })
+    .add(
+      {
+        targets: "#" + previousblockId + "_block",
+        easing: "easeInExpo",
+        translateX: 0,
+        opacity: 1,
+      },
+      "-=50"
+    );
+}
+
+function handleNextButton(currentBlockId, nextBlockId) {
+  anime
+    .timeline({
+      duration: 200,
+      delay: 200,
+    })
+    .add({
+      targets: "#" + currentBlockId + "_block",
+      easing: "easeOutExpo",
+      translateX: -20,
+      opacity: 0,
+      complete: function () {
+        document.querySelector("#" + currentBlockId + "_block").style.display =
+          "none";
+        document.querySelector("#" + nextBlockId + "_block").style.display = "";
+      },
+    })
+    .add(
+      {
+        targets: "#" + nextBlockId + "_block",
+        easing: "easeInExpo",
+        translateX: 0,
+        opacity: 1,
+      },
+      "-=50"
+    );
+}
+
+function AddFunctionListener(previousblockId, currentBlockId, nextBlockId) {
+  document
+    .getElementById(currentBlockId + "_previous_button")
+    .addEventListener("click", function () {
+      handlePreviousButton(previousblockId, currentBlockId);
+    });
+  Array.prototype.map.call(
+    document.querySelectorAll("input[name=" + previousblockId + "]"),
+    function (e) {
+      e.addEventListener("click", function () {
+        handleNextButton(currentBlockId, nextBlockId);
+      });
+      e.addEventListener("click", function () {
+        document
+          .getElementById(currentBlockId + "_next_button")
+          .addEventListener("click", function () {
+            handleNextButton(currentBlockId, nextBlockId);
+          });
+        document.getElementById(
+          currentBlockId + "_next_button"
+        ).style.opacity = 1;
+      });
+    }
+  );
+}
+
+for (var i = 1; i <= 35; i++) {
+  AddFunctionListener("enneagram_" + i, "enneagram_" + (i + 1), "enneagram_" + (i + 2));
+}
+
+//##last
+
+var enneagram_37_previous_button = document.getElementById("enneagram_37_previous_button");
+enneagram_37_previous_button.addEventListener("click", function () {
+  anime
+    .timeline({
+      duration: 200,
+      delay: 200,
+    })
+    .add({
+      targets: "#enneagram_36_block",
+      easing: "easeOutExpo",
+      translateX: 20,
+      opacity: 0,
+      complete: function () {
+        document.getElementById("enneagram_36_block").style.display = "";
+        document.getElementById("enneagram_37_block").style.display = "none";
+      },
+    })
+    .add(
+      {
+        targets: "#enneagram_36_block",
+        easing: "easeInExpo",
+        translateX: 0,
+        opacity: 1,
+      },
+      "-=50"
+    );
+});
+
+var enneagram_37_next_button = document.getElementById("enneagram_37_next_button");
+var enneagram_37_next_function = function () {
+  swal
+    .fire({
+      text: "確定提交嗎？",
+      showCloseButton: true,
+      cancelButtonText: "取消",
+      showCancelButton: true,
+      confirmButtonText: "確定",
+      customClass: {
+        confirmButton: "btnRound-thin btnRound-orange mx-2",
+        cancelButton: "btnRound-thin btnRound-green mx-2",
+      },
+      buttonsStyling: false,
+      focusConfirm: false,
+    })
+    .then(function (result) {
+      if (result.isConfirmed) {
+        document.querySelector("input[value=查看測試結果]").click();
+      }
+    });
+};
+enneagram_37_next_button.addEventListener("click", enneagram_37_next_function);
 
 var system_id_textbox = document.getElementById("system_id");
 var member_id_textbox = document.getElementById("member_id");
-
+var canvas_element = document.createElement("canvas");
 member_id_textbox.value = drupalSettings.user.member_id;
 system_id_textbox.value = drupalSettings.bokss.user_uuid;
 
-  var uid_textbox = document.getElementById("uid");
-  var member_level_textbox = document.getElementById("member_level");
-  var eap_company_textbox = document.getElementById("eap_company");
+var uid_textbox = document.getElementById("uid");
+var member_level_textbox = document.getElementById("member_level");
+var eap_company_textbox = document.getElementById("eap_company");
+var complete_time_textbox = document.getElementById("complete_time");
 
-  if (uid_textbox.value) {console.log("input uid value already")} else {uid_textbox.value = Math.random();}
-  if (drupalSettings.user.levels === undefined) {member_level_textbox.value = 0} else {member_level_textbox.value = drupalSettings.user.levels[0]}
-  if (drupalSettings.user.eap === undefined) {eap_company_textbox.value = '0'} else {eap_company_textbox.value = drupalSettings.user.eap.label}
+if (uid_textbox.value) {
+  console.log("input uid value already");
+} else {
+  uid_textbox.value = Math.random();
+}
+if (drupalSettings.user.levels === undefined) {
+  member_level_textbox.value = 0;
+} else {
+  member_level_textbox.value = drupalSettings.user.levels[0];
+}
+if (drupalSettings.user.eap === undefined) {
+  eap_company_textbox.value = "0";
+} else {
+  eap_company_textbox.value = drupalSettings.user.eap.label;
+}
 
-var form = document.getElementById('form_enneagram');
+Number.prototype.padLeft = function (base, chr) {
+  var len = String(base || 10).length - String(this).length + 1;
+  return len > 0 ? new Array(len).join(chr || "0") + this : this;
+};
+
+var d = new Date();
+var dformat =
+  [d.getFullYear(), (d.getMonth() + 1).padLeft(), d.getDate().padLeft()].join(
+    "-"
+  ) +
+  " " +
+  [
+    d.getHours().padLeft(),
+    d.getMinutes().padLeft(),
+    d.getSeconds().padLeft(),
+  ].join(":");
+
+complete_time_textbox.value = dformat;
+
+var activity_name_textbox = document.getElementById("activity_name");
+var urlParamsActivity = new URLSearchParams(window.location.search).get(
+  "activity_name"
+);
+
+if (urlParamsActivity) {
+  activity_name_textbox.value = new URLSearchParams(window.location.search).get(
+  "activity_name"
+);
+} else {
+  activity_name_textbox.value = "NA_public";
+}
+
+
+var worker_textbox = document.getElementById("worker");
+worker_textbox.value = new URLSearchParams(window.location.search).get(
+  "worker"
+);
+
+var form = document.getElementById("form_enneagram");
 
 form.addEventListener("submit", function (e) {
-    var enneagram_1_score = parseInt(document.querySelector('input[name="enneagram_1"]:checked').value);
-    var enneagram_2_score = parseInt(document.querySelector('input[name="enneagram_2"]:checked').value);
-    var enneagram_3_score = parseInt(document.querySelector('input[name="enneagram_3"]:checked').value);
-    var enneagram_4_score = parseInt(document.querySelector('input[name="enneagram_4"]:checked').value);
-    var enneagram_5_score = parseInt(document.querySelector('input[name="enneagram_5"]:checked').value);
-    var enneagram_6_score = parseInt(document.querySelector('input[name="enneagram_6"]:checked').value);
-    var enneagram_7_score = parseInt(document.querySelector('input[name="enneagram_7"]:checked').value);
-    var enneagram_8_score = parseInt(document.querySelector('input[name="enneagram_8"]:checked').value);
-    var enneagram_9_score = parseInt(document.querySelector('input[name="enneagram_9"]:checked').value);
-    var enneagram_10_score = parseInt(document.querySelector('input[name="enneagram_10"]:checked').value);
-    var enneagram_11_score = parseInt(document.querySelector('input[name="enneagram_11"]:checked').value);
-    var enneagram_12_score = parseInt(document.querySelector('input[name="enneagram_12"]:checked').value);
-    var enneagram_13_score = parseInt(document.querySelector('input[name="enneagram_13"]:checked').value);
-    var enneagram_14_score = parseInt(document.querySelector('input[name="enneagram_14"]:checked').value);
-    var enneagram_15_score = parseInt(document.querySelector('input[name="enneagram_15"]:checked').value);
-    var enneagram_16_score = parseInt(document.querySelector('input[name="enneagram_16"]:checked').value);
-    var enneagram_17_score = parseInt(document.querySelector('input[name="enneagram_17"]:checked').value);
-    var enneagram_18_score = parseInt(document.querySelector('input[name="enneagram_18"]:checked').value);
-    var enneagram_19_score = parseInt(document.querySelector('input[name="enneagram_19"]:checked').value);
-    var enneagram_20_score = parseInt(document.querySelector('input[name="enneagram_20"]:checked').value);
-    var enneagram_21_score = parseInt(document.querySelector('input[name="enneagram_21"]:checked').value);
-    var enneagram_22_score = parseInt(document.querySelector('input[name="enneagram_22"]:checked').value);
-    var enneagram_23_score = parseInt(document.querySelector('input[name="enneagram_23"]:checked').value);
-    var enneagram_24_score = parseInt(document.querySelector('input[name="enneagram_24"]:checked').value);
-    var enneagram_25_score = parseInt(document.querySelector('input[name="enneagram_25"]:checked').value);
-    var enneagram_26_score = parseInt(document.querySelector('input[name="enneagram_26"]:checked').value);
-    var enneagram_27_score = parseInt(document.querySelector('input[name="enneagram_27"]:checked').value);
-    var enneagram_28_score = parseInt(document.querySelector('input[name="enneagram_28"]:checked').value);
-    var enneagram_29_score = parseInt(document.querySelector('input[name="enneagram_29"]:checked').value);
-    var enneagram_30_score = parseInt(document.querySelector('input[name="enneagram_30"]:checked').value);
-    var enneagram_31_score = parseInt(document.querySelector('input[name="enneagram_31"]:checked').value);
-    var enneagram_32_score = parseInt(document.querySelector('input[name="enneagram_32"]:checked').value);
-    var enneagram_33_score = parseInt(document.querySelector('input[name="enneagram_33"]:checked').value);
-    var enneagram_34_score = parseInt(document.querySelector('input[name="enneagram_34"]:checked').value);
-    var enneagram_35_score = parseInt(document.querySelector('input[name="enneagram_35"]:checked').value);
-    var enneagram_36_score = parseInt(document.querySelector('input[name="enneagram_36"]:checked').value);
-
-    var enneagram_type_1 = enneagram_1_score + enneagram_10_score + enneagram_19_score + enneagram_28_score;
-    var enneagram_type_2 = enneagram_2_score + enneagram_11_score + enneagram_20_score + enneagram_29_score;
-    var enneagram_type_3 = enneagram_3_score + enneagram_12_score + enneagram_21_score + enneagram_30_score;
-    var enneagram_type_4 = enneagram_4_score + enneagram_13_score + enneagram_22_score + enneagram_31_score;
-    var enneagram_type_5 = enneagram_5_score + enneagram_14_score + enneagram_23_score + enneagram_32_score;
-    var enneagram_type_6 = enneagram_6_score + enneagram_15_score + enneagram_24_score + enneagram_33_score;
-    var enneagram_type_7 = enneagram_7_score + enneagram_16_score + enneagram_25_score + enneagram_34_score;
-    var enneagram_type_8 = enneagram_8_score + enneagram_17_score + enneagram_26_score + enneagram_35_score;
-    var enneagram_type_9 = enneagram_9_score + enneagram_18_score + enneagram_27_score + enneagram_36_score;
-
-    if (isNaN(enneagram_type_1) || isNaN(enneagram_type_2) || isNaN(enneagram_type_3) || isNaN(enneagram_type_4) || isNaN(enneagram_type_5) || isNaN(enneagram_type_6) || isNaN(enneagram_type_7) || isNaN(enneagram_type_8) || isNaN(enneagram_type_9)) {
-        return; //stop the execution of function
-    }
-
-    var data_form = new FormData(form);
-    var action = e.target.action;
-    fetch(action, {
-        method: 'POST',
-        body: data_form,
-    })
     e.preventDefault();
+  var enneagram_object = {};
 
-    enneagramResult.innerHTML = "第一型 " + enneagram_type_1 + " 分" + "<br />" + "第二型 " + enneagram_type_2 + " 分" + "<br />" + "第三型 " + enneagram_type_3 + " 分" + "<br />" + "第四型 " + enneagram_type_4 + " 分" + "<br />" + "第五型 " + enneagram_type_5 + " 分" + "<br />" + "第六型 " + enneagram_type_6 + " 分" + "<br />" + "第七型 " + enneagram_type_7 + " 分" + "<br />" + "第八型 " + enneagram_type_8 + " 分" + "<br />" + "第九型 " + enneagram_type_9 + " 分";
+  for (var i = 0; i <= 35; i++) {
+    var inputName = "enneagram_" + i;
+    enneagram_object[inputName + "_score"] = parseInt(
+      document.querySelector('input[name="' + inputName + '"]:checked').value
+    );
+  }
 
-    var enneagram_dictionary = { "第一型 理想崇高者": enneagram_type_1, "第二型 古道熱腸者": enneagram_type_2, "第三型 追求成功者": enneagram_type_3, "第四型 個人風格者": enneagram_type_4, "第五型 博學多聞者": enneagram_type_5, "第六型 謹慎忠誠者": enneagram_type_6, "第七型 樂於嘗新者": enneagram_type_7, "第八型 勇於領導者": enneagram_type_8, "第九型 愛好和平者": enneagram_type_9 };
+  function hasNull(element, index, array) {
+    return element === null;
+  }
 
-    var enneagram_description_dictionary = { "第一型 理想崇高者<br />理想崇高者以正直、有道德觀、重視倫理道德為特點。他們追求真理和正義，對自己和他人要求公正無私。外表上，他們以整齊的外表和認真的態度示人。建議他們學會寬容和接受自己和他人的不完美之處，這樣可以減輕自我壓力並建立更和諧的關係。": enneagram_type_1, "第二型 古道熱腸者<br />古道熱腸者注重情感投入、體貼他人、關心他人和樂於助人。他們樂於幫助他人，常常把他人的需求放在自己之上。他們渴望被愛和感受愛的存在。建議他們要尊重他人的私人空間，平衡工作和人際關係，不要過度追求他人的讚賞。": enneagram_type_2, "第三型 追求成功者<br />追求成功者性格具有自信、有魅力、追求成就和優秀表現的特點。他們渴望被接受和感覺有價值，追求事業上的成功。然而，他們也需要避免急功近利，停下來反思自己的動機，並學會坦誠面對自己的弱點。": enneagram_type_3, "第四型 個人風格者<br />個人風格者性格以浪漫、情感豐富、追求個人獨特性為特點。他們渴望尋找特別和獨特的存在，追求深度和情感的體驗。建議他們避免盲目追求浪漫，停下來反思自己的情感，接受自己的內在並與他人建立聯繫。": enneagram_type_4, "第五型 博學多聞者<br />博學多聞者性格以理性、好奇心強、獨立思考和追求知識與理論為特點。他們渴望獲得知識，理解世界，喜歡獨立思考。建議他們不要過度與現實脫節，培養與他人的聯繫，勇於實踐自己的想法。": enneagram_type_5, "第六型 謹慎忠誠者<br />謹慎忠誠者性格以忠誠、負責任、戒心重和追求安全感為特點。他們常常感到不安全，因此追求安全感和得到他人的支持。建議他們要學會信任自己的直覺，面對恐懼，並發展獨立思考能力。": enneagram_type_6, "第七型 樂於嘗新者<br />樂於嘗新者性格以樂觀、富創意、追求快樂和尋求刺激為特點。他們渴望追求快樂，尋找刺激和新的體驗。然而，建議他們要學會專注內省，面對不適和責任，尋找內在的平靜。": enneagram_type_7, "第八型 勇於領導者<br />勇於領導者性格以自信、堅定、權威和積極主動為特點。他們追求自由、獨立和掌控權力，並具有保護自己和他人的傾向。挑戰者性格通常勇於面對困難，並努力達成目標。然而，建議他們要學會尊重他人的需求，容忍和諒解他人的觀點，並表達出自己的脆弱和柔情，以建立更和諧的關係。": enneagram_type_8, "第九型 愛好和平者<br />愛好和平者性格以和諧、冷靜、避免衝突和追求內在平靜為特點。他們渴望和諧的環境，避免爭執和緊張局勢。他們傾向於保持內心的平靜和穩定，並希望與他人建立和諧的關係。然而，他們也需要學會表達自己的需求和意見，不要過度迎合他人的期望。": enneagram_type_9 };
+  if (Object.values(enneagram_object).some(hasNull)) {
+    return; //stop the execution of function
+  }
 
-    var enneagram_max_value = Object.entries(enneagram_dictionary)
-        .sort(function (a, b) {
-            return b[1] - a[1];
-        })
-        .slice(0, 1)
-        .map(function (arr) {
-            return arr[1];
-        });
+  if (document.getElementById("user_name_manual").value == "") {
+    console.log("no name");
+  } else {
+    participantName.textContent = document.getElementById("user_name_manual").value;
+  }
 
-    var enneagram_array = Object.entries(enneagram_dictionary);
+  //score
+  	var enneagram_type_1 = enneagram_object["enneagram_0_score"] + enneagram_object["enneagram_9_score"] + enneagram_object["enneagram_18_score"] + enneagram_object["enneagram_27_score"];
+  	var enneagram_type_2 = enneagram_object["enneagram_1_score"] + enneagram_object["enneagram_10_score"] + enneagram_object["enneagram_19_score"] + enneagram_object["enneagram_28_score"];
+  	var enneagram_type_3 = enneagram_object["enneagram_2_score"] + enneagram_object["enneagram_11_score"] + enneagram_object["enneagram_20_score"] + enneagram_object["enneagram_29_score"];
+  	var enneagram_type_4 = enneagram_object["enneagram_3_score"] + enneagram_object["enneagram_12_score"] + enneagram_object["enneagram_21_score"] + enneagram_object["enneagram_30_score"];
+  	var enneagram_type_5 = enneagram_object["enneagram_4_score"] + enneagram_object["enneagram_13_score"] + enneagram_object["enneagram_22_score"] + enneagram_object["enneagram_31_score"];
+  	var enneagram_type_6 = enneagram_object["enneagram_5_score"] + enneagram_object["enneagram_14_score"] + enneagram_object["enneagram_23_score"] + enneagram_object["enneagram_32_score"];
+  	var enneagram_type_7 = enneagram_object["enneagram_6_score"] + enneagram_object["enneagram_15_score"] + enneagram_object["enneagram_24_score"] + enneagram_object["enneagram_33_score"];
+  	var enneagram_type_8 = enneagram_object["enneagram_7_score"] + enneagram_object["enneagram_16_score"] + enneagram_object["enneagram_25_score"] + enneagram_object["enneagram_34_score"];
+  	var enneagram_type_9 = enneagram_object["enneagram_8_score"] + enneagram_object["enneagram_17_score"] + enneagram_object["enneagram_26_score"] + enneagram_object["enneagram_35_score"];
 
-    var select_enneagram_array = enneagram_array.filter(function (a) { return a[1] == enneagram_max_value[0] });
-
-    var enneagram_top = select_enneagram_array.map(function (arr) {
-        return arr[0];
+	var enneagram_factor_object = { "enneagram_type_1": enneagram_type_1, "enneagram_type_2": enneagram_type_2, "enneagram_type_3": enneagram_type_3, "enneagram_type_4": enneagram_type_4, "enneagram_type_5": enneagram_type_5, "enneagram_type_6": enneagram_type_6, "enneagram_type_7": enneagram_type_7, "enneagram_type_8": enneagram_type_8, "enneagram_type_9": enneagram_type_9 };
+	var sortedKeys_enneagram_factor_object = Object.keys(enneagram_factor_object).sort(function (a, b) {
+        return enneagram_factor_object[b] - enneagram_factor_object[a];
     });
 
-    var enneagram_description_array = Object.entries(enneagram_description_dictionary);
+	const resultBgSources = {
+        "enneagram_type_1": "/sites/default/files/inpages/assessment/enneagram/1.png",
+        "enneagram_type_2": "/sites/default/files/inpages/assessment/enneagram/2.png",
+        "enneagram_type_3": "/sites/default/files/inpages/assessment/enneagram/3.png",
+        "enneagram_type_4": "/sites/default/files/inpages/assessment/enneagram/4.png",
+        "enneagram_type_5": "/sites/default/files/inpages/assessment/enneagram/5.png",
+        "enneagram_type_6": "/sites/default/files/inpages/assessment/enneagram/6.png",
+        "enneagram_type_7": "/sites/default/files/inpages/assessment/enneagram/7.png",
+        "enneagram_type_8": "/sites/default/files/inpages/assessment/enneagram/8.png",
+        "enneagram_type_9": "/sites/default/files/inpages/assessment/enneagram/9.png",
+        "default": ""
+      };
 
-    var select_description_enneagram_array = enneagram_description_array.filter(function (a) { return a[1] == enneagram_max_value[0] });
+	
+	  const resultDiv = document.getElementById("save_result");
+      const trait = sortedKeys_enneagram_factor_object[0];
+      resultDiv.src = resultBgSources[trait] || resultBgSources["default"];
 
-    var enneagram_description_top = select_description_enneagram_array.map(function (arr) {
-        return arr[0];
-    });
+      const plotFillColor = {
+        "enneagram_type_1": "rgba(155, 147, 121, 0.8)",
+        "enneagram_type_2": "rgba(216, 166, 51, 0.8)",
+        "enneagram_type_3": "rgba(105, 193, 224, 0.8)",
+        "enneagram_type_4": "rgba(35, 215, 168, 0.8)",
+		"enneagram_type_5": "rgba(35, 215, 168, 0.8)",
+		"enneagram_type_6": "rgba(35, 215, 168, 0.8)",
+		"enneagram_type_7": "rgba(35, 215, 168, 0.8)",
+		"enneagram_type_8": "rgba(35, 215, 168, 0.8)",
+		"enneagram_type_9": "rgba(35, 215, 168, 0.8)",
+        "default": "rgba(247, 122, 121, 0.8)"
+      };
 
-    enneagramCategory.innerHTML = "以下是你最有可能屬於的九型人格<br />" + enneagram_top.join("、");
+      const plotTextColor = {
+        "enneagram_type_1": "#9B9379",
+        "enneagram_type_2": "#D8A633",
+        "enneagram_type_3": "#69C1E0",
+        "enneagram_type_4": "#23D7A8",
+		"enneagram_type_5": "#23D7A8",
+		"enneagram_type_6": "#23D7A8",
+		"enneagram_type_7": "#23D7A8",
+		"enneagram_type_8": "#23D7A8",
+		"enneagram_type_9": "#23D7A8",
+        "default": "#F77A79"
+      };
+      
+      const enneagram_FillColor = plotFillColor[trait] || plotFillColor["default"];
+      const enneagram_TextColor = plotTextColor[trait] || plotTextColor["default"];
 
-    enneagramDescription.innerHTML = "以下是你的九型人格描述<br />" + enneagram_description_top.join("<br /><br />");
+	
 
-    document.getElementById('enneagramQuestionresultDiv').style.display = 'none';
-    document.getElementById('enneagramResultDiv').style.display = '';
 
-    var data = [{
-        type: 'scatterpolar',
-        r: [enneagram_type_1, enneagram_type_2, enneagram_type_3, enneagram_type_4, enneagram_type_5, enneagram_type_6, enneagram_type_7, enneagram_type_8, enneagram_type_9, enneagram_type_1],
-        theta: ['第一型', '第二型', '第三型', '第四型', '第五型', '第六型', '第七型', '第八型', '第九型', '第一型'],
-        fill: 'toself'
-    },
-    {
-        type: 'scatterpolar',
-        mode: 'lines',
-        r: [20, 20, 20, 20, 20, 20, 20, 20, 20, 20],
-        theta: ['第一型', '第二型', '第三型', '第四型', '第五型', '第六型', '第七型', '第八型', '第九型', '第一型'],
-        line: { color: 'grey' }
-    }]
+    //enneagramResult.innerHTML = "情緒耗竭感 " + enneagramScore_ee + " 分" + "<br />" + "缺乏成就感 " + enneagramScore_pa + " 分" + "<br />" + "工作冷漠感 " + enneagramScore_dp + " 分";
+
+ 
+
+  document.getElementById("enneagramQuestionDiv").style.display = "none";
+  document.getElementById("enneagramResultDiv").style.display = "";
+  document.querySelector("h1").style.display = "";
+
+  //new
+  var svg_div = document.querySelector("#svg_div");
+
+    var data = [
+      {
+        type: "scatterpolar",
+        mode: "lines",
+        r: [15, 15, 15, 15, 15, 15, 15, 15, 15, 15],
+        theta: [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+		  "7",
+		  "8",
+		  "9",
+		  "1",
+        ],
+        line: { color: "black", width: 1 },
+      },
+      {
+        type: "scatterpolar",
+        mode: "lines",
+        r: [10, 10, 10, 10, 10, 10, 10, 10, 10, 10],
+        theta: [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+		  "7",
+		  "8",
+		  "9",
+		  "1",
+        ],
+        line: { color: "black", width: 1 },
+      },
+      {
+        type: "scatterpolar",
+        mode: "lines",
+        r: [5, 5, 5, 5, 5, 5, 5, 5, 5, 5],
+        theta: [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+		  "7",
+		  "8",
+		  "9",
+		  "1",
+        ],
+        line: { color: "black", width: 1 },
+      },
+      {
+        type: "scatterpolar",
+        mode: "lines",
+        r: [20, 20, 0, 0, 0, 0, 0, 0, 0, 0],
+        theta: [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+		  "7",
+		  "8",
+		  "9",
+		  "1",
+        ],
+        line: { color: "black", width: 1 },
+      },
+	  {
+        type: "scatterpolar",
+        mode: "lines",
+        r: [0, 20, 20, 0, 0, 0, 0, 0, 0, 0],
+        theta: [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+		  "7",
+		  "8",
+		  "9",
+		  "1",
+        ],
+        line: { color: "black", width: 1 },
+      },
+	  {
+        type: "scatterpolar",
+        mode: "lines",
+        r: [0, 0, 20, 20, 0, 0, 0, 0, 0, 0],
+        theta: [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+		  "7",
+		  "8",
+		  "9",
+		  "1",
+        ],
+        line: { color: "black", width: 1 },
+      },
+	  {
+        type: "scatterpolar",
+        mode: "lines",
+        r: [0, 0, 0, 20, 20, 0, 0, 0, 0, 0],
+        theta: [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+		  "7",
+		  "8",
+		  "9",
+		  "1",
+        ],
+        line: { color: "black", width: 1 },
+      },
+	  {
+        type: "scatterpolar",
+        mode: "lines",
+        r: [0, 0, 0, 0, 20, 20, 0, 0, 0, 0],
+        theta: [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+		  "7",
+		  "8",
+		  "9",
+		  "1",
+        ],
+        line: { color: "black", width: 1 },
+      },
+	  {
+        type: "scatterpolar",
+        mode: "lines",
+        r: [0, 0, 0, 0, 0, 20, 20, 0, 0, 0],
+        theta: [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+		  "7",
+		  "8",
+		  "9",
+		  "1",
+        ],
+        line: { color: "black", width: 1 },
+      },
+	  {
+        type: "scatterpolar",
+        mode: "lines",
+        r: [0, 0, 0, 0, 0, 0, 20, 20, 0, 0],
+        theta: [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+		  "7",
+		  "8",
+		  "9",
+		  "1",
+        ],
+        line: { color: "black", width: 1 },
+      },
+	  {
+        type: "scatterpolar",
+        mode: "lines",
+        r: [0, 0, 0, 0, 0, 0, 0, 20, 20, 0],
+        theta: [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+		  "7",
+		  "8",
+		  "9",
+		  "1",
+        ],
+        line: { color: "black", width: 1 },
+      },
+	  {
+        type: "scatterpolar",
+        mode: "lines",
+        r: [0, 0, 0, 0, 0, 0, 0, 0, 20, 20],
+        theta: [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+		  "7",
+		  "8",
+		  "9",
+		  "1",
+        ],
+        line: { color: "black", width: 1 },
+      },
+	  {
+        type: "scatterpolar",
+        mode: "lines",
+        r: [20, 0, 0, 0, 0, 0, 0, 0, 0, 20],
+        theta: [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+		  "7",
+		  "8",
+		  "9",
+		  "1",
+        ],
+        line: { color: "black", width: 1 },
+      },
+      {
+        type: "scatterpolar",
+        r: [
+            enneagram_type_1,enneagram_type_2,enneagram_type_3,enneagram_type_4,enneagram_type_5,enneagram_type_6,enneagram_type_7,enneagram_type_8,enneagram_type_9,enneagram_type_1
+        ],
+        theta: [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+		  "7",
+		  "8",
+		  "9",
+		  "1",
+        ],
+        fill: "toself",
+        fillcolor: enneagram_FillColor,
+        line: { color: enneagram_FillColor },
+        mode: "none",
+      },
+    ];
 
     var layout = {
-        margin: { b: 30, t: 30, r: 60, l: 60, pad: 0 }, font: {
-            family: 'Arial, sans-serif'
+      margin: { b: 35, t: 45, r: 25, l: 25, pad: 0 },
+      font: {
+        family: "'Noto Sans HK', Arial, sans-serif",
+        size: 16
+      },
+      polar: {
+        bgcolor: "rgba(0,0,0,0)",
+        angularaxis: {
+          color: "transparent",
+          gridcolor: "black",
+          tickfont: { color: enneagram_TextColor, weight: "bold" },
+          rotation: 90,
         },
-        polar: {
-            angularaxis: {
-                color: "transparent",
-                gridcolor: "grey",
-                tickfont: { color: "grey" },
-                rotation: 90
-            },
-            radialaxis: {
-                visible: false,
-                range: [0, 20]
-            }
+        radialaxis: {
+          visible: false,
+          range: [0, 4],
         },
-        showlegend: false,
-        hovermode: false,
-        height: 300
-    }
-    var config = { responsive: true, displaylogo: false, displayModeBar: false }
-    Plotly.newPlot('myDiv', data, layout, config);
-    document.getElementById('block-bokss-page-title').scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' })
+      },
+      showlegend: false,
+      hovermode: false,
+      height: 280,
+      width: 290,
+      plot_bgcolor: "rgba(0,0,0,0)",
+      paper_bgcolor: "rgba(0,0,0,0)"
+    };
+    var config = {
+      responsive: true,
+      displaylogo: false,
+      displayModeBar: false,
+    };
+    Plotly.newPlot("myDiv", data, layout, config)
+
+
+
+
+
+
+
+
+
+  //document.getElementById('block-bokss-page-title').scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' })
+
+  document
+    .querySelector(".fixed.bottom-0.right-4")
+    .querySelector("button")
+    .click();
+  
+  //var html2canvas_count = 0;
+  if (document.getElementById("img_div_content_id")) {
+    console.log("do not create html2canvas");
+  } else {
     
-})
+
+    setTimeout(function () {
+      html2canvas(document.querySelector("#save_result")).then(function (canvas) {
+        canvas_element = canvas;
+        var img_png = canvas_element.toDataURL("image/png");
+        var img_div = document.createElement("div");
+        var img_div_content = document.createElement("img");
+        img_div_content.id = "img_div_content_id";
+        var base64_svg = document.getElementById("base64_svg")
+        img_div.style = "display: flex; justify-content: center;";
+        img_div.appendChild(img_div_content);
+        img_div_content.src = img_png;
+        base64_svg.value = img_png;
+        document
+          .getElementById("svg_div")
+          .insertBefore(
+            img_div,
+            document.getElementById("save_div").parentNode
+          );
+        document.querySelector("#save_result").style.display = "none";
+        document.querySelector("#svg_div").style.display = "";
+        //html2canvas_count = 1;
+                      var data = new FormData(form);
+  var action = e.target.action;
+  fetch(action, {
+    method: "POST",
+    body: data,
+  });
+  e.preventDefault();
+
+      });
+    }, 1000);
+  }
+  console.log("create html2canvas");
+
+
+
+             
+
+
+  
+  
+});
+
+document
+  .querySelector("#share_div")
+  .setAttribute("data-clipboard-text", window.location.href);
+
+document.querySelector("#share_div").addEventListener("click", function () {
+  var shareData = {
+    url: document.location.origin + document.location.pathname + '?utm_source=website&utm_medium=referral',
+  };
+
+  try {
+    window.navigator.canShare(shareData);
+  } catch (err) {}
+
+  if (window.navigator.canShare(shareData)) {
+    try {
+      window.navigator.share(shareData);
+    } catch (err) {
+      if (err.name !== "AbortError") {
+        console.error(err.name, err.message);
+      }
+    }
+  } else {
+    console.warn("Sharing not supported", shareData);
+  }
+});
