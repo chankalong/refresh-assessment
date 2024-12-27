@@ -401,8 +401,8 @@ function clearTooltip(e) {
         ).style.display = "none";
         document.getElementById("big_fiveResultDiv").style.display = "";
       });
-    document.querySelector("h1").innerText = "你的「愛的語言」";
-    //document.title = "你的「愛的語言」 | Re:Fresh線上精神健康自助平台";
+    document.querySelector("h1").innerText = "你的「人格特質」";
+    //document.title = "你的「人格特質」 | Re:Fresh線上精神健康自助平台";
     //test_result.style.backgroundColor = big_fiveColor_bg + ",1)";
     //big_fiveImage_div.style.backgroundColor = big_fiveColor_inbox;
     //big_fiveSuggestion_div.style.backgroundColor =
@@ -465,7 +465,7 @@ function clearTooltip(e) {
       {
         type: "scatterpolar",
         mode: "lines",
-        r: [4, 4, 0, 0, 0, 8],
+        r: [4, 4, 0, 0, 0, 0],
         theta: [
           "外向特質",
           "親和<br>特質",
