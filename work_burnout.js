@@ -284,6 +284,12 @@ form.addEventListener("submit", function (e) {
     return; //stop the execution of function
   }
 
+  if (document.getElementById("user_name_manual").value == "") {
+    console.log("no name");
+  } else {
+    participantName.textContent = document.getElementById("user_name_manual").value;
+  }
+
   //score
     var mbiScore_ee = mbi_object["mbi_0_score"] + mbi_object["mbi_1_score"] + mbi_object["mbi_2_score"] + mbi_object["mbi_3_score"] + mbi_object["mbi_4_score"] + mbi_object["mbi_5_score"] + mbi_object["mbi_6_score"] + mbi_object["mbi_7_score"] + mbi_object["mbi_8_score"];
     var mbiScore_pa = (6 - mbi_object["mbi_9_score"]) + (6 - mbi_object["mbi_10_score"]) + (6 - mbi_object["mbi_11_score"]) + (6 - mbi_object["mbi_12_score"]) + (6 - mbi_object["mbi_13_score"]) + (6 - mbi_object["mbi_14_score"]) + (6 - mbi_object["mbi_15_score"]) + (6 - mbi_object["mbi_16_score"]);
