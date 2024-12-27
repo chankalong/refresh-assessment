@@ -293,7 +293,7 @@ form.addEventListener("submit", function (e) {
   //score
     var phqScore = phq_gad_object["phq_gad_0_score"] + phq_gad_object["phq_gad_1_score"];
     var gadScore = phq_gad_object["phq_gad_2_score"] + phq_gad_object["phq_gad_3_score"];
-    if (isNaN(phq_gadScore)) {
+    if (isNaN(phqScore) || isNaN(gadScore)) {
         return; //stop the execution of function
     }
 
