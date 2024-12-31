@@ -427,10 +427,6 @@ form.addEventListener("submit", function (e) {
 
   //enneagramResult.innerHTML = "情緒耗竭感 " + enneagramScore_ee + " 分" + "<br />" + "缺乏成就感 " + enneagramScore_pa + " 分" + "<br />" + "工作冷漠感 " + enneagramScore_dp + " 分";
 
-  document.getElementById("enneagramQuestionDiv").style.display = "none";
-  document.getElementById("enneagramResultDiv").style.display = "";
-  document.querySelector("h1").style.display = "";
-
   //new
   var data = [
     {
@@ -582,11 +578,6 @@ form.addEventListener("submit", function (e) {
 
   //document.getElementById('block-bokss-page-title').scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' })
 
-  document
-    .querySelector(".fixed.bottom-0.right-4")
-    .querySelector("button")
-    .click();
-
   //var html2canvas_count = 0;
   if (document.getElementById("img_div_content_id")) {
     console.log("do not create html2canvas");
@@ -625,6 +616,15 @@ form.addEventListener("submit", function (e) {
     }, 1000);
   }
   console.log("create html2canvas");
+
+  document.getElementById("enneagramQuestionDiv").style.display = "none";
+  document.getElementById("enneagramResultDiv").style.display = "";
+  document.querySelector("h1").style.display = "";
+
+  document
+    .querySelector(".fixed.bottom-0.right-4")
+    .querySelector("button")
+    .click();
 });
 
 document
