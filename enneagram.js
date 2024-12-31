@@ -550,7 +550,7 @@ form.addEventListener("submit", function (e) {
     margin: { b: 10, t: 10, r: 10, l: 10, pad: 0 },
     font: {
       family: "'Noto Sans HK', Arial, sans-serif",
-      size: 16,
+      size: 12,
     },
     polar: {
       bgcolor: "rgba(0,0,0,0)",
@@ -558,7 +558,7 @@ form.addEventListener("submit", function (e) {
         color: "transparent",
         gridcolor: "black",
         tickfont: { color: "black", weight: "bold" },
-        rotation: 40,
+        rotation: 130,
       },
       radialaxis: {
         visible: false,
