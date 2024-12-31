@@ -269,7 +269,7 @@ form.addEventListener("submit", function (e) {
     e.preventDefault();
   var procrastination_object = {};
 
-  for (var i = 0; i <= 7; i++) {
+  for (var i = 0; i <= 8; i++) {
     var inputName = "procrastination_" + i;
     procrastination_object[inputName + "_score"] = parseInt(
       document.querySelector('input[name="' + inputName + '"]:checked').value
