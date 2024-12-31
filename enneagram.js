@@ -366,8 +366,6 @@ form.addEventListener("submit", function (e) {
   document.querySelector("h1").style.display = "";
 
   //new
-  var svg_div = document.querySelector("#svg_div");
-
     var data = [
       {
         type: "scatterpolar",
@@ -386,7 +384,6 @@ form.addEventListener("submit", function (e) {
       font: {
         family: "'Noto Sans HK', Arial, sans-serif",
         size: 16
-      },
       },
       showlegend: false,
       hovermode: false,
