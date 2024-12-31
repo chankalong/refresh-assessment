@@ -547,10 +547,10 @@ form.addEventListener("submit", function (e) {
   ];
 
   var layout = {
-    margin: { b: 20, t: 20, r: 20, l: 20, pad: 0 },
+    margin: { b: 35, t: 35, r: 35, l: 35, pad: 0 },
     font: {
       family: "'Noto Sans HK', Arial, sans-serif",
-      size: 12,
+      size: 16,
       weight: 700,
     },
     polar: {
