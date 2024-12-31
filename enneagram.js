@@ -592,7 +592,7 @@ form.addEventListener("submit", function (e) {
     console.log("do not create html2canvas");
   } else {
     setTimeout(function () {
-      html2canvas(document.querySelector("#save_result")).then(function (
+      html2canvas(document.querySelector("#save_result"), {scale: 2}).then(function (
         canvas
       ) {
         canvas_element = canvas;
