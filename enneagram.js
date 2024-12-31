@@ -296,12 +296,12 @@ form.addEventListener("submit", function (e) {
     return; //stop the execution of function
   }
 
-  if (document.getElementById("user_name_manual").value == "") {
-    console.log("no name");
-  } else {
-    participantName.textContent =
-      document.getElementById("user_name_manual").value;
-  }
+  //if (document.getElementById("user_name_manual").value == "") {
+  //  console.log("no name");
+  //} else {
+  //  participantName.textContent =
+  //    document.getElementById("user_name_manual").value;
+  //}
 
   //score
   var enneagram_type_1 =
