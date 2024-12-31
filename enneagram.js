@@ -423,7 +423,7 @@ form.addEventListener("submit", function (e) {
   };
 
   const enneagram_FillColor = plotFillColor[trait] || plotFillColor["default"];
-  const enneagram_TextColor = plotTextColor[trait] || plotTextColor["default"];
+  //const enneagram_TextColor = plotTextColor[trait] || plotTextColor["default"];
 
   //enneagramResult.innerHTML = "情緒耗竭感 " + enneagramScore_ee + " 分" + "<br />" + "缺乏成就感 " + enneagramScore_pa + " 分" + "<br />" + "工作冷漠感 " + enneagramScore_dp + " 分";
 
@@ -438,7 +438,7 @@ form.addEventListener("submit", function (e) {
       mode: "lines",
       r: [15, 15, 15, 15, 15, 15, 15, 15, 15, 15],
       theta: ["一","二","三","四","五","六","七","八","九","一"],
-      line: { color: "black", width: 1 },
+      line: { color: "grey", width: 1 },
     },
     {
       type: "scatterpolar",
@@ -452,7 +452,7 @@ form.addEventListener("submit", function (e) {
       mode: "lines",
       r: [5, 5, 5, 5, 5, 5, 5, 5, 5, 5],
       theta: ["一","二","三","四","五","六","七","八","九","一"],
-      line: { color: "black", width: 1 },
+      line: { color: "grey", width: 1 },
     },
     {
       type: "scatterpolar",
@@ -547,7 +547,7 @@ form.addEventListener("submit", function (e) {
   ];
 
   var layout = {
-    margin: { b: 35, t: 45, r: 25, l: 25, pad: 0 },
+    margin: { b: 0, t: 0, r: 0, l: 0, pad: 0 },
     font: {
       family: "'Noto Sans HK', Arial, sans-serif",
       size: 16,
@@ -557,7 +557,7 @@ form.addEventListener("submit", function (e) {
       angularaxis: {
         color: "transparent",
         gridcolor: "black",
-        tickfont: { color: enneagram_TextColor, weight: "bold" },
+        tickfont: { color: "black", weight: "bold" },
         rotation: 90,
       },
       radialaxis: {
@@ -567,8 +567,8 @@ form.addEventListener("submit", function (e) {
     },
     showlegend: false,
     hovermode: false,
-    height: 280,
-    width: 290,
+    height: 120,
+    width: 120,
     plot_bgcolor: "rgba(0,0,0,0)",
     paper_bgcolor: "rgba(0,0,0,0)",
   };
