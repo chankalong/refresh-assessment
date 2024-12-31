@@ -397,29 +397,29 @@ form.addEventListener("submit", function (e) {
   //resultDiv.src = resultBgSources[trait] || resultBgSources["default"];
 
   const plotFillColor = {
-    enneagram_type_1: "rgba(155, 147, 121, 0.8)",
-    enneagram_type_2: "rgba(216, 166, 51, 0.8)",
-    enneagram_type_3: "rgba(105, 193, 224, 0.8)",
-    enneagram_type_4: "rgba(35, 215, 168, 0.8)",
-    enneagram_type_5: "rgba(35, 215, 168, 0.8)",
-    enneagram_type_6: "rgba(35, 215, 168, 0.8)",
-    enneagram_type_7: "rgba(35, 215, 168, 0.8)",
-    enneagram_type_8: "rgba(35, 215, 168, 0.8)",
-    enneagram_type_9: "rgba(35, 215, 168, 0.8)",
+    enneagram_type_1: "rgba(138, 95, 84, 0.8)",
+    enneagram_type_2: "rgba(135, 91, 61, 0.8)",
+    enneagram_type_3: "rgba(149, 114, 37, 0.8)",
+    enneagram_type_4: "rgba(75, 92, 78, 0.8)",
+    enneagram_type_5: "rgba(76, 104, 101, 0.8)",
+    enneagram_type_6: "rgba(65, 98, 113, 0.8)",
+    enneagram_type_7: "rgba(82, 67, 85, 0.8)",
+    enneagram_type_8: "rgba(148, 82, 100, 0.8)",
+    enneagram_type_9: "rgba(121, 81, 54, 0.8)",
     default: "rgba(247, 122, 121, 0.8)",
   };
 
   const plotTextColor = {
-    enneagram_type_1: "#9B9379",
-    enneagram_type_2: "#D8A633",
-    enneagram_type_3: "#69C1E0",
-    enneagram_type_4: "#23D7A8",
-    enneagram_type_5: "#23D7A8",
-    enneagram_type_6: "#23D7A8",
-    enneagram_type_7: "#23D7A8",
-    enneagram_type_8: "#23D7A8",
-    enneagram_type_9: "#23D7A8",
-    default: "#F77A79",
+    enneagram_type_1: "rgb(138, 95, 84)",
+    enneagram_type_2: "rgb(135, 91, 61)",
+    enneagram_type_3: "rgb(149, 114, 37)",
+    enneagram_type_4: "rgb(75, 92, 78)",
+    enneagram_type_5: "rgb(76, 104, 101)",
+    enneagram_type_6: "rgb(65, 98, 113)",
+    enneagram_type_7: "rgb(82, 67, 85)",
+    enneagram_type_8: "rgb(148, 82, 100)",
+    enneagram_type_9: "rgb(121, 81, 54)",
+    default: "rgba(247, 122, 121, 0.8)",
   };
 
   const enneagram_FillColor = plotFillColor[trait] || plotFillColor["default"];
@@ -547,10 +547,11 @@ form.addEventListener("submit", function (e) {
   ];
 
   var layout = {
-    margin: { b: 15, t: 15, r: 15, l: 15, pad: 0 },
+    margin: { b: 20, t: 20, r: 20, l: 20, pad: 0 },
     font: {
       family: "'Noto Sans HK', Arial, sans-serif",
-      size: 10,
+      size: 8,
+      weight: 700,
     },
     polar: {
       bgcolor: "rgba(0,0,0,0)",
