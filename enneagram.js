@@ -393,7 +393,7 @@ form.addEventListener("submit", function (e) {
   const trait = sortedKeys_enneagram_factor_object[0];
   resultDiv.style.backgroundImage =
     resultBgSources[trait] || resultBgSources["default"];
-    resultDiv.style.backgroundSize = "cover";
+  resultDiv.style.backgroundSize = "cover";
   //resultDiv.src = resultBgSources[trait] || resultBgSources["default"];
 
   const plotFillColor = {
@@ -433,91 +433,91 @@ form.addEventListener("submit", function (e) {
       type: "scatterpolar",
       mode: "lines",
       r: [15, 15, 15, 15, 15, 15, 15, 15, 15, 15],
-      theta: ["一","二","三","四","五","六","七","八","九","一"],
+      theta: ["一", "二", "三", "四", "五", "六", "七", "八", "九", "一"],
       line: { color: "grey", width: 0.8 },
     },
     {
       type: "scatterpolar",
       mode: "lines",
       r: [10, 10, 10, 10, 10, 10, 10, 10, 10, 10],
-      theta: ["一","二","三","四","五","六","七","八","九","一"],
+      theta: ["一", "二", "三", "四", "五", "六", "七", "八", "九", "一"],
       line: { color: "black", width: 0.8 },
     },
     {
       type: "scatterpolar",
       mode: "lines",
       r: [5, 5, 5, 5, 5, 5, 5, 5, 5, 5],
-      theta: ["一","二","三","四","五","六","七","八","九","一"],
+      theta: ["一", "二", "三", "四", "五", "六", "七", "八", "九", "一"],
       line: { color: "grey", width: 0.8 },
     },
     {
       type: "scatterpolar",
       mode: "lines",
       r: [20, 20, 0, 0, 0, 0, 0, 0, 0, 0],
-      theta: ["一","二","三","四","五","六","七","八","九","一"],
+      theta: ["一", "二", "三", "四", "五", "六", "七", "八", "九", "一"],
       line: { color: "black", width: 0.8 },
     },
     {
       type: "scatterpolar",
       mode: "lines",
       r: [0, 20, 20, 0, 0, 0, 0, 0, 0, 0],
-      theta: ["一","二","三","四","五","六","七","八","九","一"],
+      theta: ["一", "二", "三", "四", "五", "六", "七", "八", "九", "一"],
       line: { color: "black", width: 0.8 },
     },
     {
       type: "scatterpolar",
       mode: "lines",
       r: [0, 0, 20, 20, 0, 0, 0, 0, 0, 0],
-      theta: ["一","二","三","四","五","六","七","八","九","一"],
+      theta: ["一", "二", "三", "四", "五", "六", "七", "八", "九", "一"],
       line: { color: "black", width: 0.8 },
     },
     {
       type: "scatterpolar",
       mode: "lines",
       r: [0, 0, 0, 20, 20, 0, 0, 0, 0, 0],
-      theta: ["一","二","三","四","五","六","七","八","九","一"],
+      theta: ["一", "二", "三", "四", "五", "六", "七", "八", "九", "一"],
       line: { color: "black", width: 0.8 },
     },
     {
       type: "scatterpolar",
       mode: "lines",
       r: [0, 0, 0, 0, 20, 20, 0, 0, 0, 0],
-      theta: ["一","二","三","四","五","六","七","八","九","一"],
+      theta: ["一", "二", "三", "四", "五", "六", "七", "八", "九", "一"],
       line: { color: "black", width: 0.8 },
     },
     {
       type: "scatterpolar",
       mode: "lines",
       r: [0, 0, 0, 0, 0, 20, 20, 0, 0, 0],
-      theta: ["一","二","三","四","五","六","七","八","九","一"],
+      theta: ["一", "二", "三", "四", "五", "六", "七", "八", "九", "一"],
       line: { color: "black", width: 0.8 },
     },
     {
       type: "scatterpolar",
       mode: "lines",
       r: [0, 0, 0, 0, 0, 0, 20, 20, 0, 0],
-      theta: ["一","二","三","四","五","六","七","八","九","一"],
+      theta: ["一", "二", "三", "四", "五", "六", "七", "八", "九", "一"],
       line: { color: "black", width: 0.8 },
     },
     {
       type: "scatterpolar",
       mode: "lines",
       r: [0, 0, 0, 0, 0, 0, 0, 20, 20, 0],
-      theta: ["一","二","三","四","五","六","七","八","九","一"],
+      theta: ["一", "二", "三", "四", "五", "六", "七", "八", "九", "一"],
       line: { color: "black", width: 0.8 },
     },
     {
       type: "scatterpolar",
       mode: "lines",
       r: [0, 0, 0, 0, 0, 0, 0, 0, 20, 20],
-      theta: ["一","二","三","四","五","六","七","八","九","一"],
+      theta: ["一", "二", "三", "四", "五", "六", "七", "八", "九", "一"],
       line: { color: "black", width: 0.8 },
     },
     {
       type: "scatterpolar",
       mode: "lines",
       r: [20, 0, 0, 0, 0, 0, 0, 0, 0, 20],
-      theta: ["一","二","三","四","五","六","七","八","九","一"],
+      theta: ["一", "二", "三", "四", "五", "六", "七", "八", "九", "一"],
       line: { color: "black", width: 0.8 },
     },
     {
@@ -534,7 +534,7 @@ form.addEventListener("submit", function (e) {
         enneagram_type_9,
         enneagram_type_1,
       ],
-      theta: ["一","二","三","四","五","六","七","八","九","一"],
+      theta: ["一", "二", "三", "四", "五", "六", "七", "八", "九", "一"],
       fill: "toself",
       fillcolor: enneagram_FillColor,
       line: { color: enneagram_FillColor },
@@ -583,48 +583,48 @@ form.addEventListener("submit", function (e) {
     console.log("do not create html2canvas");
   } else {
     setTimeout(function () {
-      html2canvas(document.querySelector("#save_result"), {scale: 2}).then(function (
-        canvas
-      ) {
-        canvas_element = canvas;
-        var img_png = canvas_element.toDataURL("image/png");
-        var img_div = document.createElement("div");
-        var img_div_content = document.createElement("img");
-        img_div_content.id = "img_div_content_id";
-        var base64_svg = document.getElementById("base64_svg");
-        img_div.style = "display: flex; justify-content: center;";
-        img_div.appendChild(img_div_content);
-        img_div_content.src = img_png;
-        base64_svg.value = img_png;
-        document
-          .getElementById("svg_div")
-          .insertBefore(
-            img_div,
-            document.getElementById("save_div").parentNode
-          );
-        document.querySelector("#save_result").style.display = "none";
-        document.querySelector("#svg_div").style.display = "";
-        //html2canvas_count = 1;
-        var data = new FormData(form);
-        var action = e.target.action;
-        fetch(action, {
-          method: "POST",
-          body: data,
-        });
-        e.preventDefault();
-      });
+      html2canvas(document.querySelector("#save_result"), { scale: 2 }).then(
+        function (canvas) {
+          canvas_element = canvas;
+          var img_png = canvas_element.toDataURL("image/png");
+          var img_div = document.createElement("div");
+          var img_div_content = document.createElement("img");
+          img_div_content.id = "img_div_content_id";
+          var base64_svg = document.getElementById("base64_svg");
+          img_div.style = "display: flex; justify-content: center;";
+          img_div.appendChild(img_div_content);
+          img_div_content.src = img_png;
+          base64_svg.value = img_png;
+          document
+            .getElementById("svg_div")
+            .insertBefore(
+              img_div,
+              document.getElementById("save_div").parentNode
+            );
+          document.querySelector("#save_result").style.display = "none";
+          document.querySelector("#svg_div").style.display = "";
+          //html2canvas_count = 1;
+          var data = new FormData(form);
+          var action = e.target.action;
+          fetch(action, {
+            method: "POST",
+            body: data,
+          });
+          e.preventDefault();
+          document.getElementById("enneagramQuestionDiv").style.display =
+            "none";
+          document.getElementById("enneagramResultDiv").style.display = "";
+          document.querySelector("h1").style.display = "";
+
+          document
+            .querySelector(".fixed.bottom-0.right-4")
+            .querySelector("button")
+            .click();
+        }
+      );
     }, 1000);
   }
   console.log("create html2canvas");
-
-  document.getElementById("enneagramQuestionDiv").style.display = "none";
-  document.getElementById("enneagramResultDiv").style.display = "";
-  document.querySelector("h1").style.display = "";
-
-  document
-    .querySelector(".fixed.bottom-0.right-4")
-    .querySelector("button")
-    .click();
 });
 
 document
