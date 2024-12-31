@@ -643,7 +643,7 @@ form.addEventListener("submit", function (e) {
         },
         radialaxis: {
           visible: false,
-          range: [0, 4],
+          range: [0, 20],
         },
       },
       showlegend: false,
