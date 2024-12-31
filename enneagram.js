@@ -374,11 +374,10 @@ form.addEventListener("submit", function (e) {
         r: [
             enneagram_type_1,enneagram_type_2,enneagram_type_3,enneagram_type_4,enneagram_type_5,enneagram_type_6,enneagram_type_7,enneagram_type_8,enneagram_type_9,enneagram_type_1
         ],
-        theta: ["1","2","3","4","5","6","7","8","9","1"],
+        theta: ["a","b","c","d","e","f","g","h","i","a"],
         fill: "toself",
         fillcolor: enneagram_FillColor,
         line: { color: enneagram_FillColor },
-        mode: "fill",
       },
     ];
 
@@ -388,18 +387,6 @@ form.addEventListener("submit", function (e) {
         family: "'Noto Sans HK', Arial, sans-serif",
         size: 16
       },
-      polar: {
-        bgcolor: "rgba(0,0,0,0)",
-        angularaxis: {
-          color: "transparent",
-          gridcolor: "black",
-          tickfont: { color: enneagram_TextColor, weight: "bold" },
-          rotation: 90,
-        },
-        radialaxis: {
-          visible: false,
-          range: [0, 20],
-        },
       },
       showlegend: false,
       hovermode: false,
