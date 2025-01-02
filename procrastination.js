@@ -263,6 +263,9 @@ worker_textbox.value = new URLSearchParams(window.location.search).get(
   "worker"
 );
 
+var subscription_textbox = document.getElementById("subscription");
+subscription_textbox.value = drupalSettings.user.subscription.expire_subscription;
+
 var form = document.getElementById("form_procrastination");
 
 form.addEventListener("submit", function (e) {
