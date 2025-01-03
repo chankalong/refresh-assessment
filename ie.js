@@ -334,7 +334,7 @@ form.addEventListener("submit", function (e) {
       type: "indicator",
       mode: "gauge+number",
       gauge: {
-        axis: { range: [0, 32], tickvals: [0, 16.5, 32] },
+        axis: { range: [0, 32], tickvals: [0, 16, 32] },
         bar: { color: color, thickness: 1 },
         bgcolor: "white",
       },
