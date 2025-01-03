@@ -306,7 +306,7 @@ form.addEventListener("submit", function (e) {
   var category = document.getElementById(`${name_question}Category`);
   var description = document.getElementById(`${name_question}Description`);
 
-  if (question_sum < 10) {
+  if (question_sum < 17) {
     category.textContent = "內向型";
     description.textContent =
       "你偏向安靜低調，大部份時間喜歡獨處，以免被社交活動耗費大量精力。不過，你並非拒絕與人接觸，只是更著重個人空間，享受專注地思考，並以獨處來恢復精神及平靜。";
