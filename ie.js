@@ -315,7 +315,7 @@ form.addEventListener("submit", function (e) {
   } else {
     category.textContent = "外向型";
     description.textContent =
-      "你熱衷人際交往，喜歡說話及參與社交聚會。比起獨處，你更傾向與他人共處，融入所在的環境，並從身邊的人事物及反應汲取能量，變得精力充沛。當你獨處時，反而會感到無聊及失去動力。";
+      "你熱衷於人際交往，喜歡說話及參與社交聚會。比起獨處，你更傾向與他人共處，融入所在的環境，並從身邊的人事物及反應汲取能量，變得精力充沛。當你獨處時，反而會感到無聊及失去動力。";
       color = "#FFB0B0";
       ieUrl = "/sites/default/files/inpages/post%201.2%20內向vs外向人休息方法大不同_v3_cms_アートボード%201.png"
   }
