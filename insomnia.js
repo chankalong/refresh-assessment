@@ -299,12 +299,12 @@ form.addEventListener("submit", function (e) {
     var test_result_src = '/sites/default/files/inpages/assessment/insomnia/' + (question_sum + 1) + '.webp';
     test_result.src = test_result_src
 
-  if (document.getElementById("user_name_manual").value == "") {
-    console.log("no name");
-  } else {
-    participantName.textContent =
-      document.getElementById("user_name_manual").value;
-  }
+//  if (document.getElementById("user_name_manual").value == "") {
+//    console.log("no name");
+//  } else {
+//    participantName.textContent =
+//      document.getElementById("user_name_manual").value;
+//  }
 
   //var category = document.getElementById(`${name_question}Category`);
   //var description = document.getElementById(`${name_question}Description`);
