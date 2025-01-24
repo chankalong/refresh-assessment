@@ -317,7 +317,7 @@ form.addEventListener("submit", function (e) {
     var emotional_blackmail_guilt = emotional_blackmail_object['emotional_blackmail_6_score'] + emotional_blackmail_object['emotional_blackmail_7_score'] + emotional_blackmail_object['emotional_blackmail_8_score'] + emotional_blackmail_object['emotional_blackmail_9_score'] + emotional_blackmail_object['emotional_blackmail_10_score'] + emotional_blackmail_object['emotional_blackmail_11_score'] + 6;
     var emotional_blackmail_obligate = emotional_blackmail_object['emotional_blackmail_12_score'] + emotional_blackmail_object['emotional_blackmail_13_score'] + emotional_blackmail_object['emotional_blackmail_14_score'] + emotional_blackmail_object['emotional_blackmail_15_score'] + emotional_blackmail_object['emotional_blackmail_16_score'] + emotional_blackmail_object['emotional_blackmail_17_score'] + 6;
 
-    if (emotional_blackmail_fear > 10 | emotional_blackmail_guilt > 10 | emotional_blackmail_obligate > 10) {
+    if (emotional_blackmail_fear > 10 || emotional_blackmail_guilt > 10 || emotional_blackmail_obligate > 10) {
       category.textContent = "被人情緒勒索";
       description.textContent = "你可能開始被人情緒勒索，為了自己的情緒健康著想，可參考以下由英國公營醫療服務（NHS）認可的資訊網站BPDFamily.com提出的建議，5個步驟助你走出情緒勒索。";
     } else {
