@@ -1,4 +1,4 @@
-var number_question = 10;
+var number_question = 8;
 var name_question = "insomnia";
 
 document.querySelector("#start_div").addEventListener("click", function () {
