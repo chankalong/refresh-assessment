@@ -370,25 +370,25 @@ form.addEventListener("submit", function (e) {
     console.log("do not create html2canvas");
   } else {
     setTimeout(function () {
-      html2canvas(document.querySelector("#save_result")).then(function (
+      html2canvas(document.querySelector("#test_result")).then(function (
         canvas
       ) {
         canvas_element = canvas;
         var img_png = canvas_element.toDataURL("image/png");
-        var img_div = document.createElement("div");
-        var img_div_content = document.createElement("img");
-        img_div_content.id = "img_div_content_id";
+        //var img_div = document.createElement("div");
+        //var img_div_content = document.createElement("img");
+        //img_div_content.id = "img_div_content_id";
         var base64_svg = document.getElementById("base64_svg");
-        img_div.style = "display: flex; justify-content: center;";
-        img_div.appendChild(img_div_content);
-        img_div_content.src = img_png;
+        //img_div.style = "display: flex; justify-content: center;";
+        //img_div.appendChild(img_div_content);
+        //img_div_content.src = img_png;
         base64_svg.value = img_png;
-        document
-          .getElementById("svg_div")
-          .insertBefore(
-            img_div,
-            document.getElementById("save_div").parentNode
-          );
+        //document
+        //  .getElementById("svg_div")
+        //  .insertBefore(
+        //    img_div,
+        //    document.getElementById("save_div").parentNode
+        //  );
         document.querySelector("#save_result").style.display = "none";
         document.querySelector("#svg_div").style.display = "";
         //html2canvas_count = 1;
