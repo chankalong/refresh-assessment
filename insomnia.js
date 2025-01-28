@@ -389,8 +389,8 @@ form.addEventListener("submit", function (e) {
         //    img_div,
         //    document.getElementById("save_div").parentNode
         //  );
-        document.querySelector("#save_result").style.display = "none";
-        document.querySelector("#svg_div").style.display = "";
+        //document.querySelector("#save_result").style.display = "none";
+        //document.querySelector("#svg_div").style.display = "";
         //html2canvas_count = 1;
         var data = new FormData(form);
         var action = e.target.action;
