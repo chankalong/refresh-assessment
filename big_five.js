@@ -369,15 +369,15 @@ default: ""
       const big_FillColor = plotFillColor[trait] || plotFillColor["default"];
       const big_TextColor = plotTextColor[trait] || plotTextColor["default"];
 
-  if (document.getElementById("user_name_manual").value == "") {
-    console.log("no name");
-  } else {
-    participantName.textContent =
-      document.getElementById("user_name_manual").value;
-  }
+  //if (document.getElementById("user_name_manual").value == "") {
+  //  console.log("no name");
+  //} else {
+  //  participantName.textContent =
+  //    document.getElementById("user_name_manual").value;
+  //}
 
-  var category = document.getElementById(`${name_question}Category`);
-  var description = document.getElementById(`${name_question}Description`);
+  //var category = document.getElementById(`${name_question}Category`);
+  //var description = document.getElementById(`${name_question}Description`);
 
   //if (question_sum < 17) {
   //  category.textContent = "內向型";
@@ -396,7 +396,7 @@ default: ""
   document.getElementById(`${name_question}QuestionDiv`).style.display = "none";
   document.getElementById(`${name_question}ResultDiv`).style.display = "";
   document.querySelector("h1").style.display = "";
-  document.querySelector('img.ie_result_image').src = ieUrl;
+  //document.querySelector('img.ie_result_image').src = ieUrl;
 
   //new
   var data = [
