@@ -287,7 +287,7 @@ form.addEventListener("submit", function (e) {
   //score
     // Iterate over the score keys
     for (var i = 0; i <= (number_question - 2); i++) {
-      big_five_object[`"${name_question}_${i}_score"`] = parseInt(
+      big_five_object[`${name_question}_${i}_score`] = parseInt(
         document.querySelector(`input[name="${name_question}_${i}"]:checked`).value);
       // Check if the score should be subtracted from 4
       //if (inverseScores.includes(i)) {
@@ -553,8 +553,8 @@ default: ""
     },
     showlegend: false,
     hovermode: false,
-    height: 270,
-    width: 280,
+    height: 260,
+    width: 270,
     plot_bgcolor: "rgba(0,0,0,0)",
     paper_bgcolor: "rgba(0,0,0,0)",
   };
