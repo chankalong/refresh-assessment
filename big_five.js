@@ -554,7 +554,7 @@ default: ""
     showlegend: false,
     hovermode: false,
     height: 260,
-    width: 270,
+    width: 280,
     plot_bgcolor: "rgba(0,0,0,0)",
     paper_bgcolor: "rgba(0,0,0,0)",
   };
