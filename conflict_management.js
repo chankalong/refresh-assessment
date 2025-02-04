@@ -358,7 +358,7 @@ form.addEventListener("submit", function (e) {
 {
     type: 'scatterpolar',
     mode: 'lines',
-    r: [16, 16, 16, 16, 16, 16],
+    r: [20, 20, 20, 20, 20, 20],
     theta: ['屈服', '妥協', '強迫', '解難', '迴避', '屈服'],
     line: { color: 'grey' }
 }]
@@ -376,7 +376,7 @@ var layout = {
         },
         radialaxis: {
             visible: false,
-            range: [0, 16]
+            range: [0, 20]
         }
     },
     showlegend: false,
