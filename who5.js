@@ -312,9 +312,9 @@ form.addEventListener("submit", function (e) {
       "你可能有情緒困擾，不妨散散步讓自己輕鬆一下，向你的朋友及家人分享你的感受。除了放鬆心情之外，我們建議你可以考慮輔導服務，我們很樂意為你提供一對一免費線上諮詢服務，讓你進一步了解自己的狀況。";
       color = "#EB4841";
   } else {
-    category.textContent = "沒有情緒困擾";
+    category.textContent = "非常幸福";
     description.textContent =
-      "你的情緒很健康啊，真好！";
+      "恭喜，你非常幸福啊，真好！";
       color = "#4EC04E";
   }
 
@@ -327,7 +327,7 @@ form.addEventListener("submit", function (e) {
     {
       domain: { x: [0, 1], y: [0, 1] },
       value: question_sum,
-      title: { text: "情緒困擾" },
+      title: { text: "幸福感" },
       type: "indicator",
       mode: "gauge+number",
       gauge: {
