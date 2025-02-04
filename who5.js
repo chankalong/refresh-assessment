@@ -287,7 +287,7 @@ form.addEventListener("submit", function (e) {
     // Iterate over the score keys
     for (var i = 0; i <= (number_question - 2); i++) {
       var itemScore = parseInt(
-        document.querySelector(`input[name="${name_question}_${i}"]:checked`).value);
+        document.querySelector(`input[name="${name_question}_${i}"]:checked`).value) * 4;
       // Check if the score should be subtracted from 4
       //if (inverseScores.includes(i)) {
       //  question_sum += 4 - itemScore;
