@@ -297,11 +297,11 @@ form.addEventListener("submit", function (e) {
       //}
     }
 
-    var cmiScore_y = cmi_object['cmi_0_score'] - cmi_object['cmi_1_score'] + cmi_object['cmi_2_score'] - cmi_object['cmi_3_score'];
-    var cmiScore_c = cmi_object['cmi_4_score'] + cmi_object['cmi_5_score'] - cmi_object['cmi_6_score'] + cmi_object['cmi_7_score'];
-    var cmiScore_f = cmi_object['cmi_8_score'] - cmi_object['cmi_9_score'] + cmi_object['cmi_10_score'] - cmi_object['cmi_11_score'];
-    var cmiScore_p = cmi_object['cmi_12_score'] + cmi_object['cmi_13_score'] - cmi_object['cmi_14_score'] + cmi_object['cmi_15_score'];
-    var cmiScore_a = cmi_object['cmi_16_score'] - cmi_object['cmi_17_score'] + cmi_object['cmi_18_score'] - cmi_object['cmi_19_score'];
+    var cmiScore_y = cmi_object['cmi_0_score'] + cmi_object['cmi_1_score'] + cmi_object['cmi_2_score'] + cmi_object['cmi_3_score'];
+    var cmiScore_c = cmi_object['cmi_4_score'] + cmi_object['cmi_5_score'] + cmi_object['cmi_6_score'] + cmi_object['cmi_7_score'];
+    var cmiScore_f = cmi_object['cmi_8_score'] + cmi_object['cmi_9_score'] + cmi_object['cmi_10_score'] + cmi_object['cmi_11_score'];
+    var cmiScore_p = cmi_object['cmi_12_score'] + cmi_object['cmi_13_score'] + cmi_object['cmi_14_score'] + cmi_object['cmi_15_score'];
+    var cmiScore_a = cmi_object['cmi_16_score'] + cmi_object['cmi_17_score'] + cmi_object['cmi_18_score'] + cmi_object['cmi_19_score'];
 
     var cmi_factor_object = { "cmiScore_y": cmiScore_y, "cmiScore_c": cmiScore_c, "cmiScore_f": cmiScore_f, "cmiScore_p": cmiScore_p, "cmiScore_a": cmiScore_a };
     var sortedKeys_cmi_factor_object = Object.keys(cmi_factor_object).sort(function (a, b) {
