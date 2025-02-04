@@ -381,6 +381,9 @@ form.addEventListener("submit", function (e) {
         love_triangular_final_group = 'non_love';
     }
 
+  var category = document.getElementById(`${name_question}Category`);
+  var description = document.getElementById(`${name_question}Description`);
+
     if (love_triangular_final_group == 'consummate') {
         category.textContent = "完整的愛";
         description.textContent = "兩人之間充滿激情、親密和承諾。這是大部分人追求的理想愛情境界。";
