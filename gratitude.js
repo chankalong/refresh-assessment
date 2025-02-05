@@ -1,295 +1,435 @@
-document.querySelector('#start_div').addEventListener('click', function () {
-    document.querySelector('#gratitudeIntroDiv').style.display = 'none';
-    document.querySelector('#gratitudeQuestionDiv').style.display = '';
-    document.querySelector('h1').style.display = 'none';
-    document.querySelector('.fixed.bottom-0.right-4').querySelector('button').click()
-})
+var number_question = 7;
+var name_question = "gratitude";
+var max_item_score = 4
+var total_score = (number_question - 1) * max_item_score;
+var scale_name = "感恩特質";
+
+document.querySelector("#start_div").addEventListener("click", function () {
+  document.querySelector(`#${name_question}IntroDiv`).style.display = "none";
+  document.querySelector(`#${name_question}QuestionDiv`).style.display = "";
+  document.querySelector("h1").style.display = "none";
+  document
+    .querySelector(".fixed.bottom-0.right-4")
+    .querySelector("button")
+    .click();
+});
 //document.querySelector('.node-container').classList.remove('my-6')
 //document.querySelector('.node-container').classList.remove('pt-4')
-document.querySelector('.page-title').style.marginBottom = '0px';
-for (var i = 2; i <= 4; i++) {
-    var targetId = '#gratitude_' + i + '_block';
-    anime({
-        targets: targetId,
-        translateX: 20,
-    });
+document.querySelector(".page-title").style.marginBottom = "0px";
+for (var i = 2; i <= (number_question - 1); i++) {
+  var targetId = `#${name_question}_` + i + "_block";
+  anime({
+    targets: targetId,
+    translateX: 20,
+  });
 }
 
-var gratitude_1_next_button = document.getElementById('gratitude_1_next_button');
-var gratitude_1_next_function = function () {
-    anime.timeline({
-        duration: 200,
-        delay: 200
+//var scs_1_next_button = document.getElementById(`${name_question}_1_next_button`);
+var first_next_function = function () {
+  anime
+    .timeline({
+      duration: 200,
+      delay: 200,
     })
-        .add({
-            targets: '#gratitude_1_block',
-            easing: 'easeOutExpo',
-            translateX: -20,
-            opacity: 0, complete: function () {
-                document.getElementById('gratitude_1_block').style.display = 'none';
-                document.getElementById('gratitude_2_block').style.display = '';
-            }
-        })
-        .add({
-            targets: '#gratitude_2_block',
-            easing: 'easeInExpo',
-            translateX: 0,
-            opacity: 1
-        }, '-=50')
+    .add({
+      targets: `#${name_question}_1_block`,
+      easing: "easeOutExpo",
+      translateX: -20,
+      opacity: 0,
+      complete: function () {
+        document.getElementById(`${name_question}_1_block`).style.display = "none";
+        document.getElementById(`${name_question}_2_block`).style.display = "";
+      },
+    })
+    .add(
+      {
+        targets: `#${name_question}_2_block`,
+        easing: "easeInExpo",
+        translateX: 0,
+        opacity: 1,
+      },
+      "-=50"
+    );
 };
-Array.prototype.map.call(document.querySelectorAll('input[name=gratitude_0]'), function (e) {
-    e.addEventListener('click', gratitude_1_next_function);
-    e.addEventListener('click', function () {
-        gratitude_1_next_button.addEventListener('click', gratitude_1_next_function);
-        gratitude_1_next_button.style.opacity = 1
+Array.prototype.map.call(
+  document.querySelectorAll(`input[name=${name_question}_0]`),
+  function (e) {
+    e.addEventListener("click", first_next_function);
+    e.addEventListener("click", function () {
+      document.getElementById(`${name_question}_1_next_button`).addEventListener("click", first_next_function);
+      document.getElementById(`${name_question}_1_next_button`).style.opacity = 1;
     });
-})
+  }
+);
 
 // Common function for handling previous and next buttons
 function handlePreviousButton(previousblockId, currentBlockId) {
-    anime.timeline({
-        duration: 200,
-        delay: 200
+  anime
+    .timeline({
+      duration: 200,
+      delay: 200,
     })
-        .add({
-            targets: '#' + currentBlockId + '_block',
-            easing: 'easeOutExpo',
-            translateX: 20,
-            opacity: 0,
-            complete: function () {
-                document.querySelector('#' + currentBlockId + '_block').style.display = 'none';
-                document.querySelector('#' + previousblockId + '_block').style.display = '';
-            }
-        })
-        .add({
-            targets: '#' + previousblockId + '_block',
-            easing: 'easeInExpo',
-            translateX: 0,
-            opacity: 1
-        }, '-=50');
+    .add({
+      targets: "#" + currentBlockId + "_block",
+      easing: "easeOutExpo",
+      translateX: 20,
+      opacity: 0,
+      complete: function () {
+        document.querySelector("#" + currentBlockId + "_block").style.display =
+          "none";
+        document.querySelector("#" + previousblockId + "_block").style.display =
+          "";
+      },
+    })
+    .add(
+      {
+        targets: "#" + previousblockId + "_block",
+        easing: "easeInExpo",
+        translateX: 0,
+        opacity: 1,
+      },
+      "-=50"
+    );
 }
 
 function handleNextButton(currentBlockId, nextBlockId) {
-    anime.timeline({
-        duration: 200,
-        delay: 200
+  anime
+    .timeline({
+      duration: 200,
+      delay: 200,
     })
-        .add({
-            targets: '#' + currentBlockId + '_block',
-            easing: 'easeOutExpo',
-            translateX: -20,
-            opacity: 0,
-            complete: function () {
-                document.querySelector('#' + currentBlockId + '_block').style.display = 'none';
-                document.querySelector('#' + nextBlockId + '_block').style.display = '';
-            }
-        })
-        .add({
-            targets: '#' + nextBlockId + '_block',
-            easing: 'easeInExpo',
-            translateX: 0,
-            opacity: 1
-        }, '-=50');
+    .add({
+      targets: "#" + currentBlockId + "_block",
+      easing: "easeOutExpo",
+      translateX: -20,
+      opacity: 0,
+      complete: function () {
+        document.querySelector("#" + currentBlockId + "_block").style.display =
+          "none";
+        document.querySelector("#" + nextBlockId + "_block").style.display = "";
+      },
+    })
+    .add(
+      {
+        targets: "#" + nextBlockId + "_block",
+        easing: "easeInExpo",
+        translateX: 0,
+        opacity: 1,
+      },
+      "-=50"
+    );
 }
 
 function AddFunctionListener(previousblockId, currentBlockId, nextBlockId) {
-    document.getElementById(currentBlockId + '_previous_button').addEventListener('click', function () { handlePreviousButton(previousblockId, currentBlockId) })
-    Array.prototype.map.call(document.querySelectorAll('input[name=' + previousblockId + ']'), function (e) {
-        e.addEventListener('click', function () { handleNextButton(currentBlockId, nextBlockId) });
-        e.addEventListener('click', function () {
-            document.getElementById(currentBlockId + '_next_button').addEventListener('click', function () { handleNextButton(currentBlockId, nextBlockId) });
-            document.getElementById(currentBlockId + '_next_button').style.opacity = 1
-        });
-    })
-
+  document
+    .getElementById(currentBlockId + "_previous_button")
+    .addEventListener("click", function () {
+      handlePreviousButton(previousblockId, currentBlockId);
+    });
+  Array.prototype.map.call(
+    document.querySelectorAll("input[name=" + previousblockId + "]"),
+    function (e) {
+      e.addEventListener("click", function () {
+        handleNextButton(currentBlockId, nextBlockId);
+      });
+      e.addEventListener("click", function () {
+        document
+          .getElementById(currentBlockId + "_next_button")
+          .addEventListener("click", function () {
+            handleNextButton(currentBlockId, nextBlockId);
+          });
+        document.getElementById(
+          currentBlockId + "_next_button"
+        ).style.opacity = 1;
+      });
+    }
+  );
 }
 
-for (var i = 1; i <= 18; i++) {
-    AddFunctionListener('gratitude_' + i, 'gratitude_' + (i + 1), 'gratitude_' + (i + 2));
+for (var i = 1; i <= (number_question - 2); i++) {
+  AddFunctionListener(`${name_question}_${i}`, `${name_question}_${i + 1}`, `${name_question}_${i + 2}`);
 }
 
-//last
-
-var gratitude_6_previous_button = document.getElementById('gratitude_6_previous_button');
-gratitude_6_previous_button.addEventListener('click', function () {
-    anime.timeline({
+//##last
+document
+  .getElementById(`${name_question}_${number_question}_previous_button`)
+  .addEventListener("click", function () {
+    anime
+      .timeline({
         duration: 200,
-        delay: 200
-    })
-        .add({
-            targets: '#gratitude_6_block',
-            easing: 'easeOutExpo',
-            translateX: 20,
-            opacity: 0, complete: function () {
-                document.getElementById('gratitude_5_block').style.display = '';
-                document.getElementById('gratitude_6_block').style.display = 'none';
-            }
-        })
-        .add({
-            targets: '#gratitude_5_block',
-            easing: 'easeInExpo',
-            translateX: 0,
-            opacity: 1
-        }, '-=50')
-})
+        delay: 200,
+      })
+      .add({
+        targets: `#${name_question}_${number_question - 1}_block`,
+        easing: "easeOutExpo",
+        translateX: 20,
+        opacity: 0,
+        complete: function () {
+          document.getElementById(
+            `${name_question}_${number_question - 1}_block`
+          ).style.display = "";
+          document.getElementById(
+            `${name_question}_${number_question}_block`
+          ).style.display = "none";
+        },
+      })
+      .add(
+        {
+          targets: `#${name_question}_${number_question - 1}_block`,
+          easing: "easeInExpo",
+          translateX: 0,
+          opacity: 1,
+        },
+        "-=50"
+      );
+  });
 
-var gratitude_6_next_button = document.getElementById('gratitude_6_next_button');
-var gratitude_6_next_function = function () {
-    swal.fire({
-        text: '確定提交嗎？',
+document
+  .getElementById(`${name_question}_${number_question}_next_button`)
+  .addEventListener("click", function () {
+    swal
+      .fire({
+        text: "確定提交嗎？",
         showCloseButton: true,
-        cancelButtonText: '取消',
+        cancelButtonText: "取消",
         showCancelButton: true,
-        confirmButtonText: '確定',
-        customClass: { confirmButton: 'btnRound-thin btnRound-orange mx-2', cancelButton: 'btnRound-thin btnRound-green mx-2' },
+        confirmButtonText: "確定",
+        customClass: {
+          confirmButton: "btnRound-thin btnRound-orange mx-2",
+          cancelButton: "btnRound-thin btnRound-green mx-2",
+        },
         buttonsStyling: false,
-        focusConfirm: false
-    }).then(function (result) {
+        focusConfirm: false,
+      })
+      .then(function (result) {
         if (result.isConfirmed) {
-            document.querySelector('input[value=查看測試結果]').click()
+          document.querySelector("input[value=查看測試結果]").click();
         }
-    });
-}
+      });
+  });
 
-Array.prototype.map.call(document.querySelectorAll('input[name=gratitude_5]'), function (e) {
-    e.addEventListener('click', gratitude_6_next_function);
-    e.addEventListener('click', function () {
-        gratitude_6_next_button.addEventListener('click', gratitude_6_next_function);
-        gratitude_6_next_button.style.opacity = 1
-    });
-})
 var system_id_textbox = document.getElementById("system_id");
 var member_id_textbox = document.getElementById("member_id");
-var canvas_element = document.createElement('canvas');
+var canvas_element = document.createElement("canvas");
 member_id_textbox.value = drupalSettings.user.member_id;
 system_id_textbox.value = drupalSettings.bokss.user_uuid;
 
-  var uid_textbox = document.getElementById("uid");
-  var member_level_textbox = document.getElementById("member_level");
-  var eap_company_textbox = document.getElementById("eap_company");
+var uid_textbox = document.getElementById("uid");
+var member_level_textbox = document.getElementById("member_level");
+var eap_company_textbox = document.getElementById("eap_company");
+var complete_time_textbox = document.getElementById("complete_time");
 
-  if (uid_textbox.value) {console.log("input uid value already")} else {uid_textbox.value = Math.random();}
-  if (drupalSettings.user.levels === undefined) {member_level_textbox.value = 0} else {member_level_textbox.value = drupalSettings.user.levels[0]}
-  if (drupalSettings.user.eap === undefined) {eap_company_textbox.value = '0'} else {eap_company_textbox.value = drupalSettings.user.eap.label}
+if (uid_textbox.value) {
+  console.log("input uid value already");
+} else {
+  uid_textbox.value = Math.random();
+}
+if (drupalSettings.user.levels === undefined) {
+  member_level_textbox.value = 0;
+} else {
+  member_level_textbox.value = drupalSettings.user.levels[0];
+}
+if (drupalSettings.user.eap === undefined) {
+  eap_company_textbox.value = "0";
+} else {
+  eap_company_textbox.value = drupalSettings.user.eap.label;
+}
 
-var form = document.getElementById('form_gratitude');
+Number.prototype.padLeft = function (base, chr) {
+  var len = String(base || 10).length - String(this).length + 1;
+  return len > 0 ? new Array(len).join(chr || "0") + this : this;
+};
+
+var d = new Date();
+var dformat =
+  [d.getFullYear(), (d.getMonth() + 1).padLeft(), d.getDate().padLeft()].join(
+    "-"
+  ) +
+  " " +
+  [
+    d.getHours().padLeft(),
+    d.getMinutes().padLeft(),
+    d.getSeconds().padLeft(),
+  ].join(":");
+
+complete_time_textbox.value = dformat;
+
+var activity_name_textbox = document.getElementById("activity_name");
+var urlParamsActivity = new URLSearchParams(window.location.search).get(
+  "activity_name"
+);
+
+if (urlParamsActivity) {
+  activity_name_textbox.value = new URLSearchParams(window.location.search).get(
+    "activity_name"
+  );
+} else {
+  activity_name_textbox.value = "NA_public";
+}
+
+var worker_textbox = document.getElementById("worker");
+worker_textbox.value = new URLSearchParams(window.location.search).get(
+  "worker"
+);
+
+var subscription_textbox = document.getElementById("subscription");
+subscription_textbox.value =
+  drupalSettings.user.subscription.expire_subscription;
+
+var form = document.getElementById(`form_${name_question}`);
 
 form.addEventListener("submit", function (e) {
-    var gratitude_0_score = parseInt(document.querySelector('input[name="gratitude_0"]:checked').value);
-    var gratitude_1_score = parseInt(document.querySelector('input[name="gratitude_1"]:checked').value);
-    var gratitude_2_score = parseInt(document.querySelector('input[name="gratitude_2"]:checked').value);
-    var gratitude_3_score = parseInt(document.querySelector('input[name="gratitude_3"]:checked').value);
-    var gratitude_4_score = parseInt(document.querySelector('input[name="gratitude_4"]:checked').value);
-    var gratitude_5_score = parseInt(document.querySelector('input[name="gratitude_5"]:checked').value);
+  e.preventDefault();
 
-    var gratitudeScore = gratitude_0_score + gratitude_1_score + (4 - gratitude_2_score) + gratitude_3_score + gratitude_4_score + (4 - gratitude_5_score);
-    if (isNaN(gratitudeScore)) {
-        return; //stop the execution of function
+  // Define the scores that need to be subtracted from 4
+  const inverseScores = [2, 5];
+  // Initial sum
+  var question_sum = 0;
+
+  //score
+    // Iterate over the score keys
+    for (var i = 0; i <= (number_question - 2); i++) {
+      var itemScore = parseInt(
+        document.querySelector(`input[name="${name_question}_${i}"]:checked`).value);
+      // Check if the score should be subtracted from 4
+      if (inverseScores.includes(i)) {
+        question_sum += 4 - itemScore;
+      } else {
+        question_sum += itemScore;
+      }
     }
-    var data = new FormData(form);
-    var action = e.target.action;
-    fetch(action, {
-        method: 'POST',
-        body: data,
-    })
-    e.preventDefault();
 
-    if (gratitudeScore > 15 && gratitudeScore <= 25) {
-        gratitudeCategory.textContent = "感恩程度：高";
-        gratitudeDescription.textContent = "結果顯示你會經常對自己所得的美好事物或境況，感到慶幸、欣賞及感激，你亦可以透過寫感恩日記，或每日安排一段安靜的時間去數算自己的恩典，來幫助自己更加懂得感恩。";
-        gratitudeColor = "#4EC04E";
-    } if (gratitudeScore > 7 && gratitudeScore <= 15) {
-        gratitudeCategory.textContent = "感恩程度：中";
-        gratitudeDescription.textContent = "結果顯示你會間中都會對自己所得的美好事物或境況，感到慶幸、欣賞及感激。如果你想培養更加多感恩的習慣，你可以寫感恩日記，或每日安排一段安靜的時間去數算自己的恩典。";
-        gratitudeColor = "#FFC84A";
-    } if (gratitudeScore >= 0 && gratitudeScore <= 7) {
-        gratitudeCategory.textContent = "感恩程度：低";
-        gratitudeDescription.innerHTML = "結果顯示你較少會對自己所得的美好事物或境況，感到慶幸、欣賞及感激。不妨透過寫感恩日記來養成表達謝意的習慣，或每日安排一段安靜的時間去數算自己的恩典。除此之外，我們建議你可以考慮輔導服務，我們很樂意為你提供" + '<a href="/consultation?lms_course=assessment_gratitude">一對一免費線上諮詢服務</a>' + "，讓你進一步了解自己的狀況。"
-        gratitudeColor = "#F48847";
-    }
-    document.getElementById('gratitudeQuestionDiv').style.display = 'none';
-    document.getElementById('gratitudeResultDiv').style.display = '';
-    document.querySelector('h1').innerText = '測試結果';
-    document.title = '測試結果 | Re:Fresh線上精神健康自助平台';
+  if (document.getElementById("user_name_manual").value == "") {
+    console.log("no name");
+  } else {
+    participantName.textContent =
+      document.getElementById("user_name_manual").value;
+  }
 
-    var data = [
-        {
-            domain: { x: [0, 1], y: [0, 1] },
-            value: gratitudeScore,
-            type: "indicator",
-            mode: "gauge+number",
-            gauge: {
-                axis: { range: [0, 25] },
-                bar: { color: gratitudeColor, thickness: 1 }
-            }
-        }
-    ];
+  var category = document.getElementById(`${name_question}Category`);
+  var description = document.getElementById(`${name_question}Description`);
 
-    var layout = {
-        paper_bgcolor: "#ffffff",
-        margin: { l: 35, r: 35, b: 10, t: 10, pad: 0 }, height: 200, autosize: true, font: {
-            family: 'Arial, sans-serif'
-        }
-    };
-    var config = { responsive: true, displaylogo: false, displayModeBar: false }
-    Plotly.newPlot('myDiv', data, layout, config);
-    document.querySelector('.fixed.bottom-0.right-4').querySelector('button').click()
+  if (question_sum <= 7) {
+    category.textContent = "感恩微光";
+    description.textContent =
+      "親愛的，您內在感恩之光微光乍現。或許目前不易察覺美好，請別氣餒，這只是起點。感恩微光雖小，卻蘊含希望與溫暖。溫柔守護微光，從每天一絲美好開始，它終將綻放光芒，溫暖您的心房，照亮前路。";
+      color = "#D0D8E0";
+  } else if (question_sum <= 15) {
+    category.textContent = "感恩萌芽";
+    description.textContent =
+      "親愛的，您的感恩之心正萌芽。您已感受生活美好，懂得珍惜，這很棒，代表您有溫柔的心。萌芽的感恩 充滿成長希望與無限可能，請溫柔呵護，留意生活點滴，練習感謝，它將茁壯成長，帶來更多溫暖與喜悅。";
+      color = "#A9DFBF";
+  } else {
+    category.textContent = "感恩滿溢";
+    description.textContent =
+      "親愛的，您的感恩心 滿溢！您深刻感受生活美好，真摯感激身邊人事物，這份心意真誠動人。滿溢的感恩如陽光般溫暖，讓您幸福快樂，人際更美好，生活充滿正向能量。請珍視這份珍貴心意，讓它持續照亮您的美好生活！";
+      color = "#FAD7A0";
+  }
 
-    html2canvas(document.querySelector('#save_result'), {
-        backgroundColor: null,
-        onclone: function (document) {
-            document.querySelector("#save_result_logo").style.display = 'flex';
-            //document.querySelector("#save_result_header").style.display = '';
-            document.querySelector("#gratitude_category_description_div").style.borderBottomRightRadius = '0px';
-            document.querySelector("#gratitude_category_description_div").style.borderBottomLeftRadius = '0px';
-            document.querySelector("#gratitude_footer").style.display = '';
-        }
-    }).then(function (canvas) {
+  document.getElementById(`${name_question}QuestionDiv`).style.display = "none";
+  document.getElementById(`${name_question}ResultDiv`).style.display = "";
+  document.querySelector("h1").style.display = "";
+
+  //new
+  var data = [
+    {
+      domain: { x: [0, 1], y: [0, 1] },
+      value: question_sum,
+      title: { text: scale_name },
+      type: "indicator",
+      mode: "gauge+number",
+      gauge: {
+        axis: { range: [0, total_score], tickvals: [0, total_score/2, total_score] },
+        bar: { color: color, thickness: 1 },
+        bgcolor: "white",
+      },
+    },
+  ];
+
+  var layout = {
+    margin: { l: 35, r: 35, b: 10, t: 80, pad: 0 },
+    height: 200,
+    autosize: true,
+    font: {
+      family: "Arial, sans-serif",
+    },
+  };
+
+  var config = { responsive: true, displaylogo: false, displayModeBar: false };
+  Plotly.newPlot("myDiv", data, layout, config);
+
+  //document.getElementById('block-bokss-page-title').scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' })
+
+  document
+    .querySelector(".fixed.bottom-0.right-4")
+    .querySelector("button")
+    .click();
+
+  //var html2canvas_count = 0;
+  if (document.getElementById("img_div_content_id")) {
+    console.log("do not create html2canvas");
+  } else {
+    setTimeout(function () {
+      html2canvas(document.querySelector("#save_result")).then(function (
+        canvas
+      ) {
         canvas_element = canvas;
-    })
-})
-document.querySelector('#save_div').addEventListener('click', function () {
-    var img = canvas_element.toDataURL("image/png");
-    var link = document.createElement("a");
-    link.download = 'gratitude_result.png';
-    link.href = img;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    delete link;
-    //canvastoimage.saveAsPNG(canvas_element, canvas_element.width, canvas_element.height, 'result')
-})
-
-
-document.querySelector('#share_div').addEventListener('click', function () {
-    canvas_element.toBlob(function (blob) {
-        var fileType = blob.type;
-        var fileName = 'image.png';
-
-        var file = new File([blob], fileName);
-        file.type = fileType;
-        var files = [file];
-
-        // Even if you want to share just one file you need to
-        // send them as an array of files.
-        var shareData = {
-            files: files
-        }
-        if (window.navigator.canShare(shareData)) {
-            try {
-                window.navigator.share(shareData)
-            } catch (err) {
-                if (err.name !== 'AbortError') {
-                    console.error(err.name, err.message)
-                }
-            }
-        } else {
-            console.warn('Sharing not supported', shareData)
-        }
-    })
+        var img_png = canvas_element.toDataURL("image/png");
+        var img_div = document.createElement("div");
+        var img_div_content = document.createElement("img");
+        img_div_content.id = "img_div_content_id";
+        var base64_svg = document.getElementById("base64_svg");
+        img_div.style = "display: flex; justify-content: center;";
+        img_div.appendChild(img_div_content);
+        img_div_content.src = img_png;
+        base64_svg.value = img_png;
+        document
+          .getElementById("svg_div")
+          .insertBefore(
+            img_div,
+            document.getElementById("save_div").parentNode
+          );
+        document.querySelector("#save_result").style.display = "none";
+        document.querySelector("#svg_div").style.display = "";
+        //html2canvas_count = 1;
+        var data = new FormData(form);
+        var action = e.target.action;
+        fetch(action, {
+          method: "POST",
+          body: data,
+        });
+        e.preventDefault();
+      });
+    }, 1000);
+  }
+  console.log("create html2canvas");
 });
-var browser = window.bowser.getParser(window.navigator.userAgent);
-var isValidBrowser = browser.is("desktop");
-if (isValidBrowser) {
-    document.querySelector("#share_div").style.display = 'none';
-}
+
+document
+  .querySelector("#share_div")
+  .setAttribute("data-clipboard-text", window.location.href);
+
+document.querySelector("#share_div").addEventListener("click", function () {
+  var shareData = {
+    url:
+      document.location.origin +
+      document.location.pathname +
+      "?utm_source=website&utm_medium=referral",
+  };
+
+  try {
+    window.navigator.canShare(shareData);
+  } catch (err) {}
+
+  if (window.navigator.canShare(shareData)) {
+    try {
+      window.navigator.share(shareData);
+    } catch (err) {
+      if (err.name !== "AbortError") {
+        console.error(err.name, err.message);
+      }
+    }
+  } else {
+    console.warn("Sharing not supported", shareData);
+  }
+});
