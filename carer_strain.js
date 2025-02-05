@@ -1,5 +1,6 @@
 var number_question = 14;
 var name_question = "mcsi";
+var total_score = 26;
 
 document.querySelector("#start_div").addEventListener("click", function () {
   document.querySelector(`#${name_question}IntroDiv`).style.display = "none";
@@ -341,7 +342,7 @@ form.addEventListener("submit", function (e) {
       type: "indicator",
       mode: "gauge+number",
       gauge: {
-        axis: { range: [0, 40], tickvals: [0, 13, 26] },
+        axis: { range: [0, total_score], tickvals: [0, total_score/2, total_score] },
         bar: { color: color, thickness: 1 },
         bgcolor: "white",
       },
