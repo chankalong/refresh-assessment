@@ -2,6 +2,7 @@ var number_question = 16;
 var name_question = "maas";
 var max_item_score = 5
 var total_score = (number_question - 1) * max_item_score;
+var scale_name = "靜觀覺察";
 
 document.querySelector("#start_div").addEventListener("click", function () {
   document.querySelector(`#${name_question}IntroDiv`).style.display = "none";
@@ -339,7 +340,7 @@ form.addEventListener("submit", function (e) {
     {
       domain: { x: [0, 1], y: [0, 1] },
       value: question_sum,
-      title: { text: "照顧者壓力" },
+      title: { text: scale_name },
       type: "indicator",
       mode: "gauge+number",
       gauge: {
