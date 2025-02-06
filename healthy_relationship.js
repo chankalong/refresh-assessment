@@ -1,4 +1,3 @@
-
 var number_question = 14;
 var name_question = "healthy_relationship";
 var max_item_score = 1
@@ -182,7 +181,7 @@ form.addEventListener("submit", function (e) {
     e.preventDefault();
 
     // Define the scores that need to be subtracted from 4
-    const inverseScores = [2, 5];
+    //const inverseScores = [2, 5];
     // Initial sum
     var question_sum = 0;
     // Iterate over the score keys
@@ -190,11 +189,11 @@ form.addEventListener("submit", function (e) {
       var itemScore = parseInt(
         document.querySelector(`input[name="${name_question}_${i}"]:checked`).value);
       // Check if the score should be subtracted from 4
-      if (inverseScores.includes(i)) {
-        question_sum += 4 - itemScore;
-      } else {
+      //if (inverseScores.includes(i)) {
+      //  question_sum += 4 - itemScore;
+      //} else {
         question_sum += itemScore;
-      }
+      //}
     }
 
     if (document.getElementById("user_name_manual").value != "") {
@@ -207,15 +206,15 @@ form.addEventListener("submit", function (e) {
     if (question_sum <= 6) {
         category.textContent = "關係需要更多關心";
         description.textContent = "親愛的，看得出你很重視這段關係。目前你和對方在價值觀和行為模式上，可能還在探索磨合。這是一個很好的契機，溫柔地檢視關係，一起努力調整。別灰心，關係成長需要時間。專業協助能提供方向，陪伴你們朝更和諧親密的關係前進。";
-        color = "#D0D8E0";
+        color = "#FFDAB9";
     } else if (question_sum <= 10) {
         category.textContent = "關係正在成長";
         description.textContent = "太好了！看得出你和對方都為關係投入心力！你們在價值觀和行為上已建立一定共識，這是很棒的開始，關係有持續成長的潛力。不妨更深入交流想法，分享生活點滴，讓關係更緊密豐富。每個用心都能為關係帶來更多美好色彩！";
-        color = "#A9DFBF";
+        color = "#B0E0E6";
     } else {
         category.textContent = "關係真摯美好";
         description.textContent = "太棒了！看得出你和對方都非常珍惜這段關係。你們在價值觀和行為上契合度很高，真是令人羨慕的健康關係！恭喜你們！請繼續保持真誠與理解，珍惜呵護關係，讓愛與支持流動，共同創造更多美好回憶，讓這份美好關係成為彼此最堅實的後盾。";
-        color = "#FAD7A0";
+        color = "#98FB98";
     }
 
     document.getElementById(`${name_question}QuestionDiv`).style.display = "none";
