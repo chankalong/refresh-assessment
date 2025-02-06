@@ -176,6 +176,79 @@ document.getElementById(`${name_question}_${number_question}_next_button`)
         });
     });
 
+var system_id_textbox = document.getElementById("system_id");
+var member_id_textbox = document.getElementById("member_id");
+var canvas_element = document.createElement("canvas");
+member_id_textbox.value = drupalSettings.user.member_id;
+system_id_textbox.value = drupalSettings.bokss.user_uuid;
+
+var uid_textbox = document.getElementById("uid");
+var member_level_textbox = document.getElementById("member_level");
+var eap_company_textbox = document.getElementById("eap_company");
+var complete_time_textbox = document.getElementById("complete_time");
+
+if (uid_textbox.value) {
+  console.log("input uid value already");
+} else {
+  uid_textbox.value = Math.random();
+}
+
+if (drupalSettings.user.levels === undefined) {
+  member_level_textbox.value = 0;
+} else {
+  member_level_textbox.value = drupalSettings.user.levels[0];
+}
+
+if (drupalSettings.user.eap === undefined) {
+  eap_company_textbox.value = "0";
+} else {
+  eap_company_textbox.value = drupalSettings.user.eap.label;
+}
+
+
+Number.prototype.padLeft = function (base, chr) {
+  var len = String(base || 10).length - String(this).length + 1;
+  return len > 0 ? new Array(len).join(chr || "0") + this : this;
+};
+
+
+var d = new Date();
+var dformat =
+  [d.getFullYear(), (d.getMonth() + 1).padLeft(), d.getDate().padLeft()].join(
+    "-"
+  ) +
+  " " +
+  [
+    d.getHours().padLeft(),
+    d.getMinutes().padLeft(),
+    d.getSeconds().padLeft(),
+  ].join(":");
+
+complete_time_textbox.value = dformat;
+
+var activity_name_textbox = document.getElementById("activity_name");
+var urlParamsActivity = new URLSearchParams(window.location.search).get(
+  "activity_name"
+);
+
+if (urlParamsActivity) {
+  activity_name_textbox.value = new URLSearchParams(window.location.search).get(
+    "activity_name"
+  );
+} else {
+  activity_name_textbox.value = "NA_public";
+}
+
+
+var worker_textbox = document.getElementById("worker");
+worker_textbox.value = new URLSearchParams(window.location.search).get(
+  "worker"
+);
+
+var subscription_textbox = document.getElementById("subscription");
+subscription_textbox.value =
+  drupalSettings.user.subscription.expire_subscription;
+
 var form = document.getElementById(`form_${name_question}`);
 form.addEventListener("submit", function (e) {
     e.preventDefault();
@@ -194,6 +267,7 @@ form.addEventListener("submit", function (e) {
       //} else {
         question_sum += itemScore;
       //}
+
     }
 
     if (document.getElementById("user_name_manual").value != "") {
