@@ -381,6 +381,8 @@ form.addEventListener("submit", function (e) {
 
 
     document.getElementById(`${name_question}QuestionDiv`).style.display = "none";
+    document.getElementById(`${name_question}ResultDiv`).style.display = "";
+    document.querySelector("h1").style.display = "";
     
 
     var data = [
@@ -577,8 +579,7 @@ form.addEventListener("submit", function (e) {
                 );
                 document.querySelector("#save_result").style.display = "none";
                 document.querySelector("#svg_div").style.display = "";
-                document.getElementById(`${name_question}ResultDiv`).style.display = "";
-    document.querySelector("h1").style.display = "";
+
                 
                 var data = new FormData(form);
                 var action = e.target.action;
