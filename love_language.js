@@ -513,7 +513,7 @@ form.addEventListener("submit", function (e) {
       ];
 
     var layout = {
-    margin: { b: 20, t: 40, r: 20, l: 20, pad: 0 },
+    margin: { b: 25, t: 50, r: 25, l: 25, pad: 0 },
     font: {
       family: "'Noto Sans HK', Arial, sans-serif",
       size: 16,
@@ -524,7 +524,7 @@ form.addEventListener("submit", function (e) {
       angularaxis: {
         color: "transparent",
         gridcolor: "black",
-        tickfont: { color: "black", weight: "bold" },
+        tickfont: { color: love_language_FillColor, weight: "bold" },
         rotation: 90,
       },
       radialaxis: {
