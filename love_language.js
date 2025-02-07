@@ -557,8 +557,7 @@ form.addEventListener("submit", function (e) {
     var config = { responsive: true, displaylogo: false, displayModeBar: false };
     Plotly.newPlot("myDiv", data, layout, config);
 
-    document.getElementById(`${name_question}ResultDiv`).style.display = "";
-    document.querySelector("h1").style.display = "";
+    
 
     if (!document.getElementById("img_div_content_id")) {
         setTimeout(function () {
@@ -578,6 +577,8 @@ form.addEventListener("submit", function (e) {
                 );
                 document.querySelector("#save_result").style.display = "none";
                 document.querySelector("#svg_div").style.display = "";
+                document.getElementById(`${name_question}ResultDiv`).style.display = "";
+    document.querySelector("h1").style.display = "";
                 
                 var data = new FormData(form);
                 var action = e.target.action;
