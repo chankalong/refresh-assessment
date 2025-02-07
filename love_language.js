@@ -513,7 +513,7 @@ form.addEventListener("submit", function (e) {
       ];
 
     var layout = {
-    margin: { b: 10, t: 10, r: 10, l: 10, pad: 0 },
+    margin: { b: 20, t: 40, r: 20, l: 20, pad: 0 },
     font: {
       family: "'Noto Sans HK', Arial, sans-serif",
       size: 16,
