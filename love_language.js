@@ -513,13 +513,37 @@ form.addEventListener("submit", function (e) {
       ];
 
     var layout = {
-        margin: { l: 35, r: 35, b: 10, t: 80, pad: 0 },
-        height: 200,
-        autosize: true,
-        font: {
-            family: "Arial, sans-serif",
-        },
-    };
+    margin: { b: 35, t: 35, r: 35, l: 35, pad: 0 },
+    font: {
+      family: "'Noto Sans HK', Arial, sans-serif",
+      size: 16,
+      weight: 700,
+    },
+    polar: {
+      bgcolor: "rgba(0,0,0,0)",
+      angularaxis: {
+        color: "transparent",
+        gridcolor: "black",
+        tickfont: { color: "black", weight: "bold" },
+        rotation: 90,
+      },
+      radialaxis: {
+        visible: false,
+        range: [0, 8],
+      },
+    },
+    showlegend: false,
+    hovermode: false,
+    height: 260,
+    width: 260,
+    plot_bgcolor: "rgba(0,0,0,0)",
+    paper_bgcolor: "rgba(0,0,0,0)",
+  };
+  var config = {
+    responsive: true,
+    displaylogo: false,
+    displayModeBar: false,
+  };
 
     var config = { responsive: true, displaylogo: false, displayModeBar: false };
     Plotly.newPlot("myDiv", data, layout, config);
