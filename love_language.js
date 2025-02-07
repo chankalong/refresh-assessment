@@ -253,6 +253,7 @@ subscription_textbox.value =
 var form = document.getElementById(`form_${name_question}`);
 form.addEventListener("submit", function (e) {
     e.preventDefault();
+    document.querySelector(".fixed.bottom-0.right-4").querySelector("button").click();
 
     var love_language_object = {};
 
