@@ -560,7 +560,7 @@ form.addEventListener("submit", function (e) {
 
     if (!document.getElementById("img_div_content_id")) {
         setTimeout(function () {
-            html2canvas(document.querySelector("#save_result")).then(function (canvas) {
+            html2canvas(document.querySelector("#save_result"), { scale: 2 }).then(function (canvas) {
                 var img_png = canvas.toDataURL("image/png");
                 var img_div = document.createElement("div");
                 var img_div_content = document.createElement("img");
