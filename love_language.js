@@ -315,7 +315,17 @@ form.addEventListener("submit", function (e) {
     default: "rgba(247, 122, 121, 0.8)",
   };
 
+    const plotTextColor = {
+    a: "rgba(239, 162, 111,1)",
+    b: "rgba(125, 183, 134,1)",
+    c: "rgba(197, 153, 224,1)",
+    d: "rgba(104, 167, 215,1)",
+    e: "rgba(226, 141, 174,1)",
+    default: "rgba(247, 122, 121, 1)",
+  };
+
   const love_language_FillColor = plotFillColor[love_language_maxKey] || plotFillColor["default"];
+    const love_language_TextColor = plotTextColor[love_language_maxKey] || plotTextColor["default"];
 
   ['a', 'b', 'c', 'd', 'e'].forEach(key => {
     if (isNaN(love_language_count[key])) {
@@ -524,7 +534,7 @@ form.addEventListener("submit", function (e) {
       angularaxis: {
         color: "transparent",
         gridcolor: "black",
-        tickfont: { color: love_language_FillColor, weight: "bold" },
+        tickfont: { color: love_language_TextColor, weight: "bold" },
         rotation: 90,
       },
       radialaxis: {
