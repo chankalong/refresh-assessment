@@ -534,7 +534,7 @@ form.addEventListener("submit", function (e) {
     },
     showlegend: false,
     hovermode: false,
-    height: 260,
+    height: 280,
     width: 260,
     plot_bgcolor: "rgba(0,0,0,0)",
     paper_bgcolor: "rgba(0,0,0,0)",
