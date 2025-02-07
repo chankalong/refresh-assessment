@@ -513,7 +513,7 @@ form.addEventListener("submit", function (e) {
       ];
 
     var layout = {
-    margin: { b: 0, t: 0, r: 0, l: 0, pad: 0 },
+    margin: { b: 10, t: 10, r: 10, l: 10, pad: 0 },
     font: {
       family: "'Noto Sans HK', Arial, sans-serif",
       size: 16,
@@ -534,8 +534,8 @@ form.addEventListener("submit", function (e) {
     },
     showlegend: false,
     hovermode: false,
-    height: 280,
-    width: 260,
+    height: 300,
+    width: 300,
     plot_bgcolor: "rgba(0,0,0,0)",
     paper_bgcolor: "rgba(0,0,0,0)",
   };
