@@ -307,20 +307,20 @@ form.addEventListener("submit", function (e) {
   resultDiv.style.backgroundSize = "cover";
 
   const plotFillColor = {
-    a: "rgba(239, 162, 111,0.8)",
-    b: "rgba(125, 183, 134,0.8)",
+    a: "rgba(219, 183, 183,0.8)",
+    b: "rgba(226, 141, 174,0.8)",
     c: "rgba(197, 153, 224,0.8)",
-    d: "rgba(104, 167, 215,0.8)",
-    e: "rgba(226, 141, 174,0.8)",
+    d: "rgba(239, 162, 111,0.8)",
+    e: "rgba(125, 183, 134,0.8)",
     default: "rgba(247, 122, 121, 0.8)",
   };
 
     const plotTextColor = {
-    a: "rgba(239, 162, 111,1)",
-    b: "rgba(125, 183, 134,1)",
+    a: "rgba(219, 183, 183,1)",
+    b: "rgba(226, 141, 174,1)",
     c: "rgba(197, 153, 224,1)",
-    d: "rgba(104, 167, 215,1)",
-    e: "rgba(226, 141, 174,1)",
+    d: "rgba(239, 162, 111,1)",
+    e: "rgba(125, 183, 134,1)",
     default: "rgba(247, 122, 121, 1)",
   };
 
