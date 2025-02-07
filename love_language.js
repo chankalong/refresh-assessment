@@ -526,8 +526,8 @@ form.addEventListener("submit", function (e) {
     margin: { b: 25, t: 50, r: 25, l: 25, pad: 0 },
     font: {
       family: "'Noto Sans HK', Arial, sans-serif",
-      size: 16,
-      weight: 700,
+      size: 18,
+      weight: 800,
     },
     polar: {
       bgcolor: "rgba(0,0,0,0)",
