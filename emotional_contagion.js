@@ -3,7 +3,7 @@ var number_question = 16;
 var name_question = "emotional_contagion";
 var max_item_score = 3
 var total_score = 45;
-var scale_name = "情緒傳染問卷";
+var scale_name = "情緒傳染";
 
 document.querySelector("#start_div").addEventListener("click", function () {
     document.querySelector(`#${name_question}IntroDiv`).style.display = "none";
