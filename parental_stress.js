@@ -284,7 +284,7 @@ form.addEventListener("submit", function (e) {
         if (question_sum <= 30) {
         category.textContent = "親親抱抱，再出發";
         description.textContent = "嗨，爸媽！偶爾感到育兒疲憊是正常的。就像陰天需要陽光，給自己一個喘息的空間，補充能量，才能繼續照亮孩子的世界！";
-        color = "#ffda63"; } else if (question_sum <= 30) {
+        color = "#ffda63"; } else if (question_sum <= 80) {
         category.textContent = "壓力破表，SOS！";
         description.textContent = "親愛的，感到育兒壓力如夜幕般沉重嗎？請記得，即使在最黑暗的時刻，也有星光陪伴。勇敢尋求支持，讓我們一起迎接黎明！";
         color = "#5b5ea6"; }
