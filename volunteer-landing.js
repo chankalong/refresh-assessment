@@ -1,10 +1,6 @@
 var functionTime;
 
-if (typeof functionTime != "undefined") {
-  // do something
-  console.log("mounted already");
-} else {
-  //header_splide.destroy();
+if (typeof functionTime != 'undefined') {
   new Splide(document.getElementById("header_splide"), {
     type: "loop",
     autoplay: true,
@@ -64,6 +60,10 @@ if (typeof functionTime != "undefined") {
   video_splide_element.mount(window.splide.Extensions);
   thumbnail_splide_element.mount(window.splide.Extensions);
   thumbnail_splide_element.Components.Video.disable(true);
-
   functionTime = 1;
+} else {
+  //header_splide.destroy();
+  console.log("mounted already");
+  functionTime = undefined
+  
 }
