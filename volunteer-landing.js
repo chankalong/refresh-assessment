@@ -11,7 +11,7 @@ if ( header_splide.state.is( Splide.STATES.IDLE ) ) {
 	header_splide.mount();
 }
 
-var volunteer-project_splide = new Splide( document.getElementById( 'volunteer-project_splide' ), {
+var volunteer_project_splide = new Splide( document.getElementById( 'volunteer-project_splide' ), {
   type: 'loop',
   autoplay: true,
   gap: '1.2em',
@@ -23,11 +23,11 @@ var volunteer-project_splide = new Splide( document.getElementById( 'volunteer-p
   }
 } );
 
-if ( project_splide.state.is( Splide.STATES.IDLE ) ) {
+if ( volunteer_project_splide.state.is( Splide.STATES.IDLE ) ) {
   // do something
 	console.log("mounted already")
 } else {
-	project_splide.mount();
+	volunteer_project_splide.mount();
 }
   
 var content_splide = new Splide( document.getElementById( 'content_splide' ), {
@@ -92,4 +92,3 @@ if ( video_splide_element.state.is( Splide.STATES.IDLE ) ) {
   thumbnail_splide_element.mount( window.splide.Extensions );
   thumbnail_splide_element.Components.Video.disable(true)
 }
-
