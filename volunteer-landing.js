@@ -8,6 +8,7 @@ if ( header_splide.state.is( Splide.STATES.IDLE ) ) {
   // do something
 	console.log("mounted already")
 } else {
+	header_splide.destroy();
 	header_splide.mount();
 }
 
@@ -27,6 +28,7 @@ if ( volunteer_project_splide.state.is( Splide.STATES.IDLE ) ) {
   // do something
 	console.log("mounted already")
 } else {
+	volunteer_project_splide.destroy();
 	volunteer_project_splide.mount();
 }
   
@@ -46,6 +48,7 @@ if ( content_splide.state.is( Splide.STATES.IDLE ) ) {
   // do something
 	console.log("mounted already")
 } else {
+	content_splide.destroy();
 	content_splide.mount();
 }
 
@@ -87,6 +90,8 @@ if ( video_splide_element.state.is( Splide.STATES.IDLE ) ) {
   // do something
 	console.log("mounted already")
 } else {
+	video_splide_element.destroy();
+	thumbnail_splide_element.destroy();
 	  video_splide_element.sync( thumbnail_splide_element );
   video_splide_element.mount( window.splide.Extensions );
   thumbnail_splide_element.mount( window.splide.Extensions );
