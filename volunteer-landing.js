@@ -1,6 +1,6 @@
 var functionTime;
 
-if (typeof functionTime != 'undefined') {
+if (typeof functionTime == 'undefined') {
   new Splide(document.getElementById("header_splide"), {
     type: "loop",
     autoplay: true,
