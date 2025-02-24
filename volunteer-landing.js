@@ -1,99 +1,69 @@
-var header_splide = new Splide( document.getElementById( 'header_splide' ), {
-  type: 'loop',
-  autoplay: true,
-  perPage: 1,
-} );
+var functionTime;
 
-if ( header_splide.state.is( Splide.STATES.IDLE ) ) {
+if (typeof functionTime != "undefined") {
   // do something
-	console.log("mounted already")
+  console.log("mounted already");
 } else {
-	header_splide.destroy();
-	header_splide.mount();
-}
+  //header_splide.destroy();
+  new Splide(document.getElementById("header_splide"), {
+    type: "loop",
+    autoplay: true,
+    perPage: 1,
+  }).mount();
+  new Splide(document.getElementById("volunteer-project_splide"), {
+    type: "loop",
+    autoplay: true,
+    gap: "1.2em",
+    perPage: 2,
+    breakpoints: {
+      640: {
+        perPage: 1,
+      },
+    },
+  }).mount();
 
-var volunteer_project_splide = new Splide( document.getElementById( 'volunteer-project_splide' ), {
-  type: 'loop',
-  autoplay: true,
-  gap: '1.2em',
-  perPage: 2,
-  breakpoints: {
-		640: {
-			perPage: 1,
-		},
-  }
-} );
+  var video_splide_element = new Splide(
+    document.getElementById("video_splide"),
+    {
+      pagination: false,
+      arrows: false,
+      video: {
+        loop: true,
+        mute: true,
+        //playerOptions: {
+        //  youtube: { ... },
+        //},
+      },
+    }
+  );
 
-if ( volunteer_project_splide.state.is( Splide.STATES.IDLE ) ) {
-  // do something
-	console.log("mounted already")
-} else {
-	volunteer_project_splide.destroy();
-	volunteer_project_splide.mount();
-}
-  
-var content_splide = new Splide( document.getElementById( 'content_splide' ), {
-  type: 'loop',
-  autoplay: true,
-  gap: '1.2em',
-  perPage: 3,
-  breakpoints: {
-		640: {
-			perPage: 1,
-		},
-  }
-} );
+  var thumbnail_splide_element = new Splide(
+    document.getElementById("thumbnail_splide"),
+    {
+      rewind: true,
+      pagination: false,
+      isNavigation: true,
+      //fixedWidth: 640,
+      //fixedHeight: 360,
+      perPage: 3,
+      gap: 5,
+      focus: "center",
+      video: {
+        loop: true,
+        mute: false,
+        disableOverlayUI: true,
+        hideControls: true,
+        //playerOptions: {
+        //  youtube: { ... },
+        //},
+      },
+    }
+  );
 
-if ( content_splide.state.is( Splide.STATES.IDLE ) ) {
-  // do something
-	console.log("mounted already")
-} else {
-	content_splide.destroy();
-	content_splide.mount();
-}
+  video_splide_element.sync(thumbnail_splide_element);
+  video_splide_element.mount(window.splide.Extensions);
+  thumbnail_splide_element.mount(window.splide.Extensions);
+  thumbnail_splide_element.Components.Video.disable(true);
 
-var video_splide_element = new Splide( document.getElementById( 'video_splide' ), {
-  pagination: false,
-  arrows: false,
-  video: {
-    loop: true,
-    mute: true,
-    //playerOptions: {
-    //  youtube: { ... },
-    //},
-  },
-} );
-
-  
-  
-var thumbnail_splide_element = new Splide( document.getElementById( 'thumbnail_splide' ), {
-  rewind: true,
-  pagination: false,
-  isNavigation: true,
-  //fixedWidth: 640,
-  //fixedHeight: 360,
-  perPage: 3,
-  gap: 5,
-  focus: 'center',
-  video: {
-    loop: true,
-    mute: false,
-    disableOverlayUI: true,
-    hideControls: true
-    //playerOptions: {
-    //  youtube: { ... },
-    //},
-  },
-} );
-
-if ( video_splide_element.state.is( Splide.STATES.IDLE ) ) {
-  // do something
-	console.log("mounted already")
-} else {
-	video_splide_element.destroy();
-	thumbnail_splide_element.destroy();
-	  video_splide_element.sync( thumbnail_splide_element );
-  video_splide_element.mount( window.splide.Extensions );
-  thumbnail_splide_element.mount( window.splide.Extensions );
-  thumbnail_splide_element.Components.Video.disable(true)
+  functionTime = 1;
 }
