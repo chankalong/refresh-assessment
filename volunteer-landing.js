@@ -1,10 +1,17 @@
-new Splide( document.getElementById( 'header_splide' ), {
+var header_splide = new Splide( document.getElementById( 'header_splide' ), {
   type: 'loop',
   autoplay: true,
   perPage: 1,
-} ).mount(); ;
+} );
 
-new Splide( document.getElementById( 'volunteer-project_splide' ), {
+if ( header_splide.state.is( Splide.STATES.IDLE ) ) {
+  // do something
+	console.log("mounted already")
+} else {
+	header_splide.mount();
+}
+
+var volunteer-project_splide = new Splide( document.getElementById( 'volunteer-project_splide' ), {
   type: 'loop',
   autoplay: true,
   gap: '1.2em',
@@ -14,9 +21,16 @@ new Splide( document.getElementById( 'volunteer-project_splide' ), {
 			perPage: 1,
 		},
   }
-} ).mount(); ;
+} );
+
+if ( project_splide.state.is( Splide.STATES.IDLE ) ) {
+  // do something
+	console.log("mounted already")
+} else {
+	project_splide.mount();
+}
   
-  new Splide( document.getElementById( 'content_splide' ), {
+var content_splide = new Splide( document.getElementById( 'content_splide' ), {
   type: 'loop',
   autoplay: true,
   gap: '1.2em',
@@ -26,7 +40,14 @@ new Splide( document.getElementById( 'volunteer-project_splide' ), {
 			perPage: 1,
 		},
   }
-} ).mount(); ;
+} );
+
+if ( content_splide.state.is( Splide.STATES.IDLE ) ) {
+  // do something
+	console.log("mounted already")
+} else {
+	content_splide.mount();
+}
 
 var video_splide_element = new Splide( document.getElementById( 'video_splide' ), {
   pagination: false,
@@ -61,7 +82,14 @@ var thumbnail_splide_element = new Splide( document.getElementById( 'thumbnail_s
     //},
   },
 } );
-  video_splide_element.sync( thumbnail_splide_element );
+
+if ( video_splide_element.state.is( Splide.STATES.IDLE ) ) {
+  // do something
+	console.log("mounted already")
+} else {
+	  video_splide_element.sync( thumbnail_splide_element );
   video_splide_element.mount( window.splide.Extensions );
   thumbnail_splide_element.mount( window.splide.Extensions );
   thumbnail_splide_element.Components.Video.disable(true)
+}
+
