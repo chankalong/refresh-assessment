@@ -426,7 +426,7 @@
 		if (this.container.is(":visible")) {
 			css.display = "block";
 		}
-		this.container.removeAttr("style").css(css);
+		this.container.removeAttr("style").css(css).css('top', '0px');
 		if (arrowCss) {
 			return this.arrow.removeAttr("style").css(arrowCss);
 		}
