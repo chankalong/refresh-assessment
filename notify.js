@@ -383,7 +383,7 @@
 		css.top = '0px';
 		css[oppFull] = pMain === "b" ? elemH : pMain === "r" ? elemW : 0;
 		incr(css, "left", elemPos.left - wrapPos.left);
-		ref = ["top", "left"];
+		ref = ["left"];
 		for (j = 0, len = ref.length; j < len; j++) {
 			pos = ref[j];
 			margin = parseInt(this.elem.css("margin-" + pos), 10);
@@ -419,7 +419,6 @@
 				incr(arrowCss, "left", realign(pAlign, arrowSize, elemIW));
 			}
 		} else if (indexOf.call(hAligns, pMain) >= 0) {
-			incr(css, "top", realign(pAlign, contH, elemH));
 			if (arrowCss) {
 				incr(arrowCss, "top", realign(pAlign, arrowSize, elemIH));
 			}
