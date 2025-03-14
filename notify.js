@@ -420,9 +420,9 @@
 				incr(arrowCss, "left", realign(pAlign, arrowSize, elemIW));
 			}
 		} else if (indexOf.call(hAligns, pMain) >= 0) {
-			incr(css, "top", realign(pAlign, contH, elemH));
+			incr(css, "top", 0); // realign(pAlign, contH, elemH));
 			if (arrowCss) {
-				incr(arrowCss, "top", realign(pAlign, arrowSize, elemIH));
+				incr(arrowCss, "top", 0); // realign(pAlign, arrowSize, elemIH));
 			}
 		}
 		if (this.container.is(":visible")) {
