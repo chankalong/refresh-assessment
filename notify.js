@@ -382,7 +382,7 @@
 		oppFull = positions[opp];
 		css = {};
 		css[oppFull] = pMain === "b" ? elemH : pMain === "r" ? elemW : 0;
-		incr(css, "top", elemPos.top - wrapPos.top);
+		incr(css, "top", 0);// elemPos.top - wrapPos.top);
 		incr(css, "left", elemPos.left - wrapPos.left);
 		ref = ["top", "left"];
 		for (j = 0, len = ref.length; j < len; j++) {
