@@ -380,8 +380,8 @@
 		opp = opposites[pMain];
 		oppFull = positions[opp];
 		css = {};
+		css.top = '0px';
 		css[oppFull] = pMain === "b" ? elemH : pMain === "r" ? elemW : 0;
-		incr(css, "top", elemPos.top - wrapPos.top);
 		incr(css, "left", elemPos.left - wrapPos.left);
 		ref = ["top", "left"];
 		for (j = 0, len = ref.length; j < len; j++) {
