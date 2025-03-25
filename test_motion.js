@@ -1,4 +1,4 @@
-const { animate, scroll } = Motion
+const { animate, inView } = Motion
 
 inView(".box", (element) => {
   animate(element, { opacity: 1 })
