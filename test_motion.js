@@ -1,3 +1,7 @@
 const { animate, scroll } = Motion
 
-animate(".box", { rotate: 360 }, { duration: 1 })
+inView(".box", (element) => {
+  animate(element, { opacity: 1 })
+})
+
+//animate("", { rotate: 360 }, { duration: 1 })
