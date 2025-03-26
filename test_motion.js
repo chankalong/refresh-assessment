@@ -73,7 +73,7 @@ const { animate, press, scroll } = Motion;
       animate("#orgin", { scale: 1 }, { type: "spring", stiffness: 1000 });
       animate("#city", { x: 0 });
       window.scrollTo({
-        top: 0,
+        top: 150,
         behavior: 'smooth'
       });
       
