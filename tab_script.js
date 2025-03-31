@@ -1,11 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     const tabs = document.querySelectorAll('.tab');
     const tabContents = document.querySelectorAll('.tab-content');
-    const tabsContainer = document.querySelector('.tabs-container');
-    
-    // Variables for scroll behavior
-    const initialOffset = 400;  // How far down the page before hiding behavior starts
-    let lastScrollPosition = 0; // Tracks the previous scroll position
     
     // Handle tab clicking
     tabs.forEach(tab => {
@@ -65,30 +60,4 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
-    
-    // Very simple scroll handler - minimal code for maximum reliability
-    window.addEventListener('scroll', function() {
-        // Get current scroll position using both methods for maximum browser support
-        const currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        
-        // Determine scroll direction
-        const isScrollingDown = currentScrollTop > lastScrollPosition;
-        
-        // Apply or remove the hidden class based on scroll direction
-        if (isScrollingDown && currentScrollTop > initialOffset) {
-            tabsContainer.classList.add('hidden');
-        } else if (!isScrollingDown) {
-            tabsContainer.classList.remove('hidden');
-        }
-        
-        // Update the last position for next comparison
-        lastScrollPosition = currentScrollTop;
-    }, { passive: true });
-    
-    // Force initial check - sometimes needed after page refresh
-    setTimeout(function() {
-        if (window.pageYOffset > initialOffset) {
-            tabsContainer.classList.add('hidden');
-        }
-    }, 100);
 }); 
