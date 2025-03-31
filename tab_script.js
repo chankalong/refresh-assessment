@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const tabsContainer = document.querySelector('.tabs-container');
     
     // Variables for scroll behavior
-    const initialOffset = 200;  // How far down the page before hiding behavior starts
+    const initialOffset = 400;  // How far down the page before hiding behavior starts
     let lastScrollPosition = 0; // Tracks the previous scroll position
     
     // Handle tab clicking
