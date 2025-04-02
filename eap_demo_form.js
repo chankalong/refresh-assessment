@@ -191,8 +191,8 @@ form.addEventListener("submit", function (e) {
         method: "POST",
         body: data,
       });
-      document.getElementById("counselling_div").style.display = "none";
-      document.getElementById("counselling_submit").style.display = "";
+      document.getElementById("eap_demo_form").style.display = "none";
+      document.getElementById("eap_demo_submit").style.display = "";
       console.log("Submit Form.");
       e.preventDefault();
       return false;
