@@ -143,7 +143,7 @@ var dformat =
 complete_time_textbox.value = dformat;
 
 var form = document.getElementById("eap_demo_form");
-var form_company_nature = document.getElementById("form_company_nature");
+var form_company_nature = document.getElementById("form_company_nature_select");
 form_company_nature.addEventListener("change", function (e) {
   if (form_company_nature.selectedOptions[0].innerText == "其他") {
     document.getElementById("form_company_nature_other_wrapper").style.display = "";
