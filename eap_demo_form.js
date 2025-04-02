@@ -161,9 +161,9 @@ form_company_nature.addEventListener("change", function (e) {
   }
 });
 
-var form_source_refresh = document.getElementById("form_source_refresh");
-form_source_refresh.addEventListener("change", function (e) {
-  if (form_source_refresh.checked) {
+var form_source_other = document.getElementById("form_source_other");
+form_source_other.addEventListener("change", function (e) {
+  if (form_source_other.checked) {
     document.getElementById("form_source_other_wrapper").style.display = "";
     validator.addField("#form_source_other_detail", [
       {
