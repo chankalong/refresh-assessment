@@ -1,4 +1,5 @@
-const requestData = {
+document.getElementById('myButton_payment').addEventListener('click', function() {
+    const requestData = {
         amount: 10,
         description: "Hillman Group",
         account_code: "account",
@@ -13,3 +14,4 @@ const requestData = {
         },
         body: JSON.stringify(requestData),
       });
+});
