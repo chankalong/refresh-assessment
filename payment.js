@@ -1,4 +1,4 @@
-document.getElementById('myButton_payment').addEventListener('click', function() {
+document.getElementById('myButton_payment').addEventListener('click', async function() {
     const requestData = {
         amount: 10,
         description: "Hillman Group",
