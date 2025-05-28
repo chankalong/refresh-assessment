@@ -2,9 +2,7 @@
 var number_question = 22;
 var name_question = "dass_y";
 var max_item_score = 3
-var total_score = 63;
 var scale_name = "情緒自評量表 - 青少年版";
-var scale_name_plot = scale_name.replace('問卷','').replace('量表', '').replace('測試', '').replace('測驗', '');
 
 document.querySelector("#start_div").addEventListener("click", function () {
     document.querySelector(`#${name_question}IntroDiv`).style.display = "none";
@@ -285,6 +283,8 @@ form.addEventListener("submit", function (e) {
         depression_sum *= 2;
         anxiety_sum *= 2;
         stress_sum *= 2;
+
+        var total_score = depression_sum + anxiety_sum + stress_sum;
         
 
     if (document.getElementById("user_name_manual").value != "") {
@@ -294,11 +294,22 @@ form.addEventListener("submit", function (e) {
     var category = document.getElementById(`${name_question}Category`);
     var description = document.getElementById(`${name_question}Description`);
 
-        if (depression_sum <= 63) {
-        category.textContent = "Beginner";
-        description.textContent = "Basic understanding";
-        color = "#e2e8f0";
-        }
+    if (total_score >= 0 && total_score <= 23) {
+        category.textContent = "健康";
+        description.textContent = "您的情緒健康狀況在正常範圍內。您能夠很好地應對生活挑戰，並保持良好的心理健康。";
+    } else if (total_score >= 24 && total_score <= 29) {
+        category.textContent = "輕度情緒困擾";
+        description.textContent = "您正經歷輕度情緒困擾。雖然您可能在情緒、焦慮或壓力方面有一些挑戰，但這些通常是可控的，不會嚴重影響您的生活。";
+    } else if (total_score >= 30 && total_score <= 39) {
+        category.textContent = "中度情緒困擾";
+        description.textContent = "您正經歷中度情緒困擾。您可能正在與抑鬱、焦慮和壓力症狀的組合作鬥爭，這些開始顯著影響您的日常功能和生活品質。";
+    } else if (total_score >= 40 && total_score <= 46) {
+        category.textContent = "嚴重情緒困擾";
+        description.textContent = "您正經歷嚴重情緒困擾。您可能正在與抑鬱、焦慮和壓力方面的顯著症狀作鬥爭，這些嚴重干擾您在生活重要領域中有效運作的能力。";
+    } else if (total_score >= 47) {
+        category.textContent = "極度嚴重情緒困擾";
+        description.textContent = "您正經歷極度嚴重情緒困擾。您可能被抑鬱、焦慮和壓力的強烈症狀所壓倒，嚴重損害您的日常功能。強烈建議立即尋求專業協助。";
+    }
 
     document.getElementById(`${name_question}QuestionDiv`).style.display = "none";
     document.getElementById(`${name_question}ResultDiv`).style.display = "";
@@ -333,7 +344,7 @@ var layout = {
         },
         radialaxis: {
             visible: false,
-            range: [0, 20]
+            range: [0, 42]
         }
     },
     showlegend: false,
