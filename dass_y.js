@@ -271,16 +271,13 @@ form.addEventListener("submit", function (e) {
         var itemScore = parseInt(
             document.querySelector(`input[name="${name_question}_${i}"]:checked`).value);
         
-        // Check if the score should be subtracted from reverseScore
-        var finalScore = inverseScores.includes(i) ? reverseScore - itemScore : itemScore;
-        
         // Add to appropriate subscale based on item assignment
         if (depressionItems.includes(i)) {
-            depression_sum += finalScore;
+            depression_sum += itemScore;
         } else if (anxietyItems.includes(i)) {
-            anxiety_sum += finalScore;
+            anxiety_sum += itemScore;
         } else if (stressItems.includes(i)) {
-            stress_sum += finalScore;
+            stress_sum += itemScore;
         }
         }
 
