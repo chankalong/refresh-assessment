@@ -3,7 +3,7 @@ var number_question = 17;
 var name_question = "parental_stress";
 var max_item_score = 5
 var total_score = 80;
-var scale_name = "親職壓力量表";
+var scale_name = "父母管教壓力量表";
 var scale_name_plot = scale_name.replace('問卷','').replace('量表', '').replace('測試', '').replace('測驗', '');
 
 document.querySelector("#start_div").addEventListener("click", function () {
@@ -281,13 +281,13 @@ form.addEventListener("submit", function (e) {
     var category = document.getElementById(`${name_question}Category`);
     var description = document.getElementById(`${name_question}Description`);
 
-        if (question_sum <= 30) {
+        if (question_sum <= 45) {
         category.textContent = "親親抱抱，再出發";
         description.textContent = "嗨，爸媽！偶爾感到育兒疲憊是正常的。就像陰天需要陽光，給自己一個喘息的空間，補充能量，才能繼續照亮孩子的世界！";
-        color = "#ffda63"; } else if (question_sum <= 80) {
+        color = "#b1dd8c"; } else if (question_sum <= 80) {
         category.textContent = "壓力破表，SOS！";
         description.textContent = "親愛的，感到育兒壓力如夜幕般沉重嗎？請記得，即使在最黑暗的時刻，也有星光陪伴。勇敢尋求支持，讓我們一起迎接黎明！";
-        color = "#5b5ea6"; }
+        color = "#ff8c82"; }
 
     document.getElementById(`${name_question}QuestionDiv`).style.display = "none";
     document.getElementById(`${name_question}ResultDiv`).style.display = "";
