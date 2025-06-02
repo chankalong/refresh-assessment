@@ -302,7 +302,7 @@ form.addEventListener("submit", function (e) {
         color = "#bcf0c2"; } else if (totalDifficulties <= 16) {
         category.textContent = "臨床門檻邊界";
         description.textContent = "在情緒、行為或人際關係等方面可能存在一定程度的困難，已接近需要關注的程度，如有需要，應尋求專業協助";
-        color = "#ffcd94"; } else if (totalDifficulties <= 20) {
+        color = "#ffcd94"; } else {
         category.textContent = "達臨床門檻邊界";
         description.textContent = "在情緒、行為或人際關係等方面有明顯的困難，可能存在較嚴重的情緒或行為問題。建議進行專業評估或介入";
         color = "#ffa3a3"; }
