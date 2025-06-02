@@ -315,14 +315,14 @@ form.addEventListener("submit", function (e) {
   var data = [{
     type: 'scatterpolar',
     r: [emotional, conduct, hyperactivity, peer, prosocial, emotional],
-    theta: ['情緒病症', '行為問題', '注意力不足', '社交問題', '親社會行為', '情緒病症'],
+    theta: ['情緒症狀', '行為問題', '注意力不足', '社交問題', '親社會行為', '情緒症狀'],
     fill: 'toself'
 },
 {
     type: 'scatterpolar',
     mode: 'lines',
     r: [10, 10, 10, 10, 10, 10],
-    theta: ['情緒病症', '行為問題', '注意力不足', '社交問題', '親社會行為', '情緒病症'],
+    theta: ['情緒症狀', '行為問題', '注意力不足', '社交問題', '親社會行為', '情緒症狀'],
     line: { color: 'grey' },
     title: { text: '理想值' }
 }]
