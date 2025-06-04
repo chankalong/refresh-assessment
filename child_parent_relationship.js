@@ -1,8 +1,8 @@
 
-var number_question = 31;
+var number_question = 16;
 var name_question = "child_parent_relationship";
 var max_item_score = 5
-var total_score = 150;
+var total_score = 75;
 var scale_name = "親子關係量表";
 var scale_name_plot = scale_name.replace('問卷','').replace('量表', '').replace('測試', '').replace('測驗', '');
 
@@ -257,7 +257,7 @@ form.addEventListener("submit", function (e) {
 
     
         // Define the scores that need to be subtracted from 5 (0-based indices)
-        const inverseScores = [];  // Empty array means no scores will be inverted
+        const inverseScores = [1, 3, 7, 9, 10, 11, 12, 13];  // Empty array means no scores will be inverted
         const reverseScore = 5;
         // Initial sum
         var question_sum = 0;
@@ -281,10 +281,16 @@ form.addEventListener("submit", function (e) {
     var category = document.getElementById(`${name_question}Category`);
     var description = document.getElementById(`${name_question}Description`);
 
-        if (question_sum <= 150) {
-        category.textContent = "high";
-        description.textContent = "very high";
-        color = "#e2e8f0"; }
+        if (question_sum <= 25) {
+        category.textContent = "低";
+        description.textContent = "低低低";
+        color = "#f99a90"; } else if (question_sum <= 50) {
+        category.textContent = "中";
+        description.textContent = "中中中";
+        color = "#ffe09e"; } else if (question_sum <= 75) {
+        category.textContent = "高";
+        description.textContent = "高高高";
+        color = "#ceffbd"; }
 
     document.getElementById(`${name_question}QuestionDiv`).style.display = "none";
     document.getElementById(`${name_question}ResultDiv`).style.display = "";
