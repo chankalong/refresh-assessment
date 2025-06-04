@@ -282,14 +282,14 @@ form.addEventListener("submit", function (e) {
     var description = document.getElementById(`${name_question}Description`);
 
         if (question_sum <= 25) {
-        category.textContent = "低";
-        description.textContent = "低低低";
+        category.textContent = "親子關係有待加強";
+        description.textContent = "您正用溫柔耐心澆灌親子關係，每次努力都是邁向更親近未來的希望。";
         color = "#f99a90"; } else if (question_sum <= 50) {
-        category.textContent = "中";
-        description.textContent = "中中中";
+        category.textContent = "親子關係普通";
+        description.textContent = "您的親子關係穩健前行，每一次對話和傾聽都在慢慢累積深厚的連結。";
         color = "#ffe09e"; } else if (question_sum <= 75) {
-        category.textContent = "高";
-        description.textContent = "高高高";
+        category.textContent = "親子關係良好";
+        description.textContent = "您與孩子之間洋溢理解與關愛，彼此心意相通，是生活中最溫暖的陪伴。";
         color = "#ceffbd"; }
 
     document.getElementById(`${name_question}QuestionDiv`).style.display = "none";
