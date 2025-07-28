@@ -1,13 +1,4 @@
-
-
-
 document.querySelector(".page-title").style.marginBottom = "0px";
-
-
-
-
-
-
 
 var system_id_textbox = document.getElementById("system_id");
 var member_id_textbox = document.getElementById("member_id");
@@ -44,7 +35,6 @@ Number.prototype.padLeft = function (base, chr) {
   return len > 0 ? new Array(len).join(chr || "0") + this : this;
 };
 
-
 var d = new Date();
 var dformat =
   [d.getFullYear(), (d.getMonth() + 1).padLeft(), d.getDate().padLeft()].join(
@@ -58,7 +48,6 @@ var dformat =
   ].join(":");
 
 complete_time_textbox.value = dformat;
-
 
 var subscription_textbox = document.getElementById("subscription");
 subscription_textbox.value =
@@ -74,13 +63,5 @@ form.addEventListener("submit", function (e) {
                     body: data,
                 });
     document.querySelector("#application_form").style.display = "none";
-                document.querySelector("#finish_application").style.display = "";
-
-    
-        
-        
-
-   
-
-    
+                document.querySelector("#finish_application").style.display = ""; 
 });
