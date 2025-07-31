@@ -292,9 +292,9 @@ validator
         {
             validator: (value, fields) => {
                 const checkedCount = document.querySelectorAll('input[name="interest"]:checked').length;
-                return checkedCount <= 3 & checkedCount >= 1;
+                return checkedCount <= 3 && checkedCount >= 1;
             },
-            errorMessage: 'You can select a maximum of 3 options.',
+            errorMessage: 'Please select 1-3 options.',
         },
     ]);
 
@@ -442,8 +442,8 @@ form.addEventListener("submit", function (e) {
         var total_score = depression_sum + anxiety_sum + stress_sum;
         
 
-    if (document.getElementById("user_name_manual").value != "") {
-        participantName.textContent = document.getElementById("user_name_manual").value;
+    if (document.getElementById("form_name").value != "") {
+        participantName.textContent = document.getElementById("form_name").value;
     }
 
     var category = document.getElementById(`${name_question}Category`);
