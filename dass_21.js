@@ -278,12 +278,14 @@ var subscription_textbox = document.getElementById("subscription");
 subscription_textbox.value =
   drupalSettings.user.subscription.expire_subscription;
 
-const validator = new window.JustValidate("#form_dass_21", {
+var validator = new JustValidate("#form_dass_21", {
   tooltip: {
     position: "bottom",
   },
   //validateBeforeSubmitting: true,
   //submitFormAutomatically: true,
+  lockForm: false,
+  focusInvalidField: false,
 });
 
 validator
@@ -443,7 +445,13 @@ form_interest_other_select.addEventListener("change", function (e) {
 var form = document.getElementById(`form_${name_question}`);
 form.addEventListener("submit", function (e) {
   e.preventDefault();
-
+  
+  // Store the original form action and method
+  var originalAction = form.action;
+  var originalMethod = form.method;
+  
+  validator.revalidate().then(isValid => {
+    if (isValid) {
       // Define which items belong to each subscale (converting to 0-based indices)
       const depressionItems = [2, 4, 9, 12, 15, 16, 20]; // Items 3, 5, 10, 13, 16, 17, 21
       const anxietyItems = [1, 3, 6, 8, 14, 18, 19]; // Items 2, 4, 7, 9, 15, 19, 20
@@ -584,7 +592,7 @@ form.addEventListener("submit", function (e) {
             document.querySelector("#svg_div").style.display = "";
 
             var data = new FormData(form);
-            var action = e.target.action;
+            var action = originalAction || form.action;
             fetch(action, {
               method: "POST",
               body: data,
@@ -592,6 +600,41 @@ form.addEventListener("submit", function (e) {
           });
         }, 1000);
       }
+      console.log("Submit Form.");
+      return false;
+
+      // Do something with the form data
+    } else {
+      console.log("Form is not valid.");
+      // Re-enable all form fields if validation fails
+      var formFields = form.querySelectorAll('input, select, textarea');
+      formFields.forEach(function(field) {
+        field.disabled = false;
+        field.readOnly = false;
+      });
+    }
+  });
+});
+
+// Function to ensure all form fields are enabled
+function enableAllFormFields() {
+  var form = document.getElementById(`form_${name_question}`);
+  if (form) {
+    var formFields = form.querySelectorAll('input, select, textarea');
+    formFields.forEach(function(field) {
+      field.disabled = false;
+      field.readOnly = false;
+    });
+  }
+}
+
+// Add event listener to re-enable fields after validation
+validator.onSuccess(function() {
+  enableAllFormFields();
+});
+
+validator.onFail(function() {
+  enableAllFormFields();
 });
 
 document
