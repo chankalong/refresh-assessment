@@ -322,8 +322,8 @@ validator
     },
   ])
   .addField('input[name="interest"]', [
+    {rule: "required", errorMessage: "必選"},
     {
-      rule: "required",
       validator: (value, fields) => {
         const checkedCount = document.querySelectorAll(
           'input[name="interest"]:checked'
@@ -600,12 +600,10 @@ form.addEventListener("submit", function (e) {
       // Do something with the form data
     } else {
       console.log("Form is not valid.");
-        e.preventDefault();
-      return false;
+      e.preventDefault();
     }
   });
   e.preventDefault();
-  return false;
 });
 
 document
