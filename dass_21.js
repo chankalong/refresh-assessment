@@ -290,7 +290,7 @@ validator
   ])
   .addField('input[name="interest"]', [
         {
-            rule: "function",
+          rule: "function",
             validator: (value, fields) => {
                 const checkedCount = document.querySelectorAll('input[name="interest"]:checked').length;
                 return checkedCount <= 3 && checkedCount >= 1;
@@ -408,6 +408,8 @@ form_interest_other_select.addEventListener("change", function (e) {
 var form = document.getElementById(`form_${name_question}`);
 form.addEventListener("submit", function (e) {
     e.preventDefault();
+    validator.revalidate().then((isValid) => {
+    if (isValid) {
 
     
         // Define which items belong to each subscale (converting to 0-based indices)
@@ -541,6 +543,17 @@ var layout = {
             });
         }, 1000);
     }
+    console.log("Submit Form.");
+      e.preventDefault();
+      return false;
+
+      // Do something with the form data
+    } else {
+      console.log("Form is not valid.");
+    }
+  });
+  e.preventDefault();
+  return false;
 });
 
 document.querySelector("#share_div")
@@ -568,6 +581,12 @@ document.querySelector("#share_div").addEventListener("click", function () {
         console.warn("Sharing not supported", shareData);
     }
 });
+
+
+
+
+
+
 
 
 
