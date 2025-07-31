@@ -296,7 +296,11 @@ errorFieldStyles.textContent = `
     margin-bottom: 5px !important;
     display: block !important;
     font-weight: 500 !important;
+    position: relative !important;
+    z-index: 10 !important;
   }
+  
+
 `;
 document.head.appendChild(errorFieldStyles);
 
@@ -306,17 +310,19 @@ var validator = new JustValidate("#form_dass_21", {
   lockForm: false,
   focusInvalidField: false,
   errorFieldCssClass: "error-field",
-  errorLabelCssClass: "error-label",
-  errorsContainer: ".error-container"
+  errorLabelCssClass: "error-label"
 });
 
+// Add individual error containers for each field
 validator
   .addField("#form_name", [
     {
       rule: "required",
       errorMessage: "必填",
     },
-  ])
+  ], {
+    errorsContainer: "#form_name_error_container"
+  })
   .addField("#form_telephone", [
     {
       rule: "required",
@@ -327,7 +333,9 @@ validator
       value: /^[0-9]{8}$/,
       errorMessage: "8位數字",
     },
-  ])
+  ], {
+    errorsContainer: "#form_telephone_error_container"
+  })
   .addField("#form_email", [
     {
       rule: "required",
@@ -338,14 +346,19 @@ validator
       //value: /^[\S]+@([\S]+\.)+[\S]+[^\.]$/, //need to change the regex for email
       errorMessage: "電郵",
     },
-  ])
+  ], {
+    errorsContainer: "#form_email_error_container"
+  })
   .addField("#form_mode_select", [
     {
       rule: "required",
       errorMessage: "必填",
     },
-  ])
+  ], {
+    errorsContainer: "#form_mode_error_container"
+  })
   .addField('input[name="interest"]', [
+    {rule: "required", errorMessage: "必選"},
     {
       validator: (value, fields) => {
         const checkedCount = document.querySelectorAll(
@@ -355,7 +368,9 @@ validator
       },
       errorMessage: "Please select 1-3 options.",
     },
-  ]);
+  ], {
+    errorsContainer: "#form_interest_error_container"
+  });
 
 // Add real-time validation for interest checkboxes
 document.querySelectorAll('input[name="interest"]').forEach(function(checkbox) {
@@ -460,7 +475,9 @@ form_interest_other_select.addEventListener("change", function (e) {
         rule: "required",
         errorMessage: "必填",
       },
-    ]);
+    ], {
+      errorsContainer: "#form_interest_other_error_container"
+    });
     //validator.revalidate();
   } else {
     document.getElementById("form_interest_other_wrapper").style.display =
