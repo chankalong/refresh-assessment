@@ -443,7 +443,7 @@ form_interest_other_select.addEventListener("change", function (e) {
 var form = document.getElementById(`form_${name_question}`);
 form.addEventListener("submit", function (e) {
   e.preventDefault();
-  validator.revalidate().then((isValid) => {
+  validator.revalidate().then(isValid => {
     if (isValid) {
       // Define which items belong to each subscale (converting to 0-based indices)
       const depressionItems = [2, 4, 9, 12, 15, 16, 20]; // Items 3, 5, 10, 13, 16, 17, 21
@@ -600,7 +600,7 @@ form.addEventListener("submit", function (e) {
       // Do something with the form data
     } else {
       console.log("Form is not valid.");
-      e.preventDefault();
+        e.preventDefault();
       return false;
     }
   });
