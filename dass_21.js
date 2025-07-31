@@ -278,19 +278,35 @@ var subscription_textbox = document.getElementById("subscription");
 subscription_textbox.value =
   drupalSettings.user.subscription.expire_subscription;
 
+// Add CSS styles for error fields
+var errorFieldStyles = document.createElement('style');
+errorFieldStyles.textContent = `
+  .error-field {
+    border: 2px solid #dc2626 !important;
+    background-color: #fef2f2 !important;
+    box-shadow: 0 0 0 1px #dc2626 !important;
+  }
+  .error-field:focus {
+    border-color: #dc2626 !important;
+    box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.2) !important;
+  }
+  .error-label {
+    color: #dc2626 !important;
+    font-size: 14px !important;
+    margin-top: 5px !important;
+    display: block !important;
+    font-weight: 500 !important;
+  }
+`;
+document.head.appendChild(errorFieldStyles);
+
 var validator = new JustValidate("#form_dass_21", {
   //validateBeforeSubmitting: true,
   //submitFormAutomatically: true,
   lockForm: false,
   focusInvalidField: false,
   errorFieldCssClass: "error-field",
-  errorLabelCssClass: "error-label",
-  errorLabelStyle: {
-    color: "#dc2626",
-    fontSize: "14px",
-    marginTop: "5px",
-    display: "block"
-  }
+  errorLabelCssClass: "error-label"
 });
 
 validator
