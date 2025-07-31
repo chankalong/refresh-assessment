@@ -324,7 +324,6 @@ validator
     },
   ])
   .addField('input[name="interest"]', [
-    {rule: "required", errorMessage: "必選"},
     {
       validator: (value, fields) => {
         const checkedCount = document.querySelectorAll(
