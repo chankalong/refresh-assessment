@@ -296,8 +296,19 @@ errorFieldStyles.textContent = `
     margin-bottom: 5px !important;
     display: block !important;
     font-weight: 500 !important;
+    position: absolute !important;
+    top: -25px !important;
+    left: 0 !important;
+  }
+  
+  /* Add relative positioning to form field containers */
+  #form_name_wrapper,
+  #form_telephone_wrapper,
+  #form_email_wrapper,
+  #form_interest_wrapper,
+  #form_interest_other_wrapper,
+  #form_mode_wrapper {
     position: relative !important;
-    top: -5px !important;
   }
 `;
 document.head.appendChild(errorFieldStyles);
