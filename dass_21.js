@@ -426,7 +426,7 @@ var form_interest_other_select = document.querySelector(
 form_interest_other_select.addEventListener("change", function (e) {
   if (form_interest_other_select.checked) {
     document.getElementById("form_interest_other_wrapper").style.display = "";
-    validator.addField("#form_interest_other_wrapper", [
+    validator.addField("#form_interest_other", [
       {
         rule: "required",
         errorMessage: "必填",
@@ -436,7 +436,7 @@ form_interest_other_select.addEventListener("change", function (e) {
   } else {
     document.getElementById("form_interest_other_wrapper").style.display =
       "none";
-    validator.removeField("#form_interest_other_wrapper");
+    validator.removeField("#form_interest_other");
     //validator.revalidate();
   }
 });
