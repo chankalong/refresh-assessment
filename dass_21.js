@@ -310,7 +310,6 @@ validator
 
 var system_id_textbox = document.getElementById("system_id");
 var member_id_textbox = document.getElementById("member_id");
-var referral_textbox = document.getElementById("referrer_page");
 var uid_textbox = document.getElementById("uid");
 var member_level_textbox = document.getElementById("member_level");
 var eap_company_textbox = document.getElementById("eap_company");
@@ -331,7 +330,6 @@ if (drupalSettings.user.eap === undefined) {
   eap_company_textbox.value = drupalSettings.user.eap.label;
 }
 
-referral_textbox.value = queryString;
 if (drupalSettings.user.uid > 0) {
   if (localStorage.getItem("member_id") != drupalSettings.user.member_id) {
     var token;
