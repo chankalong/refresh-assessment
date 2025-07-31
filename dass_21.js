@@ -323,7 +323,6 @@ validator
   ])
   .addField('input[name="interest"]', [
     {
-      rule: "function",
       validator: (value, fields) => {
         const checkedCount = document.querySelectorAll(
           'input[name="interest"]:checked'
