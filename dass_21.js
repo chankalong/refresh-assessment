@@ -241,12 +241,6 @@ if (urlParamsActivity) {
   activity_name_textbox.value = "NA_public";
 }
 
-
-var worker_textbox = document.getElementById("worker");
-worker_textbox.value = new URLSearchParams(window.location.search).get(
-  "worker"
-);
-
 var subscription_textbox = document.getElementById("subscription");
 subscription_textbox.value =
   drupalSettings.user.subscription.expire_subscription;
@@ -296,13 +290,9 @@ validator
   ])
   .addField('input[name="interest"]', [
         {
-            rule: 'required',
-            errorMessage: 'Please select at least one option.',
-        },
-        {
             validator: (value, fields) => {
                 const checkedCount = document.querySelectorAll('input[name="interest"]:checked').length;
-                return checkedCount <= 3;
+                return checkedCount <= 3 & checkedCount >= 1;
             },
             errorMessage: 'You can select a maximum of 3 options.',
         },
@@ -577,7 +567,6 @@ document.querySelector("#share_div").addEventListener("click", function () {
         console.warn("Sharing not supported", shareData);
     }
 });
-
 
 
 
