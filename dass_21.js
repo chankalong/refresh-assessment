@@ -278,7 +278,7 @@ var subscription_textbox = document.getElementById("subscription");
 subscription_textbox.value =
   drupalSettings.user.subscription.expire_subscription;
 
-const validator = new JustValidate("#form_dass_21", {
+const validator = new window.JustValidate("#form_dass_21", {
   tooltip: {
     position: "bottom",
   },
