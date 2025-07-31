@@ -450,7 +450,12 @@ form.addEventListener("submit", function (e) {
   var originalAction = form.action;
   var originalMethod = form.method;
   
-  validator.revalidate().then(isValid => {
+  // Ensure all fields are enabled before validation
+  enableAllFormFields();
+  
+  // Use a timeout to ensure fields are enabled before validation
+  setTimeout(function() {
+    validator.revalidate().then(isValid => {
     if (isValid) {
       // Define which items belong to each subscale (converting to 0-based indices)
       const depressionItems = [2, 4, 9, 12, 15, 16, 20]; // Items 3, 5, 10, 13, 16, 17, 21
@@ -614,6 +619,7 @@ form.addEventListener("submit", function (e) {
       });
     }
   });
+  }, 100); // Close the setTimeout function
 });
 
 // Function to ensure all form fields are enabled
@@ -636,6 +642,11 @@ validator.onSuccess(function() {
 validator.onFail(function() {
   enableAllFormFields();
 });
+
+// Periodically check and re-enable fields to prevent them from being disabled
+setInterval(function() {
+  enableAllFormFields();
+}, 1000);
 
 document
   .querySelector("#share_div")
