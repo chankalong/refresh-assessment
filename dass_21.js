@@ -293,9 +293,11 @@ errorFieldStyles.textContent = `
   .error-label {
     color: #dc2626 !important;
     font-size: 14px !important;
-    margin-top: 5px !important;
+    margin-bottom: 5px !important;
     display: block !important;
     font-weight: 500 !important;
+    position: relative !important;
+    top: -5px !important;
   }
 `;
 document.head.appendChild(errorFieldStyles);
