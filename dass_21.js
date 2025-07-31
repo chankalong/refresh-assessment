@@ -335,6 +335,13 @@ validator
     },
   ]);
 
+// Add real-time validation for interest checkboxes
+document.querySelectorAll('input[name="interest"]').forEach(function(checkbox) {
+  checkbox.addEventListener('change', function() {
+    validator.revalidateField('input[name="interest"]');
+  });
+});
+
 var system_id_textbox = document.getElementById("system_id");
 var member_id_textbox = document.getElementById("member_id");
 var uid_textbox = document.getElementById("uid");
