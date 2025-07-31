@@ -279,13 +279,18 @@ subscription_textbox.value =
   drupalSettings.user.subscription.expire_subscription;
 
 var validator = new JustValidate("#form_dass_21", {
-  tooltip: {
-    position: "bottom",
-  },
   //validateBeforeSubmitting: true,
   //submitFormAutomatically: true,
   lockForm: false,
   focusInvalidField: false,
+  errorFieldCssClass: "error-field",
+  errorLabelCssClass: "error-label",
+  errorLabelStyle: {
+    color: "#dc2626",
+    fontSize: "14px",
+    marginTop: "5px",
+    display: "block"
+  }
 });
 
 validator
@@ -444,6 +449,11 @@ form_interest_other_select.addEventListener("change", function (e) {
     document.getElementById("form_interest_other_wrapper").style.display =
       "none";
     validator.removeField("#form_interest_other");
+    // Clear the text input when "other" checkbox is unchecked
+    var otherTextInput = document.getElementById("form_interest_other");
+    if (otherTextInput) {
+      otherTextInput.value = "";
+    }
     //validator.revalidate();
   }
 });
@@ -653,6 +663,8 @@ validator.onFail(function() {
 setInterval(function() {
   enableAllFormFields();
 }, 1000);
+
+
 
 document
   .querySelector("#share_div")
