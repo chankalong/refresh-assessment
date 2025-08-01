@@ -281,15 +281,6 @@ subscription_textbox.value =
 // Add CSS styles for error fields
 var errorFieldStyles = document.createElement('style');
 errorFieldStyles.textContent = `
-  .error-field {
-    border: 2px solid #dc2626 !important;
-    background-color: #fef2f2 !important;
-    box-shadow: 0 0 0 1px #dc2626 !important;
-  }
-  .error-field:focus {
-    border-color: #dc2626 !important;
-    box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.2) !important;
-  }
   .error-label {
     color: #dc2626 !important;
     font-size: 14px !important;
@@ -304,7 +295,6 @@ var validator = new JustValidate("#form_dass_21", {
   //submitFormAutomatically: true,
   lockForm: false,
   focusInvalidField: false,
-  errorFieldCssClass: "error-field",
   errorLabelCssClass: "error-label"
 });
 
@@ -482,7 +472,7 @@ form_interest_other_select.addEventListener("change", function (e) {
     if (otherTextInput) {
       otherTextInput.value = "";
     }
-    //validator.revalidate();
+    validator.revalidate();
   }
 });
 
