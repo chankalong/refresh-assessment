@@ -321,7 +321,7 @@ validator
       errorMessage: "必填",
     },
   ], {
-    errorsContainer: "#form_name_wrapper"
+    errorsContainer: "#form_name_label"
   })
   .addField("#form_telephone", [
     {
@@ -334,7 +334,7 @@ validator
       errorMessage: "8位數字",
     },
   ], {
-    errorsContainer: "#form_telephone_wrapper"
+    errorsContainer: "#form_telephone_label"
   })
   .addField("#form_email", [
     {
@@ -347,7 +347,7 @@ validator
       errorMessage: "電郵",
     },
   ], {
-    errorsContainer: "#form_email_wrapper"
+    errorsContainer: "#form_email_label"
   })
   .addField("#form_mode_select", [
     {
@@ -355,7 +355,7 @@ validator
       errorMessage: "必填",
     },
   ], {
-    errorsContainer: "#form_mode_wrapper"
+    errorsContainer: "#form_mode_label"
   })
   .addField('input[name="interest"]', [
     {rule: "required", errorMessage: "必選"},
@@ -369,7 +369,7 @@ validator
       errorMessage: "Please select 1-3 options.",
     },
   ], {
-    errorsContainer: "#form_interest_wrapper"
+    errorsContainer: "#form_interest_label"
   });
 
 // Add real-time validation for interest checkboxes
@@ -476,7 +476,7 @@ form_interest_other_select.addEventListener("change", function (e) {
         errorMessage: "必填",
       },
     ], {
-      errorsContainer: "#form_interest_other_wrapper"
+      errorsContainer: "#form_interest_other_label"
     });
     //validator.revalidate();
   } else {
