@@ -347,7 +347,7 @@ validator
       errorMessage: "電郵",
     },
   ], {
-    errorsContainer: ".form_email_wrapper"
+    errorsContainer: "#form_email_wrapper"
   })
   .addField("#form_mode_select", [
     {
@@ -355,7 +355,7 @@ validator
       errorMessage: "必填",
     },
   ], {
-    errorsContainer: "#form_mode_error_container"
+    errorsContainer: "#form_mode_wrapper"
   })
   .addField('input[name="interest"]', [
     {rule: "required", errorMessage: "必選"},
