@@ -300,19 +300,7 @@ var validator = new JustValidate("#form_dass_21", {
 
 // Add individual error containers for each field
 validator
-  .addField("#form_name", [
-    {
-      rule: "required",
-      errorMessage: "必填",
-    },
-  ], {
-    errorsContainer: "#form_name_label"
-  })
   .addField("#form_telephone", [
-    {
-      rule: "required",
-      errorMessage: "必填",
-    },
     {
       rule: "customRegexp",
       value: /^[0-9]{8}$/,
@@ -322,10 +310,6 @@ validator
     errorsContainer: "#form_telephone_label"
   })
   .addField("#form_email", [
-    {
-      rule: "required",
-      errorMessage: "必填",
-    },
     {
       rule: "email",
       //value: /^[\S]+@([\S]+\.)+[\S]+[^\.]$/, //need to change the regex for email
