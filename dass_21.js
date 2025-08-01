@@ -293,14 +293,9 @@ errorFieldStyles.textContent = `
   .error-label {
     color: #dc2626 !important;
     font-size: 14px !important;
-    margin-bottom: 5px !important;
-    display: block !important;
+    margin-left: 5px !important;
     font-weight: 500 !important;
-    position: relative !important;
-    z-index: 10 !important;
   }
-  
-
 `;
 document.head.appendChild(errorFieldStyles);
 
@@ -358,7 +353,6 @@ validator
     errorsContainer: "#form_mode_label"
   })
   .addField('input[name="interest"]', [
-    {rule: "required", errorMessage: "必選"},
     {
       validator: (value, fields) => {
         const checkedCount = document.querySelectorAll(
@@ -366,7 +360,7 @@ validator
         ).length;
         return checkedCount <= 3 && checkedCount >= 1;
       },
-      errorMessage: "Please select 1-3 options.",
+      errorMessage: "必選1-3個選項",
     },
   ], {
     errorsContainer: "#form_interest_label"
