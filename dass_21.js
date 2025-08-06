@@ -512,8 +512,6 @@ form.addEventListener("submit", function (e) {
       anxiety_sum *= 2;
       stress_sum *= 2;
 
-      var total_score = depression_sum + anxiety_sum + stress_sum;
-
       if (document.getElementById("form_name").value != "") {
         participantName.textContent =
           document.getElementById("form_name").value;
@@ -522,23 +520,23 @@ form.addEventListener("submit", function (e) {
       var category = document.getElementById(`${name_question}Category`);
       var description = document.getElementById(`${name_question}Description`);
 
-      if (total_score >= 0 && total_score <= 23) {
+      if (depression_sum <= 9 && anxiety_sum <= 7 && stress_sum <= 14) {
         category.textContent = "健康";
         description.textContent =
           "您的情緒健康狀況在正常範圍內。您能夠很好地應對生活挑戰，並保持良好的心理健康。";
-      } else if (total_score >= 24 && total_score <= 29) {
+      } else if (depression_sum <= 13 && anxiety_sum <= 9 && stress_sum <= 18) {
         category.textContent = "輕度情緒困擾";
         description.textContent =
           "您正經歷輕度情緒困擾。雖然您可能在情緒、焦慮或壓力方面有一些挑戰，但這些通常是可控的，不會嚴重影響您的生活。";
-      } else if (total_score >= 30 && total_score <= 39) {
+      } else if (depression_sum <= 20 && anxiety_sum <= 14 && stress_sum <= 25) {
         category.textContent = "中度情緒困擾";
         description.textContent =
           "您正經歷中度情緒困擾。您可能正在與抑鬱、焦慮和壓力症狀的組合作鬥爭，這些開始顯著影響您的日常功能和生活品質。";
-      } else if (total_score >= 40 && total_score <= 46) {
+      } else if (depression_sum <= 27 && anxiety_sum <= 19 && stress_sum <= 33) {
         category.textContent = "嚴重情緒困擾";
         description.textContent =
           "您正經歷嚴重情緒困擾。您可能正在與抑鬱、焦慮和壓力方面的顯著症狀作鬥爭，這些嚴重干擾您在生活重要領域中有效運作的能力。";
-      } else if (total_score >= 47) {
+      } else if (depression_sum <= 28 && anxiety_sum <= 20 && stress_sum <= 34) {
         category.textContent = "極度嚴重情緒困擾";
         description.textContent =
           "您正經歷極度嚴重情緒困擾。您可能被抑鬱、焦慮和壓力的強烈症狀所壓倒，嚴重損害您的日常功能。強烈建議立即尋求專業協助。";
