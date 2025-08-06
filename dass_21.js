@@ -318,10 +318,15 @@ validator
   ], {
     errorsContainer: "#form_email_label"
   })
-  .addField("#form_mode_select", [
+  .addField('input[name="mode"]', [
     {
-      rule: "required",
-      errorMessage: "必填",
+      validator: (value, fields) => {
+        const checkedCount = document.querySelectorAll(
+          'input[name="mode"]:checked'
+        ).length;
+        return checkedCount <= 2 && checkedCount >= 1;
+      },
+      errorMessage: "必選1-2個選項",
     },
   ], {
     errorsContainer: "#form_mode_label"
