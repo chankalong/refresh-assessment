@@ -645,7 +645,6 @@ form.addEventListener("submit", function (e) {
             data.interest = interests;
             data.mode = modes;
             
-            return data;
             var action = originalAction || form.action;
             fetch(action, {
               method: "POST",
