@@ -624,32 +624,44 @@ form.addEventListener("submit", function (e) {
             document.querySelector("#save_result").style.display = "none";
             document.querySelector("#svg_div").style.display = "";
 
+            // Option 2: Send as FormData (don't set Content-Type header)
             var formData = new FormData(form);
-            const data = {};
+            
+            // Handle multiple values for checkboxes
             const interests = [];
             const modes = [];
+            const processedData = new FormData();
             
-            // Collect all form data
             for (let [key, value] of formData.entries()) {
               if (key === 'interest') {
                 interests.push(value);
               } else if (key === 'mode') {
                 modes.push(value);
-              } else 
-              {
-                data[key] = value;
+              } else {
+                processedData.append(key, value);
               }
             }
             
-            // Add interests as array
-            data.interest = interests;
-            data.mode = modes;
+            // Add arrays as JSON strings or individual entries
+            processedData.append('interest', JSON.stringify(interests));
+            processedData.append('mode', JSON.stringify(modes));
             
-            var action = originalAction || form.action;
             fetch(action, {
               method: "POST",
-              headers: {'Content-Type': 'application/json'},
-              body: JSON.stringify(data)
+              // Don't set Content-Type header for FormData - browser sets it automatically
+              body: processedData
+            })
+            .then(response => {
+              if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+              }
+              return response.json();
+            })
+            .then(data => {
+              console.log('Success:', data);
+            })
+            .catch(error => {
+              console.error('Error:', error);
             });
           });
         }, 1000);
