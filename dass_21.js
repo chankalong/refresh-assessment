@@ -660,19 +660,10 @@ form.addEventListener("submit", function (e) {
                 'Accept': 'application/json'
               },
               body: JSON.stringify(data)
-            })
-            .then(response => {
-              if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-              }
-              return response.json();
-            })
-            .then(data => {
-              console.log('Success:', data);
-            })
-            .catch(error => {
-              console.error('Error:', error);
             });
+
+            console.log("Submit Form after fetch.");
+            
 
             
 
