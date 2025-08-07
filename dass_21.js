@@ -318,11 +318,11 @@ validator
   ], {
     errorsContainer: "#form_email_label"
   })
-  .addField('input[name="mode"]', [
+  .addField('input[name="mode[]"]', [
     {
       validator: (value, fields) => {
         const checkedCount = document.querySelectorAll(
-          'input[name="mode"]:checked'
+          'input[name="mode[]"]:checked'
         ).length;
         return checkedCount <= 2 && checkedCount >= 1;
       },
@@ -331,11 +331,11 @@ validator
   ], {
     errorsContainer: "#form_mode_label"
   })
-  .addField('input[name="interest"]', [
+  .addField('input[name="interest[]"]', [
     {
       validator: (value, fields) => {
         const checkedCount = document.querySelectorAll(
-          'input[name="interest"]:checked'
+          'input[name="interest[]"]:checked'
         ).length;
         return checkedCount <= 3 && checkedCount >= 1;
       },
@@ -346,9 +346,9 @@ validator
   });
 
 // Add real-time validation for interest checkboxes
-document.querySelectorAll('input[name="interest"]').forEach(function(checkbox) {
+document.querySelectorAll('input[name="interest[]"]').forEach(function(checkbox) {
   checkbox.addEventListener('change', function() {
-    validator.revalidateField('input[name="interest"]');
+    validator.revalidateField('input[name="interest[]"]');
   });
 });
 
@@ -438,7 +438,7 @@ var dformat =
 complete_time_textbox.value = dformat;
 
 var form_interest_other_select = document.querySelector(
-  "input[name='interest'][value='other']"
+  "input[name='interest[]'][value='other']"
 );
 form_interest_other_select.addEventListener("change", function (e) {
   if (form_interest_other_select.checked) {
