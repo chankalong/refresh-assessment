@@ -352,6 +352,13 @@ document.querySelectorAll('input[name="interest[]"]').forEach(function(checkbox)
   });
 });
 
+// Add real-time validation for mode checkboxes
+document.querySelectorAll('input[name="mode[]"]').forEach(function(checkbox) {
+  checkbox.addEventListener('change', function() {
+    validator.revalidateField('input[name="mode[]"]');
+  });
+});
+
 var system_id_textbox = document.getElementById("system_id");
 var member_id_textbox = document.getElementById("member_id");
 var uid_textbox = document.getElementById("uid");
