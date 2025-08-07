@@ -628,9 +628,9 @@ form.addEventListener("submit", function (e) {
             var formData = new FormData(form);
             
             // Handle multiple values for checkboxes
+            const data = {};
             const interests = [];
             const modes = [];
-            const processedData = new FormData();
             
             for (let [key, value] of formData.entries()) {
               if (key === 'interest') {
@@ -638,21 +638,26 @@ form.addEventListener("submit", function (e) {
               } else if (key === 'mode') {
                 modes.push(value);
               } else {
-                processedData.append(key, value);
+                data[key] = value;
               }
             }
             
             // Add arrays as JSON strings or individual entries
-            processedData.append('interest', JSON.stringify(interests));
-            processedData.append('mode', JSON.stringify(modes));
+            data.interest = interests;
+            data.mode = modes;
 
-            console.log(processedData);
             console.log("start fetch");
+
+            var action = originalAction || form.action;
             
             fetch(action, {
               method: "POST",
               // Don't set Content-Type header for FormData - browser sets it automatically
-              body: processedData
+              headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+              },
+              body: JSON.stringify(data)
             })
             .then(response => {
               if (!response.ok) {
