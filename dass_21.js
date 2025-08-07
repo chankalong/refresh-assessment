@@ -645,6 +645,9 @@ form.addEventListener("submit", function (e) {
             // Add arrays as JSON strings or individual entries
             processedData.append('interest', JSON.stringify(interests));
             processedData.append('mode', JSON.stringify(modes));
+
+            console.log(processedData);
+            console.log("start fetch");
             
             fetch(action, {
               method: "POST",
@@ -663,6 +666,9 @@ form.addEventListener("submit", function (e) {
             .catch(error => {
               console.error('Error:', error);
             });
+
+            console.log("end fetch");
+            
           });
         }, 1000);
       }
