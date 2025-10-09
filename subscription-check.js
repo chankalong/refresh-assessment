@@ -1,5 +1,3 @@
-
-  (function () {
     var redirectUrl = '/new-subscription'; // 依需要修改
 
     function isAnonymous() {
@@ -136,4 +134,3 @@
     } else {
       attach();
     }
-  })();
