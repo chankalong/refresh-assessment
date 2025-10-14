@@ -110,7 +110,7 @@
     }
 
     function attach() {
-      var trigger = document.getElementById('onsite-participation-button');
+      var trigger = document.getElementById('free-apply-button');
       if (!trigger) return;
       if (trigger.dataset.expireHandlerAttached === '1') return;
       trigger.dataset.expireHandlerAttached = '1';
