@@ -34,17 +34,17 @@
         // URLs
         urls: {
             login: '/oauth2/login',
-            subscription: '/new-subscription'
+            subscription: '/tc/new-subscription'
         },
         
         // Promo graphic images
         images: {
             left: {
-                src: '/sites/default/files/inpages/photo/subscription_promo_left.png',
+                src: 'https://refresh.bokss.org.hk/sites/default/files/inpages/photo/subscription_promo_left.png',
                 alt: 'Re:Fresh 會員登入'
             },
             right: {
-                src: '/sites/default/files/inpages/photo/subscription_promo_right.png',
+                src: 'https://refresh.bokss.org.hk/sites/default/files/inpages/photo/subscription_promo_right.png',
                 alt: '成為 Re:Fresh 會員'
             }
         },
@@ -370,7 +370,9 @@
 
         // Create left image link
         const leftLink = document.createElement('a');
-        leftLink.href = CONFIG.urls.login;
+        // Add current page URL as kh_destination parameter
+        const currentPageUrl = encodeURIComponent(window.location.href);
+        leftLink.href = CONFIG.urls.login + '?kh_destination=' + currentPageUrl;
         leftLink.style.cssText = 'display: block; text-decoration: none;';
         
         // Create left image
