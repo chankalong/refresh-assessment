@@ -34,17 +34,17 @@
         // URLs
         urls: {
             login: '/oauth2/login',
-            subscription: '/tc/new-subscription'
+            subscription: '/new-subscription'
         },
         
         // Promo graphic images
         images: {
             left: {
-                src: 'https://refresh.bokss.org.hk/sites/default/files/inpages/photo/subscription_promo_left.png',
+                src: '/sites/default/files/inpages/photo/subscription_promo_left.png',
                 alt: 'Re:Fresh 會員登入'
             },
             right: {
-                src: 'https://refresh.bokss.org.hk/sites/default/files/inpages/photo/subscription_promo_right.png',
+                src: '/sites/default/files/inpages/photo/subscription_promo_right.png',
                 alt: '成為 Re:Fresh 會員'
             }
         },
