@@ -272,10 +272,29 @@
                             body: JSON.stringify(formData)
                         })
                         .then(function(response) {
+                            // Check if response is successful (200-299 range includes 202)
                             if (!response.ok) {
-                                throw new Error('Network response was not ok');
+                                throw new Error('Network response was not ok: ' + response.status);
                             }
-                            return response.json();
+                            
+                            // Power Automate 202 responses often have no body or non-JSON content
+                            // Try to parse JSON, but handle gracefully if it fails
+                            return response.text().then(function(text) {
+                                if (text && text.trim()) {
+                                    try {
+                                        return JSON.parse(text);
+                                    } catch (e) {
+                                        // Not JSON or parse error, that's okay for 202 responses
+                                        console.log('Response is not JSON, treating as success');
+                                        return {};
+                                    }
+                                }
+                                // Empty response is fine for 202 Accepted
+                                return {};
+                            }).catch(function() {
+                                // If text() fails, still treat as success for 202
+                                return {};
+                            });
                         })
                         .then(function(data) {
                             console.log('Success:', data);
