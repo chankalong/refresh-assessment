@@ -22,6 +22,7 @@
         ];
         
         let currentSectionIndex = 0;
+        let isInitialLoad = true;
         
         // Show first section
         showSection(0);
@@ -35,7 +36,7 @@
         // Set up form submission
         setupFormSubmission();
         
-        function showSection(index) {
+        function showSection(index, shouldScroll) {
             // Hide all sections
             sections.forEach(function(sectionId) {
                 const section = document.getElementById(sectionId);
@@ -51,8 +52,15 @@
                     currentSection.style.display = 'block';
                     currentSectionIndex = index;
                     
-                    // Scroll to top of section
-                    currentSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    // Only scroll if explicitly requested (not on initial load)
+                    if (shouldScroll && !isInitialLoad) {
+                        currentSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                    
+                    // Mark that initial load is complete after first section is shown
+                    if (isInitialLoad) {
+                        isInitialLoad = false;
+                    }
                 }
             }
         }
@@ -125,7 +133,7 @@
             if (btnNextConsent) {
                 btnNextConsent.addEventListener('click', function() {
                     if (validateSection('section_consent')) {
-                        showSection(1);
+                        showSection(1, true);
                     }
                 });
             }
@@ -135,7 +143,7 @@
             if (btnNextPart1) {
                 btnNextPart1.addEventListener('click', function() {
                     if (validateSection('section_part1')) {
-                        showSection(2);
+                        showSection(2, true);
                     }
                 });
             }
@@ -144,7 +152,7 @@
             const btnPrevPart2 = document.getElementById('btn_prev_part2');
             if (btnPrevPart2) {
                 btnPrevPart2.addEventListener('click', function() {
-                    showSection(1);
+                    showSection(1, true);
                 });
             }
             
@@ -152,7 +160,7 @@
             if (btnNextPart2) {
                 btnNextPart2.addEventListener('click', function() {
                     if (validateSection('section_part2')) {
-                        showSection(3);
+                        showSection(3, true);
                     }
                 });
             }
@@ -161,7 +169,7 @@
             const btnPrevPart3 = document.getElementById('btn_prev_part3');
             if (btnPrevPart3) {
                 btnPrevPart3.addEventListener('click', function() {
-                    showSection(2);
+                    showSection(2, true);
                 });
             }
             
@@ -169,7 +177,7 @@
             if (btnNextPart3) {
                 btnNextPart3.addEventListener('click', function() {
                     if (validateSection('section_part3')) {
-                        showSection(4);
+                        showSection(4, true);
                     }
                 });
             }
@@ -178,7 +186,7 @@
             const btnPrevPart4 = document.getElementById('btn_prev_part4');
             if (btnPrevPart4) {
                 btnPrevPart4.addEventListener('click', function() {
-                    showSection(3);
+                    showSection(3, true);
                 });
             }
             
@@ -186,7 +194,7 @@
             if (btnNextPart4) {
                 btnNextPart4.addEventListener('click', function() {
                     if (validateSection('section_part4')) {
-                        showSection(5);
+                        showSection(5, true);
                     }
                 });
             }
@@ -195,7 +203,7 @@
             const btnPrevPersonal = document.getElementById('btn_prev_personal');
             if (btnPrevPersonal) {
                 btnPrevPersonal.addEventListener('click', function() {
-                    showSection(4);
+                    showSection(4, true);
                 });
             }
         }
