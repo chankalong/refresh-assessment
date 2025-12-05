@@ -99,23 +99,6 @@
                 }
             }
             
-            // Special validation for attention check questions (no alert, just mark invalid)
-            if (sectionId === 'section_part2') {
-                const part2_q9 = document.getElementById('part2_q9');
-                if (part2_q9 && part2_q9.value !== '0' && part2_q9.value !== '') {
-                    part2_q9.style.borderColor = 'red';
-                    isValid = false;
-                }
-            }
-            
-            if (sectionId === 'section_part3') {
-                const part3_q9 = document.getElementById('part3_q9');
-                if (part3_q9 && part3_q9.value !== '4' && part3_q9.value !== '') {
-                    part3_q9.style.borderColor = 'red';
-                    isValid = false;
-                }
-            }
-            
             // Special validation for birth year (must be 4 digits)
             if (sectionId === 'section_personal') {
                 const birthyear = document.getElementById('personal_birthyear');
