@@ -341,6 +341,7 @@ form.addEventListener("submit", function (e) {
   } else if (question_sum <= 80) {
     result_link =
       "/sites/default/files/inpages/assessment/pcl-5/high/PCL-5_Result.webp";
+    document.getElementById("counselling_link").style.display = "";
   } else {
     console.log("Score out of range");
   }
