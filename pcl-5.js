@@ -353,6 +353,12 @@ form.addEventListener("submit", function (e) {
   document.getElementById(`${name_question}QuestionDiv`).style.display = "none";
   document.getElementById(`${name_question}ResultDiv`).style.display = "";
   document.querySelector("h1").style.display = "";
+  var data = new FormData(form);
+  var action = e.target.action;
+  fetch(action, {
+      method: "POST",
+      body: data,
+  });
 });
 
 document
