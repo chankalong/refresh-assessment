@@ -336,15 +336,9 @@ form.addEventListener("submit", function (e) {
   var result_link;
 
   if (question_sum <= 30) {
-    category.textContent = "低";
-    description.textContent =
-      "你的結果顯示，創傷事件困擾你的程度屬較輕或一般壓力反應範圍內。若有短暫失眠、緊張或心情起伏，這在經歷重大事件後很常見。建議你繼續留意自己的狀況；如感到困擾加重或影響日常生活，可考慮尋求專業支援。";
     result_link =
       "/sites/default/files/inpages/assessment/pcl-5/low/PCL-5_Result.webp";
   } else if (question_sum <= 80) {
-    category.textContent = "高";
-    description.textContent =
-      "你的結果顯示，你正經歷較明顯的創傷相關症狀，可能已影響到你的生活，建議盡早尋求專業協助，以作進一步診斷，陪你一起尋找合適的支援方法。";
     result_link =
       "/sites/default/files/inpages/assessment/pcl-5/high/PCL-5_Result.webp";
   } else {
