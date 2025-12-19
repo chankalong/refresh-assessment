@@ -331,11 +331,6 @@ form.addEventListener("submit", function (e) {
     }
   }
 
-  if (document.getElementById("user_name_manual").value != "") {
-    participantName.textContent =
-      document.getElementById("user_name_manual").value;
-  }
-
   var category = document.getElementById(`${name_question}Category`);
   var description = document.getElementById(`${name_question}Description`);
   var result_link;
