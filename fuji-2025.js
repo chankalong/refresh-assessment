@@ -683,41 +683,52 @@
                 return;
             }
             
-            var data = [
-                {
-                    domain: { x: [0, 1], y: [0, 1] },
-                    value: value,
-                    title: { text: title },
-                    type: "indicator",
-                    mode: "gauge+number",
-                    gauge: {
-                        axis: { range: [0, maxValue] },
-                        bar: { color: color, thickness: 1 },
-                        steps: [
-                            { range: [0, maxValue * 0.33], color: "#f44336" },
-                            { range: [maxValue * 0.33, maxValue * 0.67], color: "#ff9800" },
-                            { range: [maxValue * 0.67, maxValue], color: "#4caf50" }
-                        ]
+            const container = document.getElementById(containerId);
+            if (!container) {
+                console.error('Container not found: ' + containerId);
+                return;
+            }
+            
+            try {
+                var data = [
+                    {
+                        domain: { x: [0, 1], y: [0, 1] },
+                        value: value,
+                        title: { text: title },
+                        type: "indicator",
+                        mode: "gauge+number",
+                        gauge: {
+                            axis: { range: [0, maxValue] },
+                            bar: { color: color, thickness: 1 },
+                            steps: [
+                                { range: [0, maxValue * 0.33], color: "#f44336" },
+                                { range: [maxValue * 0.33, maxValue * 0.67], color: "#ff9800" },
+                                { range: [maxValue * 0.67, maxValue], color: "#4caf50" }
+                            ]
+                        }
                     }
-                }
-            ];
-            
-            var layout = {
-                margin: { l: 35, r: 35, b: 10, t: 80, pad: 0 },
-                height: 200,
-                autosize: true,
-                font: {
-                    family: 'Arial, sans-serif'
-                }
-            };
-            
-            var config = {
-                responsive: true,
-                displaylogo: false,
-                displayModeBar: false
-            };
-            
-            Plotly.newPlot(containerId, data, layout, config);
+                ];
+                
+                var layout = {
+                    margin: { l: 35, r: 35, b: 10, t: 80, pad: 0 },
+                    height: 200,
+                    autosize: true,
+                    font: {
+                        family: 'Arial, sans-serif'
+                    }
+                };
+                
+                var config = {
+                    responsive: true,
+                    displaylogo: false,
+                    displayModeBar: false
+                };
+                
+                Plotly.newPlot(containerId, data, layout, config);
+                console.log('Gauge chart created for: ' + containerId);
+            } catch (error) {
+                console.error('Error creating gauge chart for ' + containerId + ':', error);
+            }
         }
         
         // Display results on thank you page
@@ -725,37 +736,43 @@
             const resultsDiv = document.getElementById('survey_results');
             if (!resultsDiv) return;
             
+            // Check if results have already been inserted to prevent duplicates
+            if (document.getElementById('gauge_part1')) {
+                return; // Results already exist, skip insertion
+            }
+            
             // Format numbers to 2 decimal places
             function formatScore(score) {
                 return typeof score === 'number' ? score.toFixed(2) : score;
             }
             
             // Build results HTML with new scoring structure and gauge chart containers
+            // Using Tailwind CSS classes for responsive layout (one column on small screens, two columns on medium+)
             const resultsHTML = '<h3>你的問卷結果</h3>' +
-                '<div style="margin: 20px 0; padding: 20px; background-color: #f5f5f5; border-radius: 10px;">' +
+                '<div class="my-5 p-5 rounded-lg" style="background-color: #f5f5f5;">' +
                 '<h4>第一部份：情緒健康 (WHO-5)</h4>' +
-                '<div id="gauge_part1" style="margin: 20px 0;"></div>' +
+                '<div id="gauge_part1" class="my-5"></div>' +
                 '<p>總分：' + scores.part1 + ' / 25</p>' +
                 '<p>等級：' + categories.part1 + '</p>' +
-                (scores.part1 < 13 ? '<p style="color: #d32f2f; font-weight: bold;">注意：分數低於13分，建議進一步評估</p>' : '') +
+                (scores.part1 < 13 ? '<p class="font-bold" style="color: #d32f2f;">注意：分數低於13分，建議進一步評估</p>' : '') +
                 '</div>' +
-                '<div style="margin: 20px 0; padding: 20px; background-color: #f5f5f5; border-radius: 10px;">' +
+                '<div class="my-5 p-5 rounded-lg" style="background-color: #f5f5f5;">' +
                 '<h4>第二部份：儀容外貌 (BESAA)</h4>' +
-                '<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 20px 0;">' +
+                '<div class="grid grid-cols-1 md:grid-cols-2 gap-5 my-5">' +
                 '<div><h5>外貌評價</h5><div id="gauge_part2_appearance"></div><p>分數：' + formatScore(scores.part2_appearance) + ' / 4.00</p><p>等級：' + categories.part2_appearance + '</p></div>' +
                 '<div><h5>外貌歸因</h5><div id="gauge_part2_attribution"></div><p>分數：' + formatScore(scores.part2_attribution) + ' / 4.00</p><p>等級：' + categories.part2_attribution + '</p></div>' +
                 '</div>' +
                 '</div>' +
-                '<div style="margin: 20px 0; padding: 20px; background-color: #f5f5f5; border-radius: 10px;">' +
+                '<div class="my-5 p-5 rounded-lg" style="background-color: #f5f5f5;">' +
                 '<h4>第三部份：自我關懷 (SCS)</h4>' +
-                '<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 20px 0;">' +
+                '<div class="grid grid-cols-1 md:grid-cols-2 gap-5 my-5">' +
                 '<div><h5>自我關懷</h5><div id="gauge_part3_selfCompassion"></div><p>分數：' + formatScore(scores.part3_selfCompassion) + ' / 5.00</p><p>等級：' + categories.part3_selfCompassion + '</p></div>' +
                 '<div><h5>自我批評</h5><div id="gauge_part3_selfCriticism"></div><p>分數：' + formatScore(scores.part3_selfCriticism) + ' / 5.00</p><p>等級：' + categories.part3_selfCriticism + '</p></div>' +
                 '</div>' +
                 '</div>' +
-                '<div style="margin: 20px 0; padding: 20px; background-color: #f5f5f5; border-radius: 10px;">' +
+                '<div class="my-5 p-5 rounded-lg" style="background-color: #f5f5f5;">' +
                 '<h4>第四部份：照片修飾行為 (SPMS)</h4>' +
-                '<div id="gauge_part4" style="margin: 20px 0;"></div>' +
+                '<div id="gauge_part4" class="my-5"></div>' +
                 '<p>總分：' + scores.part4 + ' / 40</p>' +
                 '<p>等級：' + categories.part4 + '</p>' +
                 '</div>';
@@ -781,18 +798,69 @@
             });
             
             // Fallback: if we didn't find the placeholder, append results
+            // But only if results haven't been inserted yet
             if (!resultsInserted) {
                 const tempDiv = document.createElement('div');
                 tempDiv.innerHTML = resultsHTML;
                 
-                // Append results to the results div
-                while (tempDiv.firstChild) {
-                    resultsDiv.appendChild(tempDiv.firstChild);
+                // Find the paragraph that says "根據你的作答結果，我們為你整理了以下摘要供參考："
+                // and insert results after it
+                let insertAfterParagraph = null;
+                paragraphs.forEach(function(p) {
+                    if (p.textContent.includes('根據你的作答結果，我們為你整理了以下摘要供參考：')) {
+                        insertAfterParagraph = p;
+                    }
+                });
+                
+                if (insertAfterParagraph && insertAfterParagraph.nextSibling) {
+                    // Insert after the paragraph
+                    while (tempDiv.firstChild) {
+                        insertAfterParagraph.parentNode.insertBefore(tempDiv.firstChild, insertAfterParagraph.nextSibling);
+                    }
+                } else {
+                    // Append to the results div as last resort
+                    while (tempDiv.firstChild) {
+                        resultsDiv.appendChild(tempDiv.firstChild);
+                    }
                 }
             }
             
-            // Create gauge charts after a short delay to ensure DOM is ready
-            setTimeout(function() {
+            // Create gauge charts after ensuring DOM is ready and Plotly is loaded
+            function createAllGaugeCharts() {
+                // Check if Plotly is loaded
+                if (typeof Plotly === 'undefined') {
+                    console.log('Waiting for Plotly to load...');
+                    setTimeout(createAllGaugeCharts, 100);
+                    return;
+                }
+                
+                // Check if all containers exist
+                const containers = [
+                    'gauge_part1',
+                    'gauge_part2_appearance',
+                    'gauge_part2_attribution',
+                    'gauge_part3_selfCompassion',
+                    'gauge_part3_selfCriticism',
+                    'gauge_part4'
+                ];
+                
+                let allContainersExist = true;
+                containers.forEach(function(id) {
+                    if (!document.getElementById(id)) {
+                        allContainersExist = false;
+                        console.log('Container not found: ' + id);
+                    }
+                });
+                
+                if (!allContainersExist) {
+                    console.log('Waiting for containers to be created...');
+                    setTimeout(createAllGaugeCharts, 100);
+                    return;
+                }
+                
+                // All containers exist and Plotly is loaded, create charts
+                console.log('Creating gauge charts...');
+                
                 // Part 1: WHO-5 (0-25)
                 createGaugeChart('gauge_part1', scores.part1, 25, '分數', getColorForCategory(categories.part1));
                 
@@ -810,7 +878,10 @@
                 
                 // Part 4: SPMS (0-40)
                 createGaugeChart('gauge_part4', scores.part4, 40, '分數', getColorForCategory(categories.part4));
-            }, 100);
+            }
+            
+            // Start creating charts after a short delay
+            setTimeout(createAllGaugeCharts, 100);
         }
         
         function setupFormSubmission() {
