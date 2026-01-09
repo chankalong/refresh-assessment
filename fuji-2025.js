@@ -746,28 +746,28 @@
             // Build results HTML with new scoring structure and gauge chart containers
             // Using Tailwind CSS classes for responsive layout (one column on small screens, two columns on medium+)
             const resultsHTML = '<h3>你的問卷結果</h3>' +
-                '<div class="py-1 px-8 rounded-4" style="background-color: #f5f5f5;">' +
+                '<div class="py-1 px-8 rounded-4 my-4" style="background-color: #f5f5f5;">' +
                 '<h4>第一部份：情緒健康 (WHO-5)</h4>' +
                 '<div id="gauge_part1" class="my-5"></div>' +
                 '<p>總分：' + scores.part1 + ' / 25</p>' +
                 '<p>等級：' + categories.part1 + '</p>' +
                 (scores.part1 < 13 ? '<p class="font-bold" style="color: #d32f2f;">注意：分數低於13分，建議進一步評估</p>' : '') +
                 '</div>' +
-                '<div class="py-1 px-8 rounded-4" style="background-color: #f5f5f5;">' +
+                '<div class="py-1 px-8 rounded-4 my-4" style="background-color: #f5f5f5;">' +
                 '<h4>第二部份：儀容外貌 (BESAA)</h4>' +
                 '<div class="grid grid-cols-1 md:grid-cols-2 gap-5 my-5">' +
                 '<div><h5>外貌評價</h5><div id="gauge_part2_appearance"></div><p>分數：' + formatScore(scores.part2_appearance) + ' / 4.00</p><p>等級：' + categories.part2_appearance + '</p></div>' +
                 '<div><h5>外貌歸因</h5><div id="gauge_part2_attribution"></div><p>分數：' + formatScore(scores.part2_attribution) + ' / 4.00</p><p>等級：' + categories.part2_attribution + '</p></div>' +
                 '</div>' +
                 '</div>' +
-                '<div class="py-1 px-8 rounded-4" style="background-color: #f5f5f5;">' +
+                '<div class="py-1 px-8 rounded-4 my-4" style="background-color: #f5f5f5;">' +
                 '<h4>第三部份：自我關懷 (SCS)</h4>' +
                 '<div class="grid grid-cols-1 md:grid-cols-2 gap-5 my-5">' +
                 '<div><h5>自我關懷</h5><div id="gauge_part3_selfCompassion"></div><p>分數：' + formatScore(scores.part3_selfCompassion) + ' / 5.00</p><p>等級：' + categories.part3_selfCompassion + '</p></div>' +
                 '<div><h5>自我批評</h5><div id="gauge_part3_selfCriticism"></div><p>分數：' + formatScore(scores.part3_selfCriticism) + ' / 5.00</p><p>等級：' + categories.part3_selfCriticism + '</p></div>' +
                 '</div>' +
                 '</div>' +
-                '<div class="py-1 px-8 rounded-4" style="background-color: #f5f5f5;">' +
+                '<div class="py-1 px-8 rounded-4 my-4" style="background-color: #f5f5f5;">' +
                 '<h4>第四部份：照片修飾行為 (SPMS)</h4>' +
                 '<div id="gauge_part4" class="my-5"></div>' +
                 '<p>總分：' + scores.part4 + ' / 40</p>' +
