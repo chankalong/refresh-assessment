@@ -698,13 +698,9 @@
                         type: "indicator",
                         mode: "gauge+number",
                         gauge: {
-                            axis: { range: [0, maxValue] },
+                            axis: { range: [0, maxValue], tickvals: [0, maxValue/2, maxValue] },
                             bar: { color: color, thickness: 1 },
-                            steps: [
-                                { range: [0, maxValue * 0.33], color: "#f44336" },
-                                { range: [maxValue * 0.33, maxValue * 0.67], color: "#ff9800" },
-                                { range: [maxValue * 0.67, maxValue], color: "#4caf50" }
-                            ]
+                            bgcolor: "white"
                         }
                     }
                 ];
@@ -715,7 +711,8 @@
                     autosize: true,
                     font: {
                         family: 'Arial, sans-serif'
-                    }
+                    },
+                    paper_bgcolor: "transparent"
                 };
                 
                 var config = {
@@ -826,12 +823,22 @@
             }
             
             // Create gauge charts after ensuring DOM is ready and Plotly is loaded
-            function createAllGaugeCharts() {
-                // Check if Plotly is loaded
-                if (typeof Plotly === 'undefined') {
-                    console.log('Waiting for Plotly to load...');
-                    setTimeout(createAllGaugeCharts, 100);
-                    return;
+            function createAllGaugeCharts(retryCount) {
+                retryCount = retryCount || 0;
+                const maxRetries = 50; // Maximum 5 seconds (50 * 100ms)
+                
+                // Check if Plotly is loaded (check both window.Plotly and typeof Plotly)
+                if (typeof Plotly === 'undefined' || typeof window.Plotly === 'undefined') {
+                    if (retryCount < maxRetries) {
+                        console.log('Waiting for Plotly to load... (attempt ' + (retryCount + 1) + '/' + maxRetries + ')');
+                        setTimeout(function() {
+                            createAllGaugeCharts(retryCount + 1);
+                        }, 100);
+                        return;
+                    } else {
+                        console.error('Plotly failed to load after ' + maxRetries + ' attempts. Charts will not be displayed.');
+                        return;
+                    }
                 }
                 
                 // Check if all containers exist
@@ -853,9 +860,16 @@
                 });
                 
                 if (!allContainersExist) {
-                    console.log('Waiting for containers to be created...');
-                    setTimeout(createAllGaugeCharts, 100);
-                    return;
+                    if (retryCount < maxRetries) {
+                        console.log('Waiting for containers to be created... (attempt ' + (retryCount + 1) + '/' + maxRetries + ')');
+                        setTimeout(function() {
+                            createAllGaugeCharts(retryCount + 1);
+                        }, 100);
+                        return;
+                    } else {
+                        console.error('Containers not found after ' + maxRetries + ' attempts. Charts will not be displayed.');
+                        return;
+                    }
                 }
                 
                 // All containers exist and Plotly is loaded, create charts
@@ -881,7 +895,9 @@
             }
             
             // Start creating charts after a short delay
-            setTimeout(createAllGaugeCharts, 100);
+            setTimeout(function() {
+                createAllGaugeCharts(0);
+            }, 100);
         }
         
         function setupFormSubmission() {
