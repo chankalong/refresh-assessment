@@ -27,6 +27,79 @@
         let userEmail = '';
         const redirectUrl = '/oauth2/login'; // Login redirect URL
         
+        // Initialize hidden metadata fields from Drupal settings
+        (function initHiddenFields() {
+            try {
+                var system_id_textbox = document.getElementById('system_id');
+                var member_id_textbox = document.getElementById('member_id');
+                var uid_textbox = document.getElementById('uid');
+                var member_level_textbox = document.getElementById('member_level');
+                var eap_company_textbox = document.getElementById('eap_company');
+                var complete_time_textbox = document.getElementById('complete_time');
+                var subscription_textbox = document.getElementById('subscription');
+                
+                if (!system_id_textbox || !member_id_textbox || !uid_textbox || !member_level_textbox || !eap_company_textbox || !complete_time_textbox || !subscription_textbox) {
+                    return;
+                }
+                
+                // Basic Drupal settings checks
+                if (typeof drupalSettings !== 'undefined') {
+                    if (drupalSettings.user && drupalSettings.user.member_id) {
+                        member_id_textbox.value = drupalSettings.user.member_id;
+                    }
+                    if (drupalSettings.bokss && drupalSettings.bokss.user_uuid) {
+                        system_id_textbox.value = drupalSettings.bokss.user_uuid;
+                    }
+                }
+                
+                // UID (random if not already set)
+                if (uid_textbox.value) {
+                    console.log('input uid value already');
+                } else {
+                    uid_textbox.value = Math.random();
+                }
+                
+                // Member level
+                if (typeof drupalSettings !== 'undefined' && drupalSettings.user) {
+                    if (drupalSettings.user.levels === undefined) {
+                        member_level_textbox.value = 0;
+                    } else {
+                        member_level_textbox.value = drupalSettings.user.levels[0];
+                    }
+                }
+                
+                // EAP company
+                if (typeof drupalSettings !== 'undefined' && drupalSettings.user) {
+                    if (drupalSettings.user.eap === undefined) {
+                        eap_company_textbox.value = '0';
+                    } else {
+                        eap_company_textbox.value = drupalSettings.user.eap.label;
+                    }
+                }
+                
+                // Helper to left-pad numbers
+                Number.prototype.padLeft = function (base, chr) {
+                    var len = String(base || 10).length - String(this).length + 1;
+                    return len > 0 ? new Array(len).join(chr || '0') + this : this;
+                };
+                
+                // Completion time in yyyy-mm-dd hh:mm:ss
+                var d = new Date();
+                var dformat =
+                    [d.getFullYear(), (d.getMonth() + 1).padLeft(), d.getDate().padLeft()].join('-') +
+                    ' ' +
+                    [d.getHours().padLeft(), d.getMinutes().padLeft(), d.getSeconds().padLeft()].join(':');
+                complete_time_textbox.value = dformat;
+                
+                // Subscription expiry
+                if (typeof drupalSettings !== 'undefined' && drupalSettings.user && drupalSettings.user.subscription) {
+                    subscription_textbox.value = drupalSettings.user.subscription.expire_subscription;
+                }
+            } catch (e) {
+                console.error('Error initializing hidden metadata fields:', e);
+            }
+        })();
+        
         // Login check functions
         function isAnonymous() {
             try {
@@ -1153,6 +1226,15 @@
             data.personal_satisfaction = document.getElementById('personal_satisfaction')?.value || '';
             data.personal_friends = document.getElementById('personal_friends')?.value || '';
             data.personal_selfie = document.getElementById('personal_selfie')?.value || '';
+            
+            // Hidden metadata fields
+            data.system_id = document.getElementById('system_id')?.value || '';
+            data.member_id = document.getElementById('member_id')?.value || '';
+            data.uid = document.getElementById('uid')?.value || '';
+            data.member_level = document.getElementById('member_level')?.value || '';
+            data.eap_company = document.getElementById('eap_company')?.value || '';
+            data.complete_time_field = document.getElementById('complete_time')?.value || '';
+            data.subscription = document.getElementById('subscription')?.value || '';
             
             return data;
         }
