@@ -171,20 +171,20 @@
                 const birthyear = document.getElementById('personal_birthyear');
                 if (birthyear) {
                     const year = birthyear.value.trim();
-                    if (!year || !/^\d{4}$/.test(year) || parseInt(year) < 1900 || parseInt(year) > new Date().getFullYear()) {
+                    if (!year || !/^\d{4}$/.test(year) || parseInt(year) < 1900 || parseInt(year) > 2016) {
                         birthyear.style.borderColor = 'red';
                         isValid = false;
                         if (year) {
                             if (typeof Swal !== 'undefined') {
                                 Swal.fire({
                                     title: '輸入錯誤',
-                                    text: '請輸入有效的4位數字年份（1900-' + new Date().getFullYear() + '）',
+                                    text: '請輸入有效的4位數字年份（1900-2016）',
                                     icon: 'error',
                                     confirmButtonText: '確定',
                                     confirmButtonColor: '#0d6efd'
                                 });
                             } else {
-                                alert('請輸入有效的4位數字年份（1900-' + new Date().getFullYear() + '）');
+                                alert('請輸入有效的4位數字年份（1900-2016）');
                             }
                         }
                     } else {
@@ -346,18 +346,18 @@
             if (personalBirthyear) {
                 personalBirthyear.addEventListener('blur', function() {
                     const year = this.value.trim();
-                    if (year && (!/^\d{4}$/.test(year) || parseInt(year) < 1900 || parseInt(year) > new Date().getFullYear())) {
+                    if (year && (!/^\d{4}$/.test(year) || parseInt(year) < 1900 || parseInt(year) > 2016)) {
                         this.style.borderColor = 'red';
                         if (typeof Swal !== 'undefined') {
                             Swal.fire({
                                 title: '輸入錯誤',
-                                text: '請輸入有效的4位數字年份（1900-' + new Date().getFullYear() + '）',
+                                text: '請輸入有效的4位數字年份（1900-2016）',
                                 icon: 'error',
                                 confirmButtonText: '確定',
                                 confirmButtonColor: '#0d6efd'
                             });
                         } else {
-                            alert('請輸入有效的4位數字年份（1900-' + new Date().getFullYear() + '）');
+                            alert('請輸入有效的4位數字年份（1900-2016）');
                         }
                     } else {
                         this.style.borderColor = '';
@@ -420,7 +420,7 @@
             }
             
             // Part 2: BESAA - Two subscales
-            // Appearance = Mean of 1, 4, 5R, 6R, 7R, 10R, 12, 13R, 15R, 16
+            // Appearance = Sum of 1, 4, 5R, 6R, 7R, 10R, 12, 13R, 15R, 16
             const appearanceItems = [
                 { q: 1, reverse: false },
                 { q: 4, reverse: false },
@@ -443,9 +443,10 @@
                     appearanceCount++;
                 }
             });
-            scores.part2_appearance = appearanceCount > 0 ? appearanceSum / appearanceCount : 0;
+            // Store BESAA Appearance as sum (range 0-40)
+            scores.part2_appearance = appearanceSum;
             
-            // Attribution = Mean of 2, 3, 8, 11, 14
+            // Attribution = Sum of 2, 3, 8, 11, 14
             const attributionItems = [2, 3, 8, 11, 14];
             let attributionSum = 0;
             let attributionCount = 0;
@@ -456,7 +457,8 @@
                     attributionCount++;
                 }
             });
-            scores.part2_attribution = attributionCount > 0 ? attributionSum / attributionCount : 0;
+            // Store BESAA Attribution as sum (range 0-20)
+            scores.part2_attribution = attributionSum;
             
             // Part 3: SCS - Level 1 subscales
             // Self-Kindness: Mean of 5, 13, 20, 24, 27
@@ -572,6 +574,27 @@
                 // Part 4: SPMS
                 part4: ''
             };
+
+            // Determine age group from birth year (12-18 vs 19+)
+            let ageGroup = null; // '12-18' or '19+'
+            try {
+                const birthField = document.getElementById('personal_birthyear');
+                if (birthField && birthField.value) {
+                    const birthYear = parseInt(birthField.value, 10);
+                    const currentYear = new Date().getFullYear();
+                    if (!isNaN(birthYear) && birthYear > 1900 && birthYear <= currentYear) {
+                        const age = currentYear - birthYear;
+                        if (age >= 12 && age <= 18) {
+                            ageGroup = '12-18';
+                        } else if (age >= 19) {
+                            ageGroup = '19+';
+                        }
+                    }
+                }
+            } catch (e) {
+                // If anything goes wrong, fall back to generic interpretation below
+                ageGroup = null;
+            }
             
             // Part 1: WHO-5
             // Cut-off: < 13 = poor wellbeing; >= 13 = good wellbeing
@@ -581,28 +604,73 @@
                 categories.part1 = '良好';
             }
             
-            // Part 2: BESAA - Appearance subscale (range 0-4)
-            // Using general interpretation: low (< 2), moderate (2-3), high (> 3)
-            if (scores.part2_appearance < 2) {
-                categories.part2_appearance = '低';
-            } else if (scores.part2_appearance <= 3) {
-                categories.part2_appearance = '中等';
+            // Part 2: BESAA - Appearance subscale (sum)
+            // Age-specific cutoffs:
+            //  - 12-18歲: 高 22–40, 低 0–21
+            //  - 19歲或以上: 高 26–40, 低 0–25
+            if (ageGroup === '12-18') {
+                if (scores.part2_appearance >= 22) {
+                    categories.part2_appearance = '高';
+                } else if (scores.part2_appearance <= 21) {
+                    categories.part2_appearance = '低';
+                } else {
+                    categories.part2_appearance = '中等';
+                }
+            } else if (ageGroup === '19+') {
+                if (scores.part2_appearance >= 26) {
+                    categories.part2_appearance = '高';
+                } else if (scores.part2_appearance <= 25) {
+                    categories.part2_appearance = '低';
+                } else {
+                    categories.part2_appearance = '中等';
+                }
             } else {
-                categories.part2_appearance = '高';
+                // Fallback: use generic mean-based interpretation if age is unavailable
+                const appearanceMean = scores.part2_appearance / 10;
+                if (appearanceMean <= 2.49) {
+                    categories.part2_appearance = '低';
+                } else if (appearanceMean <= 3.5) {
+                    categories.part2_appearance = '中等';
+                } else {
+                    categories.part2_appearance = '高';
+                }
             }
-            
-            // Part 2: BESAA - Attribution subscale (range 0-4)
-            if (scores.part2_attribution < 2) {
-                categories.part2_attribution = '低';
-            } else if (scores.part2_attribution <= 3) {
-                categories.part2_attribution = '中等';
+
+            // Part 2: BESAA - Attribution subscale (sum)
+            // Age-specific cutoffs:
+            //  - 12-18歲: 高 6–20, 低 0–5
+            //  - 19歲或以上: 高 8–20, 低 0–7
+            if (ageGroup === '12-18') {
+                if (scores.part2_attribution >= 6) {
+                    categories.part2_attribution = '高';
+                } else if (scores.part2_attribution <= 5) {
+                    categories.part2_attribution = '低';
+                } else {
+                    categories.part2_attribution = '中等';
+                }
+            } else if (ageGroup === '19+') {
+                if (scores.part2_attribution >= 8) {
+                    categories.part2_attribution = '高';
+                } else if (scores.part2_attribution <= 7) {
+                    categories.part2_attribution = '低';
+                } else {
+                    categories.part2_attribution = '中等';
+                }
             } else {
-                categories.part2_attribution = '高';
+                // Fallback: use generic mean-based interpretation if age is unavailable
+                const attributionMean = scores.part2_attribution / 5;
+                if (attributionMean <= 2.49) {
+                    categories.part2_attribution = '低';
+                } else if (attributionMean <= 3.5) {
+                    categories.part2_attribution = '中等';
+                } else {
+                    categories.part2_attribution = '高';
+                }
             }
             
             // Part 3: SCS Level 2 - Self-Compassion (range 1-5)
             // Categories: 1.0-2.49 = low, 2.5-3.5 = moderate, 3.51-5.0 = high
-            if (scores.part3_selfCompassion < 2.5) {
+            if (scores.part3_selfCompassion <= 2.49) {
                 categories.part3_selfCompassion = '低';
             } else if (scores.part3_selfCompassion <= 3.5) {
                 categories.part3_selfCompassion = '中等';
@@ -612,23 +680,16 @@
             
             // Part 3: SCS Level 2 - Self-Criticism (range 1-5)
             // Note: Lower is better for self-criticism, so we reverse the interpretation
-            if (scores.part3_selfCriticism > 3.5) {
-                categories.part3_selfCriticism = '高';
-            } else if (scores.part3_selfCriticism >= 2.5) {
+            // Categories: 1.0-2.49 = low, 2.5-3.5 = moderate, 3.51-5.0 = high
+            if (scores.part3_selfCriticism <= 2.49) {
+                categories.part3_selfCriticism = '低';
+            } else if (scores.part3_selfCriticism <= 3.5) {
                 categories.part3_selfCriticism = '中等';
             } else {
-                categories.part3_selfCriticism = '低';
+                categories.part3_selfCriticism = '高';
             }
             
-            // Part 4: SPMS (range 0-40 with 0-4 scale)
-            // Using tertiles: low (< 13.33), moderate (13.33-26.67), high (> 26.67)
-            if (scores.part4 < 13.33) {
-                categories.part4 = '低';
-            } else if (scores.part4 <= 26.67) {
-                categories.part4 = '中等';
-            } else {
-                categories.part4 = '高';
-            }
+            // Part 4: SPMS - no cutoff calculation needed
             
             return categories;
         }
@@ -749,29 +810,26 @@
                 '<div class="py-1 px-8 rounded-4 my-4" style="background-color: #f5f5f5;">' +
                 '<h4>第一部份：情緒健康 (WHO-5)</h4>' +
                 '<div id="gauge_part1" class="my-5"></div>' +
-                '<p>總分：' + scores.part1 + ' / 25</p>' +
-                '<p>等級：' + categories.part1 + '</p>' +
+                '<p>' + categories.part1 + '</p>' +
                 (scores.part1 < 13 ? '<p class="font-bold" style="color: #d32f2f;">注意：分數低於13分，建議進一步評估</p>' : '') +
                 '</div>' +
                 '<div class="py-1 px-8 rounded-4 my-4" style="background-color: #f5f5f5;">' +
                 '<h4>第二部份：儀容外貌 (BESAA)</h4>' +
                 '<div class="grid grid-cols-1 md:grid-cols-2 gap-5 my-5">' +
-                '<div><h5>外貌評價</h5><div id="gauge_part2_appearance"></div><p>分數：' + formatScore(scores.part2_appearance) + ' / 4.00</p><p>等級：' + categories.part2_appearance + '</p></div>' +
-                '<div><h5>外貌歸因</h5><div id="gauge_part2_attribution"></div><p>分數：' + formatScore(scores.part2_attribution) + ' / 4.00</p><p>等級：' + categories.part2_attribution + '</p></div>' +
+                '<div><h5>外貌評價</h5><div id="gauge_part2_appearance"></div><p>' + categories.part2_appearance + '</p></div>' +
+                '<div><h5>外貌歸因</h5><div id="gauge_part2_attribution"></div><p>' + categories.part2_attribution + '</p></div>' +
                 '</div>' +
                 '</div>' +
                 '<div class="py-1 px-8 rounded-4 my-4" style="background-color: #f5f5f5;">' +
                 '<h4>第三部份：自我關懷 (SCS)</h4>' +
                 '<div class="grid grid-cols-1 md:grid-cols-2 gap-5 my-5">' +
-                '<div><h5>自我關懷</h5><div id="gauge_part3_selfCompassion"></div><p>分數：' + formatScore(scores.part3_selfCompassion) + ' / 5.00</p><p>等級：' + categories.part3_selfCompassion + '</p></div>' +
-                '<div><h5>自我批評</h5><div id="gauge_part3_selfCriticism"></div><p>分數：' + formatScore(scores.part3_selfCriticism) + ' / 5.00</p><p>等級：' + categories.part3_selfCriticism + '</p></div>' +
+                '<div><h5>自我關懷</h5><div id="gauge_part3_selfCompassion"></div><p>' + categories.part3_selfCompassion + '</p></div>' +
+                '<div><h5>自我批評</h5><div id="gauge_part3_selfCriticism"></div><p>' + categories.part3_selfCriticism + '</p></div>' +
                 '</div>' +
                 '</div>' +
                 '<div class="py-1 px-8 rounded-4 my-4" style="background-color: #f5f5f5;">' +
                 '<h4>第四部份：照片修飾行為 (SPMS)</h4>' +
                 '<div id="gauge_part4" class="my-5"></div>' +
-                '<p>總分：' + scores.part4 + ' / 40</p>' +
-                '<p>等級：' + categories.part4 + '</p>' +
                 '</div>';
             
             // Find the paragraph that says "（結果TBC）" and replace it with actual results
@@ -876,22 +934,22 @@
                 console.log('Creating gauge charts...');
                 
                 // Part 1: WHO-5 (0-25)
-                createGaugeChart('gauge_part1', scores.part1, 25, '分數', getColorForCategory(categories.part1));
+                createGaugeChart('gauge_part1', scores.part1, 25, '情緒健康', getColorForCategory(categories.part1));
                 
-                // Part 2: BESAA Appearance (0-4)
-                createGaugeChart('gauge_part2_appearance', scores.part2_appearance, 4, '分數', getColorForCategory(categories.part2_appearance));
+                // Part 2: BESAA Appearance (sum 0-40)
+                createGaugeChart('gauge_part2_appearance', scores.part2_appearance, 40, '外貌評價', getColorForCategory(categories.part2_appearance));
                 
-                // Part 2: BESAA Attribution (0-4)
-                createGaugeChart('gauge_part2_attribution', scores.part2_attribution, 4, '分數', getColorForCategory(categories.part2_attribution));
+                // Part 2: BESAA Attribution (sum 0-20)
+                createGaugeChart('gauge_part2_attribution', scores.part2_attribution, 20, '外貌歸因', getColorForCategory(categories.part2_attribution));
                 
                 // Part 3: SCS Self-Compassion (1-5)
-                createGaugeChart('gauge_part3_selfCompassion', scores.part3_selfCompassion, 5, '分數', getColorForCategory(categories.part3_selfCompassion));
+                createGaugeChart('gauge_part3_selfCompassion', scores.part3_selfCompassion, 5, '自我關懷', getColorForCategory(categories.part3_selfCompassion));
                 
                 // Part 3: SCS Self-Criticism (1-5) - Lower is better (reversed)
-                createGaugeChart('gauge_part3_selfCriticism', scores.part3_selfCriticism, 5, '分數', getColorForCategory(categories.part3_selfCriticism, true));
+                createGaugeChart('gauge_part3_selfCriticism', scores.part3_selfCriticism, 5, '自我批評', getColorForCategory(categories.part3_selfCriticism, true));
                 
                 // Part 4: SPMS (0-40)
-                createGaugeChart('gauge_part4', scores.part4, 40, '分數', getColorForCategory(categories.part4));
+                createGaugeChart('gauge_part4', scores.part4, 40, '照片修飾行為', '#2196f3');
             }
             
             // Start creating charts after a short delay
