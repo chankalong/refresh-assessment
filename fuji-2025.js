@@ -840,9 +840,6 @@
                         title: { text: title },
                         type: "indicator",
                         mode: "gauge+number",
-                        number: {
-                            valueformat: '.1f'
-                        },
                         gauge: {
                             axis: { range: [gaugeMin, maxValue], tickvals: [gaugeMin, (gaugeMin + maxValue) / 2, maxValue] },
                             bar: { color: color, thickness: 1 },
@@ -1095,13 +1092,32 @@
                 createGaugeChart('gauge_part2_attribution', scores.part2_attribution, 20, '外貌歸因', getColorForCategory(categories.part2_attribution));
                 
                 // Part 3: SCS Self-Compassion (1-5)
-                createGaugeChart('gauge_part3_selfCompassion', scores.part3_selfCompassion, 5, '自我關懷', getColorForCategory(categories.part3_selfCompassion));
+                createGaugeChart(
+                    'gauge_part3_selfCompassion',
+                    Number(scores.part3_selfCompassion.toFixed(1)),
+                    5,
+                    '自我關懷',
+                    getColorForCategory(categories.part3_selfCompassion)
+                );
                 
                 // Part 3: SCS Self-Criticism (1-5) - Lower is better (reversed)
-                createGaugeChart('gauge_part3_selfCriticism', scores.part3_selfCriticism, 5, '自我批評', getColorForCategory(categories.part3_selfCriticism, true));
+                createGaugeChart(
+                    'gauge_part3_selfCriticism',
+                    Number(scores.part3_selfCriticism.toFixed(1)),
+                    5,
+                    '自我批評',
+                    getColorForCategory(categories.part3_selfCriticism, true)
+                );
                 
                 // Part 4: SPMS (1-5 average)
-                createGaugeChart('gauge_part4', scores.part4, 5, '鏡頭下的你', '#2196f3', 1);
+                createGaugeChart(
+                    'gauge_part4',
+                    Number(scores.part4.toFixed(1)),
+                    5,
+                    '鏡頭下的你',
+                    '#2196f3',
+                    1
+                );
             }
             
             // Start creating charts after a short delay
