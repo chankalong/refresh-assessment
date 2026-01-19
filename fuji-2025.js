@@ -619,7 +619,7 @@
             // Self-Criticism: Mean of Self-Judgment, Isolation, Over-identification
             scores.part3_selfCriticism = (scores.part3_selfJudgment + scores.part3_isolation + scores.part3_overIdentification) / 3;
             
-            // Part 4: SPMS - Mean of all items (range 0-4 with 0-4 scale)
+            // Part 4: SPMS - Mean of all items (range 1-5 after rescaling from 0-4)
             let part4Sum = 0;
             let part4Count = 0;
             for (let i = 1; i <= 10; i++) {
@@ -629,7 +629,9 @@
                     part4Count++;
                 }
             }
-            scores.part4 = part4Count > 0 ? part4Sum / part4Count : 0;
+            // Original mean is 0-4; add 1 so final scale is 1-5
+            const part4Mean = part4Count > 0 ? part4Sum / part4Count : 0;
+            scores.part4 = part4Mean + 1;
             
             return scores;
         }
@@ -815,7 +817,7 @@
         }
         
         // Helper function to create Plotly gauge chart
-        function createGaugeChart(containerId, value, maxValue, title, color) {
+        function createGaugeChart(containerId, value, maxValue, title, color, minValue) {
             if (typeof Plotly === 'undefined') {
                 console.error('Plotly library not loaded');
                 return;
@@ -828,6 +830,9 @@
             }
             
             try {
+                // Default min value to 0 if not provided
+                var gaugeMin = typeof minValue === 'number' ? minValue : 0;
+                
                 var data = [
                     {
                         domain: { x: [0, 1], y: [0, 1] },
@@ -835,8 +840,11 @@
                         title: { text: title },
                         type: "indicator",
                         mode: "gauge+number",
+                        number: {
+                            valueformat: '.1f'
+                        },
                         gauge: {
-                            axis: { range: [0, maxValue], tickvals: [0, maxValue/2, maxValue] },
+                            axis: { range: [gaugeMin, maxValue], tickvals: [gaugeMin, (gaugeMin + maxValue) / 2, maxValue] },
                             bar: { color: color, thickness: 1 },
                             bgcolor: "white"
                         }
@@ -1092,8 +1100,8 @@
                 // Part 3: SCS Self-Criticism (1-5) - Lower is better (reversed)
                 createGaugeChart('gauge_part3_selfCriticism', scores.part3_selfCriticism, 5, '自我批評', getColorForCategory(categories.part3_selfCriticism, true));
                 
-                // Part 4: SPMS (0-4 average)
-                createGaugeChart('gauge_part4', scores.part4, 4, '鏡頭下的你', '#2196f3');
+                // Part 4: SPMS (1-5 average)
+                createGaugeChart('gauge_part4', scores.part4, 5, '鏡頭下的你', '#2196f3', 1);
             }
             
             // Start creating charts after a short delay
