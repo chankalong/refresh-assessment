@@ -480,7 +480,7 @@
                 part3_selfCompassion: 0,  // Level 2
                 part3_selfCriticism: 0,   // Level 2
                 
-                // Part 4: SPMS (sum, range 10-50, but actual is 0-40 with 0-4 scale)
+                // Part 4: SPMS (mean, range 0-4 with 0-4 scale)
                 part4: 0
             };
             
@@ -619,13 +619,17 @@
             // Self-Criticism: Mean of Self-Judgment, Isolation, Over-identification
             scores.part3_selfCriticism = (scores.part3_selfJudgment + scores.part3_isolation + scores.part3_overIdentification) / 3;
             
-            // Part 4: SPMS - Sum of all items (range 0-40 with 0-4 scale, or 10-50 if scale is different)
+            // Part 4: SPMS - Mean of all items (range 0-4 with 0-4 scale)
+            let part4Sum = 0;
+            let part4Count = 0;
             for (let i = 1; i <= 10; i++) {
                 const value = getFieldValue('part4_q' + i);
                 if (value !== null) {
-                    scores.part4 += value;
+                    part4Sum += value;
+                    part4Count++;
                 }
             }
+            scores.part4 = part4Count > 0 ? part4Sum / part4Count : 0;
             
             return scores;
         }
@@ -874,9 +878,9 @@
             
             // Part 1: 身心健康狀況
             if (scores.part1 >= 13) {
-                descriptions.part1 = '你最近的身心狀態相當穩定，能夠從生活中感受到快樂與活力，並且有良好的休息品質。';
+                descriptions.part1 = '你的身心狀態目前處於理想水平。你較能在日常生活中感受到快樂與活力，並維持良好的休息與精神狀態。';
             } else {
-                descriptions.part1 = '你最近可能感到有些疲憊、壓力大、不太提得起勁。這不是你的錯，而是你的身體和心理在提醒你：「該休息一下了」。如果情況持續，可能需要尋求專業的協助。';
+                descriptions.part1 = '你的身心狀態值得多加留意。你目前可能較常感到疲憊或壓力大，或較難在生活中感到活力。這可能是身體和內心在提醒你，是時候給自己多一點關懷與休息。若這些感受持續，尋求專業協助可能對你有所幫助。';
             }
             
             // Part 2: 外貌滿意度與自信
@@ -885,31 +889,31 @@
             const othersEvalHigh = categories.part2_attribution === '高';
             
             if (selfEvalHigh && othersEvalHigh) {
-                descriptions.part2 = '你的內外評價高度一致且正面。你對自己的外貌有自信，也感受到其他人對你的友善和欣賞。這種「內外一致」的自信是你強大的能量來源！請繼續保持這種積極的心態，並將這份正能量分享給身邊正為容貌焦慮的朋友。';
+                descriptions.part2 = '你對自己的外貌有信心，也感受到身邊的人對你的外貌的欣賞。這種「內外一致」的自信，是你強大的能量來源，有助你在生活與人際互動中更積極自在。';
             } else if (!selfEvalHigh && othersEvalHigh) {
-                descriptions.part2 = '你認為大家都覺得你很好看，但你內心卻對自己非常苛刻，總是在找自己的缺點。這通常源於有過高的自我要求或太渴望達至你在社交媒體上看到的完美標準。試著練習相信別人的讚美！當有人誇獎你時，收下這份肯定。你眼中的瑕疵，在別人眼裡可能是獨特的亮點。';
+                descriptions.part2 = '你可能感受到別人對你外貌的肯定，但你對自己的外表卻有較高的要求，並傾向留意自己的不足。這可能源於你對自我有較高的期望，或受社交媒體上「完美形象」的影響。建議練習接納並相信別人的讚美！當有人欣賞你時，容許自己收下這份肯定，在別人眼中你擁有獨特的魅力。';
             } else if (selfEvalHigh && !othersEvalHigh) {
-                descriptions.part2 = '你擁有非常堅強的心理素質！即便你覺得外界不一定給予你外貌上的最高評價，你依然能欣賞自己的美。你是一個不容易被大眾審美左右、很有主見的人。這種對自我肯定非常珍貴。美本來就是主觀的，活成自己喜歡的模樣比取悅世界更重要。';
+                descriptions.part2 = '你的心理質素非常強大！即使你認為別人不一定對你的外貌給予最高評價，但你仍能欣賞自己，反映你不容易被別人的眼光左右，並擁有主見。美本來就是主觀的；活成自己喜歡的模樣，比取悅世界更重要。';
             } else {
-                descriptions.part2 = '你目前可能正處於一段對外貌比較灰心的時期。你覺得自己不好看，同時也擔心別人不喜歡你的長相。這種雙重焦慮有時讓你感到有壓力。請先抱抱自己。美不應該只有一種標準，請你相信你值得活出屬於自己的美，做自己最迷人！';
+                descriptions.part2 = '你目前可能較在意自己的外貌，會因此而感到苦惱，同時也擔心別人怎樣看你。當「自己不太滿意」加上「又怕別人不喜歡」這種雙重焦慮，有時會令你感到有壓力。請提醒自己：美，可以有很多不同的標準，我值得活出屬於自己的美，做自己最迷人！';
             }
             
             // Part 3: 自我關懷 - Self-Compassion
             if (scores.part3_selfCompassion >= 3.51) {
-                descriptions.part3_selfCompassion = '你擁有一顆強大的「自我療癒心」。你能以開放和平和的心態接納不完美的自己，這讓你即使在逆境中也能迅速恢復能量。';
+                descriptions.part3_selfCompassion = '你擁有良好的自我關懷能力，能理解與接納自己的不完美。這有助你在逆境中能迅速調整自己，以重新恢復力量。';
             } else if (scores.part3_selfCompassion >= 2.5) {
-                descriptions.part3_selfCompassion = '你具備一定的自我照顧能力，某些時候你能體諒自己，但面對較大打擊時，就會暫時關閉了這個能力呢。';
+                descriptions.part3_selfCompassion = '你具備一定的自我關懷能力，在某些情況下能體諒自己，但當面對較大的挑戰或壓力時，你較難維持這份自我關懷。建議慢慢培養與練習這份可貴的能力。';
             } else {
-                descriptions.part3_selfCompassion = '當你遇到困難時，你似乎很難對自己溫柔。你可能覺得自己必須完美，因此比較少在逆境出現時呵護自己。要記住：你也是需要被自己溫柔呵護的人。';
+                descriptions.part3_selfCompassion = '你可能覺得自己必須完美，所以較少在逆境或困難時對自己展現溫柔。請謹記：你值得被自己理解與呵護。';
             }
             
             // Part 3: 自我關懷 - Negative Self-compassion (Self-Criticism)
             if (scores.part3_selfCriticism >= 3.51) {
-                descriptions.part3_selfCriticism = '分數顯示，你對自己可能過於嚴厲了。當失敗發生時，你容易陷入「這全是我的錯」的自我批評當中。';
+                descriptions.part3_selfCriticism = '此外，面對挑戰或不如意時，你傾向對自己嚴厲，容易陷入自我批評或孤立感。這會讓你增加壓力，並影響你從中恢復，建議學習善待自己。';
             } else if (scores.part3_selfCriticism >= 2.5) {
-                descriptions.part3_selfCriticism = '有時你內心的「批評者」會跑出來，讓你覺得自己不夠好，或者覺得別人都比你快樂。';
+                descriptions.part3_selfCriticism = '此外，你偶爾出現的自我批評聲音，會令你懷疑自己或與人比較，覺得他人似乎更快樂。這些感受雖然常見，但有可能會影響你的情緒和自我接納，建議多些溫柔對待自己。';
             } else {
-                descriptions.part3_selfCriticism = '你很少會過度苛責自己，這種心態能讓你更輕鬆地應對生活中的種種挑戰！';
+                descriptions.part3_selfCriticism = '此外，你較少在逆境中過度苛責自己，這種心態讓你能較輕鬆地應對生活中的種種挑戰。';
             }
             
             // Part 4: 照片修飾行為
@@ -938,15 +942,15 @@
             
             // Build results HTML with new scoring structure and gauge chart containers
             // Using Tailwind CSS classes for responsive layout (one column on small screens, two columns on medium+)
-            const resultsHTML = '<h3>你的問卷結果</h3>' +
+            const resultsHTML = '<h3>你的結果</h3>' +
                 '<div class="py-1 px-8 rounded-4 my-4" style="background-color: #f5f5f5;">' +
-                '<h4>第一部份</h4>' +
+                '<h4>第1部分︰WHO-5 (身心健康狀況)</h4>' +
                 '<div id="gauge_part1" class="my-5"></div>' +
                 '<p style="text-align: center;">' + categories.part1 + '</p>' +
                 '<p style="margin-top: 15px;">' + descriptions.part1 + '</p>' +
                 '</div>' +
                 '<div class="py-1 px-8 rounded-4 my-4" style="background-color: #f5f5f5;">' +
-                '<h4>第二部份</h4>' +
+                '<h4>第2部分︰BESAA (外貌滿意度)</h4>' +
                 '<div class="grid grid-cols-1 md:grid-cols-2 gap-5 my-5">' +
                 '<div><div id="gauge_part2_appearance"></div><p style="text-align: center;">' + categories.part2_appearance + '</p></div>' +
                 '<div><div id="gauge_part2_attribution"></div><p style="text-align: center;">' + categories.part2_attribution + '</p></div>' +
@@ -954,18 +958,22 @@
                 '<p style="margin-top: 15px;">' + descriptions.part2 + '</p>' +
                 '</div>' +
                 '<div class="py-1 px-8 rounded-4 my-4" style="background-color: #f5f5f5;">' +
-                '<h4>第三部份</h4>' +
+                '<h4>第3部分︰SCS (自我關懷)</h4>' +
                 '<div class="grid grid-cols-1 md:grid-cols-2 gap-5 my-5">' +
-                '<div><div id="gauge_part3_selfCompassion"></div><p style="text-align: center;">' + categories.part3_selfCompassion + '</p>' +
-                '<p style="margin-top: 10px; font-size: 0.9em;">' + descriptions.part3_selfCompassion + '</p></div>' +
-                '<div><div id="gauge_part3_selfCriticism"></div><p style="text-align: center;">' + categories.part3_selfCriticism + '</p>' +
-                '<p style="margin-top: 10px; font-size: 0.9em;">' + descriptions.part3_selfCriticism + '</p></div>' +
+                '<div><div id="gauge_part3_selfCompassion"></div><p style="text-align: center;">' + categories.part3_selfCompassion + '</p></div>' +
+                '<div><div id="gauge_part3_selfCriticism"></div><p style="text-align: center;">' + categories.part3_selfCriticism + '</p></div>' +
+                '</div>' +
+                '<div>' +
+                '<p style="margin-top: 15px;">' + descriptions.part3_selfCompassion + '</p>' +
+                '<p style="margin-top: 15px;">' + descriptions.part3_selfCriticism + '</p>' +
                 '</div>' +
                 '</div>' +
                 '<div class="py-1 px-8 rounded-4 my-4" style="background-color: #f5f5f5;">' +
-                '<h4>第四部份</h4>' +
+                '<h4>第4部分︰SPMS (照片修飾行為)</h4>' +
                 '<div id="gauge_part4" class="my-5"></div>' +
-                '<p style="margin-top: 15px;">' + descriptions.part4 + '</p>' +
+                '<p style="margin-top: 15px;">分數越高，代表你越常花費心力修飾與美化照片，以展現你所<b>追求的理想形象</b>，反映你十分重視自己的形象。</p>' +
+                '<p style="margin-top: 15px;">分數較低，意味你越傾向於以自然、未經修飾的樣貌示人，並對此感到自在，擁有一份對<b>真實自我</b>的接納和自信。</p>' +
+                '<p style="margin-top: 15px;">無論你的分數高低，這都是一個機會去思考自己在社交媒體上如何呈現真實與理想之間的平衡。</p>' +
                 '</div>';
             
             // Find the paragraph that says "（結果TBC）" and replace it with actual results
@@ -1070,7 +1078,7 @@
                 console.log('Creating gauge charts...');
                 
                 // Part 1: WHO-5 (0-25)
-                createGaugeChart('gauge_part1', scores.part1, 25, '情緒健康', getColorForCategory(categories.part1));
+                createGaugeChart('gauge_part1', scores.part1, 25, '身心健康狀況', getColorForCategory(categories.part1));
                 
                 // Part 2: BESAA Appearance (sum 0-40)
                 createGaugeChart('gauge_part2_appearance', scores.part2_appearance, 40, '外貌評價', getColorForCategory(categories.part2_appearance));
@@ -1084,8 +1092,8 @@
                 // Part 3: SCS Self-Criticism (1-5) - Lower is better (reversed)
                 createGaugeChart('gauge_part3_selfCriticism', scores.part3_selfCriticism, 5, '自我批評', getColorForCategory(categories.part3_selfCriticism, true));
                 
-                // Part 4: SPMS (0-40)
-                createGaugeChart('gauge_part4', scores.part4, 40, '照片修飾行為', '#2196f3');
+                // Part 4: SPMS (0-4 average)
+                createGaugeChart('gauge_part4', scores.part4, 4, '鏡頭下的你', '#2196f3');
             }
             
             // Start creating charts after a short delay
