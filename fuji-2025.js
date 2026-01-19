@@ -672,9 +672,9 @@
             // Part 1: WHO-5
             // Cut-off: < 13 = poor wellbeing; >= 13 = good wellbeing
             if (scores.part1 < 13) {
-                categories.part1 = '較差';
+                categories.part1 = '欠佳';
             } else {
-                categories.part1 = '良好';
+                categories.part1 = '理想';
             }
             
             // Part 2: BESAA - Appearance subscale (sum)
@@ -800,7 +800,7 @@
                 }
             } else {
                 // Normal scales (higher is better)
-                if (category === '高' || category === '良好') {
+                if (category === '高' || category === '良好' || category === '理想') {
                     return '#4caf50'; // Green
                 } else if (category === '中等') {
                     return '#ff9800'; // Orange
@@ -862,6 +862,62 @@
             }
         }
         
+        // Generate descriptions based on scores (returns plain text)
+        function generateDescriptions(scores, categories) {
+            const descriptions = {
+                part1: '',
+                part2: '',
+                part3_selfCompassion: '',
+                part3_selfCriticism: '',
+                part4: ''
+            };
+            
+            // Part 1: 身心健康狀況
+            if (scores.part1 >= 13) {
+                descriptions.part1 = '你最近的身心狀態相當穩定，能夠從生活中感受到快樂與活力，並且有良好的休息品質。';
+            } else {
+                descriptions.part1 = '你最近可能感到有些疲憊、壓力大、不太提得起勁。這不是你的錯，而是你的身體和心理在提醒你：「該休息一下了」。如果情況持續，可能需要尋求專業的協助。';
+            }
+            
+            // Part 2: 外貌滿意度與自信
+            // Use categories to determine high/low (consistent with categorizeScores)
+            const selfEvalHigh = categories.part2_appearance === '高';
+            const othersEvalHigh = categories.part2_attribution === '高';
+            
+            if (selfEvalHigh && othersEvalHigh) {
+                descriptions.part2 = '你的內外評價高度一致且正面。你對自己的外貌有自信，也感受到其他人對你的友善和欣賞。這種「內外一致」的自信是你強大的能量來源！請繼續保持這種積極的心態，並將這份正能量分享給身邊正為容貌焦慮的朋友。';
+            } else if (!selfEvalHigh && othersEvalHigh) {
+                descriptions.part2 = '你認為大家都覺得你很好看，但你內心卻對自己非常苛刻，總是在找自己的缺點。這通常源於有過高的自我要求或太渴望達至你在社交媒體上看到的完美標準。試著練習相信別人的讚美！當有人誇獎你時，收下這份肯定。你眼中的瑕疵，在別人眼裡可能是獨特的亮點。';
+            } else if (selfEvalHigh && !othersEvalHigh) {
+                descriptions.part2 = '你擁有非常堅強的心理素質！即便你覺得外界不一定給予你外貌上的最高評價，你依然能欣賞自己的美。你是一個不容易被大眾審美左右、很有主見的人。這種對自我肯定非常珍貴。美本來就是主觀的，活成自己喜歡的模樣比取悅世界更重要。';
+            } else {
+                descriptions.part2 = '你目前可能正處於一段對外貌比較灰心的時期。你覺得自己不好看，同時也擔心別人不喜歡你的長相。這種雙重焦慮有時讓你感到有壓力。請先抱抱自己。美不應該只有一種標準，請你相信你值得活出屬於自己的美，做自己最迷人！';
+            }
+            
+            // Part 3: 自我關懷 - Self-Compassion
+            if (scores.part3_selfCompassion >= 3.51) {
+                descriptions.part3_selfCompassion = '你擁有一顆強大的「自我療癒心」。你能以開放和平和的心態接納不完美的自己，這讓你即使在逆境中也能迅速恢復能量。';
+            } else if (scores.part3_selfCompassion >= 2.5) {
+                descriptions.part3_selfCompassion = '你具備一定的自我照顧能力，某些時候你能體諒自己，但面對較大打擊時，就會暫時關閉了這個能力呢。';
+            } else {
+                descriptions.part3_selfCompassion = '當你遇到困難時，你似乎很難對自己溫柔。你可能覺得自己必須完美，因此比較少在逆境出現時呵護自己。要記住：你也是需要被自己溫柔呵護的人。';
+            }
+            
+            // Part 3: 自我關懷 - Negative Self-compassion (Self-Criticism)
+            if (scores.part3_selfCriticism >= 3.51) {
+                descriptions.part3_selfCriticism = '分數顯示，你對自己可能過於嚴厲了。當失敗發生時，你容易陷入「這全是我的錯」的自我批評當中。';
+            } else if (scores.part3_selfCriticism >= 2.5) {
+                descriptions.part3_selfCriticism = '有時你內心的「批評者」會跑出來，讓你覺得自己不夠好，或者覺得別人都比你快樂。';
+            } else {
+                descriptions.part3_selfCriticism = '你很少會過度苛責自己，這種心態能讓你更輕鬆地應對生活中的種種挑戰！';
+            }
+            
+            // Part 4: 照片修飾行為
+            descriptions.part4 = '分數愈高，代表你愈多花心力在修飾和美化照片，希望在別人眼中展現出最好的自己。';
+            
+            return descriptions;
+        }
+        
         // Display results on thank you page
         function displayResults(scores, categories) {
             const resultsDiv = document.getElementById('survey_results');
@@ -877,6 +933,9 @@
                 return typeof score === 'number' ? score.toFixed(2) : score;
             }
             
+            // Generate descriptions (plain text)
+            const descriptions = generateDescriptions(scores, categories);
+            
             // Build results HTML with new scoring structure and gauge chart containers
             // Using Tailwind CSS classes for responsive layout (one column on small screens, two columns on medium+)
             const resultsHTML = '<h3>你的問卷結果</h3>' +
@@ -884,7 +943,7 @@
                 '<h4>第一部份</h4>' +
                 '<div id="gauge_part1" class="my-5"></div>' +
                 '<p style="text-align: center;">' + categories.part1 + '</p>' +
-                (scores.part1 < 13 ? '<p class="font-bold" style="color: #d32f2f;">注意：分數低於13分，建議進一步評估</p>' : '') +
+                '<p style="margin-top: 15px;">' + descriptions.part1 + '</p>' +
                 '</div>' +
                 '<div class="py-1 px-8 rounded-4 my-4" style="background-color: #f5f5f5;">' +
                 '<h4>第二部份</h4>' +
@@ -892,17 +951,21 @@
                 '<div><div id="gauge_part2_appearance"></div><p style="text-align: center;">' + categories.part2_appearance + '</p></div>' +
                 '<div><div id="gauge_part2_attribution"></div><p style="text-align: center;">' + categories.part2_attribution + '</p></div>' +
                 '</div>' +
+                '<p style="margin-top: 15px;">' + descriptions.part2 + '</p>' +
                 '</div>' +
                 '<div class="py-1 px-8 rounded-4 my-4" style="background-color: #f5f5f5;">' +
                 '<h4>第三部份</h4>' +
                 '<div class="grid grid-cols-1 md:grid-cols-2 gap-5 my-5">' +
-                '<div><div id="gauge_part3_selfCompassion"></div><p style="text-align: center;">' + categories.part3_selfCompassion + '</p></div>' +
-                '<div><div id="gauge_part3_selfCriticism"></div><p style="text-align: center;">' + categories.part3_selfCriticism + '</p></div>' +
+                '<div><div id="gauge_part3_selfCompassion"></div><p style="text-align: center;">' + categories.part3_selfCompassion + '</p>' +
+                '<p style="margin-top: 10px; font-size: 0.9em;">' + descriptions.part3_selfCompassion + '</p></div>' +
+                '<div><div id="gauge_part3_selfCriticism"></div><p style="text-align: center;">' + categories.part3_selfCriticism + '</p>' +
+                '<p style="margin-top: 10px; font-size: 0.9em;">' + descriptions.part3_selfCriticism + '</p></div>' +
                 '</div>' +
                 '</div>' +
                 '<div class="py-1 px-8 rounded-4 my-4" style="background-color: #f5f5f5;">' +
                 '<h4>第四部份</h4>' +
                 '<div id="gauge_part4" class="my-5"></div>' +
+                '<p style="margin-top: 15px;">' + descriptions.part4 + '</p>' +
                 '</div>';
             
             // Find the paragraph that says "（結果TBC）" and replace it with actual results
@@ -1043,13 +1106,15 @@
                         // Calculate scores
                         const scores = calculateScores();
                         const categories = categorizeScores(scores);
+                        const descriptions = generateDescriptions(scores, categories);
                         
                         // Collect all form data
                         const formData = collectFormData();
                         
-                        // Add scores and categories to form data
+                        // Add scores, categories, and descriptions to form data
                         formData.scores = scores;
                         formData.categories = categories;
+                        formData.descriptions = descriptions;
                         
                         // Add timestamp
                         formData.complete_time = new Date().toISOString();
