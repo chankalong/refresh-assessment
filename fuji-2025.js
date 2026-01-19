@@ -942,7 +942,7 @@
             
             // Build results HTML with new scoring structure and gauge chart containers
             // Using Tailwind CSS classes for responsive layout (one column on small screens, two columns on medium+)
-            const resultsHTML = '<h3>你的結果</h3>' +
+            const resultsHTML = '<h3 style="text-align: center;">你的結果</h3>' +
                 '<div class="py-1 px-8 rounded-4 my-4" style="background-color: #f5f5f5;">' +
                 '<h4>第1部分︰WHO-5 (身心健康狀況)</h4>' +
                 '<div id="gauge_part1" class="my-5"></div>' +
