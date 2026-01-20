@@ -949,13 +949,13 @@
             // Using Tailwind CSS classes for responsive layout (one column on small screens, two columns on medium+)
             const resultsHTML = '<h3 style="text-align: center;">你的結果</h3>' +
                 '<div class="py-1 px-8 rounded-4 my-4" style="background-color: #f5f5f5;">' +
-                '<h4>第1部分︰WHO-5 (身心健康狀況)</h4>' +
+                '<h4>第1部分︰身心健康狀況</h4>' +
                 '<div id="gauge_part1" class="my-5"></div>' +
                 '<p style="text-align: center;">' + categories.part1 + '</p>' +
                 '<p style="margin-top: 15px;">' + descriptions.part1 + '</p>' +
                 '</div>' +
                 '<div class="py-1 px-8 rounded-4 my-4" style="background-color: #f5f5f5;">' +
-                '<h4>第2部分︰BESAA (外貌滿意度)</h4>' +
+                '<h4>第2部分︰外貌滿意度</h4>' +
                 '<div class="grid grid-cols-1 md:grid-cols-2 gap-5 my-5">' +
                 '<div><div id="gauge_part2_appearance"></div><p style="text-align: center;">' + categories.part2_appearance + '</p></div>' +
                 '<div><div id="gauge_part2_attribution"></div><p style="text-align: center;">' + categories.part2_attribution + '</p></div>' +
@@ -963,7 +963,7 @@
                 '<p style="margin-top: 15px;">' + descriptions.part2 + '</p>' +
                 '</div>' +
                 '<div class="py-1 px-8 rounded-4 my-4" style="background-color: #f5f5f5;">' +
-                '<h4>第3部分︰SCS (自我關懷)</h4>' +
+                '<h4>第3部分︰自我關懷</h4>' +
                 '<div class="grid grid-cols-1 md:grid-cols-2 gap-5 my-5">' +
                 '<div><div id="gauge_part3_selfCompassion"></div><p style="text-align: center;">' + categories.part3_selfCompassion + '</p></div>' +
                 '<div><div id="gauge_part3_selfCriticism"></div><p style="text-align: center;">' + categories.part3_selfCriticism + '</p></div>' +
@@ -974,7 +974,7 @@
                 '</div>' +
                 '</div>' +
                 '<div class="py-1 px-8 rounded-4 my-4" style="background-color: #f5f5f5;">' +
-                '<h4>第4部分︰SPMS (照片修飾行為)</h4>' +
+                '<h4>第4部分︰照片修飾行為</h4>' +
                 '<div id="gauge_part4" class="my-5"></div>' +
                 '<p style="margin-top: 15px;">分數越高，代表你越常花費心力修飾與美化照片，以展現你所<b>追求的理想形象</b>，反映你十分重視自己的形象。</p>' +
                 '<p style="margin-top: 15px;">分數較低，意味你越傾向於以自然、未經修飾的樣貌示人，並對此感到自在，擁有一份對<b>真實自我</b>的接納和自信。</p>' +
@@ -1086,10 +1086,10 @@
                 createGaugeChart('gauge_part1', scores.part1, 25, '身心健康狀況', getColorForCategory(categories.part1));
                 
                 // Part 2: BESAA Appearance (sum 0-40)
-                createGaugeChart('gauge_part2_appearance', scores.part2_appearance, 40, '外貌評價', getColorForCategory(categories.part2_appearance));
+                createGaugeChart('gauge_part2_appearance', scores.part2_appearance, 40, '外貌自評', getColorForCategory(categories.part2_appearance));
                 
                 // Part 2: BESAA Attribution (sum 0-20)
-                createGaugeChart('gauge_part2_attribution', scores.part2_attribution, 20, '外貌歸因', getColorForCategory(categories.part2_attribution));
+                createGaugeChart('gauge_part2_attribution', scores.part2_attribution, 20, '外貌影響', getColorForCategory(categories.part2_attribution));
                 
                 // Part 3: SCS Self-Compassion (1-5)
                 createGaugeChart(
