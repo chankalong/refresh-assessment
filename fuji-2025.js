@@ -180,7 +180,7 @@
                         setTimeout(function() {
                             const rect = currentSection.getBoundingClientRect();
                             const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-                            const offset = 150; // Adjust this value to change the offset amount
+                            const offset = 100; // Adjust this value to change the offset amount
                             
                             window.scrollTo({
                                 top: scrollTop + rect.top - offset,
@@ -1219,7 +1219,7 @@
                                 setTimeout(function() {
                                     const rect = completeDiv.getBoundingClientRect();
                                     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-                                    const offset = 150; // Adjust this value to change the offset amount
+                                    const offset = 100; // Adjust this value to change the offset amount
                                     
                                     window.scrollTo({
                                         top: scrollTop + rect.top - offset,
