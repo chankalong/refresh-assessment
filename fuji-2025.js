@@ -176,7 +176,17 @@
                     
                     // Only scroll if explicitly requested (not on initial load)
                     if (shouldScroll && !isInitialLoad) {
-                        currentSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        // Scroll with offset to account for fixed headers/page-title
+                        setTimeout(function() {
+                            const rect = currentSection.getBoundingClientRect();
+                            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                            const offset = 150; // Adjust this value to change the offset amount
+                            
+                            window.scrollTo({
+                                top: scrollTop + rect.top - offset,
+                                behavior: 'smooth'
+                            });
+                        }, 10);
                     }
                     
                     // Mark that initial load is complete after first section is shown
@@ -1205,7 +1215,17 @@
                                 displayResults(scores, categories);
                                 // Update name in thank you message
                                 updateThankYouMessage();
-                                completeDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                // Scroll with offset to account for fixed headers/page-title
+                                setTimeout(function() {
+                                    const rect = completeDiv.getBoundingClientRect();
+                                    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                                    const offset = 150; // Adjust this value to change the offset amount
+                                    
+                                    window.scrollTo({
+                                        top: scrollTop + rect.top - offset,
+                                        behavior: 'smooth'
+                                    });
+                                }, 10);
                             }
                         })
                         .catch(function(error) {
