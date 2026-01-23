@@ -213,6 +213,24 @@
                     } else {
                         field.style.borderColor = '';
                     }
+                } else if (field.type === 'radio') {
+                    // Check if any radio button in the group is selected
+                    const radioGroup = document.querySelectorAll('input[name="' + field.name + '"]');
+                    const isChecked = Array.from(radioGroup).some(function(radio) {
+                        return radio.checked;
+                    });
+                    if (!isChecked) {
+                        isValid = false;
+                        // Highlight all radio buttons in the group
+                        radioGroup.forEach(function(radio) {
+                            radio.closest('label').style.borderColor = 'red';
+                        });
+                    } else {
+                        // Clear highlight
+                        radioGroup.forEach(function(radio) {
+                            radio.closest('label').style.borderColor = '';
+                        });
+                    }
                 } else if (field.tagName === 'SELECT') {
                     if (!field.value || field.value === '') {
                         isValid = false;
@@ -467,7 +485,16 @@
         // Helper function to get field value
         function getFieldValue(id) {
             const field = document.getElementById(id);
-            return field && field.value ? parseInt(field.value) : null;
+            if (field) {
+                // Handle radio buttons
+                if (field.type === 'radio') {
+                    const checkedRadio = document.querySelector('input[name="' + id + '"]:checked');
+                    return checkedRadio ? parseInt(checkedRadio.value) : null;
+                }
+                // Handle select and other inputs
+                return field.value ? parseInt(field.value) : null;
+            }
+            return null;
         }
         
         // Calculate scores for each section according to research literature
@@ -1302,33 +1329,61 @@
             
             // Part 1 data
             for (let i = 1; i <= 5; i++) {
-                const field = document.getElementById('part1_q' + i);
+                const fieldId = 'part1_q' + i;
+                const field = document.getElementById(fieldId);
                 if (field) {
-                    data['part1_q' + i] = field.value;
+                    // Handle radio buttons
+                    if (field.type === 'radio') {
+                        const checkedRadio = document.querySelector('input[name="' + fieldId + '"]:checked');
+                        data['part1_q' + i] = checkedRadio ? checkedRadio.value : '';
+                    } else {
+                        data['part1_q' + i] = field.value;
+                    }
                 }
             }
             
             // Part 2 data
             for (let i = 1; i <= 16; i++) {
-                const field = document.getElementById('part2_q' + i);
+                const fieldId = 'part2_q' + i;
+                const field = document.getElementById(fieldId);
                 if (field) {
-                    data['part2_q' + i] = field.value;
+                    // Handle radio buttons
+                    if (field.type === 'radio') {
+                        const checkedRadio = document.querySelector('input[name="' + fieldId + '"]:checked');
+                        data['part2_q' + i] = checkedRadio ? checkedRadio.value : '';
+                    } else {
+                        data['part2_q' + i] = field.value;
+                    }
                 }
             }
             
             // Part 3 data
             for (let i = 1; i <= 27; i++) {
-                const field = document.getElementById('part3_q' + i);
+                const fieldId = 'part3_q' + i;
+                const field = document.getElementById(fieldId);
                 if (field) {
-                    data['part3_q' + i] = field.value;
+                    // Handle radio buttons
+                    if (field.type === 'radio') {
+                        const checkedRadio = document.querySelector('input[name="' + fieldId + '"]:checked');
+                        data['part3_q' + i] = checkedRadio ? checkedRadio.value : '';
+                    } else {
+                        data['part3_q' + i] = field.value;
+                    }
                 }
             }
             
             // Part 4 data
             for (let i = 1; i <= 10; i++) {
-                const field = document.getElementById('part4_q' + i);
+                const fieldId = 'part4_q' + i;
+                const field = document.getElementById(fieldId);
                 if (field) {
-                    data['part4_q' + i] = field.value;
+                    // Handle radio buttons
+                    if (field.type === 'radio') {
+                        const checkedRadio = document.querySelector('input[name="' + fieldId + '"]:checked');
+                        data['part4_q' + i] = checkedRadio ? checkedRadio.value : '';
+                    } else {
+                        data['part4_q' + i] = field.value;
+                    }
                 }
             }
             
