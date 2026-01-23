@@ -148,6 +148,9 @@
         // Set up navigation buttons
         setupNavigation();
         
+        // Set up auto scroll between questions in Parts 1–4
+        setupAutoScrollBetweenQuestions();
+        
         // Set up conditional fields
         setupConditionalFields();
         
@@ -195,6 +198,20 @@
                     }
                 }
             }
+        }
+        
+        // Smoothly scroll a given element into view with offset (for fixed headers)
+        function scrollElementIntoViewWithOffset(element, offset) {
+            if (!element) return;
+            
+            const rect = element.getBoundingClientRect();
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const safeOffset = typeof offset === 'number' ? offset : 100;
+            
+            window.scrollTo({
+                top: scrollTop + rect.top - safeOffset,
+                behavior: 'smooth'
+            });
         }
         
         function validateSection(sectionId) {
@@ -391,6 +408,53 @@
                     showSection(4, true);
                 });
             }
+        }
+        
+        // When an answer is selected in Part 1–4, scroll to the next question
+        function setupAutoScrollBetweenQuestions() {
+            const partSectionIds = [
+                'section_part1',
+                'section_part2',
+                'section_part3',
+                'section_part4'
+            ];
+            
+            partSectionIds.forEach(function(sectionId) {
+                const section = document.getElementById(sectionId);
+                if (!section) return;
+                
+                section.addEventListener('change', function(event) {
+                    const target = event.target;
+                    
+                    // Only react to radio button changes
+                    if (!target || target.type !== 'radio') {
+                        return;
+                    }
+                    
+                    // Find the current question <li>
+                    const currentQuestion = target.closest('li');
+                    if (!currentQuestion) return;
+                    
+                    // Find the next question <li> in the same list
+                    let nextQuestion = currentQuestion.nextElementSibling;
+                    while (nextQuestion && nextQuestion.tagName && nextQuestion.tagName.toLowerCase() !== 'li') {
+                        nextQuestion = nextQuestion.nextElementSibling;
+                    }
+                    
+                    // If there is a next question, scroll to it
+                    if (nextQuestion) {
+                        setTimeout(function() {
+                            scrollElementIntoViewWithOffset(nextQuestion, 120);
+                        }, 50);
+                    } else {
+                        // If it's the last question in the part, scroll to the navigation buttons
+                        const navButtonsContainer = section.querySelector('.my-8.text-center') || section;
+                        setTimeout(function() {
+                            scrollElementIntoViewWithOffset(navButtonsContainer, 120);
+                        }, 50);
+                    }
+                });
+            });
         }
         
         function setupConditionalFields() {
