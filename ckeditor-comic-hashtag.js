@@ -1,13 +1,29 @@
 (function () {
   "use strict";
 
+  function queryOne(root, selectors) {
+    for (var i = 0; i < selectors.length; i += 1) {
+      var found = root.querySelector(selectors[i]);
+      if (found) return found;
+    }
+    return null;
+  }
+
+  function queryAll(root, selectors) {
+    for (var i = 0; i < selectors.length; i += 1) {
+      var found = root.querySelectorAll(selectors[i]);
+      if (found && found.length) return found;
+    }
+    return [];
+  }
+
   function initSingleRoot(root) {
     if (!root || root.getAttribute("data-peanuts-init") === "1") {
       return;
     }
     root.setAttribute("data-peanuts-init", "1");
 
-    var hashList = root.querySelector("[data-hash-list]");
+    var hashList = queryOne(root, ["#peanuts-hash-list", "[data-hash-list]"]);
     if (hashList) {
       var baseItems = Array.prototype.slice.call(hashList.children);
       var fragmentBefore = document.createDocumentFragment();
@@ -48,11 +64,11 @@
       window.requestAnimationFrame(animateHash);
     }
 
-    var comicsWrap = root.querySelector("[data-comics-wrap]");
-    var comicsCarousel = root.querySelector("[data-comics-carousel]");
+    var comicsWrap = queryOne(root, ["#peanuts-comics-wrap", "[data-comics-wrap]"]);
+    var comicsCarousel = queryOne(root, ["#peanuts-comics-carousel", "[data-comics-carousel]"]);
     if (!comicsCarousel) return;
 
-    var cards = Array.prototype.slice.call(comicsCarousel.querySelectorAll("[data-comic-card]"));
+    var cards = Array.prototype.slice.call(queryAll(comicsCarousel, ["[data-comic-card]", ".comic-card", "article"]));
     if (!cards.length) return;
 
     var activeIndex = 0;
@@ -125,8 +141,8 @@
       autoplayId = null;
     }
 
-    var prevButton = root.querySelector("[data-comics-prev]");
-    var nextButton = root.querySelector("[data-comics-next]");
+    var prevButton = queryOne(root, ["#peanuts-comics-prev", "[data-comics-prev]"]);
+    var nextButton = queryOne(root, ["#peanuts-comics-next", "[data-comics-next]"]);
 
     function applyResponsiveStyles() {
       var isMobile = window.innerWidth <= 780;
@@ -191,7 +207,7 @@
 
   function initPeanutsCkeditorSections(scope) {
     var rootScope = scope || document;
-    var roots = rootScope.querySelectorAll(".peanuts-ckeditor");
+    var roots = rootScope.querySelectorAll(".peanuts-ckeditor, #peanuts-ckeditor-root");
     Array.prototype.forEach.call(roots, initSingleRoot);
   }
 
