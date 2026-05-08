@@ -1,6 +1,14 @@
 (function () {
   "use strict";
 
+  var DEBUG = true;
+  function log() {
+    if (!DEBUG || typeof console === "undefined") return;
+    var args = Array.prototype.slice.call(arguments);
+    args.unshift("[peanuts]");
+    console.log.apply(console, args);
+  }
+
   function queryOne(root, selectors) {
     for (var i = 0; i < selectors.length; i += 1) {
       var found = root.querySelector(selectors[i]);
@@ -20,7 +28,11 @@
   function initSingleRoot(root) {
     if (!root) return;
 
+    var rootId = root.id || "(no-id)";
+    log("initSingleRoot:start", rootId);
+
     if (typeof root.__peanutsCleanup === "function") {
+      log("initSingleRoot:running previous cleanup", rootId);
       root.__peanutsCleanup();
     }
 
@@ -42,6 +54,7 @@
     }
 
     function cleanup() {
+      log("cleanup:start", rootId);
       if (hashRafId !== null && window.cancelAnimationFrame) {
         window.cancelAnimationFrame(hashRafId);
       }
@@ -60,6 +73,7 @@
         var fn = cleanups.pop();
         fn();
       }
+      log("cleanup:done", rootId);
     }
 
     root.__peanutsCleanup = cleanup;
@@ -89,6 +103,7 @@
       hashList.appendChild(afterFragment);
 
       function startHashLoop(retryCount) {
+        log("hashLoop:measure", rootId, "retry", retryCount);
         var originalWidth = 0;
         baseItems.forEach(function (node) {
           originalWidth += node.getBoundingClientRect().width;
@@ -99,6 +114,7 @@
 
         if (!originalWidth || originalWidth < 10) {
           if (retryCount < 30) {
+            log("hashLoop:width not ready", rootId, originalWidth);
             addTimer(
               window.setTimeout(function () {
                 startHashLoop(retryCount + 1);
@@ -108,6 +124,7 @@
           return;
         }
 
+        log("hashLoop:start", rootId, "width", originalWidth);
         var hashOffset = -originalWidth;
         var hashSpeed = 38;
         var previousTime = 0;
@@ -209,12 +226,14 @@
     function startAutoplay() {
       if (autoplayId !== null) window.clearInterval(autoplayId);
       autoplayId = window.setInterval(slideNext, autoplayDelay);
+      log("autoplay:start", rootId, "delay", autoplayDelay);
     }
 
     function stopAutoplay() {
       if (autoplayId === null) return;
       window.clearInterval(autoplayId);
       autoplayId = null;
+      log("autoplay:stop", rootId);
     }
 
     function bindButtonHover(button, isPrev) {
@@ -258,11 +277,13 @@
     addTimer(window.setTimeout(applyComicTransforms, 30));
     addTimer(window.setTimeout(applyComicTransforms, 120));
     startAutoplay();
+    log("initSingleRoot:done", rootId, "cards", cards.length);
   }
 
   function initPeanutsCkeditorSections(scope) {
     var rootScope = scope || document;
     var roots = rootScope.querySelectorAll(".peanuts-ckeditor, #peanuts-ckeditor-root");
+    log("initPeanutsCkeditorSections", "roots", roots.length);
     Array.prototype.forEach.call(roots, initSingleRoot);
     return roots.length;
   }
@@ -270,17 +291,21 @@
   var scheduledInitTimer = null;
   function scheduleInit() {
     if (scheduledInitTimer) return;
+    log("scheduleInit:queued");
     scheduledInitTimer = window.setTimeout(function () {
       scheduledInitTimer = null;
+      log("scheduleInit:run");
       initPeanutsCkeditorSections(document);
     }, 80);
   }
 
   function robustBoot() {
+    log("robustBoot:start");
     var attempts = 0;
     function tryInit() {
       attempts += 1;
       var count = initPeanutsCkeditorSections(document);
+      log("robustBoot:attempt", attempts, "count", count);
       if (count > 0 || attempts >= 20) return;
       window.setTimeout(tryInit, 120);
     }
@@ -288,7 +313,9 @@
 
     if (!window.__peanutsObserverAttached && window.MutationObserver && document.body) {
       window.__peanutsObserverAttached = true;
+      log("robustBoot:observer attached");
       var observer = new MutationObserver(function () {
+        log("observer:mutation");
         scheduleInit();
       });
       observer.observe(document.body, { childList: true, subtree: true });
