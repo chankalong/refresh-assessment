@@ -1,6 +1,13 @@
 (function () {
   "use strict";
 
+  function requestFrame(fn) {
+    if (window.requestAnimationFrame) return window.requestAnimationFrame(fn);
+    return window.setTimeout(function () {
+      fn(Date.now());
+    }, 16);
+  }
+
   function queryOne(root, selectors) {
     for (var i = 0; i < selectors.length; i += 1) {
       var found = root.querySelector(selectors[i]);
@@ -37,31 +44,48 @@
       hashList.insertBefore(fragmentBefore, hashList.firstChild);
       hashList.appendChild(fragmentAfter);
 
-      var originalWidth = 0;
-      baseItems.forEach(function (node) {
-        originalWidth += node.getBoundingClientRect().width;
-      });
-      if (originalWidth <= 0) {
-        originalWidth = hashList.scrollWidth / 3;
+      function computeOriginalWidth() {
+        var width = 0;
+        baseItems.forEach(function (node) {
+          width += node.getBoundingClientRect().width;
+        });
+        if (width <= 0) {
+          width = hashList.scrollWidth / 3;
+        }
+        return width;
       }
 
-      var hashOffset = -originalWidth;
-      var hashSpeed = 38;
-      var previousHashTime = 0;
+      function startHashLoopWithRetry(retryCount) {
+        var originalWidth = computeOriginalWidth();
+        if (!originalWidth || originalWidth < 10) {
+          if (retryCount < 12) {
+            window.setTimeout(function () {
+              startHashLoopWithRetry(retryCount + 1);
+            }, 120);
+          }
+          return;
+        }
 
-      function animateHash(time) {
-        if (!previousHashTime) previousHashTime = time;
-        var delta = (time - previousHashTime) / 1000;
-        previousHashTime = time;
+        var hashOffset = -originalWidth;
+        var hashSpeed = 38;
+        var previousHashTime = 0;
 
-        hashOffset += hashSpeed * delta;
-        if (hashOffset >= 0) hashOffset -= originalWidth;
+        function animateHash(time) {
+          if (!previousHashTime) previousHashTime = time;
+          var delta = (time - previousHashTime) / 1000;
+          previousHashTime = time;
 
-        hashList.style.transform = "translate3d(" + hashOffset.toFixed(2) + "px, 0, 0)";
-        window.requestAnimationFrame(animateHash);
+          hashOffset += hashSpeed * delta;
+          if (hashOffset >= 0) hashOffset -= originalWidth;
+
+          hashList.style.transform = "translate3d(" + hashOffset.toFixed(2) + "px, 0, 0)";
+          requestFrame(animateHash);
+        }
+
+        requestFrame(animateHash);
       }
 
-      window.requestAnimationFrame(animateHash);
+      startHashLoopWithRetry(0);
     }
 
     var comicsWrap = queryOne(root, ["#peanuts-comics-wrap", "[data-comics-wrap]"]);
@@ -209,8 +233,33 @@
     var rootScope = scope || document;
     var roots = rootScope.querySelectorAll(".peanuts-ckeditor, #peanuts-ckeditor-root");
     Array.prototype.forEach.call(roots, initSingleRoot);
+    return roots.length;
+  }
+
+  function robustBoot() {
+    var attempts = 0;
+    function tryInit() {
+      attempts += 1;
+      var count = initPeanutsCkeditorSections(document);
+      if (count > 0 || attempts >= 12) return;
+      window.setTimeout(tryInit, 120);
+    }
+    tryInit();
+
+    if (!window.__peanutsObserverAttached && window.MutationObserver && document.body) {
+      window.__peanutsObserverAttached = true;
+      var observer = new MutationObserver(function (mutations) {
+        for (var i = 0; i < mutations.length; i += 1) {
+          if (mutations[i].addedNodes && mutations[i].addedNodes.length) {
+            initPeanutsCkeditorSections(document);
+            break;
+          }
+        }
+      });
+      observer.observe(document.body, { childList: true, subtree: true });
+    }
   }
 
   window.initPeanutsCkeditorSections = initPeanutsCkeditorSections;
-  initPeanutsCkeditorSections(document);
+  robustBoot();
 })();
