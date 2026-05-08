@@ -1,13 +1,6 @@
 (function () {
   "use strict";
 
-  function requestFrame(fn) {
-    if (window.requestAnimationFrame) return window.requestAnimationFrame(fn);
-    return window.setTimeout(function () {
-      fn(Date.now());
-    }, 16);
-  }
-
   function queryOne(root, selectors) {
     for (var i = 0; i < selectors.length; i += 1) {
       var found = root.querySelector(selectors[i]);
@@ -25,67 +18,117 @@
   }
 
   function initSingleRoot(root) {
-    if (!root || root.getAttribute("data-peanuts-init") === "1") {
-      return;
+    if (!root) return;
+
+    if (typeof root.__peanutsCleanup === "function") {
+      root.__peanutsCleanup();
     }
-    root.setAttribute("data-peanuts-init", "1");
+
+    var cleanups = [];
+    var retryTimers = [];
+    var hashRafId = null;
+    var autoplayId = null;
+
+    function addListener(el, type, handler, options) {
+      if (!el) return;
+      el.addEventListener(type, handler, options);
+      cleanups.push(function () {
+        el.removeEventListener(type, handler, options);
+      });
+    }
+
+    function addTimer(id) {
+      retryTimers.push(id);
+    }
+
+    function cleanup() {
+      if (hashRafId !== null && window.cancelAnimationFrame) {
+        window.cancelAnimationFrame(hashRafId);
+      }
+      hashRafId = null;
+
+      if (autoplayId !== null) {
+        window.clearInterval(autoplayId);
+      }
+      autoplayId = null;
+
+      while (retryTimers.length) {
+        window.clearTimeout(retryTimers.pop());
+      }
+
+      while (cleanups.length) {
+        var fn = cleanups.pop();
+        fn();
+      }
+    }
+
+    root.__peanutsCleanup = cleanup;
 
     var hashList = queryOne(root, ["#peanuts-hash-list", "[data-hash-list]"]);
     if (hashList) {
-      var baseItems = Array.prototype.slice.call(hashList.children);
-      var fragmentBefore = document.createDocumentFragment();
-      var fragmentAfter = document.createDocumentFragment();
-
-      baseItems.forEach(function (node) {
-        fragmentBefore.appendChild(node.cloneNode(true));
-        fragmentAfter.appendChild(node.cloneNode(true));
+      var oldClones = hashList.querySelectorAll('[data-peanuts-clone="1"]');
+      Array.prototype.forEach.call(oldClones, function (node) {
+        if (node && node.parentNode) node.parentNode.removeChild(node);
       });
 
-      hashList.insertBefore(fragmentBefore, hashList.firstChild);
-      hashList.appendChild(fragmentAfter);
+      var baseItems = Array.prototype.slice.call(hashList.children);
+      var beforeFragment = document.createDocumentFragment();
+      var afterFragment = document.createDocumentFragment();
 
-      function computeOriginalWidth() {
-        var width = 0;
+      baseItems.forEach(function (node) {
+        var beforeClone = node.cloneNode(true);
+        beforeClone.setAttribute("data-peanuts-clone", "1");
+        beforeFragment.appendChild(beforeClone);
+
+        var afterClone = node.cloneNode(true);
+        afterClone.setAttribute("data-peanuts-clone", "1");
+        afterFragment.appendChild(afterClone);
+      });
+
+      hashList.insertBefore(beforeFragment, hashList.firstChild);
+      hashList.appendChild(afterFragment);
+
+      function startHashLoop(retryCount) {
+        var originalWidth = 0;
         baseItems.forEach(function (node) {
-          width += node.getBoundingClientRect().width;
+          originalWidth += node.getBoundingClientRect().width;
         });
-        if (width <= 0) {
-          width = hashList.scrollWidth / 3;
+        if (originalWidth <= 0) {
+          originalWidth = hashList.scrollWidth / 3;
         }
-        return width;
-      }
 
-      function startHashLoopWithRetry(retryCount) {
-        var originalWidth = computeOriginalWidth();
         if (!originalWidth || originalWidth < 10) {
-          if (retryCount < 12) {
-            window.setTimeout(function () {
-              startHashLoopWithRetry(retryCount + 1);
-            }, 120);
+          if (retryCount < 30) {
+            addTimer(
+              window.setTimeout(function () {
+                startHashLoop(retryCount + 1);
+              }, 120)
+            );
           }
           return;
         }
 
         var hashOffset = -originalWidth;
         var hashSpeed = 38;
-        var previousHashTime = 0;
+        var previousTime = 0;
 
         function animateHash(time) {
-          if (!previousHashTime) previousHashTime = time;
-          var delta = (time - previousHashTime) / 1000;
-          previousHashTime = time;
+          if (!hashList.isConnected) return;
+          if (!previousTime) previousTime = time;
+          var delta = (time - previousTime) / 1000;
+          previousTime = time;
 
           hashOffset += hashSpeed * delta;
           if (hashOffset >= 0) hashOffset -= originalWidth;
 
           hashList.style.transform = "translate3d(" + hashOffset.toFixed(2) + "px, 0, 0)";
-          requestFrame(animateHash);
+          hashRafId = window.requestAnimationFrame(animateHash);
         }
 
-        requestFrame(animateHash);
+        hashRafId = window.requestAnimationFrame(animateHash);
       }
 
-      startHashLoopWithRetry(0);
+      startHashLoop(0);
     }
 
     var comicsWrap = queryOne(root, ["#peanuts-comics-wrap", "[data-comics-wrap]"]);
@@ -97,13 +140,21 @@
 
     var activeIndex = 0;
     var autoplayDelay = 2800;
-    var autoplayId = null;
+    var prevButton = queryOne(root, ["#peanuts-comics-prev", "[data-comics-prev]"]);
+    var nextButton = queryOne(root, ["#peanuts-comics-next", "[data-comics-next]"]);
 
     function wrapDistance(index, center, total) {
       var distance = index - center;
       if (distance > total / 2) distance -= total;
       if (distance < -total / 2) distance += total;
       return distance;
+    }
+
+    function applyResponsiveStyles() {
+      var isMobile = window.innerWidth <= 780;
+      if (comicsWrap) comicsWrap.style.height = isMobile ? "460px" : "500px";
+      if (prevButton) prevButton.style.left = isMobile ? "0.4rem" : "30%";
+      if (nextButton) nextButton.style.right = isMobile ? "0.4rem" : "30%";
     }
 
     function applyComicTransforms() {
@@ -114,6 +165,7 @@
       var radius = 260;
 
       cards.forEach(function (card, index) {
+        if (!card.isConnected) return;
         var progress = wrapDistance(index, activeIndex, total);
         var abs = Math.abs(progress);
         var clamped = Math.max(-maxVisibleProgress, Math.min(maxVisibleProgress, progress));
@@ -155,78 +207,57 @@
     }
 
     function startAutoplay() {
-      stopAutoplay();
+      if (autoplayId !== null) window.clearInterval(autoplayId);
       autoplayId = window.setInterval(slideNext, autoplayDelay);
     }
 
     function stopAutoplay() {
-      if (!autoplayId) return;
+      if (autoplayId === null) return;
       window.clearInterval(autoplayId);
       autoplayId = null;
     }
 
-    var prevButton = queryOne(root, ["#peanuts-comics-prev", "[data-comics-prev]"]);
-    var nextButton = queryOne(root, ["#peanuts-comics-next", "[data-comics-next]"]);
-
-    function applyResponsiveStyles() {
-      var isMobile = window.innerWidth <= 780;
-
-      if (comicsWrap) {
-        comicsWrap.style.height = isMobile ? "460px" : "500px";
-      }
-      if (prevButton) {
-        prevButton.style.left = isMobile ? "0.4rem" : "30%";
-      }
-      if (nextButton) {
-        nextButton.style.right = isMobile ? "0.4rem" : "30%";
-      }
-    }
-
-    function bindButtonHover(button) {
+    function bindButtonHover(button, isPrev) {
       if (!button) return;
       var baseStyle = button.getAttribute("data-btn-base") || "";
 
-      button.addEventListener("mouseenter", function () {
-        var sideStyle = button === prevButton ? "left:" + button.style.left + ";" : "right:" + button.style.right + ";";
+      addListener(button, "mouseenter", function () {
+        var sideValue = isPrev ? button.style.left : button.style.right;
+        var sideStyle = (isPrev ? "left:" : "right:") + sideValue + ";";
         button.style.cssText = baseStyle + "transform:translateY(-50%) scale(1.06);" + sideStyle;
       });
 
-      button.addEventListener("mouseleave", function () {
-        var sideStyle = button === prevButton ? "left:" + button.style.left + ";" : "right:" + button.style.right + ";";
+      addListener(button, "mouseleave", function () {
+        var sideValue = isPrev ? button.style.left : button.style.right;
+        var sideStyle = (isPrev ? "left:" : "right:") + sideValue + ";";
         button.style.cssText = baseStyle + sideStyle;
       });
     }
 
-    if (prevButton) {
-      prevButton.addEventListener("click", function () {
-        slidePrev();
-        startAutoplay();
-      });
-    }
-
-    if (nextButton) {
-      nextButton.addEventListener("click", function () {
-        slideNext();
-        startAutoplay();
-      });
-    }
-
-    comicsCarousel.addEventListener("mouseenter", stopAutoplay);
-    comicsCarousel.addEventListener("mouseleave", startAutoplay);
-    comicsCarousel.addEventListener("touchstart", stopAutoplay, { passive: true });
-    comicsCarousel.addEventListener("touchend", startAutoplay);
-
-    applyResponsiveStyles();
-    bindButtonHover(prevButton);
-    bindButtonHover(nextButton);
-    applyComicTransforms();
-    window.setTimeout(applyComicTransforms, 30);
-    window.setTimeout(applyComicTransforms, 120);
-    startAutoplay();
-    window.addEventListener("resize", function () {
+    addListener(prevButton, "click", function () {
+      slidePrev();
+      startAutoplay();
+    });
+    addListener(nextButton, "click", function () {
+      slideNext();
+      startAutoplay();
+    });
+    addListener(comicsCarousel, "mouseenter", stopAutoplay);
+    addListener(comicsCarousel, "mouseleave", startAutoplay);
+    addListener(comicsCarousel, "touchstart", stopAutoplay, { passive: true });
+    addListener(comicsCarousel, "touchend", startAutoplay);
+    addListener(window, "resize", function () {
       applyResponsiveStyles();
       applyComicTransforms();
     });
+
+    applyResponsiveStyles();
+    bindButtonHover(prevButton, true);
+    bindButtonHover(nextButton, false);
+    applyComicTransforms();
+    addTimer(window.setTimeout(applyComicTransforms, 30));
+    addTimer(window.setTimeout(applyComicTransforms, 120));
+    startAutoplay();
   }
 
   function initPeanutsCkeditorSections(scope) {
@@ -236,25 +267,29 @@
     return roots.length;
   }
 
+  var scheduledInitTimer = null;
+  function scheduleInit() {
+    if (scheduledInitTimer) return;
+    scheduledInitTimer = window.setTimeout(function () {
+      scheduledInitTimer = null;
+      initPeanutsCkeditorSections(document);
+    }, 80);
+  }
+
   function robustBoot() {
     var attempts = 0;
     function tryInit() {
       attempts += 1;
       var count = initPeanutsCkeditorSections(document);
-      if (count > 0 || attempts >= 12) return;
+      if (count > 0 || attempts >= 20) return;
       window.setTimeout(tryInit, 120);
     }
     tryInit();
 
     if (!window.__peanutsObserverAttached && window.MutationObserver && document.body) {
       window.__peanutsObserverAttached = true;
-      var observer = new MutationObserver(function (mutations) {
-        for (var i = 0; i < mutations.length; i += 1) {
-          if (mutations[i].addedNodes && mutations[i].addedNodes.length) {
-            initPeanutsCkeditorSections(document);
-            break;
-          }
-        }
+      var observer = new MutationObserver(function () {
+        scheduleInit();
       });
       observer.observe(document.body, { childList: true, subtree: true });
     }
