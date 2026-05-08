@@ -196,7 +196,7 @@
         var finalX = clamped * spacing;
         var opacity = abs > 3 ? 0 : abs > 1.1 ? 0.2 : 1;
         var zIndex = Math.round(40 - abs * 10);
-        var rotate = angle * -0.35;
+        var rotate = angle * 0.35;
 
         card.style.transform =
           "translate3d(" +
