@@ -282,9 +282,13 @@
 
   function initPeanutsCkeditorSections(scope) {
     var rootScope = scope || document;
+    window.__peanutsInternalMutating = true;
     var roots = rootScope.querySelectorAll(".peanuts-ckeditor, #peanuts-ckeditor-root");
     log("initPeanutsCkeditorSections", "roots", roots.length);
     Array.prototype.forEach.call(roots, initSingleRoot);
+    window.setTimeout(function () {
+      window.__peanutsInternalMutating = false;
+    }, 0);
     return roots.length;
   }
 
@@ -314,8 +318,28 @@
     if (!window.__peanutsObserverAttached && window.MutationObserver && document.body) {
       window.__peanutsObserverAttached = true;
       log("robustBoot:observer attached");
-      var observer = new MutationObserver(function () {
-        log("observer:mutation");
+      var observer = new MutationObserver(function (mutations) {
+        if (window.__peanutsInternalMutating) return;
+
+        var shouldInit = false;
+        for (var i = 0; i < mutations.length; i += 1) {
+          var addedNodes = mutations[i].addedNodes || [];
+          for (var j = 0; j < addedNodes.length; j += 1) {
+            var node = addedNodes[j];
+            if (!node || node.nodeType !== 1) continue;
+            if (
+              (node.matches && node.matches(".peanuts-ckeditor, #peanuts-ckeditor-root")) ||
+              (node.querySelector && node.querySelector(".peanuts-ckeditor, #peanuts-ckeditor-root"))
+            ) {
+              shouldInit = true;
+              break;
+            }
+          }
+          if (shouldInit) break;
+        }
+
+        if (!shouldInit) return;
+        log("observer:mutation (external peanuts root detected)");
         scheduleInit();
       });
       observer.observe(document.body, { childList: true, subtree: true });
