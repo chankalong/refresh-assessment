@@ -219,7 +219,7 @@
   var flag_style = gt.flag_style || "2d";
   var flags_location =
     gt.flags_location ||
-    "https://refresh.bokss.org.hk/sites/default/files/inpages/";
+    "/sites/default/files/inpages/";
   var url_structure = gt.url_structure || "none";
   var custom_domains = gt.custom_domains || {};
   var switcher_horizontal_position = gt.switcher_horizontal_position || "left";
