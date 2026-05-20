@@ -176,6 +176,24 @@ phq_11_previous_button.addEventListener("click", function () {
 
 var phq_11_next_button = document.getElementById("phq_11_next_button");
 var phq_11_next_function = function () {
+  var user_mobile_manual = document.getElementById("user_mobile_manual");
+  var mobileValue = user_mobile_manual.value.trim();
+  var mobilePattern = /^\d{8}$/;
+
+  if (!mobilePattern.test(mobileValue)) {
+    swal.fire({
+      text: "Please enter a valid 8-digit mobile number.",
+      confirmButtonText: "OK",
+      customClass: {
+        confirmButton: "btnRound-thin btnRound-orange mx-2",
+      },
+      buttonsStyling: false,
+      focusConfirm: false,
+    });
+    user_mobile_manual.focus();
+    return;
+  }
+
   swal
     .fire({
       text: "Are you sure you want to submit?",
@@ -294,7 +312,7 @@ form.addEventListener("submit", function (e) {
   }
 
   //score
-    var phqScore = phq_object["phq_0_score"] + phq_object["phq_1_score"] + phq_object["phq_2_score"] + phq_object["phq_3_score"] + phq_object["phq_4_score"] + phq_object["phq_5_score"] + phq_object["phq_6_score"] + phq_object["phq_7_score"] + phq_object["phq_8_score"];
+    var phqScore = phq_object["phq_0_score"] + phq_object["phq_1_score"] + phq_object["phq_2_score"] + phq_object["phq_3_score"] + phq_object["phq_4_score"] + phq_object["phq_5_score"] + phq_object["phq_6_score"] + phq_object["phq_7_score"] + phq_object["phq_8_score"]
     if (isNaN(phqScore)) {
         return; //stop the execution of function
     }
@@ -306,12 +324,12 @@ form.addEventListener("submit", function (e) {
   } else if (phqScore >= 5 && phqScore <= 9) {
     phqCategory.textContent = "Mild depression";
     phqDescription.textContent =
-      "You may be showing signs of mild depression. Try taking a walk to relax, share your feelings with friends and family, review the mental wellness tips we prepared for you, or join our online workshops.";
+      "You may be showing signs of mild depression. Try taking a walk to relax, share your feelings with friends and family, review the mental wellness tips we prepared for you, or join our online workshop to learn more about caring for your mind.";
     phqColor = "#FFC84A";
   } else if (phqScore >= 10 && phqScore <= 14) {
     phqCategory.textContent = "Moderate depression";
     phqDescription.textContent =
-      "You may be showing signs of moderate depression. It is important to start taking good care of your emotions and explore different stress management methods. Our mental wellness self-help courses and workshops may be very helpful for you.";
+      "You may be showing signs of moderate depression. It is important to start taking good care of your emotions and explore different stress management methods. Our mental wellness self-help course may be able to support you.";
     phqColor = "#F48847";
   } else if (phqScore >= 15 && phqScore <= 19) {
     phqCategory.textContent = "Severe depression";
