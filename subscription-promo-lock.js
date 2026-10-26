@@ -169,15 +169,15 @@
             return;
         }
 
-        // Count paragraph and table blocks in document order, so a table that appears
-        // within the first N visible blocks is preserved instead of being discarded.
-        const allContentBlocks = Array.from(targetElement.querySelectorAll('p, table')).filter(function(node) {
-            const tagName = node.tagName ? node.tagName.toLowerCase() : '';
-            if (tagName === 'p') {
-                return !node.closest('table');
+        // Keep the first N direct content elements inside targetElement.
+        const allContentBlocks = Array.from(targetElement.children).filter(function(node) {
+            if (!node || !node.tagName) {
+                return false;
             }
-            if (tagName === 'table') {
-                return !node.parentElement || !node.parentElement.closest('table');
+            if (node.id === CONFIG.ids.btnContainer ||
+                node.id === CONFIG.ids.promoContainer ||
+                node.id === CONFIG.ids.gradientBlurWrapper) {
+                return false;
             }
             return true;
         });
@@ -287,9 +287,7 @@
         // Add gradient blur to the last kept paragraph (if any remain)
         let lastParagraph = keptParagraphs.length > 0 ? keptParagraphs[keptParagraphs.length - 1] : null;
         const lastKeptBlock = keptBlocks.length > 0 ? keptBlocks[keptBlocks.length - 1] : null;
-        if (!lastParagraph && lastKeptBlock && lastKeptBlock.tagName && lastKeptBlock.tagName.toLowerCase() === 'table') {
-            lastParagraph = lastKeptBlock;
-        }
+        const promoAnchor = lastParagraph || lastKeptBlock || null;
         let blurWrapper = null;
         
         if (lastParagraph && lastParagraph.tagName && lastParagraph.tagName.toLowerCase() === 'p' && CONFIG.gradientBlur.enabled) {
@@ -297,7 +295,7 @@
         }
 
         // Add subscription promo graphic after the last kept content block
-        addSubscriptionPromo(targetElement, lastParagraph, blurWrapper);
+        addSubscriptionPromo(targetElement, promoAnchor, blurWrapper);
     }
     
     // Function to apply gradient blur to the last paragraph
