@@ -169,15 +169,19 @@
             return;
         }
 
-        // Find all <p> tags within the target element
-        const allParagraphs = targetElement.querySelectorAll('p');
+        // Find all countable <p> tags within the target element
+        // Exclude paragraphs inside tables to avoid summary/table markup
+        // affecting the lock threshold.
+        const allParagraphs = Array.from(targetElement.querySelectorAll('p')).filter(function(paragraph) {
+            return !paragraph.closest('table');
+        });
         
         if (allParagraphs.length === 0) {
             if (CONFIG.logging.enabled) console.warn('No <p> tags found in target element. Content lock not applied.');
             return;
         }
 
-        // Keep only the first N <p> tags, remove all others
+        // Keep only the first N countable <p> tags, remove all others
         const paragraphsToKeep = Math.min(CONFIG.paragraphsToKeep, allParagraphs.length);
         const keptParagraphs = [];
         
@@ -478,4 +482,3 @@
         setTimeout(initContentLock, delay);
     });
 })();
-
