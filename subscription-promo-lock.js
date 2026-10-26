@@ -169,40 +169,49 @@
             return;
         }
 
-        // Find all countable <p> tags within the target element
-        // Exclude paragraphs inside tables to avoid summary/table markup
-        // affecting the lock threshold.
-        const allParagraphs = Array.from(targetElement.querySelectorAll('p')).filter(function(paragraph) {
-            return !paragraph.closest('table');
+        // Count paragraph and table blocks in document order, so a table that appears
+        // within the first N visible blocks is preserved instead of being discarded.
+        const allContentBlocks = Array.from(targetElement.querySelectorAll('p, table')).filter(function(node) {
+            const tagName = node.tagName ? node.tagName.toLowerCase() : '';
+            if (tagName === 'p') {
+                return !node.closest('table');
+            }
+            if (tagName === 'table') {
+                return !node.parentElement || !node.parentElement.closest('table');
+            }
+            return true;
         });
         
-        if (allParagraphs.length === 0) {
-            if (CONFIG.logging.enabled) console.warn('No <p> tags found in target element. Content lock not applied.');
+        if (allContentBlocks.length === 0) {
+            if (CONFIG.logging.enabled) console.warn('No content blocks found in target element. Content lock not applied.');
             return;
         }
 
-        // Keep only the first N countable <p> tags, remove all others
-        const paragraphsToKeep = Math.min(CONFIG.paragraphsToKeep, allParagraphs.length);
+        // Keep only the first N content blocks, removing everything after that point.
+        const paragraphsToKeep = Math.min(CONFIG.paragraphsToKeep, allContentBlocks.length);
+        const keptBlocks = [];
         const keptParagraphs = [];
         
         for (let i = 0; i < paragraphsToKeep; i++) {
-            keptParagraphs.push(allParagraphs[i]);
+            const block = allContentBlocks[i];
+            keptBlocks.push(block);
+            if (block.tagName && block.tagName.toLowerCase() === 'p') {
+                keptParagraphs.push(block);
+            }
         }
         
-        // Remove all other paragraphs (after the first N)
-        for (let i = paragraphsToKeep; i < allParagraphs.length; i++) {
-            allParagraphs[i].remove();
-            if (CONFIG.logging.verbose) console.log('Removed paragraph:', i + 1);
+        // Remove all other content blocks after the first N
+        for (let i = paragraphsToKeep; i < allContentBlocks.length; i++) {
+            allContentBlocks[i].remove();
+            if (CONFIG.logging.verbose) console.log('Removed content block:', i + 1);
         }
 
-        // Remove all other elements except those that contain the kept paragraphs
-        // First, collect all direct children to remove
+        // Remove all other elements except those that contain the kept blocks
         const allChildren = Array.from(targetElement.children);
         const elementsToRemove = [];
         
         allChildren.forEach(function(child) {
-            // Skip if it's one of the paragraphs we're keeping
-            if (keptParagraphs.includes(child)) {
+            if (keptBlocks.includes(child)) {
                 return;
             }
             
@@ -217,34 +226,29 @@
                 return;
             }
             
-            // Check if this child contains any of the kept paragraphs
-            let containsKeptParagraph = false;
-            for (let i = 0; i < keptParagraphs.length; i++) {
-                if (child.contains(keptParagraphs[i])) {
-                    containsKeptParagraph = true;
+            let containsKeptBlock = false;
+            for (let i = 0; i < keptBlocks.length; i++) {
+                if (child.contains(keptBlocks[i])) {
+                    containsKeptBlock = true;
                     break;
                 }
             }
             
-            // If it doesn't contain any kept paragraphs, mark it for removal
-            if (!containsKeptParagraph) {
+            if (!containsKeptBlock) {
                 elementsToRemove.push(child);
             }
         });
         
-        // Remove all other direct children that don't contain kept paragraphs
         elementsToRemove.forEach(function(element) {
             element.remove();
         });
         
-        // Now, within elements that contain kept paragraphs, remove other content
-        // For each kept paragraph, remove all siblings that aren't kept paragraphs
-        keptParagraphs.forEach(function(keptPara) {
-            const parent = keptPara.parentNode;
+        // Preserve table blocks that are kept in the first visible content window.
+        keptBlocks.forEach(function(keptBlock) {
+            const parent = keptBlock.parentNode;
             if (parent && parent !== targetElement) {
                 const siblings = Array.from(parent.children);
                 siblings.forEach(function(sibling) {
-                    // Skip if it's the subscription button, promo container, blur wrapper, or gradient blur wrapper
                     if (sibling.id === CONFIG.ids.btnContainer || 
                         sibling.id === CONFIG.ids.promoContainer ||
                         sibling.id === CONFIG.ids.gradientBlurWrapper ||
@@ -254,8 +258,7 @@
                         sibling.querySelector('#' + CONFIG.ids.gradientBlurWrapper)) {
                         return;
                     }
-                    // Remove siblings that aren't kept paragraphs
-                    if (sibling !== keptPara && !keptParagraphs.includes(sibling)) {
+                    if (sibling !== keptBlock && !keptBlocks.includes(sibling)) {
                         sibling.remove();
                     }
                 });
@@ -263,7 +266,7 @@
         });
 
         if (CONFIG.logging.enabled) {
-            console.log('Kept first', paragraphsToKeep, 'paragraph(s), removed', allParagraphs.length - paragraphsToKeep, 'other paragraphs and', elementsToRemove.length, 'other elements.');
+            console.log('Kept first', paragraphsToKeep, 'content block(s), removed', allContentBlocks.length - paragraphsToKeep, 'other blocks and', elementsToRemove.length, 'other elements.');
         }
 
         // Check and remove blank last paragraphs
@@ -272,25 +275,28 @@
             const textContent = lastPara.textContent ? lastPara.textContent.trim() : '';
             const innerHTML = lastPara.innerHTML ? lastPara.innerHTML.trim() : '';
             
-            // Check if paragraph is blank (empty text or only whitespace/HTML tags)
             if (textContent === '' || innerHTML === '' || innerHTML === '<br>' || innerHTML === '<br/>') {
                 if (CONFIG.logging.verbose) console.log('Removing blank last paragraph');
                 lastPara.remove();
                 keptParagraphs.pop();
             } else {
-                break; // Found a non-blank paragraph, stop removing
+                break;
             }
         }
 
         // Add gradient blur to the last kept paragraph (if any remain)
         let lastParagraph = keptParagraphs.length > 0 ? keptParagraphs[keptParagraphs.length - 1] : null;
+        const lastKeptBlock = keptBlocks.length > 0 ? keptBlocks[keptBlocks.length - 1] : null;
+        if (!lastParagraph && lastKeptBlock && lastKeptBlock.tagName && lastKeptBlock.tagName.toLowerCase() === 'table') {
+            lastParagraph = lastKeptBlock;
+        }
         let blurWrapper = null;
         
-        if (lastParagraph && CONFIG.gradientBlur.enabled) {
+        if (lastParagraph && lastParagraph.tagName && lastParagraph.tagName.toLowerCase() === 'p' && CONFIG.gradientBlur.enabled) {
             blurWrapper = applyGradientBlur(lastParagraph);
         }
 
-        // Add subscription promo graphic after the last kept paragraph (after blur wrapper if it exists)
+        // Add subscription promo graphic after the last kept content block
         addSubscriptionPromo(targetElement, lastParagraph, blurWrapper);
     }
     
