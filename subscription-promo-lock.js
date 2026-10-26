@@ -169,18 +169,10 @@
             return;
         }
 
-        // Keep the first N direct content elements inside targetElement.
-        const allContentBlocks = Array.from(targetElement.children).filter(function(node) {
-            if (!node || !node.tagName) {
-                return false;
-            }
-            if (node.id === CONFIG.ids.btnContainer ||
-                node.id === CONFIG.ids.promoContainer ||
-                node.id === CONFIG.ids.gradientBlurWrapper) {
-                return false;
-            }
-            return true;
-        });
+        // Keep the first N real content blocks inside targetElement. Some production pages wrap all
+        // article content in a single nested container, so we must flatten to actual article elements instead
+        // of treating the wrapper itself as visible content.
+        const allContentBlocks = getContentBlocks(targetElement);
         
         if (allContentBlocks.length === 0) {
             if (CONFIG.logging.enabled) console.warn('No content blocks found in target element. Content lock not applied.');
@@ -298,6 +290,84 @@
         addSubscriptionPromo(targetElement, promoAnchor, blurWrapper);
     }
     
+    function getContentBlocks(rootElement) {
+        const nodes = [];
+        const walk = function(current) {
+            if (!current || !current.tagName) {
+                return;
+            }
+
+            if (current.id === CONFIG.ids.btnContainer ||
+                current.id === CONFIG.ids.promoContainer ||
+                current.id === CONFIG.ids.gradientBlurWrapper) {
+                return;
+            }
+
+            if (current !== rootElement && current.tagName.toLowerCase() === 'p') {
+                nodes.push(current);
+                return;
+            }
+
+            if (current !== rootElement && current.tagName.toLowerCase() === 'table') {
+                nodes.push(current);
+                return;
+            }
+
+            if (current !== rootElement && current.tagName.toLowerCase() === 'ul') {
+                nodes.push(current);
+                return;
+            }
+
+            if (current !== rootElement && current.tagName.toLowerCase() === 'ol') {
+                nodes.push(current);
+                return;
+            }
+
+            if (current !== rootElement && current.tagName.toLowerCase() === 'h1') {
+                nodes.push(current);
+                return;
+            }
+
+            if (current !== rootElement && current.tagName.toLowerCase() === 'h2') {
+                nodes.push(current);
+                return;
+            }
+
+            if (current !== rootElement && current.tagName.toLowerCase() === 'h3') {
+                nodes.push(current);
+                return;
+            }
+
+            if (current !== rootElement && current.tagName.toLowerCase() === 'div' && current.children.length === 0) {
+                nodes.push(current);
+                return;
+            }
+
+            Array.from(current.children).forEach(walk);
+        };
+
+        walk(rootElement);
+
+        return nodes.filter(function(node) {
+            if (!node || !node.tagName) {
+                return false;
+            }
+
+            const tagName = node.tagName.toLowerCase();
+            if (['p', 'table', 'ul', 'ol', 'h1', 'h2', 'h3', 'div'].indexOf(tagName) === -1) {
+                return false;
+            }
+
+            if (node.closest('#' + CONFIG.ids.promoContainer) ||
+                node.closest('#' + CONFIG.ids.btnContainer) ||
+                node.closest('#' + CONFIG.ids.gradientBlurWrapper)) {
+                return false;
+            }
+
+            return true;
+        });
+    }
+
     // Function to apply gradient blur to the last paragraph
     function applyGradientBlur(element) {
         if (!element) {
